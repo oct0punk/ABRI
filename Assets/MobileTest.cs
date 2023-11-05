@@ -11,7 +11,7 @@ public class MobileTest : MonoBehaviour
     void Update()
     {
         if (Input.touches.Length <= index) return;
-        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.GetTouch(index).rawPosition);
+        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.GetTouch(index).position);
         pos.z = 0;
         transform.position = pos;
     }
