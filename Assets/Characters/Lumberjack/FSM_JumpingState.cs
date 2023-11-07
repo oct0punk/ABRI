@@ -24,6 +24,7 @@ public class FSM_JumpingState : FSM_BaseState
     {
         t += Time.deltaTime;
         l.transform.position = Vector3.Lerp(start, land, t);
+        l.transform.position += Vector3.up * Mathf.Sin(t * Mathf.PI);
         if (t > 1.0f) {
             l.Move(land);
             l.ChangeFSM(l.movingState);

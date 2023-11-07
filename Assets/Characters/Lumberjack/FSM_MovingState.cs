@@ -1,6 +1,7 @@
 using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -8,14 +9,13 @@ using UnityEngine.UI;
 public class FSM_MovingState : FSM_BaseState
 {
     float h = 2.0f;
-    float r = 0.8f;
+    float r = 0.5f;
     bool debug = true;
     LayerMask mask = LayerMask.GetMask("Platform");
     Vector3 targetPosition;
 
     public override void OnEnter(Lumberjack l)
     {
-        targetPosition = l.transform.position;
         l.SetSpriteColor(Color.blue);
     }
 
@@ -40,44 +40,48 @@ public class FSM_MovingState : FSM_BaseState
 
         if (SwipeManager.MoveLeft())
         {
-            if (TryMove(l, -1.0f)) return;
+            if (TryMove(l, -r))
+            {
+                l.Move(targetPosition);
+                return;
+            }
+            else if (TryMove(l, -(r + 2)))   // TryJump
+            {
+                l.Jump(targetPosition);
+                return;
+            }
+            
         }
         else if (SwipeManager.MoveRight())
         {
-            if (TryMove(l, 1.0f)) return;
+            if (TryMove(l, r))
+            {
+                l.Move(targetPosition);
+                return;
+            }
+            else if (TryMove(l, r + 2))   // TryJump
+            {
+                l.Jump(targetPosition);
+                return;
+            }
         }
-        else
-        {
-            targetPosition = l.transform.position;
-        }
-
-        l.Move(targetPosition);
     }
 
-    bool TryMove(Lumberjack l, float hAxis)
+    bool TryMove(Lumberjack l, float exp)
     {
         // Simple step
-        Vector2 start = l.transform.position + new Vector3(r * hAxis, h, 0);
+        Vector2 start = l.transform.position + new Vector3(exp, h, 0);
         RaycastHit2D hit = Physics2D.Raycast(start, Vector2.down, 2*h, mask);
+        if (debug)
+            Debug.DrawRay(start, Vector2.down * 2 * h, Color.yellow);
         if (hit)
         {
-            if (debug)                
-                Debug.DrawRay(start, hit.point - start, Color.yellow);
+            if (debug)
+                Debug.DrawRay(start, Vector2.down * 2 * h, Color.yellow, 1);
 
-            if (Mathf.Abs(hit.point.y - l.transform.position.y) > .1f)
-            {
-                if (hit.transform != l.transform.parent)
-                {
-                    l.Jump(hit.point + Vector2.right * hAxis * .5f);
-                    return true;
-                }
-            }
-            else
-            {
-                l.Move(hit.point);
-                targetPosition = hit.point;
-                return true;
-            }
+            targetPosition = hit.point;
+            return true;
+            
         }
         return false;
     }
