@@ -72,12 +72,10 @@ public class FSM_MovingState : FSM_BaseState
         // Simple step
         Vector2 start = l.transform.position + new Vector3(exp, h, 0);
         RaycastHit2D hit = Physics2D.Raycast(start, Vector2.down, 2*h, mask);
-        if (debug)
-            Debug.DrawRay(start, Vector2.down * 2 * h, Color.yellow);
         if (hit)
         {
             if (debug)
-                Debug.DrawRay(start, Vector2.down * 2 * h, Color.yellow, 1);
+                Debug.DrawRay(start, hit.point - start, Color.yellow);
 
             targetPosition = hit.point;
             return true;

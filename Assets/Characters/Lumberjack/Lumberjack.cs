@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class Lumberjack : MonoBehaviour
 {
@@ -47,12 +41,29 @@ public class Lumberjack : MonoBehaviour
 
     public void Move(Vector3 targetPos)
     {
-        transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * speed);
+        Vector3 delta = targetPos - transform.position;
+        delta = Vector3.ClampMagnitude(delta, Time.deltaTime * speed);
+        transform.position += delta;
     }
 
     public void Jump(Vector3 landAt)
     {
         jumpingState.land = landAt;
         ChangeFSM(jumpingState);
+    }
+
+    public void ClimbUp(Ladder ladder)
+    {
+        Climb(ladder, ladder.transform.position + Vector3.up * ladder.getHeight());
+    }
+    public void ClimbDown(Ladder ladder)
+    {
+        Climb(ladder, ladder.transform.position);
+    }
+    void Climb(Ladder ladder, Vector3 pos)
+    {
+        climbingState.targetPos = pos;
+        transform.SetParent(ladder.transform);
+        ChangeFSM(climbingState);
     }
 }

@@ -37,6 +37,7 @@ public class SwipeManager : MonoBehaviour
         foreach (var swipe in swipes) swipe.Update();
     }
 
+    #region Movement
     public static bool MoveLeft()
     {
         if (MoveCancel()) return false;
@@ -68,5 +69,25 @@ public class SwipeManager : MonoBehaviour
     private static bool MoveCancel()
     {
         return testLeft() && testRight();
+    }
+    #endregion
+
+    public static bool ClimbUp()
+    {
+        int count = 0;
+        foreach (var s in Instance.swipes)
+        {
+            if (s.SwipeUp(.5f)) ++count;
+        }
+        return count == 1;
+    }
+    public static bool ClimbDown()
+    {        
+        int count = 0;
+        foreach (var s in Instance.swipes)
+        {
+            if (s.SwipeDown(.5f)) ++count;
+        }
+        return count == 1;
     }
 }
