@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class Lumberjack : MonoBehaviour
 {
     [Min(0)]
     public int speed = 3;
+
 
     FSM_BaseState fsm;
     public FSM_MovingState movingState { get; private set; }
@@ -30,7 +35,7 @@ public class Lumberjack : MonoBehaviour
 
     public void ChangeFSM(FSM_BaseState newState)
     {
-        fsm.OnExit(this);
+        fsm.OnExit(this);        
         fsm = newState;
         fsm.OnEnter(this);
     }
@@ -43,5 +48,11 @@ public class Lumberjack : MonoBehaviour
     public void Move(Vector3 targetPos)
     {
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * speed);
+    }
+
+    public void Jump(Vector3 landAt)
+    {
+        jumpingState.land = landAt;
+        ChangeFSM(jumpingState);
     }
 }

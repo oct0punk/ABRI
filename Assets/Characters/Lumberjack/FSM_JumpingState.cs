@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class FSM_JumpingState : FSM_BaseState
 {
+    float t = 0.0f; 
+    Vector3 start; 
+    public Vector3 land;
+
     public override void OnEnter(Lumberjack l)
     {
-        throw new System.NotImplementedException();
+        t = .0f;
+        l.SetSpriteColor(Color.yellow);
+        start = l.transform.position;
     }
 
     public override void OnExit(Lumberjack l)
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void Update(Lumberjack l)
     {
-        throw new System.NotImplementedException();
+        t += Time.deltaTime;
+        l.transform.position = Vector3.Lerp(start, land, t);
+        if (t > 1.0f) {
+            l.Move(land);
+            l.ChangeFSM(l.movingState);
+        }
     }
 }
