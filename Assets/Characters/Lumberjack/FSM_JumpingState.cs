@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class FSM_JumpingState : FSM_BaseState
 {
     float t = 0.0f; 

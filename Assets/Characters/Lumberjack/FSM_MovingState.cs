@@ -36,7 +36,6 @@ public class FSM_MovingState : FSM_BaseState
                 Debug.Log("New parent : " + hit.collider.gameObject.name);
             }
         }
-        l.transform.rotation = Quaternion.identity;
 
         if (SwipeManager.MoveLeft())
         {

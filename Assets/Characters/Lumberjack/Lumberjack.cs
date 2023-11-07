@@ -25,6 +25,8 @@ public class Lumberjack : MonoBehaviour
     private void Update()
     {
         fsm.Update(this);
+        ResetGlobalScale();
+        transform.rotation = Quaternion.identity;
     }
 
     public void ChangeFSM(FSM_BaseState newState)
@@ -65,5 +67,11 @@ public class Lumberjack : MonoBehaviour
         climbingState.targetPos = pos;
         transform.SetParent(ladder.transform);
         ChangeFSM(climbingState);
+    }
+    
+    public void ResetGlobalScale()
+    {
+        transform.localScale = Vector3.one;
+        transform.localScale = new Vector3(1 / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
     }
 }
