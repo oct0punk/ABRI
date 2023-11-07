@@ -51,8 +51,6 @@ public class Swipe
 
                 if (swipeDelta.magnitude > 100)
                 {
-                    isDragging = false;
-
                     // which directions ?
                     float x = swipeDelta.x;
                     float y = swipeDelta.y;
@@ -74,7 +72,7 @@ public class Swipe
                             swipeUp = 0;
                     }
 
-                    Reset();
+                    startTouch = Input.touches[index].position;
                 }
             }
         }

@@ -234,8 +234,8 @@ Transform:
   m_GameObject: {fileID: 5193035}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.3, y: 0.57, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 36.89, y: 4.24, z: 0}
+  m_LocalScale: {x: 6.3298, y: 6.3298, z: 6.3298}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2087880260}
@@ -1316,8 +1316,8 @@ Transform:
   - {fileID: 1534590140}
   m_Father: {fileID: 2087880260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 41.219}
---- !u!68 &1139197682
-EdgeCollider2D:
+--- !u!70 &1139197682
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1348,15 +1348,9 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 0.037302315, y: -0.1778226}
-  - {x: 1.8619473, y: -0.046629973}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_Offset: {x: 0.8, y: 0}
+  m_Size: {x: 1.78, y: 0.13}
+  m_Direction: 1
 --- !u!1 &1147448636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,8 +1652,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1139197681}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.689}
---- !u!68 &1534590141
-EdgeCollider2D:
+--- !u!70 &1534590141
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1690,15 +1684,9 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.10987079, y: 0.0012158258}
-  - {x: 1.4331809, y: 0.0059069525}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_Offset: {x: 0.8, y: 0}
+  m_Size: {x: 1.78, y: 0.13}
+  m_Direction: 1
 --- !u!1 &1686307297
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class Ladder : MonoBehaviour
     private void Update()
     {
         if (l == null) return;
+        if (l.fsm != l.movingState) return;
 
         if (SwipeManager.ClimbUp())
         {

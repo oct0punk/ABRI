@@ -6,7 +6,7 @@ public class Lumberjack : MonoBehaviour
     public int speed = 3;
 
 
-    FSM_BaseState fsm;
+    public FSM_BaseState fsm { get; private set; }
     public FSM_MovingState movingState { get; private set; }
     public FSM_ClimbingState climbingState { get; private set; }
     public FSM_JumpingState jumpingState{ get; private set; }
