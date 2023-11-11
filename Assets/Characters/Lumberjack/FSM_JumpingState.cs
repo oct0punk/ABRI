@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,22 @@ public class FSM_JumpingState : FSM_BaseState
     float t = 0.0f; 
     Vector3 start; 
     public Vector3 land;
+    Vector3 localLand;
+    Transform parent;
 
     public override void OnEnter(Lumberjack l)
     {
+        parent = null;
         t = .0f;
         l.SetSpriteColor(Color.yellow);
         start = l.transform.position;
+
+        RaycastHit2D hit = Physics2D.Raycast(land + Vector3.up * 2, Vector2.down, 3, LayerMask.GetMask("Platform"));
+        if (hit) {
+            parent = hit.transform;
+            land = hit.point;
+            localLand = parent.InverseTransformPoint(land);
+        }
     }
 
     public override void OnExit(Lumberjack l)
@@ -25,9 +36,19 @@ public class FSM_JumpingState : FSM_BaseState
     public override void Update(Lumberjack l)
     {
         t += Time.deltaTime;
+        
+        if (parent)
+        {
+            land = parent.TransformPoint(localLand);
+            Debug.DrawLine(land + Vector3.up, land, Color.red);
+        }
+
+        
         l.transform.position = Vector3.Lerp(start, land, t);
         l.transform.position += Vector3.up * Mathf.Sin(t * Mathf.PI);
-        if (t > 1.0f) {
+
+        if (t > 1.0f)
+        {
             l.Move(land);
             l.ChangeFSM(l.movingState);
         }

@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 
 public class SwipeManager : MonoBehaviour
 {
+    public bool buildLadder = false;
     static SwipeManager instance;
     private static SwipeManager Instance
     {
@@ -22,6 +23,16 @@ public class SwipeManager : MonoBehaviour
             }
         }
         set { }
+    }
+
+    public static bool GetBuildLadder()
+    {
+        if (Instance.buildLadder)
+        {
+            Instance.buildLadder = false;
+            return true;
+        }
+        return false;
     }
 
     [SerializeField] private Swipe[] swipes;

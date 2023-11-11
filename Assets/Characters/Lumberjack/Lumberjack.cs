@@ -5,6 +5,7 @@ public class Lumberjack : MonoBehaviour
     [Min(0)]
     public int speed = 3;
 
+    public Ladder ladderPrefab;
 
     public FSM_BaseState fsm { get; private set; }
     public FSM_MovingState movingState { get; private set; }
@@ -56,7 +57,12 @@ public class Lumberjack : MonoBehaviour
 
     public void ClimbUp(Ladder ladder)
     {
-        Climb(ladder, ladder.transform.position + Vector3.up * ladder.getHeight());
+        Vector3 pos = ladder.transform.position + Vector3.up * ladder.getHeight();
+        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.down, 2, LayerMask.GetMask("Platform"));
+        if (hit)
+            pos = hit.point;
+
+        Climb(ladder, pos);
     }
     public void ClimbDown(Ladder ladder)
     {
@@ -73,5 +79,13 @@ public class Lumberjack : MonoBehaviour
     {
         transform.localScale = Vector3.one;
         transform.localScale = new Vector3(1 / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
+    }
+
+    public void BuildLadder()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.up, Vector2.up, Mathf.Infinity, LayerMask.GetMask("Platform"));
+        if (!hit) return;
+        Ladder lad = Instantiate(ladderPrefab, transform.position + Vector3.down * .5f + Vector3.forward * 2, Quaternion.identity).GetComponent<Ladder>();
+        lad.SetHeight(Vector2.Distance(transform.position, hit.point) + 2);
     }
 }
