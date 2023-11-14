@@ -26,6 +26,9 @@ public class Lumberjack : MonoBehaviour
     private void Update()
     {
         fsm.Update(this);
+    }
+    private void LateUpdate()
+    {
         ResetGlobalScale();
         transform.rotation = Quaternion.identity;
     }
