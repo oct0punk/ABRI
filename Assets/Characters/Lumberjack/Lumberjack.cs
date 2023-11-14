@@ -1,9 +1,11 @@
+using Cinemachine;
 using UnityEngine;
 
 public class Lumberjack : MonoBehaviour
 {
     [Min(0)]
     public int speed = 3;
+    public CinemachineVirtualCamera cam;
 
     public Ladder ladderPrefab;
 
@@ -86,6 +88,7 @@ public class Lumberjack : MonoBehaviour
 
     public void BuildLadder()
     {
+        if (transform.parent.tag != "Platform") return;
         RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.up, Vector2.up, Mathf.Infinity, LayerMask.GetMask("Platform"));
         if (!hit) return;
         Ladder lad = Instantiate(ladderPrefab, transform.position + Vector3.down * .5f + Vector3.forward * 2, Quaternion.identity).GetComponent<Ladder>();
