@@ -1,6 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 
+[SelectionBase]
 public class Lumberjack : MonoBehaviour
 {
     [Min(0)]

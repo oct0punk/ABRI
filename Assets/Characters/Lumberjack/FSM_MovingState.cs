@@ -15,7 +15,7 @@ public class FSM_MovingState : FSM_BaseState
 
     public override void OnEnter(Lumberjack l)
     {
-        l.SetSpriteColor(Color.blue);
+        l.SetSpriteColor(Color.white);
     }
 
     public override void OnExit(Lumberjack l)
