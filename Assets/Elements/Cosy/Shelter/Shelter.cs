@@ -3,6 +3,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.Rendering.Universal;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 [SelectionBase]
 public class Shelter : MonoBehaviour
@@ -19,6 +20,7 @@ public class Shelter : MonoBehaviour
 
     Piece[] pieces;
     Storm storm;
+    public Slider thermometer;
 
 
     void Awake()
@@ -48,9 +50,13 @@ public class Shelter : MonoBehaviour
     void ChangeTemperature(float amount)
     {
         temperature += amount;
+        float lerpVal = Mathf.Lerp(0.0f, 1.0f, temperature / 20.0f);
+        
         Color c = ext.color;
-        c.a = Mathf.Lerp(0.0f, 1.0f, temperature / 20.0f);
+        c.a = lerpVal;
         ext.color = c;
+
+        thermometer.value = lerpVal;
     }
 
     public static void UpdateSpeed()
