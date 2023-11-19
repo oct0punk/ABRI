@@ -26,6 +26,8 @@ public class FSM_JumpingState : FSM_BaseState
             land = hit.point;
             localLand = parent.InverseTransformPoint(land);
         }
+
+        l.x = (int)Mathf.Sign((land - start).x);
     }
 
     public override void OnExit(Lumberjack l)
