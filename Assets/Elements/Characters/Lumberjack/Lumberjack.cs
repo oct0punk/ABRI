@@ -6,6 +6,7 @@ public class Lumberjack : MonoBehaviour
 {
     [Min(0)]
     public int speed = 3;
+    public int x = 1;
     public CinemachineVirtualCamera cam;
 
     public Ladder ladderPrefab;
@@ -53,6 +54,8 @@ public class Lumberjack : MonoBehaviour
         Vector3 delta = targetPos - transform.position;
         delta = Vector3.ClampMagnitude(delta, Time.deltaTime * speed);
         transform.position += delta;
+        if (delta.magnitude >= Time.deltaTime * speed)
+            x = (int)Mathf.Sign(delta.x);
     }
 
     public void Jump(Vector3 landAt)
@@ -84,7 +87,7 @@ public class Lumberjack : MonoBehaviour
     public void ResetGlobalScale()
     {
         transform.localScale = Vector3.one;
-        transform.localScale = new Vector3(1 / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
+        transform.localScale = new Vector3(x / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
     }
 
     public void BuildLadder()
