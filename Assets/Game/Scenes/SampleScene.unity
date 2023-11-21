@@ -1117,6 +1117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  x: 1
   cam: {fileID: 806199412}
   ladderPrefab: {fileID: 4322358318920254523, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
 --- !u!4 &847752035
@@ -2324,6 +2325,10 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 847752035}
+    - target: {fileID: 6761278046677639939, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7056827409904935335, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
       propertyPath: m_RenderMode
       value: 2
@@ -2343,6 +2348,14 @@ PrefabInstance:
     - target: {fileID: 7628705653616621231, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873410107596658062, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 184112170}
+    - target: {fileID: 7873410107596658062, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8157532840496696416, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
       propertyPath: consuming

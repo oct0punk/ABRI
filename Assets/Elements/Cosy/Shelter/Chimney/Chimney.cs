@@ -1,8 +1,10 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Chimney : MonoBehaviour
 {
-    public bool reload;
+    public bool canReload;
+    public Canvas canvas;
     Combustible[] coms;
     
 
@@ -11,17 +13,14 @@ public class Chimney : MonoBehaviour
         coms = GetComponentsInChildren<Combustible>();
     }
 
-    private void Update()
-    {
-        if (reload)
-        {
-            reload = false;
-            Reload();
-        }
-    }
-
     public void Reload()
     {
+        if (!canReload)
+        {
+            canvas.GetComponent<Animator>().SetTrigger("NoLog");
+            return;
+        }
+
         float maxCom = coms[0].consuming;
         int idx = 0;
         for (int i = 1; i < coms.Length; i++) 
@@ -33,5 +32,22 @@ public class Chimney : MonoBehaviour
             }
         }
         coms[idx].Activate();
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponentInParent<Lumberjack>())
+        {
+            canvas.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision);
+        if (collision.GetComponentInParent<Lumberjack>())
+        {
+            canvas.gameObject.SetActive(true);
+        }
     }
 }
