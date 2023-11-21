@@ -750,9 +750,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1350290838}
-        m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
-        m_MethodName: End
+      - m_Target: {fileID: 1115294555}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: Outro
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -800,11 +800,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299924648}
   m_CullTransparentMesh: 1
---- !u!4 &301347693 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 497308442773100793, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
-  m_PrefabInstance: {fileID: 942921444837817322}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &380609832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,6 +1105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  x: 1
   cam: {fileID: 187936662}
   ladderPrefab: {fileID: 4322358318920254523, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
 --- !u!1 &488367657
@@ -1143,7 +1139,7 @@ Transform:
   m_Children:
   - {fileID: 1819980875}
   - {fileID: 1225587178}
-  - {fileID: 301347693}
+  - {fileID: 942921444837817323}
   - {fileID: 425714413}
   - {fileID: 1202343595}
   m_Father: {fileID: 0}
@@ -1817,8 +1813,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1350290838}
-        m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
+      - m_Target: {fileID: 1115294555}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
@@ -2235,8 +2231,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1350290838}
-        m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
+      - m_Target: {fileID: 1115294555}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: GameOver
         m_Mode: 1
         m_Arguments:
@@ -2465,6 +2461,7 @@ GameObject:
   - component: {fileID: 1115294550}
   - component: {fileID: 1115294549}
   - component: {fileID: 1115294548}
+  - component: {fileID: 1115294555}
   m_Layer: 0
   m_Name: CinemachineBrain
   m_TagString: MainCamera
@@ -2652,6 +2649,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1115294555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115294547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c6daab16ef158c4fb7ac89b8207fa69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 1350290838}
 --- !u!4 &1202343595 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8401535724522177847, guid: becc643b1e752204f9900a30ada0a739, type: 3}
@@ -4704,6 +4714,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+--- !u!4 &942921444837817323 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2141197600078108994, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+  m_PrefabInstance: {fileID: 942921444837817322}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
-
 
 public class Chimney : MonoBehaviour
 {
     public bool reload;
     Combustible[] coms;
+    
 
     private void Start()
     {

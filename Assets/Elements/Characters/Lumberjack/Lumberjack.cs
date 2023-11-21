@@ -6,7 +6,7 @@ public class Lumberjack : MonoBehaviour
 {
     [Min(0)]
     public int speed = 3;
-    public int x = 1;
+    [HideInInspector] public int x = 1;
     public CinemachineVirtualCamera cam;
 
     public Ladder ladderPrefab;

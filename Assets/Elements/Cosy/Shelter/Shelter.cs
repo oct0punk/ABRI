@@ -54,8 +54,7 @@ public class Shelter : MonoBehaviour
         temperature = Mathf.Clamp(temperature + amount, 0.0f, 25.0f);        
         if (temperature <= 0.0f)
         {
-            Debug.Log("GAMEOVER");
-            // GAME OVER
+            GameManager.instance.GameOver();
             return;
         }
         

@@ -40,4 +40,13 @@ public class Piece : MonoBehaviour
         life = Random.Range(solid, solid + 4);
         Shelter.UpdateSpeed(1);
     }
+
+    /*USP : 
+Le vieil habitant des arbres y mettra tout son coeur pour protéger ses compagnons animaux. 
+
+KSP : 
+Faites face à la tempête qui pourrait vous coûter la vie
+Les animaux apeurés de la forêt seront d’un grand réconfort dans votre foyer. 
+Construisez pour progresser sans tomber!
+*/
 }

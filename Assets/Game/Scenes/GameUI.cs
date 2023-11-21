@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
+    public static GameUI instance;
     public GameObject GamePanel;
     public GameObject GameOverPanel;
     public GameObject EndPanel;
@@ -13,9 +14,11 @@ public class GameUI : MonoBehaviour
 
     private void Start()
     {
+        instance = this;
         GameOverPanel.SetActive(false);
         EndPanel.SetActive(false);
         Resume();
+        
     }
 
     public void Pause()
