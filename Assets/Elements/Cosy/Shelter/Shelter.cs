@@ -10,13 +10,15 @@ public class Shelter : MonoBehaviour
 {
     static Shelter instance;
 
+    [Header("Enter")]
     [SerializeField] SpriteRenderer ext;
     [SerializeField] Light2D light;
     [SerializeField] CinemachineVirtualCamera cam;
 
+    [Header("Temperature")]
     [SerializeField] float temperature = 20.0f;
-    [SerializeField] float speed = 0.0f;
-    public float timeBeforeNextGust = 1.0f;
+    [SerializeField] float timeBeforeNextGust = 1.0f;
+    [SerializeField] int push = 0;
 
     Piece[] pieces;
     Storm storm;
@@ -27,45 +29,45 @@ public class Shelter : MonoBehaviour
     {
         instance = this;
         storm = GetComponent<Storm>();
-        pieces = GetComponentsInChildren<Piece>();
+        pieces = GetComponentsInChildren<Piece>();        
     }
 
 
 
     private void Update()
     {
-        ChangeTemperature(speed * Time.deltaTime);
+        ChangeTemperature(push * Time.deltaTime);
+
         timeBeforeNextGust -= Time.deltaTime;
         if (timeBeforeNextGust < 0.0f)
         {
             timeBeforeNextGust = UnityEngine.Random.Range(40.0f, 100.0f);
-            foreach (Piece p in pieces)
-            {
+            foreach (Piece p in pieces) {
                 p.Resist(storm.wind);
-            }
-        }
+        }   }
+
     }
 
 
     void ChangeTemperature(float amount)
     {
         temperature += amount;
-        float lerpVal = Mathf.Lerp(0.0f, 1.0f, temperature / 20.0f);
+        if (temperature < 0.0f)
+        {
+            Debug.Log("GAMEOVER");
+            // GAME OVER
+            return;
+        }
+        if (temperature > 25.0f)
+            temperature = 25.0f;
         
-        Color c = ext.color;
-        c.a = lerpVal;
-        ext.color = c;
-
-        thermometer.value = lerpVal;
+        
+        thermometer.value = Mathf.Lerp(0.0f, 1.0f, temperature / 20.0f);
     }
 
-    public static void UpdateSpeed()
+    public static void UpdateSpeed(int amount)
     {
-        int res = 0;
-        foreach (Piece pi in Array.FindAll(instance.pieces, p => !p.alive))
-            --res;
-
-        instance.speed = res;
+        instance.push += amount;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

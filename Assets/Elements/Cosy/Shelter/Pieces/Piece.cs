@@ -29,7 +29,7 @@ public class Piece : MonoBehaviour
         alive = false;
         GetComponent<SpriteRenderer>().color = Color.red;
         bubble.SetActive(true);
-        Shelter.UpdateSpeed();
+        Shelter.UpdateSpeed(-1);
     }
 
     public void Repair()
@@ -38,6 +38,6 @@ public class Piece : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.white;
         bubble.SetActive(false);
         life = Random.Range(solid, solid + 4);
-        Shelter.UpdateSpeed();
+        Shelter.UpdateSpeed(1);
     }
 }
