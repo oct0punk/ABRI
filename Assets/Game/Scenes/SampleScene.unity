@@ -2237,6 +2237,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 509708574675582763, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 509708574675582763, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 509708574675582763, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 995079640016593577, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      propertyPath: m_Color.b
+      value: 0.995283
+      objectReference: {fileID: 0}
+    - target: {fileID: 995079640016593577, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      propertyPath: m_Color.g
+      value: 0.995283
+      objectReference: {fileID: 0}
+    - target: {fileID: 995079640016593577, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1553848334720212574, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
       propertyPath: consuming
       value: 1
@@ -2326,9 +2350,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 847752035}
     - target: {fileID: 6761278046677639939, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Name
+      value: Bubble
       objectReference: {fileID: 0}
+    - target: {fileID: 6761278046677639939, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926117156753060362, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: dad80cc989805c3499cc80710f8d03f4, type: 2}
     - target: {fileID: 7056827409904935335, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
       propertyPath: m_RenderMode
       value: 2

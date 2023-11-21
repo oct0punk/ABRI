@@ -17,7 +17,7 @@ public class Chimney : MonoBehaviour
     {
         if (!canReload)
         {
-            canvas.GetComponent<Animator>().SetTrigger("NoLog");
+            canvas.GetComponent<Animator>().SetTrigger("NOPE");
             return;
         }
 
@@ -32,6 +32,7 @@ public class Chimney : MonoBehaviour
             }
         }
         coms[idx].Activate();
+        canvas.GetComponent<Animator>().SetTrigger("OK");
     }
 
     private void OnTriggerExit2D(Collider2D collision)
