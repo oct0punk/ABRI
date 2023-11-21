@@ -3,16 +3,22 @@ using UnityEngine;
 
 public class Combustible : MonoBehaviour
 {
-    Material mat;    
-    [SerializeField] [Range(0.0f,1.0f)] private float consuming; // 1.0f means that it is consumed
+    Material mat;
+    [Range(0.0f, 1.0f)]
+    public float consuming;// { get; private set; }
     bool active = false;
-
 
     private void Start()
     {
+
         mat = GetComponent<SpriteRenderer>().material;
+        mat.SetFloat("_consuming", consuming);
+
         if (consuming < 1.0f)
-            Activate();
+        {
+            active = true;
+            Shelter.UpdateSpeed(1);
+        }
     }
     private void Update()
     {
@@ -27,10 +33,10 @@ public class Combustible : MonoBehaviour
 
     public void Activate()
     {
-        if (active) return;
-        
-        Shelter.UpdateSpeed(1);
-        Reload();
+        if (!active)
+            Shelter.UpdateSpeed(1);
+        consuming = 0.0f;
+        active = true;
     }
     public void Deactivate()
     {
@@ -38,11 +44,6 @@ public class Combustible : MonoBehaviour
         
         Shelter.UpdateSpeed(-1);        
         active = false;
-    }
-    public void Reload()
-    {
-        active = true;
-        consuming = 0.0f;
     }
 
 }

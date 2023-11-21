@@ -9,7 +9,7 @@ public class Piece : MonoBehaviour
        
     public void SetBubbleVisible(bool isActive)
     {
-        bubble.SetActive(isActive);
+        bubble.transform.parent.gameObject.SetActive(isActive);
     }
 
     public void Resist(int windForce)

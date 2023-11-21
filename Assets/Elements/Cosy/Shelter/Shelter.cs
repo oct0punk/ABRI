@@ -41,7 +41,7 @@ public class Shelter : MonoBehaviour
         timeBeforeNextGust -= Time.deltaTime;
         if (timeBeforeNextGust < 0.0f)
         {
-            timeBeforeNextGust = UnityEngine.Random.Range(40.0f, 100.0f);
+            timeBeforeNextGust = 5.0f; // UnityEngine.Random.Range(40.0f, 100.0f);
             foreach (Piece p in pieces) {
                 p.Resist(storm.wind);
         }   }
@@ -50,16 +50,14 @@ public class Shelter : MonoBehaviour
 
 
     void ChangeTemperature(float amount)
-    {
-        temperature += amount;
-        if (temperature < 0.0f)
+    {        
+        temperature = Mathf.Clamp(temperature + amount, 0.0f, 25.0f);        
+        if (temperature <= 0.0f)
         {
             Debug.Log("GAMEOVER");
             // GAME OVER
             return;
         }
-        if (temperature > 25.0f)
-            temperature = 25.0f;
         
         
         thermometer.value = Mathf.Lerp(0.0f, 1.0f, temperature / 20.0f);
