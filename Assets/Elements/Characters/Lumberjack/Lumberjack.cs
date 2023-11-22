@@ -9,6 +9,10 @@ public class Lumberjack : MonoBehaviour
     [HideInInspector] public int x = 1;
     public CinemachineVirtualCamera cam;
 
+    // Component
+    public Animator animator { get; private set; }
+
+
     public Ladder ladderPrefab;
 
     public FSM_BaseState fsm { get; private set; }
@@ -19,6 +23,7 @@ public class Lumberjack : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         movingState = new FSM_MovingState();
         climbingState = new FSM_ClimbingState();
         jumpingState = new FSM_JumpingState();

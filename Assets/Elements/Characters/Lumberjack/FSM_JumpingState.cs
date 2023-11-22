@@ -18,8 +18,10 @@ public class FSM_JumpingState : FSM_BaseState
         parent = null;
         t = .0f;
         l.SetSpriteColor(Color.yellow);
+        l.animator.SetBool("isJumping", true);
         start = l.transform.position;
 
+        // Parents the land pos
         RaycastHit2D hit = Physics2D.Raycast(land + Vector3.up * 2, Vector2.down, 3, LayerMask.GetMask("Platform"));
         if (hit) {
             parent = hit.transform;
@@ -32,7 +34,7 @@ public class FSM_JumpingState : FSM_BaseState
 
     public override void OnExit(Lumberjack l)
     {
-
+        l.animator.SetBool("isJumping", false);
     }
 
     public override void Update(Lumberjack l)

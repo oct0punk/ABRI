@@ -16,6 +16,7 @@ public class FSM_MovingState : FSM_BaseState
     public override void OnEnter(Lumberjack l)
     {
         l.SetSpriteColor(Color.white);
+        l.animator.SetBool("isWalking", false);
     }
 
     public override void OnExit(Lumberjack l)
@@ -25,6 +26,7 @@ public class FSM_MovingState : FSM_BaseState
 
     public override void Update(Lumberjack l)
     {        
+        // Stabilize
         RaycastHit2D hit = Physics2D.Raycast(l.transform.position + new Vector3(0, h, 0), Vector2.down, 3, mask);
         if (hit)
         {
@@ -35,11 +37,8 @@ public class FSM_MovingState : FSM_BaseState
             }
         }
 
-        if (SwipeManager.GetBuildLadder())
-        {
-            l.BuildLadder();
-        }
 
+        // Move left or right
         if (SwipeManager.MoveLeft())
         {
             if (TryMove(l, -r, 2.0f, 0.0f))
@@ -68,6 +67,9 @@ public class FSM_MovingState : FSM_BaseState
             }
         }
 
+        // Idle
+        l.animator.SetBool("isWalking", false);
+        
     }
 
     bool TryMove(Lumberjack l, float exp, float hExp, float hDiff)
@@ -79,6 +81,7 @@ public class FSM_MovingState : FSM_BaseState
         if (hit) {
             Debug.DrawLine(start, hit.point, Color.yellow);
             targetPosition = hit.point;
+            l.animator.SetBool("isWalking", true);
             return true;            
         }
         else {
