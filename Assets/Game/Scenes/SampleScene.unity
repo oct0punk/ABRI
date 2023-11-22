@@ -1097,6 +1097,7 @@ GameObject:
   - component: {fileID: 847752035}
   - component: {fileID: 847752033}
   - component: {fileID: 847752036}
+  - component: {fileID: 847752037}
   m_Layer: 0
   m_Name: Lumberjack
   m_TagString: Player
@@ -1164,6 +1165,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &847752037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847752032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c697a9ae674933b42a2af3ee6a1fa1f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  content:
+  - type: branchs
+    q: 0
+    maxQ: 0
 --- !u!1 &863251377
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,6 +1677,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1593305720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1593305721}
+  - component: {fileID: 1593305722}
+  m_Layer: 0
+  m_Name: Storage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1593305721
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593305720}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1660774090}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1593305722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593305720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c697a9ae674933b42a2af3ee6a1fa1f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  content:
+  - type: branch
+    q: 0
+    maxQ: -1
+  - type: planch
+    q: 0
+    maxQ: -1
 --- !u!1 &1620406982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1748,6 +1816,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: becc643b1e752204f9900a30ada0a739, type: 3}
+--- !u!4 &1660774090 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2141197600078108994, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+  m_PrefabInstance: {fileID: 6768345936367468285}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1661543725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2464,6 +2537,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2141197600078108994, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1593305721}
     - targetCorrespondingSourceObject: {fileID: 6867651674226578153, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
       insertIndex: -1
       addedObject: {fileID: 483380513}
