@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.Rendering.Universal;
-using Unity.VisualScripting;
 using UnityEngine.UI;
 
 [SelectionBase]
@@ -22,6 +21,7 @@ public class Shelter : MonoBehaviour
 
     Piece[] pieces;
     Storm storm;
+    public Storage storage { get; private set; }
     public Slider thermometer;
 
 
@@ -29,7 +29,8 @@ public class Shelter : MonoBehaviour
     {
         instance = this;
         storm = GetComponent<Storm>();
-        pieces = GetComponentsInChildren<Piece>();        
+        pieces = GetComponentsInChildren<Piece>();
+        storage = GetComponentInChildren<Storage>();
     }
 
 
@@ -42,23 +43,25 @@ public class Shelter : MonoBehaviour
         if (timeBeforeNextGust < 0.0f)
         {
             timeBeforeNextGust = 5.0f; // UnityEngine.Random.Range(40.0f, 100.0f);
-            foreach (Piece p in pieces) {
+            foreach (Piece p in pieces)
+            {
                 p.Resist(storm.wind);
-        }   }
+            }
+        }
 
     }
 
 
     void ChangeTemperature(float amount)
-    {        
-        temperature = Mathf.Clamp(temperature + amount, 0.0f, 25.0f);        
+    {
+        temperature = Mathf.Clamp(temperature + amount, 0.0f, 25.0f);
         if (temperature <= 0.0f)
         {
             GameManager.instance.GameOver();
             return;
         }
-        
-        
+
+
         thermometer.value = Mathf.Lerp(0.0f, 1.0f, temperature / 20.0f);
     }
 
@@ -70,12 +73,19 @@ public class Shelter : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Le bucheron ENTRE dans la cabane
-        if (collision.GetComponentInParent<Lumberjack>() != null)
+        Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
+        if (lum != null)
         {
             ext.enabled = false;
             light.enabled = true;
             CameraManager.Possess(cam);
             Array.ForEach<Piece>(instance.pieces, p => p.SetBubbleVisible(true));
+
+            // Store planchs
+            string type = "branch";
+            int iter = lum.storage.CountEmpty(type);
+            lum.storage.Add(type, -iter);
+            storage.Add(type, iter);
         }
     }
 
@@ -89,6 +99,12 @@ public class Shelter : MonoBehaviour
             CameraManager.Possess(lum.cam);
             light.enabled = false;
             Array.ForEach<Piece>(instance.pieces, p => p.SetBubbleVisible(false));
+
+            // Store planchs
+            string type = "branch";
+            int iter = Mathf.Min(storage.CountEmpty(type), lum.storage.CountEmpty(type));
+            lum.storage.Add(type, iter);
+            storage.Add(type, -iter);
         }
     }
 }

@@ -50,6 +50,14 @@ public class Storage : MonoBehaviour
             return false;
     }
 
+    public int CountEmpty(string type)
+    {
+        MatType mat = GetMatInContent(type);
+        if (mat == null)
+            return -1;
+        return mat.maxQ - mat.q;
+    }
+
     public int Count(string type)
     {
         MatType mat = GetMatInContent(type);

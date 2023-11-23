@@ -21,7 +21,7 @@ public class Lumberjack : MonoBehaviour
     #region Owning Components
     public Animator animator { get; private set; }
     public List<Resource> canCutRes { get; private set; }
-    private Storage storage;
+    public Storage storage { get; private set; }
     #endregion
 
     #region FSM
