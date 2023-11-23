@@ -21,7 +21,7 @@ public class FSM_MovingState : FSM_BaseState
 
     public override void OnExit(Lumberjack l)
     {
-
+        l.animator.SetBool("isWalking", false);
     }
 
     public override void Update(Lumberjack l)
@@ -34,6 +34,15 @@ public class FSM_MovingState : FSM_BaseState
             if (l.transform.parent != hit.transform)
             {
                 l.transform.SetParent(hit.transform);
+            }
+        }
+
+        if (SwipeManager.Cut())
+        {
+            if (l.canCutRes.Count > 0)
+            {
+                l.StartCutting();
+                return;
             }
         }
 

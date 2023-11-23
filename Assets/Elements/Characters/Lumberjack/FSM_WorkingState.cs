@@ -1,21 +1,64 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 using UnityEngine;
+
+public enum WorkState
+{
+    Cutting,
+    Building,
+    Crafting,
+}
 
 public class FSM_WorkingState : FSM_BaseState
 {
+    public WorkState state;
+    Func<bool> condition;
+    Action<Lumberjack> updateFunc;
+
     public override void OnEnter(Lumberjack l)
     {
-        throw new System.NotImplementedException();
+        l.SetSpriteColor(Color.red);
+        l.animator.SetBool("isWorking", true);
+        switch (state)
+        {
+            case WorkState.Building:
+
+                break;
+            case WorkState.Crafting: 
+                
+                break;
+            case WorkState.Cutting:
+                updateFunc = CuttingUpdate;
+                condition = () => l.pickingResource.resistance <= 0;
+                break;
+        }
     }
+
 
     public override void OnExit(Lumberjack l)
     {
-        throw new System.NotImplementedException();
+        l.animator.SetBool("isWorking", false);
+        Debug.Log("WorkEnd");
     }
 
     public override void Update(Lumberjack l)
     {
-        throw new System.NotImplementedException();
+        if (condition.Invoke())
+        {
+            l.ChangeFSM(l.movingState);
+            return;
+        }
+        updateFunc(l);        
+    }
+
+    void CuttingUpdate(Lumberjack l)
+    {
+        if (SwipeManager.Cut())
+        {
+            if (l.animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != "CutAnim")
+                l.Cut();
+        }
     }
 }

@@ -1,11 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
-using Unity.VisualScripting;
-using System.Linq.Expressions;
 
 public class SwipeManager : MonoBehaviour
 {
@@ -100,5 +93,15 @@ public class SwipeManager : MonoBehaviour
             if (s.SwipeDown(.5f)) ++count;
         }
         return count == 1;
+    }
+
+    public static bool Cut()
+    {
+        foreach (var s in Instance.swipes)
+        {
+            if (s.SwipeLeft(0.0f)) return true;
+            if (s.SwipeRight(0.0f)) return true;
+        }
+        return false;
     }
 }
