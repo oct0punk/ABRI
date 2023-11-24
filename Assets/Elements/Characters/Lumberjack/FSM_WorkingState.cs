@@ -27,6 +27,7 @@ public class FSM_WorkingState : FSM_BaseState
             case WorkState.Building:
                 condition = () => forceExit == true;
                 updateFunc = BuildingUpdate;
+                l.constructUI.SetActive(true);
                 break;
             case WorkState.Crafting: 
                 
@@ -68,6 +69,7 @@ public class FSM_WorkingState : FSM_BaseState
     {
         if (SwipeManager.ConstructMode())
         {
+            l.constructUI.SetActive(false);
             l.ChangeFSM(l.movingState);
         }
     }

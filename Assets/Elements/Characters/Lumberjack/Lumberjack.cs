@@ -13,8 +13,9 @@ public class Lumberjack : MonoBehaviour
     [HideInInspector] public int x = 1;
 
     #region External datas
+    [Header("External")]
     public CinemachineVirtualCamera cam;
-    public Ladder ladderPrefab;
+    public GameObject constructUI;
     public Resource pickingResource { get; private set; }
     #endregion
 
@@ -110,14 +111,6 @@ public class Lumberjack : MonoBehaviour
         transform.localScale = new Vector3(x / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
     }
 
-    public void BuildLadder()
-    {
-        if (transform.parent.tag != "Platform") return;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.up, Vector2.up, Mathf.Infinity, LayerMask.GetMask("Platform"));
-        if (!hit) return;
-        Ladder lad = Instantiate(ladderPrefab, transform.position + Vector3.down * .5f + Vector3.forward * 2, Quaternion.identity).GetComponent<Ladder>();
-        lad.SetHeight(Vector2.Distance(transform.position, hit.point) + 2);
-    }
 
     public void OnResEnter(Resource res)
     {

@@ -232,6 +232,7 @@ MonoBehaviour:
   x: 1
   cam: {fileID: 0}
   ladderPrefab: {fileID: 4322358318920254523, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
+  constructUI: {fileID: 0}
 --- !u!114 &7678264919461317884
 MonoBehaviour:
   m_ObjectHideFlags: 0
