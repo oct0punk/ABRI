@@ -81,9 +81,11 @@ public class Shelter : MonoBehaviour
             CameraManager.Possess(cam);
             Array.ForEach<Piece>(instance.pieces, p => p.SetBubbleVisible(true));
 
-            // Store planchs
+            // Store planchs into shelter
             string type = "branch";
-            int iter = lum.storage.CountEmpty(type);
+            int iter = lum.storage.Count(type);
+            if (iter == 0) return;
+            Debug.Log("Lum enter : " + iter + " empty emplacements");
             lum.storage.Add(type, -iter);
             storage.Add(type, iter);
         }
@@ -100,9 +102,11 @@ public class Shelter : MonoBehaviour
             light.enabled = false;
             Array.ForEach<Piece>(instance.pieces, p => p.SetBubbleVisible(false));
 
-            // Store planchs
+            // Store planchs into player
             string type = "branch";
-            int iter = Mathf.Min(storage.CountEmpty(type), lum.storage.CountEmpty(type));
+            int iter = Mathf.Min(storage.Count(type), lum.storage.CountEmpty(type));
+            if (iter == 0) return;
+            Debug.Log("Lum exit : " + iter + " branchs to move");
             lum.storage.Add(type, iter);
             storage.Add(type, -iter);
         }
