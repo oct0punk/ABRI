@@ -46,6 +46,13 @@ public class FSM_MovingState : FSM_BaseState
             }
         }
 
+        if (SwipeManager.ConstructMode())
+        {
+            l.ConstructMode();
+            return;
+        }
+
+        if (Input.touches.Length > 1) return;
 
         // Move left or right
         if (SwipeManager.MoveLeft())

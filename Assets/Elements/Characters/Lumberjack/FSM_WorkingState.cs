@@ -15,6 +15,7 @@ public class FSM_WorkingState : FSM_BaseState
 {
     public WorkState state;
     Func<bool> condition;
+    bool forceExit = false;
     Action<Lumberjack> updateFunc;
 
     public override void OnEnter(Lumberjack l)
@@ -24,7 +25,8 @@ public class FSM_WorkingState : FSM_BaseState
         switch (state)
         {
             case WorkState.Building:
-
+                condition = () => forceExit == true;
+                updateFunc = BuildingUpdate;
                 break;
             case WorkState.Crafting: 
                 
@@ -50,7 +52,7 @@ public class FSM_WorkingState : FSM_BaseState
             l.ChangeFSM(l.movingState);
             return;
         }
-        updateFunc(l);        
+        updateFunc(l);
     }
 
     void CuttingUpdate(Lumberjack l)
@@ -59,6 +61,14 @@ public class FSM_WorkingState : FSM_BaseState
         {
             if (l.animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != "CutAnim")
                 l.Cut();
+        }
+    }
+
+    void BuildingUpdate(Lumberjack l)
+    {
+        if (SwipeManager.ConstructMode())
+        {
+            l.ChangeFSM(l.movingState);
         }
     }
 }

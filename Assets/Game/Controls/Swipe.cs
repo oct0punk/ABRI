@@ -8,6 +8,8 @@ public class Swipe
 {
     private float tap, swipeUp, swipeDown, swipeLeft, swipeRight;
     private bool isDragging;
+    public bool DoOnce { get { return iter == 1; } }
+    private int iter = 0;
     private Vector2 startTouch, swipeDelta;
 
     public bool Tap(float tolerance) { return tap <= tolerance; }
@@ -72,6 +74,7 @@ public class Swipe
                             swipeUp = 0;
                     }
 
+                    iter++;
                     startTouch = Input.touches[index].position;
                 }
             }
@@ -83,6 +86,7 @@ public class Swipe
         if (isDragging)
             tap = 0;
         isDragging = false;
+        iter = 0;
 
         startTouch = swipeDelta = Vector2.zero;
 

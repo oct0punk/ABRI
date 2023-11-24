@@ -137,7 +137,6 @@ public class Lumberjack : MonoBehaviour
         pickingResource = canCutRes[0];
         if (pickingResource == null) return;
 
-        Debug.Log("StartCutting", pickingResource);
         workingState.state = WorkState.Cutting;
         ChangeFSM(workingState);
     }
@@ -150,5 +149,11 @@ public class Lumberjack : MonoBehaviour
     public void Collect(Resource res)
     {
         storage.Add(res.type, 1);
+    }
+
+    public void ConstructMode()
+    {
+        workingState.state = WorkState.Building;
+        ChangeFSM(workingState);
     }
 }

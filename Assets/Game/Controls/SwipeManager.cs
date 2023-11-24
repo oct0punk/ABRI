@@ -104,4 +104,21 @@ public class SwipeManager : MonoBehaviour
         }
         return false;
     }
+
+    public static bool ConstructMode()
+    {
+        if (instance.swipes.Length < 2) return false;
+
+        int countDown = 0;
+        foreach (var s in Instance.swipes)
+        {
+            if (!s.DoOnce) continue;
+            if (s.SwipeDown(countDown == 0 ? 1.0f : 0.0f))
+            {
+                countDown++;
+            }
+        }
+        if (countDown > 1) Debug.Log("SwipeConstruct");
+        return countDown > 1;
+    }
 }
