@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1541168163224868923}
   - component: {fileID: 6877017816282018764}
-  - component: {fileID: 1930650433865967157}
+  - component: {fileID: 7881088763674005959}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1930650433865967157
-BoxCollider2D:
+--- !u!70 &7881088763674005959
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -114,22 +114,12 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.0069385767}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
-    newSize: {x: 1, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2.374686}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.18, y: 0.28}
+  m_Size: {x: 1.15, y: 2}
+  m_Direction: 0
 --- !u!1 &5866900312539568024
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +221,6 @@ MonoBehaviour:
   force: 1
   x: 1
   cam: {fileID: 0}
-  ladderPrefab: {fileID: 4322358318920254523, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
   constructUI: {fileID: 0}
 --- !u!114 &7678264919461317884
 MonoBehaviour:
