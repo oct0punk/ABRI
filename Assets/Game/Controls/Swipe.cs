@@ -12,13 +12,15 @@ public class Swipe
     private int iter = 0;
     private Vector2 startTouch, swipeDelta;
 
-    public bool Tap(float tolerance) { return tap <= tolerance; }
-    public bool SwipeUp(float tolerance) { return swipeUp <= tolerance; }
-    public bool SwipeDown(float tolerance) { return swipeDown <= tolerance; }
-    public bool SwipeLeft(float tolerance) { return swipeLeft <= tolerance; }
-    public bool SwipeRight(float tolerance) { return swipeRight <= tolerance; }
+    public bool Tap(float tolerance) { return isDragging && tap <= tolerance; }
+    public bool SwipeUp(float tolerance) { return isDragging && swipeUp <= tolerance; }
+    public bool SwipeDown(float tolerance) { return isDragging && swipeDown <= tolerance; }
+    public bool SwipeLeft(float tolerance) { return isDragging && swipeLeft <= tolerance; }
+    public bool SwipeRight(float tolerance) { return isDragging && swipeRight <= tolerance; }
 
     public int index;
+
+    float distanceToDrag = 200.0f;
 
 
 
@@ -51,7 +53,7 @@ public class Swipe
             {
                 swipeDelta = Input.touches[index].position - startTouch;
 
-                if (swipeDelta.magnitude > 100)
+                if (swipeDelta.magnitude > distanceToDrag)
                 {
                     // which directions ?
                     float x = swipeDelta.x;

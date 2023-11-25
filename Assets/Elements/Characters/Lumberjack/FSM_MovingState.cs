@@ -1,10 +1,7 @@
-using Cinemachine.Utility;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+
+
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
+
 
 public class FSM_MovingState : FSM_BaseState
 {

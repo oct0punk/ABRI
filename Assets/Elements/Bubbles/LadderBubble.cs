@@ -1,6 +1,6 @@
+
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.PlayerSettings;
 
 public class LadderBubble : DragDropBubble
 {
@@ -13,6 +13,12 @@ public class LadderBubble : DragDropBubble
         condition = canBeBuild;
     }
 
+    public override void OnDrag(PointerEventData eventData)
+    {
+        base.OnDrag(eventData);
+        m_Image.color = condition.Invoke(eventData) ? Color.green : Color.red;
+    }
+
     bool canBeBuild(PointerEventData eventData)
     {
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(eventData.position);
@@ -21,6 +27,7 @@ public class LadderBubble : DragDropBubble
         RaycastHit2D hitUp = Physics2D.Raycast(worldPos, Vector2.up, Mathf.Infinity, LayerMask.GetMask("Platform"));
         if (!hitUp) return false;
 
+        if (hitDown.collider == hitUp.collider) return false;
 
         bottom = hitDown.point;
         top = hitUp.point;

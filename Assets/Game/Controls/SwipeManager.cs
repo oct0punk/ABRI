@@ -4,6 +4,7 @@ public class SwipeManager : MonoBehaviour
 {
     public bool buildLadder = false;
     static SwipeManager instance;
+    bool flag = true;
     private static SwipeManager Instance
     {
         get
@@ -39,6 +40,11 @@ public class SwipeManager : MonoBehaviour
     void Update()
     {
         foreach (var swipe in swipes) swipe.Update();
+
+        if (!flag)
+        {
+            flag = Input.touches.Length == 0;
+        }
     }
 
     #region Movement
@@ -108,17 +114,18 @@ public class SwipeManager : MonoBehaviour
     public static bool ConstructMode()
     {
         if (instance.swipes.Length < 2) return false;
+        if (!instance.flag) return false;
 
         int countDown = 0;
         foreach (var s in Instance.swipes)
         {
-            if (!s.DoOnce) continue;
-            if (s.SwipeDown(countDown == 0 ? 1.0f : 0.0f))
-            {
-                countDown++;
+            if (s.SwipeDown(1.0f)) {
+                countDown++;                
             }
         }
-        if (countDown > 1) Debug.Log("SwipeConstruct");
-        return countDown > 1;
+        bool res = countDown > 1;
+        if (res)
+            instance.flag = false;
+        return res;
     }
 }

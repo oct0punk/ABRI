@@ -14,18 +14,18 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         m_RectTransform = GetComponent<RectTransform>();
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public virtual void OnBeginDrag(PointerEventData eventData)
     {
         m_Image.color = Color.white;
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public virtual void OnDrag(PointerEventData eventData)
     {
         Debug.Log(m_RectTransform);
         m_RectTransform.anchoredPosition += eventData.delta;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public virtual void OnEndDrag(PointerEventData eventData)
     {
         if (condition.Invoke(eventData)) OnSuccess(eventData);
         else OnError(eventData);
