@@ -61,6 +61,8 @@ public class Ladder : MonoBehaviour
         if (p != null)
         {
             l = p;
+            enabled = true;
+            Tuto.canClimb = true;
         }
     }
 
@@ -70,6 +72,8 @@ public class Ladder : MonoBehaviour
         if (p != null)
         {
             l = null;
+            enabled = false;
+            Tuto.canClimb = false;
         }
     }
 

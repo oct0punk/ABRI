@@ -5,6 +5,7 @@ public class Resource : MonoBehaviour
 {
     public string type;
     public int maxResistance = 1;
+    public bool alive = true;
     public int resistance { get; private set; }
     Collider2D collider;
     
@@ -25,6 +26,7 @@ public class Resource : MonoBehaviour
 
     void OnDie(Lumberjack l)
     {
+        alive = false;
         l.OnResExit(this);
         l.Collect(this);
         collider.enabled = false;
@@ -33,6 +35,7 @@ public class Resource : MonoBehaviour
 
     private void Reset()
     {
+        alive = true;
         collider.enabled = true;
         resistance = maxResistance;
         transform.localScale = Vector3.one;
@@ -40,6 +43,7 @@ public class Resource : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!alive) return;
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
@@ -48,6 +52,7 @@ public class Resource : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (!alive) return;
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
