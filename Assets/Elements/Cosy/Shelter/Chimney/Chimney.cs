@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using UnityEngine;
 
+[SelectionBase]
 public class Chimney : MonoBehaviour
 {
     public bool canReload;
@@ -11,6 +12,7 @@ public class Chimney : MonoBehaviour
     private void Start()
     {
         coms = GetComponentsInChildren<Combustible>();
+        canvas.gameObject.SetActive(false);
     }
 
     public void Reload()

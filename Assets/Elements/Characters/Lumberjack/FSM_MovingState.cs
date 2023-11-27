@@ -22,7 +22,7 @@ public class FSM_MovingState : FSM_BaseState
     }
 
     public override void Update(Lumberjack l)
-    {        
+    {
         // Stabilize
         RaycastHit2D hit = Physics2D.Raycast(l.transform.position + new Vector3(0, h, 0), Vector2.down, 3, mask);
         if (hit)
@@ -62,7 +62,7 @@ public class FSM_MovingState : FSM_BaseState
                 l.Move(targetPosition);
                 return;
             }
-            else if (TryMove(l, -(r + 2), 1.5f, h))   // TryJump
+            else if (TryMove(l, -(r + 2), 1.5f, -h/2))   // TryJump
             {
                 l.Jump(targetPosition);
                 return;
@@ -76,7 +76,7 @@ public class FSM_MovingState : FSM_BaseState
                 l.Move(targetPosition);
                 return;
             }
-            else if (TryMove(l, r + 2, 1.5f, h))   // TryJump
+            else if (TryMove(l, r + 2, 1.5f, -h/2))   // TryJump
             {
                 l.Jump(targetPosition);
                 return;
@@ -88,11 +88,11 @@ public class FSM_MovingState : FSM_BaseState
         
     }
 
-    bool TryMove(Lumberjack l, float exp, float hExp, float hDiff)
+    bool TryMove(Lumberjack l, float far, float depth, float drop)
     {
         // Simple step
-        Vector2 start = l.transform.position + new Vector3(exp, h - hDiff, 0);
-        RaycastHit2D hit = Physics2D.Raycast(start, Vector2.down, hExp * h, mask);
+        Vector2 start = l.transform.position + new Vector3(far, h - drop, 0);
+        RaycastHit2D hit = Physics2D.Raycast(start, Vector2.down, depth * h, mask);
         
         if (hit) {
             Debug.DrawLine(start, hit.point, Color.yellow);
@@ -101,7 +101,7 @@ public class FSM_MovingState : FSM_BaseState
             return true;            
         }
         else {
-            Debug.DrawRay(start, Vector2.down * hExp * h, Color.white);
+            Debug.DrawRay(start, Vector2.down * depth * h, Color.white);
         }
         
         return false;

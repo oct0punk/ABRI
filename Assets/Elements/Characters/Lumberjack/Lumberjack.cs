@@ -48,6 +48,8 @@ public class Lumberjack : MonoBehaviour
         workingState = new FSM_WorkingState();
         fsm = movingState;
         fsm.OnEnter(this);
+
+        constructUI.SetActive(false);
     }
 
     private void Update()
@@ -148,5 +150,17 @@ public class Lumberjack : MonoBehaviour
     {
         workingState.state = WorkState.Building;
         ChangeFSM(workingState);
+    }
+
+    public void WorkbenchMode(Workbench workbench)
+    {
+        workingState.workBench = workbench;
+        workingState.state = WorkState.Crafting;
+        ChangeFSM(workingState);
+    }
+
+    public void ExitCraftingMode()
+    {
+        workingState.forceExit = true;
     }
 }

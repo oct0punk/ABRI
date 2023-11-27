@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[SelectionBase]
 public class Resource : MonoBehaviour
 {
     public string type;

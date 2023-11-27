@@ -8,6 +8,7 @@ public enum AnchorType
     right,
 }
 
+[SelectionBase]
 public class AnchorForBridge : MonoBehaviour
 {
     public AnchorForBridge other;
