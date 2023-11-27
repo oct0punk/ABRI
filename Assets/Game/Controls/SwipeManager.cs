@@ -1,11 +1,13 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwipeManager : MonoBehaviour
 {
+    [SerializeField] private Swipe[] swipes;
     public bool buildLadder = false;
     public bool construct = false;
     static SwipeManager instance;
-    bool flag = true;
+    bool canConstruct = true;
     private static SwipeManager Instance
     {
         get
@@ -30,7 +32,6 @@ public class SwipeManager : MonoBehaviour
         return false;
     }
 
-    [SerializeField] private Swipe[] swipes;
 
     private void Start()
     {
@@ -42,10 +43,8 @@ public class SwipeManager : MonoBehaviour
     {
         foreach (var swipe in swipes) swipe.Update();
 
-        if (!flag)
-        {
-            flag = Input.touches.Length == 0;
-        }
+        if (!canConstruct)
+            canConstruct = Input.touches.Length == 0;
     }
 
     #region Walk
@@ -104,6 +103,7 @@ public class SwipeManager : MonoBehaviour
     }
     #endregion
 
+    #region Actions
     public static bool Cut()
     {
         foreach (var s in Instance.swipes)
@@ -120,19 +120,23 @@ public class SwipeManager : MonoBehaviour
             instance.construct = false;
             return true;
         }
+        if (!instance.canConstruct) return false;
         if (instance.swipes.Length < 2) return false;
-        if (!instance.flag) return false;
 
         int countDown = 0;
+        bool foundZero = false;
         foreach (var s in Instance.swipes)
         {
-            if (s.SwipeDown(1.0f)) {
-                countDown++;                
+            if (s.SwipeDown(.4f)) {
+                countDown++;
+                if (s.SwipeDown(0.0f)) foundZero = true;
             }
         }
-        bool res = countDown > 1;
+        
+        bool res = countDown > 1 && foundZero;
         if (res)
-            instance.flag = false;
+            instance.canConstruct = false;
         return res;
     }
+    #endregion
 }

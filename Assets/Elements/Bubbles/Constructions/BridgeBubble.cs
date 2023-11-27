@@ -1,5 +1,6 @@
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -16,9 +17,15 @@ public class BridgeBubble : DragDropBubble
         if (hit) 
         {
             anchor = hit.collider.GetComponentInParent<AnchorForBridge>();
-            return  anchor != null;
+            return  anchor != null && !anchor.isBuilt;
         }        
         return false;
+    }
+
+    public override void OnDrag(PointerEventData eventData)
+    {
+        base.OnDrag(eventData);
+        Debug.Log(m_Image.color, m_Image);
     }
 
     protected override void OnSuccess(PointerEventData eventData)

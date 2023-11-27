@@ -13,4 +13,10 @@ public class AnchorForBridge : MonoBehaviour
 {
     public AnchorForBridge other;
     public AnchorType type;
+    public bool isBuilt { get; private set; }
+
+    public void Build()
+    {
+        isBuilt = other.isBuilt = true;
+    }
 }

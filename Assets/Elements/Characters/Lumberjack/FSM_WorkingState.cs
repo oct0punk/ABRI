@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum WorkState
 {
@@ -16,25 +12,25 @@ public class FSM_WorkingState : FSM_BaseState
 {
     public WorkState state;
     Func<bool> condition;
-    public bool forceExit = false;
+    public bool canExit = false;
     Action<Lumberjack> updateFunc;
     internal Workbench workBench;
 
     public override void OnEnter(Lumberjack l)
     {
-        forceExit = false;
+        canExit = false;
         l.SetSpriteColor(Color.red);
         l.animator.SetBool("isWorking", true);
         switch (state)
         {
             case WorkState.Building:
-                condition = () => forceExit == true;
+                condition = () => SwipeManager.ConstructMode();
                 updateFunc = BuildingUpdate;
                 l.constructUI.SetActive(true);
                 break;
             case WorkState.Crafting:
                 updateFunc = CraftUpdate;
-                condition = () => forceExit == true;
+                condition = () => canExit == true;
                 break;
             case WorkState.Cutting:
                 updateFunc = CuttingUpdate;
@@ -50,6 +46,7 @@ public class FSM_WorkingState : FSM_BaseState
         switch (state)
         {
             case WorkState.Building:
+                l.constructUI.SetActive(false);
                 break;
             case WorkState.Crafting:
                 workBench.HidePlans();
@@ -80,11 +77,7 @@ public class FSM_WorkingState : FSM_BaseState
 
     void BuildingUpdate(Lumberjack l)
     {
-        if (SwipeManager.ConstructMode())
-        {
-            l.constructUI.SetActive(false);
-            l.ChangeFSM(l.movingState);
-        }
+
     }
 
     void CraftUpdate(Lumberjack l)

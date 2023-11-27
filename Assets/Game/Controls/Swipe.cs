@@ -12,7 +12,7 @@ public class Swipe
     private int iter = 0;
     private Vector2 startTouch, swipeDelta;
 
-    public bool Tap(float tolerance) { return isDragging && tap <= tolerance; }
+    public bool Tap(float tolerance) { return !isDragging && tap <= tolerance; }
     public bool SwipeUp(float tolerance) { return isDragging && swipeUp <= tolerance; }
     public bool SwipeDown(float tolerance) { return isDragging && swipeDown <= tolerance; }
     public bool SwipeLeft(float tolerance) { return isDragging && swipeLeft <= tolerance; }
@@ -20,7 +20,7 @@ public class Swipe
 
     public int index;
 
-    float distanceToDrag = 200.0f;
+    float distanceToDrag = 100.0f;
 
 
 

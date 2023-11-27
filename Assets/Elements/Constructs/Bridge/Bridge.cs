@@ -15,6 +15,7 @@ public class Bridge : MonoBehaviour
 
     public void Build(AnchorForBridge left, AnchorForBridge right)
     {
+        left.Build();
         Building(left, right);
         StartCoroutine(ComputeJoints(joints));
     }

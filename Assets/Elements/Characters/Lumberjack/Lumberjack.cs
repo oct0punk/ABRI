@@ -161,6 +161,6 @@ public class Lumberjack : MonoBehaviour
 
     public void ExitCraftingMode()
     {
-        workingState.forceExit = true;
+        workingState.canExit = true;
     }
 }
