@@ -9,8 +9,9 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     protected RectTransform m_RectTransform;
     public Image m_Image;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
+        condition = CanBeBuild;
         m_RectTransform = GetComponent<RectTransform>();
     }
 
@@ -23,6 +24,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     {
         Debug.Log(m_RectTransform);
         m_RectTransform.anchoredPosition += eventData.delta;
+        m_Image.color = condition.Invoke(eventData) ? Color.green : Color.red;
     }
 
     public virtual void OnEndDrag(PointerEventData eventData)
@@ -43,5 +45,10 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         Debug.Log("OnError");
         m_Image.color = new Color(1, 1, 1, .4f);
         m_RectTransform.anchoredPosition = Vector3.zero;
+    }
+
+    protected virtual bool CanBeBuild(PointerEventData eventData)
+    {
+        return false;
     }
 }

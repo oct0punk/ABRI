@@ -30,7 +30,10 @@ public class FSM_MovingState : FSM_BaseState
             l.Move(hit.point);
             if (l.transform.parent != hit.transform)
             {
-                l.transform.SetParent(hit.transform);
+                if (hit.transform.GetComponentInParent<Bridge>())
+                    l.transform.SetParent(hit.transform.GetComponentInParent<Bridge>().transform);
+                else
+                    l.transform.SetParent(hit.transform);
             }
         }
 

@@ -3,6 +3,7 @@ using UnityEngine;
 public class SwipeManager : MonoBehaviour
 {
     public bool buildLadder = false;
+    public bool construct = false;
     static SwipeManager instance;
     bool flag = true;
     private static SwipeManager Instance
@@ -47,7 +48,7 @@ public class SwipeManager : MonoBehaviour
         }
     }
 
-    #region Movement
+    #region Walk
     public static bool MoveLeft()
     {
         if (MoveCancel()) return false;
@@ -82,6 +83,7 @@ public class SwipeManager : MonoBehaviour
     }
     #endregion
 
+    #region Climb
     public static bool ClimbUp()
     {
         int count = 0;
@@ -100,6 +102,7 @@ public class SwipeManager : MonoBehaviour
         }
         return count == 1;
     }
+    #endregion
 
     public static bool Cut()
     {
@@ -113,6 +116,10 @@ public class SwipeManager : MonoBehaviour
 
     public static bool ConstructMode()
     {
+        if (instance.construct) {
+            instance.construct = false;
+            return true;
+        }
         if (instance.swipes.Length < 2) return false;
         if (!instance.flag) return false;
 

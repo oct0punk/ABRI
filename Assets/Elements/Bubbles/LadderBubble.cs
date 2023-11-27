@@ -7,19 +7,9 @@ public class LadderBubble : DragDropBubble
     [SerializeField] GameObject ladderPrefab;
     Vector3 bottom;
     Vector3 top;
-    private void Awake()
-    {
-        base.Awake();
-        condition = canBeBuild;
-    }
 
-    public override void OnDrag(PointerEventData eventData)
-    {
-        base.OnDrag(eventData);
-        m_Image.color = condition.Invoke(eventData) ? Color.green : Color.red;
-    }
 
-    bool canBeBuild(PointerEventData eventData)
+    protected override bool CanBeBuild(PointerEventData eventData)
     {
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(eventData.position);
         RaycastHit2D hitDown = Physics2D.Raycast(worldPos, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Platform"));
