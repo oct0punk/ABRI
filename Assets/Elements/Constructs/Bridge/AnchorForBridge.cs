@@ -19,4 +19,20 @@ public class AnchorForBridge : MonoBehaviour
     {
         isBuilt = other.isBuilt = true;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponentInParent<Lumberjack>() != null)
+        {
+            Tuto.canBuild = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponentInParent<Lumberjack>() != null)
+        {
+            Tuto.canBuild = false;
+        }
+    }
 }

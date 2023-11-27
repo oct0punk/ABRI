@@ -16,6 +16,7 @@ public class Lumberjack : MonoBehaviour
     [Header("External")]
     public CinemachineVirtualCamera cam;
     public GameObject constructUI;
+    public Canvas canvas;
     public Resource pickingResource { get; private set; }
     #endregion
 
@@ -75,7 +76,12 @@ public class Lumberjack : MonoBehaviour
         delta = Vector3.ClampMagnitude(delta, Time.deltaTime * speed);
         transform.position += delta;
         if (delta.magnitude >= Time.deltaTime * speed)
+        {
             x = (int)Mathf.Sign(delta.x);
+            Vector3 scale = canvas.transform.localScale;
+            scale.x = x * 0.01f;
+            canvas.GetComponent<RectTransform>().localScale = scale;
+        }
     }
     public void Jump(Vector3 landAt)
     {

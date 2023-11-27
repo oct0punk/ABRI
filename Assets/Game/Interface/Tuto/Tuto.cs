@@ -8,18 +8,25 @@ public class Tuto : MonoBehaviour
     public Lumberjack lum;
 
     [Header("Cut Tuto")]
-    public bool slideDone = false;
+    public static bool slideDone = false;
     public GameObject slideTuto;
     
     [Header("Climb Tuto")]
-    public bool climbDownDone;
-    public GameObject climbDownTuto;
     public static bool canClimb = false;
+    public static bool climbDownDone;
+    public GameObject climbDownTuto;
+
+    [Header("BuildTuto")]
+    public static bool canBuild = false;
+    public static bool buildDone;
+    public GameObject buildTuto;
+    public GameObject dragNdrop;
 
     private void Start()
     {
         StartCoroutine(CutTuto());
         StartCoroutine(ClimbTuto());
+        StartCoroutine(BuildTuto());
     }
 
     IEnumerator CutTuto()
@@ -65,6 +72,31 @@ public class Tuto : MonoBehaviour
             {
             }
             climbDownTuto.SetActive(false);
+        }
+    }
+
+    IEnumerator BuildTuto()
+    {
+        while (!buildDone)
+        {
+            buildTuto.SetActive(false);
+            dragNdrop.SetActive(false);
+            yield return new WaitWhile(() => !canBuild);
+            buildTuto.SetActive(true);
+            yield return new WaitUntil(() => lum.workingState.state == WorkState.Building || !canBuild);
+            if (lum.workingState.state == WorkState.Building)
+            {
+                buildTuto.SetActive(false);
+                dragNdrop.SetActive(true);
+                yield return new WaitWhile(() => !buildDone);
+                buildTuto.SetActive(false);
+                dragNdrop.SetActive(false);
+            }
+            else
+            {
+
+            }
+
         }
     }
 }
