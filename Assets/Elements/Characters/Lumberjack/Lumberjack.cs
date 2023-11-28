@@ -1,30 +1,33 @@
 using Cinemachine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 [SelectionBase]
 public class Lumberjack : MonoBehaviour
 {
+    #region properties
+
     [Min(0)]
     public int speed = 3;
     public int force = 1;
 
     [HideInInspector] public int x = 1;
+    public bool canCut = false;
 
-    #region External datas
     public CinemachineVirtualCamera cam;
     public Resource pickingResource { get; private set; }
     LayerMask mask;
-    #endregion
 
-    #region Construction UI
+    [Space]
+    [Header("Constructions")]
     public Canvas canvas;
     public GameObject constructUI;
     public GameObject plans;
     public GameObject thinkObj;
-    #endregion
 
     #region Owning Components
     public Animator animator { get; private set; }
@@ -39,6 +42,8 @@ public class Lumberjack : MonoBehaviour
     public FSM_ClimbingState climbingState { get; private set; }
     public FSM_JumpingState jumpingState{ get; private set; }
     public FSM_WorkingState workingState { get; private set; }
+    #endregion
+
     #endregion
 
 
@@ -151,47 +156,68 @@ public class Lumberjack : MonoBehaviour
     
 
     #region Res
+    // Called when a resource ENTER the zone
     public void OnResEnter(Resource res)
     {
         canCutRes.Add(res);
+        canCut = true;
         animator.SetBool("CanCut", true);
+        // Trail emits
     }
 
+    // Called when a resource EXIT the zone
     public void OnResExit(Resource res)
     {
         canCutRes.Remove(res);
         if (canCutRes.Count == 0)
+        {
             animator.SetBool("CanCut", false);
+            canCut = false;
+            // Trail doesn't emit
+        }
     }
     #endregion
 
 
-    #region Work
+    // Deploy plans in bubbles
     public void DisplayPlans()
     {
         thinkObj.SetActive(false);
         plans.SetActive(true);
     }
 
+    // Deploy the bubble "..."
     public void ThinkOf(bool isActive)
     {
         thinkObj.SetActive(isActive);
         plans.SetActive(false);
     }
 
+    #region Work
     public void StartCutting()
     {
         pickingResource = canCutRes[0];
-        if (pickingResource == null) return;
+        if (pickingResource != null) 
+        {
+            if (!storage.CanFill(pickingResource.type))
+                return;
 
-        workingState.state = WorkState.Cutting;
-        ChangeFSM(workingState);
+            workingState.state = WorkState.Cutting;
+            ChangeFSM(workingState);
+            Cut();
+        }
     }
     public void Cut()
     {
+        if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "CutAnim") return;
         animator.SetTrigger("Cut");
+    }
+
+    public void ResistRes()
+    {
         pickingResource.Resist(this);
     }
+
 
     public void Collect(Resource res)
     {

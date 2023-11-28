@@ -40,12 +40,11 @@ public class FSM_IdleState : FSM_BaseState
             }
         }
 
-        if (SwipeManager.Cut())
+        if (l.canCut)
         {
-            if (l.canCutRes.Count > 0)
+            if (SwipeManager.Cut())
             {
                 l.StartCutting();
-                return;
             }
         }
 

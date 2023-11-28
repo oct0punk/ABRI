@@ -30,8 +30,9 @@ public class Storage : MonoBehaviour
         MatType mat = GetMatInContent(type);
         if (mat != null)
         {
-            Debug.Log("Add " + count + " to ", this);
+            Debug.Log("Add " + count + " to " + gameObject.name, this);
             mat.q += count;
+            if (mat.q > mat.maxQ) Debug.LogWarning("Q out of range : " + mat.type, this);
         }
     }
 

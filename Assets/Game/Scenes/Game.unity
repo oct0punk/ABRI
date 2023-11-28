@@ -210,6 +210,10 @@ PrefabInstance:
       value: Sprite
       objectReference: {fileID: 0}
     - target: {fileID: 7460317984199259666, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460317984199259666, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.95
       objectReference: {fileID: 0}
@@ -1158,7 +1162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7262710102204979021, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
       propertyPath: m_FalloffIntensity
-      value: 0.869
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7262710102204979021, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
       propertyPath: m_LightVolumeIntensity
@@ -1166,7 +1170,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7262710102204979021, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
       propertyPath: m_PointLightInnerRadius
-      value: 0.81
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262710102204979021, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 7.7
       objectReference: {fileID: 0}
     - target: {fileID: 7262710102204979021, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
       propertyPath: m_LightVolumeIntensityEnabled
@@ -2488,6 +2496,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mat
       objectReference: {fileID: 0}
+    - target: {fileID: 6842043644818452884, guid: b11bf8983d1bc554fbfd9d837ae8b241, type: 3}
+      propertyPath: maxResistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8090103043121339311, guid: b11bf8983d1bc554fbfd9d837ae8b241, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.69
@@ -2783,6 +2795,10 @@ PrefabInstance:
     - target: {fileID: 6512787099984800548, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
       propertyPath: m_Offset.y
       value: 7.1166945
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460317984199259666, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8375
       objectReference: {fileID: 0}
     - target: {fileID: 7460317984199259666, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
       propertyPath: m_LocalPosition.x

@@ -33,7 +33,7 @@ public class FSM_WorkingState : FSM_BaseState
                 break;
             case WorkState.Cutting:
                 updateFunc = CuttingUpdate;
-                condition = () => l.pickingResource.resistance <= 0;
+                condition = () => !l.pickingResource.alive;
                 break;
         }
     }
