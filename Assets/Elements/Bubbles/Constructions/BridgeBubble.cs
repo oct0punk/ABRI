@@ -25,7 +25,6 @@ public class BridgeBubble : DragDropBubble
     public override void OnDrag(PointerEventData eventData)
     {
         base.OnDrag(eventData);
-        Debug.Log(m_Image.color, m_Image);
     }
 
     protected override void OnSuccess(PointerEventData eventData)

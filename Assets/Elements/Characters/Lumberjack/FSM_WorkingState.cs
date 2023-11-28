@@ -19,18 +19,17 @@ public class FSM_WorkingState : FSM_BaseState
     public override void OnEnter(Lumberjack l)
     {
         canExit = false;
+        condition = () => canExit == true;
         l.SetSpriteColor(Color.red);
         l.animator.SetBool("isWorking", true);
         switch (state)
         {
             case WorkState.Building:
-                condition = () => SwipeManager.ConstructMode();
                 updateFunc = BuildingUpdate;
                 l.constructUI.SetActive(true);
                 break;
             case WorkState.Crafting:
                 updateFunc = CraftUpdate;
-                condition = () => canExit == true;
                 break;
             case WorkState.Cutting:
                 updateFunc = CuttingUpdate;
@@ -46,7 +45,7 @@ public class FSM_WorkingState : FSM_BaseState
         switch (state)
         {
             case WorkState.Building:
-                l.constructUI.SetActive(false);
+                l.ThinkOf(false);
                 break;
             case WorkState.Crafting:
                 workBench.HidePlans();

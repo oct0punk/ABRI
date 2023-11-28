@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [SelectionBase]
 public class Lumberjack : MonoBehaviour
@@ -13,11 +14,16 @@ public class Lumberjack : MonoBehaviour
     [HideInInspector] public int x = 1;
 
     #region External datas
-    [Header("External")]
     public CinemachineVirtualCamera cam;
-    public GameObject constructUI;
-    public Canvas canvas;
     public Resource pickingResource { get; private set; }
+    LayerMask mask;
+    #endregion
+
+    #region Construction UI
+    public Canvas canvas;
+    public GameObject constructUI;
+    public GameObject plans;
+    public GameObject thinkObj;
     #endregion
 
     #region Owning Components
@@ -29,28 +35,32 @@ public class Lumberjack : MonoBehaviour
     #region FSM
     public FSM_BaseState fsm { get; private set; }
     public FSM_MovingState movingState { get; private set; }
+    public FSM_IdleState idleState { get; private set; }
     public FSM_ClimbingState climbingState { get; private set; }
     public FSM_JumpingState jumpingState{ get; private set; }
     public FSM_WorkingState workingState { get; private set; }
     #endregion
 
 
-    private void Start()
+    private void Awake()
     {
         // Component
         animator = GetComponent<Animator>();
         canCutRes = new List<Resource>();
         storage = GetComponent<Storage>();
+        mask = LayerMask.GetMask("Platform");
 
         // FSM
         movingState = new FSM_MovingState();
+        idleState = new FSM_IdleState();
         climbingState = new FSM_ClimbingState();
         jumpingState = new FSM_JumpingState();
         workingState = new FSM_WorkingState();
-        fsm = movingState;
+        fsm = idleState;
         fsm.OnEnter(this);
 
-        constructUI.SetActive(false);
+        constructUI.SetActive(true);
+        ThinkOf(false);
     }
 
     private void Update()
@@ -70,6 +80,17 @@ public class Lumberjack : MonoBehaviour
         fsm.OnEnter(this);
     }
 
+    public void SetSpriteColor(Color c)
+    {
+        GetComponentInChildren<SpriteRenderer>().color = c;
+    }
+    public void ResetGlobalScale()
+    {
+        transform.localScale = Vector3.one;
+        transform.localScale = new Vector3(x / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
+    }
+
+    #region Move
     public void Move(Vector3 targetPos)
     {
         Vector3 delta = targetPos - transform.position;
@@ -89,6 +110,23 @@ public class Lumberjack : MonoBehaviour
         ChangeFSM(jumpingState);
     }
 
+    public void Stabilize()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, idleState.h, 0), Vector2.down, 3, mask);
+        if (hit)
+        {
+            Move(hit.point);
+            if (transform.parent != hit.transform)
+            {
+                if (hit.transform.GetComponentInParent<Bridge>())
+                    transform.SetParent(hit.transform.GetComponentInParent<Bridge>().transform);
+                else
+                    transform.SetParent(hit.transform);
+            }
+        }
+    }
+
+    #region Climb
     public void ClimbUp(Ladder ladder)
     {
         Vector3 pos = ladder.transform.position + Vector3.up * ladder.getHeight();
@@ -108,18 +146,11 @@ public class Lumberjack : MonoBehaviour
         transform.SetParent(ladder.transform);
         ChangeFSM(climbingState);
     }
+    #endregion
+    #endregion
     
-    public void SetSpriteColor(Color c)
-    {
-        GetComponentInChildren<SpriteRenderer>().color = c;
-    }
-    public void ResetGlobalScale()
-    {
-        transform.localScale = Vector3.one;
-        transform.localScale = new Vector3(x / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
-    }
 
-
+    #region Res
     public void OnResEnter(Resource res)
     {
         canCutRes.Add(res);
@@ -131,6 +162,21 @@ public class Lumberjack : MonoBehaviour
         canCutRes.Remove(res);
         if (canCutRes.Count == 0)
             animator.SetBool("CanCut", false);
+    }
+    #endregion
+
+
+    #region Work
+    public void DisplayPlans()
+    {
+        thinkObj.SetActive(false);
+        plans.SetActive(true);
+    }
+
+    public void ThinkOf(bool isActive)
+    {
+        thinkObj.SetActive(isActive);
+        plans.SetActive(false);
     }
 
     public void StartCutting()
@@ -152,10 +198,19 @@ public class Lumberjack : MonoBehaviour
         storage.Add(res.type, 1);
     }
 
-    public void ConstructMode()
+    public void ConstructMode(bool active)
     {
-        workingState.state = WorkState.Building;
-        ChangeFSM(workingState);
+        if (active)
+        {
+            DisplayPlans();
+            workingState.state = WorkState.Building;
+            ChangeFSM(workingState);
+        }
+        else
+        {
+            ThinkOf(false);
+            ChangeFSM(idleState);
+        }
     }
 
     public void WorkbenchMode(Workbench workbench)
@@ -169,4 +224,5 @@ public class Lumberjack : MonoBehaviour
     {
         workingState.canExit = true;
     }
+    #endregion
 }

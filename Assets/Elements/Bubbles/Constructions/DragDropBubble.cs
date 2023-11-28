@@ -32,7 +32,6 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public virtual void OnBeginDrag(PointerEventData eventData)
     {
         m_Image.color = Color.white;
-        Debug.Log("WHITE");
     }
 
 

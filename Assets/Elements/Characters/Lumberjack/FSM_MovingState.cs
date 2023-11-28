@@ -3,17 +3,15 @@
 using UnityEngine;
 
 
-public class FSM_MovingState : FSM_BaseState
+public class FSM_MovingState : FSM_IdleState
 {
-    float h = 1.0f;
-    float r = 0.5f;
     LayerMask mask = LayerMask.GetMask("Platform");
     Vector3 targetPosition;
 
     public override void OnEnter(Lumberjack l)
     {
-        l.SetSpriteColor(Color.white);
-        l.animator.SetBool("isWalking", false);
+        l.SetSpriteColor(Color.blue);
+        l.ThinkOf(false);
     }
 
     public override void OnExit(Lumberjack l)
@@ -24,7 +22,7 @@ public class FSM_MovingState : FSM_BaseState
     public override void Update(Lumberjack l)
     {
         // Stabilize
-        RaycastHit2D hit = Physics2D.Raycast(l.transform.position + new Vector3(0, h, 0), Vector2.down, 3, mask);
+        RaycastHit2D hit = Physics2D.Raycast(l.transform.position + new Vector3(0, l.idleState.h, 0), Vector2.down, 3, mask);
         if (hit)
         {
             l.Move(hit.point);
@@ -46,11 +44,6 @@ public class FSM_MovingState : FSM_BaseState
             }
         }
 
-        if (SwipeManager.ConstructMode())
-        {
-            l.ConstructMode();
-            return;
-        }
 
         if (Input.touches.Length > 1) return;
 
@@ -83,8 +76,7 @@ public class FSM_MovingState : FSM_BaseState
             }
         }
 
-        // Idle
-        l.animator.SetBool("isWalking", false);
+        l.ChangeFSM(l.idleState);
         
     }
 

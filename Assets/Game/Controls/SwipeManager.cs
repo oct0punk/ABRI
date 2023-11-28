@@ -114,7 +114,7 @@ public class SwipeManager : MonoBehaviour
         return false;
     }
 
-    public static bool ConstructMode()
+    static bool ConstructMode()
     {
         if (instance.construct) {
             instance.construct = false;
