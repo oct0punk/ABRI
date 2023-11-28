@@ -189,6 +189,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ladder
       objectReference: {fileID: 0}
+    - target: {fileID: 1837055598212237541, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1837055598212237541, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1837055598212237541, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1837055598212237541, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2540001752032308706, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
       propertyPath: m_Name
       value: Sprite
@@ -2005,30 +2021,6 @@ PrefabInstance:
     - target: {fileID: 5039936999456542347, guid: e90ea1444244e0e4bb3a218c1f0d4408, type: 3}
       propertyPath: m_Offset.y
       value: 0.9708854
-      objectReference: {fileID: 0}
-    - target: {fileID: 5479779772746731565, guid: e90ea1444244e0e4bb3a218c1f0d4408, type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5479779772746731565, guid: e90ea1444244e0e4bb3a218c1f0d4408, type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5479779772746731565, guid: e90ea1444244e0e4bb3a218c1f0d4408, type: 3}
-      propertyPath: m_AutoConfigureConnectedAnchor
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6035442786908056749, guid: e90ea1444244e0e4bb3a218c1f0d4408, type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6035442786908056749, guid: e90ea1444244e0e4bb3a218c1f0d4408, type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6035442786908056749, guid: e90ea1444244e0e4bb3a218c1f0d4408, type: 3}
-      propertyPath: m_AutoConfigureConnectedAnchor
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6142535240259688421, guid: e90ea1444244e0e4bb3a218c1f0d4408, type: 3}
       propertyPath: m_LocalPosition.x

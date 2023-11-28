@@ -7,7 +7,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 {
     protected Predicate<PointerEventData> condition;
     protected RectTransform m_RectTransform;
-    public Image m_Image;
+    [SerializeField] protected Image m_Image;
 
     protected virtual void Awake()
     {

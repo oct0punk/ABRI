@@ -5,9 +5,18 @@ using UnityEngine.EventSystems;
 public class LadderBubble : DragDropBubble
 {
     [SerializeField] GameObject ladderPrefab;
+    Ladder ladder;
     Vector3 bottom;
     Vector3 top;
 
+
+    void MoveLadder()
+    {
+        if (ladder == null)
+            ladder = Instantiate(ladderPrefab).GetComponent<Ladder>();
+        ladder.transform.SetPositionAndRotation(bottom + Vector3.down * .5f, Quaternion.identity);
+        ladder.SetHeight(Vector2.Distance(bottom, top) + 2);
+    }
 
     protected override bool CanBeBuild(PointerEventData eventData)
     {
@@ -25,11 +34,25 @@ public class LadderBubble : DragDropBubble
         return true;
     }
 
+    public override void OnDragCorrect(PointerEventData eventData)
+    {
+        MoveLadder();
+        ladder.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, .4f);
+        base.OnDragCorrect(eventData);
+    }
+
+    public override void OnDragUncorrect(PointerEventData eventData)
+    {
+        if (ladder != null)
+            Destroy(ladder.gameObject);
+        base.OnDragUncorrect(eventData);
+    }
+
     protected override void OnSuccess(PointerEventData eventData)
     {
-        Ladder lad = Instantiate(ladderPrefab, bottom + Vector3.down * .5f, Quaternion.identity).GetComponent<Ladder>();
-        lad.SetHeight(Vector2.Distance(bottom, top) + 2);
-
+        MoveLadder();
+        ladder.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+        ladder = null;
         base.OnSuccess(eventData);
     }
 

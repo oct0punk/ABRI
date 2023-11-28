@@ -54,11 +54,6 @@ public class BridgeBubble : DragDropBubble
         }
     }
 
-    protected override void OnSuccess(PointerEventData eventData)
-    {
-        anchor.Build();
-        base.OnSuccess(eventData);
-    }
     public override void OnEndDrag(PointerEventData eventData)
     {
         if (preview != null)
@@ -69,5 +64,11 @@ public class BridgeBubble : DragDropBubble
             preview = null;
         }
         base.OnEndDrag(eventData);
+    }
+
+    protected override void OnSuccess(PointerEventData eventData)
+    {
+        anchor.Build();
+        base.OnSuccess(eventData);
     }
 }
