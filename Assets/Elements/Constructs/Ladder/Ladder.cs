@@ -43,7 +43,7 @@ public class Ladder : MonoBehaviour
         transform.rotation = Quaternion.identity;
 
         if (l == null) return;
-        if (l.fsm != l.movingState) return;
+        if (l.fsm != l.movingState && l.fsm != l.idleState) return;
 
         if (SwipeManager.ClimbUp()) {
             if (isAtBottom(l))

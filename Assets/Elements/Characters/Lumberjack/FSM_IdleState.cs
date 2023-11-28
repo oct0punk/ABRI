@@ -21,9 +21,15 @@ public class FSM_IdleState : FSM_BaseState
 
     public override void Update(Lumberjack l)
     {        
-        // Stabilize
+        BaseUpdate(l);
+
+        if (SwipeManager.MoveLeft() || SwipeManager.MoveRight())
+            l.ChangeFSM(l.movingState);
+    }
+
+    protected void BaseUpdate(Lumberjack l)
+    {
         l.Stabilize();
-        
 
         if (time > 0.0f)
         {
@@ -34,8 +40,16 @@ public class FSM_IdleState : FSM_BaseState
             }
         }
 
-        if (SwipeManager.MoveLeft() || SwipeManager.MoveRight())
-            l.ChangeFSM(l.movingState);
+        if (SwipeManager.Cut())
+        {
+            if (l.canCutRes.Count > 0)
+            {
+                l.StartCutting();
+                return;
+            }
+        }
+
+
     }
 
     public override void OnExit(Lumberjack l)

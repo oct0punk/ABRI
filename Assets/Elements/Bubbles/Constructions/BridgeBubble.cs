@@ -1,14 +1,13 @@
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class BridgeBubble : DragDropBubble
 {
-    [SerializeField] GameObject bridgePrefab;
-
     AnchorForBridge anchor;
+    AnchorForBridge anchorForPreview;
+
+    protected GameObject preview;
+    public GameObject previewPrefab;
 
     protected override bool CanBeBuild(PointerEventData eventData)
     {
@@ -27,21 +26,48 @@ public class BridgeBubble : DragDropBubble
         base.OnDrag(eventData);
     }
 
+    public override void OnDragCorrect(PointerEventData eventData)
+    {
+        base.OnDragCorrect(eventData);
+
+        if (anchor == null) return;
+        if (anchorForPreview == anchor) return;
+        anchorForPreview = anchor;
+        
+        if (preview == null)
+            preview = Instantiate(previewPrefab);
+
+        preview.name = "Preview";
+        preview.transform.position = Vector3.zero;
+        preview.GetComponent<Bridge>().Preview(anchorForPreview.left, anchorForPreview.right);
+        Debug.Log("Preview");
+    }
+
+    public override void OnDragUncorrect(PointerEventData eventData)
+    {
+        base.OnDragUncorrect(eventData);
+        if (preview != null)
+        {
+            anchorForPreview = null;
+            Destroy(preview);
+            preview = null;
+        }
+    }
+
     protected override void OnSuccess(PointerEventData eventData)
     {
-        Bridge bridge = Instantiate(bridgePrefab).GetComponent<Bridge>();
-        bridge.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-
-        if (anchor.other == null) {
-            Debug.Log("Other null", anchor);
-            return;
-        }
-
-        if (anchor.type == AnchorType.left)
-            bridge.Build(anchor, anchor.other);
-        else
-            bridge.Build(anchor.other, anchor);
-
+        anchor.Build();
         base.OnSuccess(eventData);
+    }
+    public override void OnEndDrag(PointerEventData eventData)
+    {
+        if (preview != null)
+        {
+            anchorForPreview = null;
+            Destroy(preview.gameObject);
+            Debug.Log("Destroy");
+            preview = null;
+        }
+        base.OnEndDrag(eventData);
     }
 }

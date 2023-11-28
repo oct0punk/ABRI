@@ -112,6 +112,9 @@ public class SwipeManager : MonoBehaviour
             if (s.SwipeRight(0.0f)) return true;
         }
         return false;
+
+        return instance.swipes[0].Tap(0.0f) && instance.swipes[0].Tap(1.0f)
+            || instance.swipes[0].Tap(1.0f) && instance.swipes[0].Tap(0.0f);
     }
 
     static bool ConstructMode()

@@ -21,28 +21,9 @@ public class FSM_MovingState : FSM_IdleState
 
     public override void Update(Lumberjack l)
     {
-        // Stabilize
-        RaycastHit2D hit = Physics2D.Raycast(l.transform.position + new Vector3(0, l.idleState.h, 0), Vector2.down, 3, mask);
-        if (hit)
-        {
-            l.Move(hit.point);
-            if (l.transform.parent != hit.transform)
-            {
-                if (hit.transform.GetComponentInParent<Bridge>())
-                    l.transform.SetParent(hit.transform.GetComponentInParent<Bridge>().transform);
-                else
-                    l.transform.SetParent(hit.transform);
-            }
-        }
+        BaseUpdate(l);
 
-        if (SwipeManager.Cut())
-        {
-            if (l.canCutRes.Count > 0)
-            {
-                l.StartCutting();
-                return;
-            }
-        }
+        
 
 
         if (Input.touches.Length > 1) return;
