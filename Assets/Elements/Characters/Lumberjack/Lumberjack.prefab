@@ -1258,6 +1258,7 @@ MonoBehaviour:
   speed: 4
   force: 1
   x: 1
+  canCut: 0
   cam: {fileID: 0}
   canvas: {fileID: 1310557747580433747}
   constructUI: {fileID: 2652694854261931842}
@@ -1276,7 +1277,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content:
-  - type: branch
+  - material: {fileID: 11400000, guid: cc3c0788fd693044888b709d50563a33, type: 2}
+    q: 0
+    maxQ: 4
+  - material: {fileID: 11400000, guid: bfa6f9108ba59614eb5527e7a7242832, type: 2}
+    q: 0
+    maxQ: 4
+  - material: {fileID: 11400000, guid: 15ca6439087ba654d8ff70845ea415c8, type: 2}
     q: 0
     maxQ: 4
 --- !u!1 &6726991232038666166

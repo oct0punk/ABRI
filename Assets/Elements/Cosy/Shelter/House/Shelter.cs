@@ -11,7 +11,7 @@ public class Shelter : MonoBehaviour
 
     [Header("Enter")]
     [SerializeField] SpriteRenderer ext;
-    [SerializeField] Light2D light;
+    [SerializeField] new Light2D light;
     [SerializeField] CinemachineVirtualCamera cam;
 
     [Header("Temperature")]
@@ -76,18 +76,19 @@ public class Shelter : MonoBehaviour
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
+            // Visibility
             ext.enabled = false;
             light.enabled = true;
             CameraManager.Possess(cam);
             Array.ForEach<Piece>(instance.pieces, p => p.SetBubbleVisible(true));
 
-            // Store planchs into shelter
-            string type = "branch";
-            int iter = lum.storage.Count(type);
+            // Store planchs
+            RawMaterial mat = RawMatManager.instance.GetRawMatByName("WoodPlanch");
+            int iter = lum.storage.Count(mat);
             if (iter == 0) return;
             Debug.Log("Lum enter : " + iter + " empty emplacements");
-            lum.storage.Add(type, -iter);
-            storage.Add(type, iter);
+            lum.storage.Add(mat, -iter);
+            storage.Add(mat, iter);
         }
     }
 
@@ -102,13 +103,13 @@ public class Shelter : MonoBehaviour
             light.enabled = false;
             Array.ForEach<Piece>(instance.pieces, p => p.SetBubbleVisible(false));
 
-            // Store planchs into player
-            string type = "branch";
-            int iter = Mathf.Min(storage.Count(type), lum.storage.CountEmpty(type));
+            // Restore planchs
+            RawMaterial material = RawMatManager.instance.GetRawMatByName("WoodPlanch");
+            int iter = Mathf.Min(storage.Count(material), lum.storage.CountEmpty(material));
             if (iter == 0) return;
             Debug.Log("Lum exit : " + iter + " branchs to move");
-            lum.storage.Add(type, iter);
-            storage.Add(type, -iter);
+            lum.storage.Add(material, iter);
+            storage.Add(material, -iter);
         }
     }
 }

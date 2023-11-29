@@ -40,7 +40,6 @@ public class BridgeBubble : DragDropBubble
         preview.name = "Preview";
         preview.transform.position = Vector3.zero;
         preview.GetComponent<Bridge>().Preview(anchorForPreview.left, anchorForPreview.right);
-        Debug.Log("Preview");
     }
 
     public override void OnDragUncorrect(PointerEventData eventData)
@@ -60,7 +59,6 @@ public class BridgeBubble : DragDropBubble
         {
             anchorForPreview = null;
             Destroy(preview.gameObject);
-            Debug.Log("Destroy");
             preview = null;
         }
         base.OnEndDrag(eventData);

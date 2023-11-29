@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6842043644818452884}
   - component: {fileID: 7280821055981441921}
   m_Layer: 0
-  m_Name: Mat
+  m_Name: Branch_RawMat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,8 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3a41707e5d5ef41be61267908efbeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: branch
+  material: {fileID: 11400000, guid: cc3c0788fd693044888b709d50563a33, type: 2}
   maxResistance: 1
+  alive: 1
 --- !u!61 &7280821055981441921
 BoxCollider2D:
   m_ObjectHideFlags: 0

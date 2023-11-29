@@ -19,7 +19,7 @@ public class Lumberjack : MonoBehaviour
     public bool canCut = false;
 
     public CinemachineVirtualCamera cam;
-    public Resource pickingResource { get; private set; }
+    public Pickable pickingResource { get; private set; }
     LayerMask mask;
 
     [Space]
@@ -31,7 +31,7 @@ public class Lumberjack : MonoBehaviour
 
     #region Owning Components
     public Animator animator { get; private set; }
-    public List<Resource> canCutRes { get; private set; }
+    public List<Pickable> canCutRes { get; private set; }
     public Storage storage { get; private set; }
     #endregion
 
@@ -51,7 +51,7 @@ public class Lumberjack : MonoBehaviour
     {
         // Component
         animator = GetComponent<Animator>();
-        canCutRes = new List<Resource>();
+        canCutRes = new List<Pickable>();
         storage = GetComponent<Storage>();
         mask = LayerMask.GetMask("Platform");
 
@@ -157,7 +157,7 @@ public class Lumberjack : MonoBehaviour
 
     #region Res
     // Called when a resource ENTER the zone
-    public void OnResEnter(Resource res)
+    public void OnResEnter(Pickable res)
     {
         canCutRes.Add(res);
         canCut = true;
@@ -166,7 +166,7 @@ public class Lumberjack : MonoBehaviour
     }
 
     // Called when a resource EXIT the zone
-    public void OnResExit(Resource res)
+    public void OnResExit(Pickable res)
     {
         canCutRes.Remove(res);
         if (canCutRes.Count == 0)
@@ -199,7 +199,7 @@ public class Lumberjack : MonoBehaviour
         pickingResource = canCutRes[0];
         if (pickingResource != null) 
         {
-            if (!storage.CanFill(pickingResource.type))
+            if (!storage.CanFill(pickingResource.material))
                 return;
 
             workingState.state = WorkState.Cutting;
@@ -219,9 +219,9 @@ public class Lumberjack : MonoBehaviour
     }
 
 
-    public void Collect(Resource res)
+    public void Collect(Pickable res)
     {
-        storage.Add(res.type, 1);
+        storage.Add(res.material, 1);
     }
 
     public void ConstructMode(bool active)

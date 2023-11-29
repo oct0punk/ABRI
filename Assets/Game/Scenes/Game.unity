@@ -418,7 +418,7 @@ Transform:
   m_GameObject: {fileID: 187936661}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.439999, y: 2.4299998, z: -10}
+  m_LocalPosition: {x: 9.44, y: 2.4299998, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1179,6 +1179,10 @@ PrefabInstance:
     - target: {fileID: 7262710102204979021, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
       propertyPath: m_LightVolumeIntensityEnabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7678264919461317884, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
+      propertyPath: content.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8165952965455170650, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
       propertyPath: m_IsActive
@@ -2494,11 +2498,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3685502088407769354, guid: b11bf8983d1bc554fbfd9d837ae8b241, type: 3}
       propertyPath: m_Name
-      value: Mat
-      objectReference: {fileID: 0}
-    - target: {fileID: 6842043644818452884, guid: b11bf8983d1bc554fbfd9d837ae8b241, type: 3}
-      propertyPath: maxResistance
-      value: 1
+      value: Branch
       objectReference: {fileID: 0}
     - target: {fileID: 8090103043121339311, guid: b11bf8983d1bc554fbfd9d837ae8b241, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3060,6 +3060,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 3856430415129791537, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      propertyPath: content.Array.data[0].material
+      value: 
+      objectReference: {fileID: 11400000, guid: cc3c0788fd693044888b709d50563a33, type: 2}
+    - target: {fileID: 3856430415129791537, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
+      propertyPath: content.Array.data[1].material
+      value: 
+      objectReference: {fileID: 11400000, guid: bfa6f9108ba59614eb5527e7a7242832, type: 2}
     - target: {fileID: 4309408616663407380, guid: bd500ae8167a4db44bc86ed53e043313, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3224,7 +3232,7 @@ PrefabInstance:
       objectReference: {fileID: 1350290838}
     - target: {fileID: 7959769529078016007, guid: 220ea60f27bb10440981c4a338adc3db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.439999
+      value: 9.44
       objectReference: {fileID: 0}
     - target: {fileID: 7959769529078016007, guid: 220ea60f27bb10440981c4a338adc3db, type: 3}
       propertyPath: m_LocalPosition.y

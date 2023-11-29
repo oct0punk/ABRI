@@ -1,13 +1,13 @@
 using UnityEngine;
 
 [SelectionBase]
-public class Resource : MonoBehaviour
+public class Pickable : MonoBehaviour
 {
-    public string type;
+    public RawMaterial material;
     public int maxResistance = 1;
     public bool alive = true;
     public int resistance { get; private set; }
-    Collider2D collider;
+    new Collider2D collider;
     
 
     private void Start()
