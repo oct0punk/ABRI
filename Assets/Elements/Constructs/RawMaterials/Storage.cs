@@ -61,7 +61,6 @@ public class Storage : MonoBehaviour
         StockRawMat stock = GetMatInContent(material);
         if (stock != null)
         {
-            Debug.Log("Add " + count + " to " + gameObject.name, this);
             stock.q += count;
             if (stock.q > stock.maxQ) Debug.LogWarning("Q out of range : " + stock.material.name, this);
         }
@@ -71,10 +70,6 @@ public class Storage : MonoBehaviour
     public bool CanFill(RawMaterial material, int count = 1)
     {
         StockRawMat stock = GetMatInContent(material);
-        Debug.Log("---------");
-        Debug.Log(stock.q);
-        Debug.Log(stock.maxQ);
-        Debug.Log("---------");
         if (stock.maxQ == -1) return true;
         if (stock != null)        
             return stock.q + count <= stock.maxQ;
@@ -104,11 +99,16 @@ public class Storage : MonoBehaviour
 
     public void Craft(RawMaterial material)
     {
-        foreach (var resources in material.craftMaterials)
+        Consume(material.craftMaterials);
+        Add(material);
+    }
+
+    public void Consume(CraftMaterials[] materials)
+    {
+        foreach (var resources in materials)
         {
             Add(resources.rawMaterial, -resources.q);
         }
-        Add(material);
     }
 
     public bool CanCraft(CraftMaterials[] materials)

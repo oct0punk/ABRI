@@ -20,6 +20,7 @@ public class LadderBubble : DragDropBubble
 
     protected override bool CanBeBuild(PointerEventData eventData)
     {
+        
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(eventData.position);
         RaycastHit2D hitDown = Physics2D.Raycast(worldPos, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Platform"));
         if (!hitDown) return false;

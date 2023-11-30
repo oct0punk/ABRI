@@ -3,16 +3,20 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler
+public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     protected Predicate<PointerEventData> condition;
     protected RectTransform m_RectTransform;
     [SerializeField] protected Image m_Image;
+    public CraftMaterials[] CraftMaterials;
+    protected static Storage lumStorage;
+    public bool gotTheRawMats = false;
 
     protected virtual void Awake()
     {
         condition = CanBeBuild;
         m_RectTransform = GetComponent<RectTransform>();
+        lumStorage = FindObjectOfType<Lumberjack>().storage;
     }
 
     private void Start()
@@ -24,19 +28,18 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     }
 
 
-    public virtual void OnPointerDown(PointerEventData eventData)
-    {
-
-    }
+    
 
     public virtual void OnBeginDrag(PointerEventData eventData)
     {
+        if (!gotTheRawMats) return;
         m_Image.color = Color.white;
     }
 
 
     public virtual void OnDrag(PointerEventData eventData)
     {
+        if (!gotTheRawMats) return;
         m_RectTransform.anchoredPosition += eventData.delta / GetComponentInParent<Canvas>().scaleFactor;
         if (condition.Invoke(eventData))
             OnDragCorrect(eventData);
@@ -58,6 +61,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     
     public virtual void OnEndDrag(PointerEventData eventData)
     {
+        if (!gotTheRawMats) return;
         if (condition.Invoke(eventData)) OnSuccess(eventData);
         else OnError(eventData);
     }
@@ -67,6 +71,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         m_Image.color = new Color(1, 1, 1, .4f);
         m_RectTransform.anchoredPosition = Vector3.zero;
         Tuto.buildDone = true;
+        lumStorage.Consume(CraftMaterials);
     }
 
     protected virtual void OnError(PointerEventData eventData)
@@ -74,17 +79,15 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         m_Image.color = new Color(1, 1, 1, .4f);
         m_RectTransform.anchoredPosition = Vector3.zero;
     }
-
-    public virtual void OnPointerUp(PointerEventData eventData)
-    {
-
-    }
     
     
     protected virtual bool CanBeBuild(PointerEventData eventData)
     {
-        return false;
+        return gotTheRawMats;
     }
 
-
+    private void OnEnable()
+    {
+        gotTheRawMats = lumStorage.CanCraft(CraftMaterials);
+    }
 }

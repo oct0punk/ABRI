@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,6 +12,7 @@ public class BridgeBubble : DragDropBubble
 
     protected override bool CanBeBuild(PointerEventData eventData)
     {
+        if (!gotTheRawMats) return false;
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, LayerMask.GetMask("Anchor"));
         if (hit) 
@@ -21,10 +23,6 @@ public class BridgeBubble : DragDropBubble
         return false;
     }
 
-    public override void OnDrag(PointerEventData eventData)
-    {
-        base.OnDrag(eventData);
-    }
 
     public override void OnDragCorrect(PointerEventData eventData)
     {

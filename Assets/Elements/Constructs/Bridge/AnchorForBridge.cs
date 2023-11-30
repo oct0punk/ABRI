@@ -30,8 +30,7 @@ public class AnchorForBridge : MonoBehaviour
 
         Bridge bridge = Instantiate(bridgePrefab).GetComponent<Bridge>();
         bridge.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-        Debug.Log("Build", bridge);
-
+        
         bridge.Build(left, right);
     }
 
