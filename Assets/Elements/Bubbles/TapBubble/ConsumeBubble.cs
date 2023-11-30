@@ -12,13 +12,10 @@ public class ConsumeBubble : MonoBehaviour
     public void Consume()
     {
         Lumberjack lum = FindAnyObjectByType<Lumberjack>();
-        foreach (var material in materials)
+        if (!lum.storage.CanCraft(materials))
         {
-            if (lum.storage.Count(material.rawMaterial) < material.q)
-            {
-                GetComponent<Animator>().SetTrigger("NOPE");
-                return;
-            }
+            GetComponent<Animator>().SetTrigger("NOPE");
+            return;
         }
         foreach (var material in materials)
         {

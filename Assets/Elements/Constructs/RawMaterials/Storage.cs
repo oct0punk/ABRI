@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -108,5 +109,15 @@ public class Storage : MonoBehaviour
             Add(resources.rawMaterial, -resources.q);
         }
         Add(material);
+    }
+
+    public bool CanCraft(CraftMaterials[] materials)
+    {
+        foreach (var material in materials)
+        {
+            if (Count(material.rawMaterial) < material.q)
+                return false;
+        }
+        return true;
     }
 }
