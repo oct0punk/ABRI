@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34022016b8aca541a3885d65ee4ca1a, type: 3}
   m_Name: WoodPlanch
   m_EditorClassIdentifier: 
-  name: WoodPlanch
   resistance: 2
-  craftMaterials: []
+  craftMaterials:
+  - rawMaterial: {fileID: 11400000, guid: cc3c0788fd693044888b709d50563a33, type: 2}
+    q: 2

@@ -3,13 +3,21 @@ using UnityEngine;
 public class Piece : MonoBehaviour
 {
     public bool alive = true;
-    public GameObject bubble;
+    public GameObject button;
+    public ConsumeBubble bubble;
     public int solid = 1;
     public int life;
-       
+
+    private void Start()
+    {
+        SetBubbleVisible(false);
+        button.SetActive(false);
+        bubble.action = Repair;
+    }
+
     public void SetBubbleVisible(bool isActive)
     {
-        bubble.transform.parent.gameObject.SetActive(isActive);
+        bubble.gameObject.SetActive(isActive);
     }
 
     public void Resist(int windForce)
@@ -28,7 +36,7 @@ public class Piece : MonoBehaviour
     {
         alive = false;
         GetComponent<SpriteRenderer>().color = Color.red;
-        bubble.SetActive(true);
+        button.SetActive(true);
         Shelter.UpdateSpeed(-1);
     }
 
@@ -36,7 +44,7 @@ public class Piece : MonoBehaviour
     {
         alive = true;
         GetComponent<SpriteRenderer>().color = Color.white;
-        bubble.SetActive(false);
+        button.SetActive(false);
         life = Random.Range(solid, solid + 4);
         Shelter.UpdateSpeed(1);
     }

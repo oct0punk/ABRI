@@ -4,8 +4,8 @@ using UnityEngine;
 [Serializable]
 class StockRawMat {
     public RawMaterial material;
-    public int q;
-    public int maxQ;
+    [Min(0)] public int q;
+    [Min(-1)] public int maxQ;
 
     public StockRawMat(RawMaterial material, int q = 0, int maxQ = 4)
     {
@@ -70,6 +70,10 @@ public class Storage : MonoBehaviour
     public bool CanFill(RawMaterial material, int count = 1)
     {
         StockRawMat stock = GetMatInContent(material);
+        Debug.Log("---------");
+        Debug.Log(stock.q);
+        Debug.Log(stock.maxQ);
+        Debug.Log("---------");
         if (stock.maxQ == -1) return true;
         if (stock != null)        
             return stock.q + count <= stock.maxQ;
@@ -95,5 +99,14 @@ public class Storage : MonoBehaviour
             return stock.q;
         return -1;
         
+    }
+
+    public void Craft(RawMaterial material)
+    {
+        foreach (var resources in material.craftMaterials)
+        {
+            Add(resources.rawMaterial, -resources.q);
+        }
+        Add(material);
     }
 }

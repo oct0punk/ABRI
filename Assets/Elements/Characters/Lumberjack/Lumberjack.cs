@@ -16,6 +16,7 @@ public class Lumberjack : MonoBehaviour
     public int force = 1;
 
     [HideInInspector] public int x = 1;
+    [HideInInspector] public bool indoor;
     public bool canCut = false;
 
     public CinemachineVirtualCamera cam;

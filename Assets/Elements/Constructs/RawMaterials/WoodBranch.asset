@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34022016b8aca541a3885d65ee4ca1a, type: 3}
   m_Name: WoodBranch
   m_EditorClassIdentifier: 
-  name: 
   resistance: 1
+  craftMaterials: []

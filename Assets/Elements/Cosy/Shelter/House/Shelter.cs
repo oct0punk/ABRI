@@ -42,7 +42,7 @@ public class Shelter : MonoBehaviour
         timeBeforeNextGust -= Time.deltaTime;
         if (timeBeforeNextGust < 0.0f)
         {
-            timeBeforeNextGust = 5.0f; // UnityEngine.Random.Range(40.0f, 100.0f);
+            timeBeforeNextGust = UnityEngine.Random.Range(40.0f, 100.0f);
             foreach (Piece p in pieces)
             {
                 p.Resist(storm.wind);
@@ -76,6 +76,8 @@ public class Shelter : MonoBehaviour
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
+            lum.indoor = true;
+
             // Visibility
             ext.enabled = false;
             light.enabled = true;
@@ -98,6 +100,8 @@ public class Shelter : MonoBehaviour
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
+            lum.indoor = false;
+
             ext.enabled = true;
             CameraManager.Possess(lum.cam);
             light.enabled = false;

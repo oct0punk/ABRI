@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Workbench : MonoBehaviour
 {
+    Lumberjack lumberjack;
     public GameObject bubble;
     public GameObject[] craftPlans;
 
     private void Start()
     {
+        lumberjack = FindObjectOfType<Lumberjack>();
         bubble.SetActive(false);
         foreach (GameObject plan in craftPlans)
         {
@@ -30,9 +32,24 @@ public class Workbench : MonoBehaviour
             plan.SetActive(false);
     }
 
-    public void TransfrormWoodToPlanch(Animator anim)
+    public void Craft(CraftBubble bubble)
     {
-        anim.SetTrigger("NOPE");
+        RawMaterial craftable = bubble.material;
+        if (!lumberjack.storage.CanFill(craftable))
+        {
+            bubble.animator.SetTrigger("NOPE");
+            return;
+        }
+        foreach (var material in craftable.craftMaterials)
+        {
+            if (lumberjack.storage.Count(material.rawMaterial) < material.q)
+            {
+                bubble.animator.SetTrigger("NOPE");
+                return;
+            }
+        }
+        bubble.animator.SetTrigger("OK");
+        lumberjack.storage.Craft(craftable);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -23,14 +23,12 @@ public class FSM_IdleState : FSM_BaseState
     {        
         BaseUpdate(l);
 
-        if (SwipeManager.MoveLeft() || SwipeManager.MoveRight())
+        if (SwipeManager.MoveLeft() || SwipeManager.MoveRight()) {
             l.ChangeFSM(l.movingState);
-    }
+            return;
+        }
 
-    protected void BaseUpdate(Lumberjack l)
-    {
-        l.Stabilize();
-
+        if (l.indoor) return;
         if (time > 0.0f)
         {
             time -= Time.deltaTime;
@@ -39,6 +37,12 @@ public class FSM_IdleState : FSM_BaseState
                 l.ThinkOf(true);
             }
         }
+    }
+
+    protected void BaseUpdate(Lumberjack l)
+    {
+        l.Stabilize();
+
 
         if (l.canCut)
         {

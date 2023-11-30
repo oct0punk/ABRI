@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,13 @@ using UnityEngine;
 public class RawMaterial : ScriptableObject
 {
     public int resistance;
-    public RawMaterial[] craftMaterials;
+    public CraftMaterials[] craftMaterials;
     public bool craftable { get { return craftMaterials.Length > 0; } }
 }
 
-
+[Serializable]
+public struct CraftMaterials
+{
+    public RawMaterial rawMaterial;
+    public int q;
+}
