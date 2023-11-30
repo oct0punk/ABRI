@@ -18,6 +18,7 @@ public class Lumberjack : MonoBehaviour
     [HideInInspector] public int x = 1;
     [HideInInspector] public bool indoor;
     public bool canCut = false;
+    public Bird carryingBird;
 
     public CinemachineVirtualCamera cam;
     public Pickable pickingResource { get; private set; }

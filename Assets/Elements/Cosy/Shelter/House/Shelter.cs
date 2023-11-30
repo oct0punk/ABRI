@@ -20,6 +20,7 @@ public class Shelter : MonoBehaviour
     [SerializeField] int push = 0;
 
     Piece[] pieces;
+    public GameObject[] perchs;
     Storm storm;
     public Storage storage { get; private set; }
     public Slider thermometer;
@@ -77,6 +78,15 @@ public class Shelter : MonoBehaviour
         if (lum != null)
         {
             lum.indoor = true;
+
+            // Free the birds
+            if (lum.carryingBird != null)
+            {
+                Bird bird = lum.carryingBird;
+                bird.perch = perchs[0].GetComponent<NestBox>();
+                bird.Free();
+                lum.carryingBird = null;
+            }
 
             // Visibility
             ext.enabled = false;

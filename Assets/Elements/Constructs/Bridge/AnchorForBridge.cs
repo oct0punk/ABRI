@@ -8,9 +8,9 @@ public class AnchorForBridge : MonoBehaviour
 {
     public Transform left;
     public Transform right;
-    [Space]
-    public Transform leftParent;
-    public Transform rightParent;
+    //[Space]
+    //public Transform leftParent;
+    //public Transform rightParent;
     [Space]
     public GameObject bridgePrefab;
 
@@ -18,10 +18,16 @@ public class AnchorForBridge : MonoBehaviour
 
     private void Start()
     {
-        if (leftParent != null)
-            left.transform.SetParent(leftParent);
-        if (rightParent != null)
-            right.transform.SetParent(rightParent);
+        RaycastHit2D hit = Physics2D.Raycast(left.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Platform"));
+        if (hit)
+        {
+            left.transform.SetParent(hit.transform);
+        }
+        hit = Physics2D.Raycast(right.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Platform"));
+        if (hit)
+        {
+            right.transform.SetParent(hit.transform);
+        }
     }
 
     public void Build()
