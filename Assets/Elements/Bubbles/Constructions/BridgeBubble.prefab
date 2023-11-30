@@ -50,9 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Image: {fileID: 6218781692969711882}
-  CraftMaterials:
-  - rawMaterial: {fileID: 11400000, guid: bfa6f9108ba59614eb5527e7a7242832, type: 2}
-    q: 2
+  construction: {fileID: 11400000, guid: b1d8f1a80019d5d46b7ecf0148358321, type: 2}
+  gotTheRawMats: 0
   previewPrefab: {fileID: 746705973476448980, guid: 49666b7b908a1614693163c11e4e7282, type: 3}
 --- !u!1001 &321342263674630703
 PrefabInstance:

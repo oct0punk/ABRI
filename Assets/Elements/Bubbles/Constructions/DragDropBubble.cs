@@ -1,4 +1,5 @@
 using System;
+using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,9 +9,9 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     protected Predicate<PointerEventData> condition;
     protected RectTransform m_RectTransform;
     [SerializeField] protected Image m_Image;
-    public CraftMaterials[] CraftMaterials;
+    public Construction construction;
     protected static Storage lumStorage;
-    public bool gotTheRawMats = false;
+    protected bool gotTheRawMats = false;
 
     protected virtual void Awake()
     {
@@ -27,13 +28,11 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         }
     }
 
-
     
 
     public virtual void OnBeginDrag(PointerEventData eventData)
-    {
-        if (!gotTheRawMats) return;
-        m_Image.color = Color.white;
+    {   
+        m_Image.color = gotTheRawMats ? Color.white : new Color(1, 0, 0, .4f);
     }
 
 
@@ -46,12 +45,10 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         else
             OnDragUncorrect(eventData);
     }
-
     public virtual void OnDragCorrect(PointerEventData eventData)
     {
         m_Image.color = Color.green;
     }
-
     public virtual void OnDragUncorrect(PointerEventData eventData)
     {
         m_Image.color = Color.red;
@@ -65,15 +62,14 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         if (condition.Invoke(eventData)) OnSuccess(eventData);
         else OnError(eventData);
     }
-
     protected virtual void OnSuccess(PointerEventData eventData)
     {
-        m_Image.color = new Color(1, 1, 1, .4f);
+        m_Image.color = new Color(1, 1, 1, 1);
         m_RectTransform.anchoredPosition = Vector3.zero;
         Tuto.buildDone = true;
-        lumStorage.Consume(CraftMaterials);
+        lumStorage.Consume(construction.materials);
+        UpdateAllGotMats();
     }
-
     protected virtual void OnError(PointerEventData eventData)
     {
         m_Image.color = new Color(1, 1, 1, .4f);
@@ -85,9 +81,34 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     {
         return gotTheRawMats;
     }
-
     private void OnEnable()
     {
-        gotTheRawMats = lumStorage.CanCraft(CraftMaterials);
+        Debug.Log("Enable " + gameObject.name, this);
+        UpdateGotMats();
+    }
+    public void UpdateGotMats()
+    {
+        if (lumStorage.CanCraft(construction.materials))        
+            Enable();        
+
+        else
+            Block();        
+    }
+    public void Enable()
+    {
+        gotTheRawMats = true;
+        m_Image.color = new Color(1, 1, 1, .4f);
+    }
+    public virtual void Block()
+    {
+        gotTheRawMats = false;
+        m_Image.color = new Color(1, 0, 0, .4f);
+    }
+    public static void UpdateAllGotMats()
+    {
+        foreach (var bubble in lumStorage.GetComponent<Lumberjack>().constructUI.GetComponentsInChildren<DragDropBubble>())
+        {
+            bubble.UpdateGotMats();
+        }
     }
 }

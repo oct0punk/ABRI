@@ -81,6 +81,7 @@ public class Bridge : MonoBehaviour
             go.name = t.ToString();
             go.GetComponent<Rigidbody2D>().simulated = false;
             go.GetComponent<HingeJoint2D>().enabled = false;
+            go.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .4f);
         }
     }
 
