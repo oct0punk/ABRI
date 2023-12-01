@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resistance: 0
   craftMaterials: []
+  icon: {fileID: 21300000, guid: b2b3788031f6ae44098c61d319384a1c, type: 3}

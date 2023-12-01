@@ -13,14 +13,14 @@ GameObject:
   - component: {fileID: 4654452668160020244}
   - component: {fileID: 5978798162620429935}
   - component: {fileID: 3833818866670044676}
-  - component: {fileID: 3422555857926682397}
+  - component: {fileID: 407331506881089890}
   m_Layer: 5
   m_Name: CraftBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5272758446663460579
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30,17 +30,17 @@ RectTransform:
   m_GameObject: {fileID: 647979200301504269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4619873653668590127}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.94100004}
-  m_SizeDelta: {x: 1, y: 1}
-  m_Pivot: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4064797657217556864
 Canvas:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3422555857926682397
+--- !u!114 &407331506881089890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,8 +137,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fecaebeb8df1d946a4fb728d09588bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 11400000, guid: bfa6f9108ba59614eb5527e7a7242832, type: 2}
+  materials: []
+  offset: 100
+  presPrefab: {fileID: 2504203939886635047, guid: 74afba8ec619114478a0c212e83dec41, type: 3}
+  isPresenting: 0
   animator: {fileID: 0}
+  material: {fileID: 11400000, guid: bfa6f9108ba59614eb5527e7a7242832, type: 2}
 --- !u!1 &3658488494110026772
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,9 +264,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 647979200301504269}
-        m_TargetAssemblyTypeName: Chimney, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 407331506881089890}
+        m_TargetAssemblyTypeName: ConsumeBubble, Assembly-CSharp
+        m_MethodName: Consume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
