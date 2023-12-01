@@ -9,6 +9,7 @@ public class RawMaterial : ScriptableObject
     public int resistance;
     public CraftMaterials[] craftMaterials;
     public bool craftable { get { return craftMaterials.Length > 0; } }
+    public Sprite icon;
 }
 
 [Serializable]
