@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class Branch : MonoBehaviour
 {
+    [Space]
     public AnimationCurve curve;
-    public Vector2 angle = Vector2.zero;
     public float speed = 1.0f;
-    public GameObject rootBone;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Space]
+    public GameObject IKtarget;
+    public GameObject targetPole1;
+    public GameObject targetPole2;
 
     // Update is called once per frame
     void Update()
     {
-        float val = Mathf.Lerp(angle.x, angle.y, curve.Evaluate(Time.timeSinceLevelLoad * speed));
-        rootBone.transform.localRotation = Quaternion.Euler(0, 0, val);
+        Vector3 val = Vector3.Lerp(targetPole1.transform.position, targetPole2.transform.position, curve.Evaluate(Time.timeSinceLevelLoad * speed));
+        IKtarget.transform.position = val;
     }
 }

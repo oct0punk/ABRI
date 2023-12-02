@@ -15,3 +15,4 @@ MonoBehaviour:
   resistance: 1
   craftMaterials: []
   icon: {fileID: 21300000, guid: bc9ca53eafc14444c9341e9e2b740cb6, type: 3}
+  timeBeforeRevive: {x: 1, y: 4}

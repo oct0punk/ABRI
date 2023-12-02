@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,13 @@ using UnityEngine;
 public class Workbench : MonoBehaviour
 {
     Lumberjack lumberjack;
+    Shelter shelter;
     public GameObject bubble;
     public GameObject[] craftPlans;
 
     private void Start()
     {
+        shelter = GetComponentInParent<Shelter>();
         lumberjack = FindObjectOfType<Lumberjack>();
         bubble.SetActive(false);
         foreach (GameObject plan in craftPlans)
@@ -21,15 +24,17 @@ public class Workbench : MonoBehaviour
     public void DisplayPlans()
     {
         bubble.SetActive(false);
-        foreach (var plan in craftPlans)
-            plan.SetActive(true);
+        Array.ForEach(craftPlans, plan => plan.SetActive(true));
+        Array.ForEach(shelter.pieces, p => p.SetBubbleVisible(true));
+        Array.ForEach(shelter.perchs, p => p.bubble.gameObject.SetActive(true));
     }
 
     public void HidePlans()
     {
         bubble.SetActive(true);
-        foreach (var plan in craftPlans)
-            plan.SetActive(false);
+        Array.ForEach(craftPlans, plan => plan.SetActive(false));
+        Array.ForEach(shelter.pieces, p => p.SetBubbleVisible(false));
+        Array.ForEach(shelter.perchs, p => p.bubble.gameObject.SetActive(false));
     }
 
     public void Craft(CraftBubble bubble)
@@ -67,6 +72,8 @@ public class Workbench : MonoBehaviour
         if (lum != null)
         {
             bubble.SetActive(false);
+            foreach (var bubble in craftPlans)
+                bubble.gameObject.SetActive(false);
         }
     }
 }

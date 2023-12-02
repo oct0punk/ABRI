@@ -15,5 +15,5 @@ MonoBehaviour:
   resistance: 2
   craftMaterials:
   - rawMaterial: {fileID: 11400000, guid: cc3c0788fd693044888b709d50563a33, type: 2}
-    q: 2
+    q: 1
   icon: {fileID: 21300000, guid: c71cdad602bd7314e94313f31d7deb8c, type: 3}

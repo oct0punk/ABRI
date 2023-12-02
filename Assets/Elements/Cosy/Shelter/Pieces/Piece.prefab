@@ -75,11 +75,11 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5177388603050735206, guid: 8884154dfe85442a3a3578be807dbcdf, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 2
+  m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -117,7 +117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 180546079179306651, guid: a1c130d9596eac240b077653291babb1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4851469487264925557, guid: a1c130d9596eac240b077653291babb1, type: 3}
       propertyPath: m_Pivot.x
@@ -145,11 +145,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4851469487264925557, guid: a1c130d9596eac240b077653291babb1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4851469487264925557, guid: a1c130d9596eac240b077653291babb1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851469487264925557, guid: a1c130d9596eac240b077653291babb1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851469487264925557, guid: a1c130d9596eac240b077653291babb1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4851469487264925557, guid: a1c130d9596eac240b077653291babb1, type: 3}
       propertyPath: m_LocalPosition.x

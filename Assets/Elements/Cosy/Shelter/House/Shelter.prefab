@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 1152058357614230769}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -0.05, y: -0.05, z: -0.05}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 456602410588018349}
@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.33, y: 4.79}
+  m_AnchoredPosition: {x: -4, y: 1.03}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8251148795513415817
@@ -308,11 +308,13 @@ MonoBehaviour:
   light: {fileID: 1840047576437614543}
   cam: {fileID: 6750577495154648533}
   temperature: 20
+  maxTemperature: 25
+  speed: 0.5
   timeBeforeNextGust: 1
   push: 0
+  thermometer: {fileID: 3132507242148490621}
   perchs:
   - {fileID: 8002399598089798253}
-  thermometer: {fileID: 3132507242148490621}
 --- !u!114 &3262465680258151783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,7 +503,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4785627021380086939}
-  m_LocalRotation: {x: 0, y: 0, z: -0.9890159, w: 0.1478095}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -510,7 +512,7 @@ RectTransform:
   - {fileID: 3930131026089597014}
   - {fileID: 6811884968349618135}
   m_Father: {fileID: 2372232539657100950}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -163}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1301,17 +1303,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7049886735291559373, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
   m_PrefabInstance: {fileID: 5636129318955351198}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8714938672163331793 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3946880939168326223, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
-  m_PrefabInstance: {fileID: 5636129318955351198}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82a12a28f751c3246993cd72c06271bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7511034844907604443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1364,10 +1355,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6842704263165250241, guid: d04d98ad1470f3844bca37494c38f279, type: 3}
-      propertyPath: bubble
-      value: 
-      objectReference: {fileID: 8714938672163331793}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

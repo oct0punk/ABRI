@@ -6,6 +6,7 @@ public class Combustible : MonoBehaviour
     Material mat;
     [Range(0.0f, 1.0f)]
     public float consuming;// { get; private set; }
+    public int intensity = 2;
     bool active = false;
 
     private void Start()
@@ -17,7 +18,7 @@ public class Combustible : MonoBehaviour
         if (consuming < 1.0f)
         {
             active = true;
-            Shelter.UpdateSpeed(1);
+            Shelter.UpdateSpeed(intensity);
         }
     }
     private void Update()
@@ -34,7 +35,7 @@ public class Combustible : MonoBehaviour
     public void Activate()
     {
         if (!active)
-            Shelter.UpdateSpeed(1);
+            Shelter.UpdateSpeed(intensity);
         consuming = 0.0f;
         active = true;
     }
@@ -42,7 +43,7 @@ public class Combustible : MonoBehaviour
     {
         if (!active) return;
         
-        Shelter.UpdateSpeed(-1);        
+        Shelter.UpdateSpeed(-intensity);        
         active = false;
     }
 

@@ -13,6 +13,7 @@ public class Piece : MonoBehaviour
         SetBubbleVisible(false);
         button.SetActive(false);
         bubble.action = Repair;
+        if (!alive) Break();
     }
 
     public void SetBubbleVisible(bool isActive)
@@ -35,7 +36,7 @@ public class Piece : MonoBehaviour
     public void Break()
     {
         alive = false;
-        GetComponent<SpriteRenderer>().color = Color.red;
+        GetComponent<SpriteRenderer>().color = Color.black;
         button.SetActive(true);
         Shelter.UpdateSpeed(-1);
     }

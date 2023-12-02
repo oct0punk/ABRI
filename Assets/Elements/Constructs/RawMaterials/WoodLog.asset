@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34022016b8aca541a3885d65ee4ca1a, type: 3}
   m_Name: WoodLog
   m_EditorClassIdentifier: 
-  resistance: 4
+  resistance: 3
   craftMaterials: []
   icon: {fileID: 21300000, guid: 7fd0b753065996d4080eb1b643fdf516, type: 3}

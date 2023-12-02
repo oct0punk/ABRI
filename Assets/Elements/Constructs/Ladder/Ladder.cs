@@ -10,6 +10,7 @@ public class Ladder : MonoBehaviour
     SpriteRenderer sprite;
     BoxCollider2D box;
 
+    
     public void SetHeight(float height)
     {
         sprite.transform.localScale = new Vector3(1, height, 1);
@@ -22,6 +23,9 @@ public class Ladder : MonoBehaviour
     {
         sprite = GetComponentInChildren<SpriteRenderer>();
         box = GetComponent<BoxCollider2D>();
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Platform"));
+        if (hit)
+            transform.SetParent(hit.transform);
     }
 
     public float getHeight()

@@ -12,6 +12,16 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
+    public void OnNestBuilt()
+    {
+        foreach (NestBox nest in FindObjectsOfType(typeof(NestBox)))
+        {
+            if (!nest.isBuilt) return;
+        }
+
+        Outro();
+    }
+
     public void Resume()
     {
         Time.timeScale = 1.0f;

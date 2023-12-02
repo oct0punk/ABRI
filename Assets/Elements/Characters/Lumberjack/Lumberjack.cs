@@ -16,7 +16,7 @@ public class Lumberjack : MonoBehaviour
     public int force = 1;
 
     [HideInInspector] public int x = 1;
-    [HideInInspector] public bool indoor;
+    [HideInInspector] public bool indoor = false;
     public bool canCut = false;
     public Bird carryingBird;
 
@@ -30,6 +30,8 @@ public class Lumberjack : MonoBehaviour
     public GameObject constructUI;
     public GameObject plans;
     public GameObject thinkObj;
+    public GameObject fullStorage;
+    public Image fullStorageImage;
 
     #region Owning Components
     public Animator animator { get; private set; }
@@ -202,7 +204,10 @@ public class Lumberjack : MonoBehaviour
         if (pickingResource != null) 
         {
             if (!storage.CanFill(pickingResource.material))
+            {
+                StartCoroutine(CantCutMat(pickingResource.material));
                 return;
+            }
 
             workingState.state = WorkState.Cutting;
             ChangeFSM(workingState);
@@ -214,7 +219,13 @@ public class Lumberjack : MonoBehaviour
         if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "CutAnim") return;
         animator.SetTrigger("Cut");
     }
-
+    IEnumerator CantCutMat(RawMaterial mat)
+    {
+        fullStorage.SetActive(true);
+        fullStorageImage.sprite = mat.icon;
+        yield return new WaitForSeconds(2);
+        fullStorage.SetActive(false);
+    }
     public void ResistRes()
     {
         pickingResource.Resist(this);

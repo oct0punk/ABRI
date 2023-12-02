@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materials:
   - rawMaterial: {fileID: 11400000, guid: bfa6f9108ba59614eb5527e7a7242832, type: 2}
-    q: 3
+    q: 1

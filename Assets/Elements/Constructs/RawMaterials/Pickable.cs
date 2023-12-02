@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [SelectionBase]
@@ -36,6 +37,16 @@ public class Pickable : MonoBehaviour
         l.Collect(this);
         collider.enabled = false;
         transform.localScale = Vector3.down;
+        if (material.revivable)
+        {
+            StartCoroutine(Revive());
+        }
+    }
+
+    IEnumerator Revive()
+    {
+        yield return new WaitForSeconds(Random.Range(material.timeBeforeRevive.x, material.timeBeforeRevive.y));
+        Reset();
     }
 
     private void Reset()

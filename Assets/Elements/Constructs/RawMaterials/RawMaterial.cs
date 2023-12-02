@@ -10,6 +10,8 @@ public class RawMaterial : ScriptableObject
     public CraftMaterials[] craftMaterials;
     public bool craftable { get { return craftMaterials.Length > 0; } }
     public Sprite icon;
+    public Vector2 timeBeforeRevive;
+    public bool revivable { get { return timeBeforeRevive != Vector2.zero; } }
 }
 
 [Serializable]

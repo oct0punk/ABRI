@@ -13,17 +13,20 @@ public class Shelter : MonoBehaviour
     [SerializeField] SpriteRenderer ext;
     [SerializeField] new Light2D light;
     [SerializeField] CinemachineVirtualCamera cam;
-
+    [Space]
     [Header("Temperature")]
     [SerializeField] float temperature = 20.0f;
+    [SerializeField] float maxTemperature = 25.0f;
+    [SerializeField] float speed = .5f;
     [SerializeField] float timeBeforeNextGust = 1.0f;
     [SerializeField] int push = 0;
-
-    Piece[] pieces;
-    public GameObject[] perchs;
+    [SerializeField] Slider thermometer;
     Storm storm;
     public Storage storage { get; private set; }
-    public Slider thermometer;
+    public Piece[] pieces;
+    
+    [Space]
+    public NestBox[] perchs;    
 
 
     void Awake()
@@ -32,13 +35,14 @@ public class Shelter : MonoBehaviour
         storm = GetComponent<Storm>();
         pieces = GetComponentsInChildren<Piece>();
         storage = GetComponentInChildren<Storage>();
+        perchs = GetComponentsInChildren<NestBox>();
     }
 
 
 
     private void Update()
     {
-        ChangeTemperature(push * Time.deltaTime);
+        ChangeTemperature(push * Time.deltaTime * speed);
 
         timeBeforeNextGust -= Time.deltaTime;
         if (timeBeforeNextGust < 0.0f)
@@ -55,7 +59,7 @@ public class Shelter : MonoBehaviour
 
     void ChangeTemperature(float amount)
     {
-        temperature = Mathf.Clamp(temperature + amount, 0.0f, 25.0f);
+        temperature = Mathf.Clamp(temperature + amount, 0.0f, maxTemperature);
         if (temperature <= 0.0f)
         {
             GameManager.instance.GameOver();
@@ -63,7 +67,7 @@ public class Shelter : MonoBehaviour
         }
 
 
-        thermometer.value = Mathf.Lerp(0.0f, 1.0f, temperature / 20.0f);
+        thermometer.value = Mathf.Lerp(0.0f, 1.0f, temperature / maxTemperature);
     }
 
     public static void UpdateSpeed(int amount)
@@ -92,7 +96,6 @@ public class Shelter : MonoBehaviour
             ext.enabled = false;
             light.enabled = true;
             CameraManager.Possess(cam);
-            Array.ForEach<Piece>(instance.pieces, p => p.SetBubbleVisible(true));
 
             // Store planchs
             RawMaterial mat = RawMatManager.instance.GetRawMatByName("WoodPlanch");
@@ -115,7 +118,6 @@ public class Shelter : MonoBehaviour
             ext.enabled = true;
             CameraManager.Possess(lum.cam);
             light.enabled = false;
-            Array.ForEach<Piece>(instance.pieces, p => p.SetBubbleVisible(false));
 
             // Restore planchs
             RawMaterial material = RawMatManager.instance.GetRawMatByName("WoodPlanch");

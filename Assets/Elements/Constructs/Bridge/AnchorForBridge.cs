@@ -6,6 +6,8 @@ using UnityEngine;
 [SelectionBase]
 public class AnchorForBridge : MonoBehaviour
 {
+    public bool buildOnStart;
+
     public Transform left;
     public Transform right;
     //[Space]
@@ -28,6 +30,9 @@ public class AnchorForBridge : MonoBehaviour
         {
             right.transform.SetParent(hit.transform);
         }
+
+        if (buildOnStart)
+            Build();
     }
 
     public void Build()
