@@ -41,7 +41,10 @@ public class ConsumeBubble : TapBubble
         else
         {
             foreach (var pres in presentation)
+            {
                 pres.gameObject.SetActive(true);
+                pres.UpdateMat();
+            }
         }
         isPresenting = true;
     }
@@ -81,5 +84,7 @@ public class ConsumeBubble : TapBubble
         }
         animator.SetTrigger("OK");
         action();
+        foreach (var pres in presentation)
+            pres.UpdateMat();
     }
 }

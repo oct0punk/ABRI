@@ -70,6 +70,7 @@ public class Lumberjack : MonoBehaviour
 
         constructUI.SetActive(true);
         ThinkOf(false);
+        fullStorage.SetActive(false);
     }
 
     private void Update()
@@ -80,6 +81,17 @@ public class Lumberjack : MonoBehaviour
     {
         ResetGlobalScale();
         transform.rotation = Quaternion.identity;
+    }
+
+    private void OnEnable()
+    {
+
+    }
+
+    private void OnDisable()
+    {
+        if (fsm == idleState)
+            idleState.OnEnter(this);
     }
 
     public void ChangeFSM(FSM_BaseState newState)

@@ -40,11 +40,6 @@ public class Workbench : MonoBehaviour
     public void Craft(CraftBubble bubble)
     {
         RawMaterial craftable = bubble.material;
-        if (!lumberjack.storage.CanFill(craftable))
-        {
-            bubble.animator.SetTrigger("NOPE");
-            return;
-        }
         foreach (var material in craftable.craftMaterials)
         {
             if (lumberjack.storage.Count(material.rawMaterial) < material.q)
@@ -53,8 +48,22 @@ public class Workbench : MonoBehaviour
                 return;
             }
         }
-        bubble.animator.SetTrigger("OK");
-        lumberjack.storage.Craft(craftable);
+        if (lumberjack.storage.CanFill(craftable))
+        {
+            bubble.animator.SetTrigger("OK");
+            lumberjack.storage.Craft(craftable);
+        }
+        else
+        {
+            if (craftable == RawMatManager.instance.GetRawMatByName("WoodPlanch"))
+            {
+                lumberjack.storage.Consume(craftable.craftMaterials);
+                shelter.storage.Add(craftable);
+                bubble.animator.SetTrigger("OK");
+            }
+            else
+                bubble.animator.SetTrigger("NOPE");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
