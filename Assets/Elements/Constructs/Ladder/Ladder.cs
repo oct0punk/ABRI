@@ -9,7 +9,7 @@ public class Ladder : MonoBehaviour
     Lumberjack l;
     SpriteRenderer sprite;
     BoxCollider2D box;
-
+    public GameObject arrow;
     
     public void SetHeight(float height)
     {
@@ -39,6 +39,9 @@ public class Ladder : MonoBehaviour
         if (hit)
         {
             transform.SetParent(hit.transform);
+
+            transform.localScale = Vector3.one;
+            transform.localScale = new Vector3(1 / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
         }
     }
 
@@ -51,13 +54,21 @@ public class Ladder : MonoBehaviour
 
         if (SwipeManager.ClimbUp()) {
             if (isAtBottom(l))
-                l.ClimbUp(this);            
+            {
+                l.ClimbUp(this);
+                arrow.SetActive(false);
+                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, getHeight() - .5f, 0.0f), Quaternion.Euler(0, 0, 90));
+            }
         }
         else if (SwipeManager.ClimbDown()) {
             if (!isAtBottom(l))
+            {
                 l.ClimbDown(this);
+                arrow.SetActive(false);
+                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, .5f, 0.0f), Quaternion.Euler(0, 0, -90));
+            }
         }
-    }
+    }   
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -66,6 +77,17 @@ public class Ladder : MonoBehaviour
         {
             l = p;
             enabled = true;
+            
+            arrow.SetActive(true);            
+            if (isAtBottom(l))
+            {
+                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, .5f, 0.0f), Quaternion.Euler(0, 0, -90));
+            } 
+            else
+            {
+                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, getHeight() - .5f, 0.0f), Quaternion.Euler(0, 0, 90));
+            }
+
             Tuto.canClimb = true;
         }
     }
@@ -77,6 +99,7 @@ public class Ladder : MonoBehaviour
         {
             l = null;
             enabled = false;
+            arrow.SetActive(false);
             Tuto.canClimb = false;
         }
     }

@@ -166,6 +166,13 @@ public class Lumberjack : MonoBehaviour
         climbingState.targetPos = pos;
         transform.SetParent(ladder.transform);
         ChangeFSM(climbingState);
+        StartCoroutine(WaitEndOfLadder(ladder));
+    }
+
+    IEnumerator WaitEndOfLadder(Ladder ladder)
+    {
+        yield return new WaitWhile(() => fsm == climbingState);
+        ladder.arrow.SetActive(true);
     }
     #endregion
     #endregion
