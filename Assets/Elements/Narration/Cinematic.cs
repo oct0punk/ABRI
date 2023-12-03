@@ -9,7 +9,13 @@ public class Cinematic : MonoBehaviour
 
     private void Awake()
     {
-        videoPlayer = GetComponent<VideoPlayer>();
+        videoPlayer = GetComponent<VideoPlayer>();        
+    }
+
+    public void Play()
+    {
+        videoPlayer.enabled = true;
+        videoPlayer.Play();
         StartCoroutine(HideOnEnd());
     }
 
@@ -17,6 +23,6 @@ public class Cinematic : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime((float)videoPlayer.clip.length);
         videoPlayer.enabled = false;
-        GameManager.instance.Resume();
+        GameManager.instance.ChangeState(GameState.Intro);
     }
 }

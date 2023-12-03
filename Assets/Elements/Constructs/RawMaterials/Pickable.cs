@@ -9,6 +9,7 @@ public class Pickable : MonoBehaviour
     public bool alive = true;
     public int resistance { get; private set; }
     new Collider2D collider;
+    public GameObject trail;
     
 
     private void Start()
@@ -20,12 +21,12 @@ public class Pickable : MonoBehaviour
         {
             transform.SetParent(hit.transform);
         }
+        trail.SetActive(false);
     }
 
     public void Resist(Lumberjack l)
     {
         resistance -= l.force;
-        Debug.Log("Cut : " + resistance, this);
         if (resistance <= 0)
             OnDie(l);
     }

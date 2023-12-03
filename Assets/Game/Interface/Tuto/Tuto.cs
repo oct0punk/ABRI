@@ -21,12 +21,20 @@ public class Tuto : MonoBehaviour
     public static bool buildDone;
     public GameObject buildTuto;
     public GameObject dragNdrop;
+    public GameObject moveTuto;
 
     private void Start()
     {
+        // StartCoroutine(WalkTuto());
         StartCoroutine(CutTuto());
         StartCoroutine(ClimbTuto());
         StartCoroutine(BuildTuto());
+    }
+
+    IEnumerator WalkTuto()
+    {
+        yield return new WaitUntil(() => GameManager.instance.lumberjack.fsm == GameManager.instance.lumberjack.movingState);
+        moveTuto.SetActive(false);
     }
 
     IEnumerator CutTuto()

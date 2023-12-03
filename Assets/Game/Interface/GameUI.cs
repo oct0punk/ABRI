@@ -7,49 +7,60 @@ using UnityEngine.UI;
 public class GameUI : MonoBehaviour
 {
     public static GameUI instance;
-    public GameObject GamePanel;
-    public GameObject GameOverPanel;
-    public GameObject EndPanel;
-    public VerticalLayoutGroup PausePanel;
+    [SerializeField] GameObject GamePanel;
+    [SerializeField] GameObject GameOverPanel;
+    [SerializeField] GameObject EndPanel;
+    [SerializeField] Cinematic cineIntro;
+    [SerializeField] VerticalLayoutGroup PausePanel;
 
-    private void Start()
+    private void Awake()
     {
-        instance = this;
-        GameOverPanel.SetActive(false);
-        EndPanel.SetActive(false);
-        Resume();
-        
+        instance = this;        
     }
 
+    #region Layers
+    public void Game()
+    {
+        NoHUD();
+        GamePanel.gameObject.SetActive(true);
+    }
     public void Pause()
     {
-        GamePanel.SetActive(false);
+        NoHUD();
         PausePanel.gameObject.SetActive(true);
     }
-
-    public void Resume()
+    public void GameOver()
     {
-        GamePanel.gameObject.SetActive(true);
+        NoHUD();
+        GameOverPanel.SetActive(true);
+    }
+    public void NoHUD()
+    {
+        GamePanel.SetActive(false);
         PausePanel.gameObject.SetActive(false);
+        EndPanel.SetActive(false);
+        GameOverPanel.SetActive(false);
+        cineIntro.gameObject.SetActive(false);
+    }
+    #endregion
+
+
+    public void Intro()
+    {
+        NoHUD();
+        cineIntro.gameObject.SetActive(true);
+        cineIntro.Play();
+    }
+    public void Outro()
+    {
+        NoHUD();
+        EndPanel.SetActive(true);
     }
 
     public void BackToMenu()
     {
         SceneManager.LoadScene(0);
     }
-
-    public void End()
-    {
-        GamePanel.SetActive(false);
-        EndPanel.SetActive(true);
-    }
-
-    public void GameOver()
-    {
-        GamePanel.SetActive(false);
-        GameOverPanel.SetActive(true);
-    }
-
     public void Reload()
     {
         SceneManager.LoadScene(1);

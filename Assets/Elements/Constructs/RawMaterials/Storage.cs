@@ -19,6 +19,8 @@ class StockRawMat {
 public class Storage : MonoBehaviour
 {
     [SerializeField] StockRawMat[] content;
+    public PresBubble pres;
+    public Canvas canvas;
 
     private void Start()
     {
@@ -44,8 +46,7 @@ public class Storage : MonoBehaviour
         if (mat != null)
             return mat;
         else { 
-            Debug.LogWarning("RawMat '" + material + "' not found.", this);
-            
+
             // Create a new slot for the material
             StockRawMat[] copy = new StockRawMat[content.Length + 1];
             content.CopyTo(copy, 0);
@@ -62,6 +63,10 @@ public class Storage : MonoBehaviour
         if (stock != null)
         {
             stock.q += count;
+            PresBubble bubble = Instantiate(pres, canvas.transform);
+            bubble.Init(new CraftMaterials(material, count));
+            bubble.transform.localPosition = Vector3.up;
+            Destroy(bubble, 1.0f);
             if (stock.q > stock.maxQ) Debug.LogWarning("Q out of range : " + stock.material.name, this);
         }
     }

@@ -15,7 +15,6 @@ public class Lumberjack : MonoBehaviour
     public int speed = 3;
     public int force = 1;
 
-    [HideInInspector] public int x = 1;
     [HideInInspector] public bool indoor = false;
     public bool canCut = false;
     public Bird carryingBird;
@@ -35,6 +34,7 @@ public class Lumberjack : MonoBehaviour
 
     #region Owning Components
     public Animator animator { get; private set; }
+    public SpriteRenderer spriteRenderer { get; private set; }
     public List<Pickable> canCutRes { get; private set; }
     public Storage storage { get; private set; }
     #endregion
@@ -55,6 +55,7 @@ public class Lumberjack : MonoBehaviour
     {
         // Component
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         canCutRes = new List<Pickable>();
         storage = GetComponent<Storage>();
         mask = LayerMask.GetMask("Platform");
@@ -83,10 +84,6 @@ public class Lumberjack : MonoBehaviour
         transform.rotation = Quaternion.identity;
     }
 
-    private void OnEnable()
-    {
-
-    }
 
     private void OnDisable()
     {
@@ -108,7 +105,7 @@ public class Lumberjack : MonoBehaviour
     public void ResetGlobalScale()
     {
         transform.localScale = Vector3.one;
-        transform.localScale = new Vector3(x / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
+        transform.localScale = new Vector3(1 / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
     }
 
     #region Move
@@ -119,10 +116,7 @@ public class Lumberjack : MonoBehaviour
         transform.position += delta;
         if (delta.magnitude >= Time.deltaTime * speed)
         {
-            x = (int)Mathf.Sign(delta.x);
-            Vector3 scale = canvas.transform.localScale;
-            scale.x = x * 0.01f;
-            canvas.GetComponent<RectTransform>().localScale = scale;
+            spriteRenderer.flipX = (int)Mathf.Sign(delta.x) == -1;
         }
     }
     public void Jump(Vector3 landAt)
@@ -183,6 +177,8 @@ public class Lumberjack : MonoBehaviour
     public void OnResEnter(Pickable res)
     {
         canCutRes.Add(res);
+        if (res == canCutRes[0])
+            res.trail.SetActive(true);
         canCut = true;
         animator.SetBool("CanCut", true);
         // Trail emits
@@ -191,12 +187,17 @@ public class Lumberjack : MonoBehaviour
     // Called when a resource EXIT the zone
     public void OnResExit(Pickable res)
     {
+        res.trail.SetActive(false);
         canCutRes.Remove(res);
         if (canCutRes.Count == 0)
         {
             animator.SetBool("CanCut", false);
             canCut = false;
             // Trail doesn't emit
+        }
+        else
+        {
+            canCutRes[0].trail.SetActive(true);
         }
     }
     #endregion
@@ -214,6 +215,7 @@ public class Lumberjack : MonoBehaviour
     {
         thinkObj.SetActive(isActive);
         plans.SetActive(false);
+        constructUI.GetComponent<RectTransform>().pivot = new Vector2(spriteRenderer.flipX ? 1.0f : .0f, .0f);
     }
 
     #region Work

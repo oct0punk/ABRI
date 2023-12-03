@@ -10,22 +10,14 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     protected RectTransform m_RectTransform;
     [SerializeField] protected Image m_Image;
     public Construction construction;
-    protected static Storage lumStorage;
     protected bool gotTheRawMats = false;
+    protected Storage lumStorage;
 
     protected virtual void Awake()
     {
         condition = CanBeBuild;
         m_RectTransform = GetComponent<RectTransform>();
         lumStorage = FindObjectOfType<Lumberjack>().storage;
-    }
-
-    private void Start()
-    {
-        if (!Tuto.buildDone)
-        {
-            m_Image.color = Color.yellow;
-        }
     }
 
     
@@ -83,11 +75,16 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     }
     private void OnEnable()
     {
-        Debug.Log("Enable " + gameObject.name, this);
         UpdateGotMats();
     }
     public void UpdateGotMats()
     {
+        if (lumStorage == null)
+        {
+            lumStorage = FindObjectOfType<Lumberjack>().storage;
+            if (lumStorage == null)
+                return;
+        }
         if (lumStorage.CanCraft(construction.materials))        
             Enable();        
 
@@ -106,7 +103,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     }
     public static void UpdateAllGotMats()
     {
-        foreach (var bubble in lumStorage.GetComponent<Lumberjack>().constructUI.GetComponentsInChildren<DragDropBubble>())
+        foreach (var bubble in GameManager.instance.lumberjack.constructUI.GetComponentsInChildren<DragDropBubble>())
         {
             bubble.UpdateGotMats();
         }

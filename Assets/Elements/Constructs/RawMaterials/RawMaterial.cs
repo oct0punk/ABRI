@@ -19,4 +19,10 @@ public struct CraftMaterials
 {
     public RawMaterial rawMaterial;
     public int q;
+
+    public CraftMaterials(RawMaterial rawMaterial, int q)
+    {
+        this.rawMaterial = rawMaterial;
+        this.q = q;
+    }
 }

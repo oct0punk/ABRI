@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6daab16ef158c4fb7ac89b8207fa69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: 1
+  lumberjack: {fileID: 0}
   ui: {fileID: 0}
 --- !u!20 &80961404534833638
 Camera:
@@ -236,6 +238,7 @@ MonoBehaviour:
   climbDownTuto: {fileID: 0}
   buildTuto: {fileID: 0}
   dragNdrop: {fileID: 0}
+  moveTuto: {fileID: 0}
 --- !u!114 &380517034906365682
 MonoBehaviour:
   m_ObjectHideFlags: 0

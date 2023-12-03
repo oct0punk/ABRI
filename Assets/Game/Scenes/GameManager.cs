@@ -2,23 +2,68 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState
+{
+    Tuto,
+    Explore,
+    Craft,
+    Build,
+    Intro,
+    Outro
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [HideInInspector] public Lumberjack lumberjack;
+    public GameState gameState;
+
+    public Lumberjack lumberjack;
     public GameUI ui;
+    Tuto tuto;
 
     private void Awake()
     {
         instance = this;
+        tuto = GetComponent<Tuto>();
         lumberjack = FindObjectOfType<Lumberjack>();
     }
 
     private void Start()
     {
-        Time.timeScale = 0.0f;
-        lumberjack.enabled = false;
-        ui.PausePanel.gameObject.SetActive(false);
+        EnterState(gameState);
+    }
+
+    public void ChangeState(GameState newState)
+    {
+        ExitState(gameState);
+        gameState = newState;
+        EnterState(gameState);
+    }
+
+    void EnterState(GameState state) {
+        switch (state)
+        {
+            case GameState.Intro:
+                ui.Intro();
+                Time.timeScale = 0.0f;
+                lumberjack.enabled = false;
+                break;
+            case GameState.Explore:
+                
+                break;
+        }
+    }
+
+    void ExitState(GameState state) { 
+        switch (state)
+        {
+            case GameState.Intro:
+                Time.timeScale = 1.0f;
+                lumberjack.enabled = true;
+                ui.Game();
+                // TUTO();
+                break;
+        }
     }
 
     public void OnNestBuilt()
@@ -34,7 +79,7 @@ public class GameManager : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = 1.0f;
-        ui.Resume();
+        ui.Game();
         lumberjack.enabled = true;
     }
 
@@ -54,6 +99,6 @@ public class GameManager : MonoBehaviour
     {
         lumberjack.enabled = false;
         Time.timeScale = .0f;
-        ui.End();
+        ui.Outro();
     }
 }
