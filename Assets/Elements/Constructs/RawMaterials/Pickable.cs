@@ -10,11 +10,13 @@ public class Pickable : MonoBehaviour
     public int resistance { get; private set; }
     new Collider2D collider;
     public GameObject trail;
-    
+    GameObject bubbleContent;
+    public Canvas canvas;
 
     private void Start()
     {
         collider = GetComponent<Collider2D>();
+        bubbleContent = material.bubbleContent;
         Reset();
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Platform"));
         if (hit)
@@ -22,6 +24,7 @@ public class Pickable : MonoBehaviour
             transform.SetParent(hit.transform);
         }
         trail.SetActive(false);
+        canvas = GetComponentInChildren<Canvas>();
     }
 
     public void Resist(Lumberjack l)
@@ -75,5 +78,14 @@ public class Pickable : MonoBehaviour
         {
             lum.OnResExit(this);
         }
+    }
+
+    public void CanCut(bool canCut, Lumberjack lum)
+    {
+        trail.SetActive(canCut);
+        //if (canCut)
+        //{
+        //    lum.Message(bubbleContent, () => (lum.pickingResource != this || !lum.canCut));
+        //}
     }
 }

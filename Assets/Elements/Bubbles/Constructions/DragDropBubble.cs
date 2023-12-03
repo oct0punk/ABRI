@@ -58,7 +58,6 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     {
         m_Image.color = new Color(1, 1, 1, 1);
         m_RectTransform.anchoredPosition = Vector3.zero;
-        Tuto.buildDone = true;
         lumStorage.Consume(construction.materials);
         UpdateAllGotMats();
     }

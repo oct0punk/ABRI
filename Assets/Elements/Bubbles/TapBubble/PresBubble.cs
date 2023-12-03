@@ -25,6 +25,7 @@ public class PresBubble : MonoBehaviour
         UpdateMat();
     }
 
+
     public void UpdateMat()
     {
         int count = GameManager.instance.lumberjack.storage.Count(mat.rawMaterial);

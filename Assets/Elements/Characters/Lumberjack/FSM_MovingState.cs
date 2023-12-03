@@ -12,6 +12,11 @@ public class FSM_MovingState : FSM_IdleState
     {
         l.SetSpriteColor(Color.blue);
         l.ThinkOf(false);
+
+        if (SwipeManager.MoveLeft())
+            GameManager.instance.ui.MoveLeft();
+        else if (SwipeManager.MoveRight())
+            GameManager.instance.ui.MoveRight();
     }
 
     public override void OnExit(Lumberjack l)

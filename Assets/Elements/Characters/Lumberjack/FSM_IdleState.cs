@@ -11,7 +11,8 @@ public class FSM_IdleState : FSM_BaseState
     
 
     public override void OnEnter(Lumberjack l)
-    {        
+    {
+        GameManager.instance.ui.NoMove();
         l.SetSpriteColor(Color.white);
         l.animator.SetBool("isWalking", false);
         l.ThinkOf(false);

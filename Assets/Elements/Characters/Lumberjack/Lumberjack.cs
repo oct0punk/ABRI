@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,15 +24,18 @@ public class Lumberjack : MonoBehaviour
     public CinemachineVirtualCamera cam;
     public Pickable pickingResource { get; private set; }
     LayerMask mask;
+    float coolDown = 0.0f;
 
     [Space]
     [Header("Constructions")]
-    public Canvas canvas;
     public GameObject constructUI;
     public GameObject plans;
     public GameObject thinkObj;
-    public GameObject fullStorage;
-    public Image fullStorageImage;
+
+    [Header("Message")]
+    public GameObject messageBubble;
+    Coroutine messageRoutine;
+    Coroutine cdRoutine;
 
     #region Owning Components
     public Animator animator { get; private set; }
@@ -71,7 +76,7 @@ public class Lumberjack : MonoBehaviour
 
         constructUI.SetActive(true);
         ThinkOf(false);
-        fullStorage.SetActive(false);
+        messageBubble.SetActive(false);
     }
 
     private void Update()
@@ -116,7 +121,16 @@ public class Lumberjack : MonoBehaviour
         transform.position += delta;
         if (delta.magnitude >= Time.deltaTime * speed)
         {
-            spriteRenderer.flipX = (int)Mathf.Sign(delta.x) == -1;
+            bool res = (int)Mathf.Sign(delta.x) == -1;
+            if (res != spriteRenderer.flipX)
+            {
+                // changeDir feedback
+                if (delta.x > 0)
+                    GameManager.instance.ui.MoveRight();
+                else
+                    GameManager.instance.ui.MoveLeft();
+            }
+            spriteRenderer.flipX = res;
         }
     }
     public void Jump(Vector3 landAt)
@@ -178,7 +192,7 @@ public class Lumberjack : MonoBehaviour
     {
         canCutRes.Add(res);
         if (res == canCutRes[0])
-            res.trail.SetActive(true);
+            res.CanCut(true, this);
         canCut = true;
         animator.SetBool("CanCut", true);
         // Trail emits
@@ -187,7 +201,7 @@ public class Lumberjack : MonoBehaviour
     // Called when a resource EXIT the zone
     public void OnResExit(Pickable res)
     {
-        res.trail.SetActive(false);
+        res.CanCut(false, this);
         canCutRes.Remove(res);
         if (canCutRes.Count == 0)
         {
@@ -197,7 +211,7 @@ public class Lumberjack : MonoBehaviour
         }
         else
         {
-            canCutRes[0].trail.SetActive(true);
+            canCutRes[0].CanCut(true, this);
         }
     }
     #endregion
@@ -218,6 +232,47 @@ public class Lumberjack : MonoBehaviour
         constructUI.GetComponent<RectTransform>().pivot = new Vector2(spriteRenderer.flipX ? 1.0f : .0f, .0f);
     }
 
+
+    IEnumerator MessageRoutine(Func<bool> condition) {
+
+        yield return new WaitWhile(() => condition.Invoke());
+        
+        Debug.Log("EndMessage");
+        for (int i = 0; i < messageBubble.transform.childCount; i++) {
+            Destroy(messageBubble.transform.GetChild(i).gameObject);
+        }
+        messageBubble.SetActive(false);
+    }
+    public Coroutine Message(GameObject obj, Func<bool> condition)
+    {
+        Debug.Log("Message : " + obj.name);
+        if (messageRoutine != null) StopCoroutine(messageRoutine);
+        messageBubble.SetActive(true);
+        for (int i = 0; i < messageBubble.transform.childCount; i++) {
+            Destroy(messageBubble.transform.GetChild(i).gameObject);
+        }
+        Instantiate(obj, messageBubble.transform);        
+        return messageRoutine = StartCoroutine(MessageRoutine(condition));
+    }
+
+    public Coroutine Message(GameObject obj, float time)
+    {
+        coolDown = time;
+        if (cdRoutine != null) StopCoroutine(cdRoutine);
+        cdRoutine = StartCoroutine(CoolDown());
+        return Message(obj, () => coolDown > 0.0f);
+    }
+    IEnumerator CoolDown()
+    {
+        while (coolDown > 0)
+        {
+            coolDown -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+
+
     #region Work
     public void StartCutting()
     {
@@ -226,7 +281,9 @@ public class Lumberjack : MonoBehaviour
         {
             if (!storage.CanFill(pickingResource.material))
             {
-                StartCoroutine(CantCutMat(pickingResource.material));
+                Image image = new GameObject().AddComponent<Image>();
+                image.sprite = pickingResource.material.icon;
+                Message(image.gameObject, 2.0f);
                 return;
             }
 
@@ -239,13 +296,6 @@ public class Lumberjack : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "CutAnim") return;
         animator.SetTrigger("Cut");
-    }
-    IEnumerator CantCutMat(RawMaterial mat)
-    {
-        fullStorage.SetActive(true);
-        fullStorageImage.sprite = mat.icon;
-        yield return new WaitForSeconds(2);
-        fullStorage.SetActive(false);
     }
     public void ResistRes()
     {

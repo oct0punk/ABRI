@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameState gameState;
 
-    public Lumberjack lumberjack;
+    [HideInInspector] public Lumberjack lumberjack;
     public GameUI ui;
     Tuto tuto;
 
@@ -40,6 +40,20 @@ public class GameManager : MonoBehaviour
         EnterState(gameState);
     }
 
+    void ExitState(GameState state) { 
+        switch (state)
+        {
+            case GameState.Intro:
+                Time.timeScale = 1.0f;
+                lumberjack.enabled = true;
+                ui.Game();
+                ui.BothMove();
+                // TUTO();
+                tuto.Launch(lumberjack);
+                break;
+        }
+    }
+
     void EnterState(GameState state) {
         switch (state)
         {
@@ -51,17 +65,8 @@ public class GameManager : MonoBehaviour
             case GameState.Explore:
                 
                 break;
-        }
-    }
-
-    void ExitState(GameState state) { 
-        switch (state)
-        {
-            case GameState.Intro:
-                Time.timeScale = 1.0f;
-                lumberjack.enabled = true;
-                ui.Game();
-                // TUTO();
+            case GameState.Tuto:
+                tuto.Launch(lumberjack);
                 break;
         }
     }

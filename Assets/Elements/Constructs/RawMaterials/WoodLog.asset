@@ -15,3 +15,5 @@ MonoBehaviour:
   resistance: 3
   craftMaterials: []
   icon: {fileID: 21300000, guid: 7fd0b753065996d4080eb1b643fdf516, type: 3}
+  bubbleContent: {fileID: 866232295419377264, guid: 7512546c50b9eae4e90dd0b4a33f8dfa, type: 3}
+  timeBeforeRevive: {x: 60, y: 300}

@@ -77,8 +77,8 @@ public class Ladder : MonoBehaviour
         {
             l = p;
             enabled = true;
-            
-            arrow.SetActive(true);            
+
+            arrow.SetActive(GameManager.instance.gameState != GameState.Tuto);            
             if (isAtBottom(l))
             {
                 arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, .5f, 0.0f), Quaternion.Euler(0, 0, -90));
@@ -87,8 +87,6 @@ public class Ladder : MonoBehaviour
             {
                 arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, getHeight() - .5f, 0.0f), Quaternion.Euler(0, 0, 90));
             }
-
-            Tuto.canClimb = true;
         }
     }
 
@@ -100,7 +98,6 @@ public class Ladder : MonoBehaviour
             l = null;
             enabled = false;
             arrow.SetActive(false);
-            Tuto.canClimb = false;
         }
     }
 

@@ -63,10 +63,6 @@ public class Storage : MonoBehaviour
         if (stock != null)
         {
             stock.q += count;
-            PresBubble bubble = Instantiate(pres, canvas.transform);
-            bubble.Init(new CraftMaterials(material, count));
-            bubble.transform.localPosition = Vector3.up;
-            Destroy(bubble, 1.0f);
             if (stock.q > stock.maxQ) Debug.LogWarning("Q out of range : " + stock.material.name, this);
         }
     }
