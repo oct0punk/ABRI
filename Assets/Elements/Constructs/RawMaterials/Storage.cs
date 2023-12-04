@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
-class StockRawMat {
+public class StockRawMat {
     public RawMaterial material;
     [Min(0)] public int q;
     [Min(-1)] public int maxQ;
@@ -63,6 +63,7 @@ public class Storage : MonoBehaviour
         if (stock != null)
         {
             stock.q += count;
+            GameUI.instance.inventory.UpdateItem(stock);
             if (stock.q > stock.maxQ) Debug.LogWarning("Q out of range : " + stock.material.name, this);
         }
     }

@@ -21,6 +21,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] GameObject GamePanel;
     [SerializeField] Image moveLeft;
     [SerializeField] Image moveRight;
+    public Inventory inventory;
     [Space]
     [SerializeField] GameObject GameOverPanel;
     [SerializeField] GameObject EndPanel;

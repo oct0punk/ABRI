@@ -11,8 +11,6 @@ using UnityEngine.UI;
 [SelectionBase]
 public class Lumberjack : MonoBehaviour
 {
-    #region properties
-
     [Min(0)]
     public int speed = 3;
     public int force = 1;
@@ -31,6 +29,7 @@ public class Lumberjack : MonoBehaviour
     public GameObject constructUI;
     public GameObject plans;
     public GameObject thinkObj;
+    public CollectFeedback collectPrefab;
 
 
     #region Owning Components
@@ -50,7 +49,6 @@ public class Lumberjack : MonoBehaviour
     public FSM_WorkingState workingState { get; private set; }
     #endregion
 
-    #endregion
 
 
     private void Awake()
@@ -261,6 +259,8 @@ public class Lumberjack : MonoBehaviour
     public void Collect(Pickable res)
     {
         storage.Add(res.material, 1);
+        CollectFeedback inst = Instantiate(collectPrefab, res.transform.position, Quaternion.identity);
+        inst.Init(this, res);
     }
 
 
