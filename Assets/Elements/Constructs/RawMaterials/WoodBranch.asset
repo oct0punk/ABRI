@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resistance: 1
   craftMaterials: []
-  icon: {fileID: 21300000, guid: bc9ca53eafc14444c9341e9e2b740cb6, type: 3}
+  icon: {fileID: 3382772228669368103, guid: 6f99b1c74e8f34545b453133fa068fb2, type: 3}
   bubbleContent: {fileID: 9018223464736818568, guid: 3ea2febb2b4f53e428753a6374a96c24, type: 3}
   timeBeforeRevive: {x: 30, y: 30}

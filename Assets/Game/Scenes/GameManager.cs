@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GameState
@@ -50,18 +52,19 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1.0f;
                 ui.Game();                
                 break;
-            case GameState.Tuto:
 
-                break;
-            case GameState.Explore: break;
-            case GameState.Indoor: break;
             case GameState.Craft:
-                // Mode Indoor
+                lumberjack.ChangeFSM(lumberjack.idleState);
+                shelter.DisplayPieceBubble(false);
+                shelter.workbench.HidePlans();
                 break;
-            case GameState.Build:
-                // Mode Explore
-                break;
-            case GameState.Outro: break;
+
+
+            case GameState.Indoor:  break;
+            case GameState.Build:   break;
+            case GameState.Explore: break;
+            case GameState.Outro:   break;            
+            case GameState.Tuto:    break;
         }
     }
 
@@ -73,21 +76,35 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0.0f;
                 lumberjack.enabled = false;
                 break;
+
             case GameState.Tuto:
                 Time.timeScale = 1.0f;
                 lumberjack.enabled = false;
                 ui.Game();
                 tuto.Launch(lumberjack);
                 break;
-            case GameState.Explore: break;
-            case GameState.Indoor: break;
-            case GameState.Craft: 
-                // display all craft plans and broken pieces
+
+            case GameState.Indoor:
+                lumberjack.indoor = true;
+                CameraManager.Possess(shelter.cam);
                 break;
+
+            case GameState.Craft:
+                shelter.workbench.DisplayPlans();
+                lumberjack.CraftMode();
+                break;
+            
             case GameState.Build: 
                 // Hide ...
                 // Display plans
                 break;
+            
+            
+            case GameState.Explore:
+                lumberjack.indoor = false;
+                CameraManager.Possess(lumberjack.cam); 
+                break;
+
             case GameState.Outro: break;
         }
     }

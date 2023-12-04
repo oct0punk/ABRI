@@ -30,7 +30,6 @@ public class FSM_WorkingState : FSM_BaseState
                 l.constructUI.SetActive(true);
                 break;
             case WorkState.Crafting:
-                GameManager.instance.ChangeState(GameState.Craft);
                 updateFunc = CraftUpdate;
                 break;
             case WorkState.Cutting:

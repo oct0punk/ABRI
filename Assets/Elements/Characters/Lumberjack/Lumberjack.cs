@@ -182,8 +182,30 @@ public class Lumberjack : MonoBehaviour
     #endregion
     
 
-    #region Res
-    // Called when a resource ENTER the zone
+    
+
+
+    // -------- MESSAGE --------
+    public Coroutine Message(GameObject obj, Func<bool> condition)
+    {
+        return thinkBubble.Message(obj, condition);
+    }
+    public Coroutine Message(GameObject obj, float time)
+    {
+        return thinkBubble.Message(obj, time);
+    }
+    IEnumerator CoolDown()
+    {
+        while (coolDown > 0)
+        {
+            coolDown -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+
+    // ---------- CUTTING ----------
+
     public void OnResEnter(Pickable res)
     {
         canCutRes.Add(res);
@@ -193,8 +215,6 @@ public class Lumberjack : MonoBehaviour
         animator.SetBool("CanCut", true);
         // Trail emits
     }
-
-    // Called when a resource EXIT the zone
     public void OnResExit(Pickable res)
     {
         res.CanCut(false, this);
@@ -210,47 +230,7 @@ public class Lumberjack : MonoBehaviour
             canCutRes[0].CanCut(true, this);
         }
     }
-    #endregion
 
-
-    // Deploy plans in bubbles
-    public void DisplayPlans()
-    {
-        thinkObj.SetActive(false);
-        plans.SetActive(true);
-    }
-
-    // Deploy the bubble "..."
-    public void ThinkOf(bool isActive)
-    {
-        thinkObj.SetActive(isActive);
-        plans.SetActive(false);
-        constructUI.GetComponent<RectTransform>().pivot = new Vector2(spriteRenderer.flipX ? 1.0f : .0f, .0f);
-    }
-
-
-
-    public Coroutine Message(GameObject obj, Func<bool> condition)
-    {
-        return thinkBubble.Message(obj, condition);
-    }
-
-    public Coroutine Message(GameObject obj, float time)
-    {
-        return thinkBubble.Message(obj, time);
-    }
-    IEnumerator CoolDown()
-    {
-        while (coolDown > 0)
-        {
-            coolDown -= Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-    }
-
-
-
-    #region Work
     public void StartCutting()
     {
         pickingResource = canCutRes[0];
@@ -275,16 +255,16 @@ public class Lumberjack : MonoBehaviour
         animator.SetTrigger("Cut");
     }
     public void ResistRes()
-    {
+    { // event for animation
         pickingResource.Resist(this);
     }
-
-
     public void Collect(Pickable res)
     {
         storage.Add(res.material, 1);
     }
 
+
+    // ---------- BUILD ----------
     public void ConstructMode(bool active)
     {
         if (active)
@@ -299,17 +279,33 @@ public class Lumberjack : MonoBehaviour
             ChangeFSM(idleState);
         }
     }
-
-    public void WorkbenchMode(Workbench workbench)
+    // Deploy plans in bubbles
+    public void DisplayPlans()
     {
-        workingState.workBench = workbench;
+        thinkObj.SetActive(false);
+        plans.SetActive(true);
+    }
+
+    // Deploy the bubble "..."
+    public void ThinkOf(bool isActive)
+    {
+        thinkObj.SetActive(isActive);
+        plans.SetActive(false);
+        constructUI.GetComponent<RectTransform>().pivot = new Vector2(spriteRenderer.flipX ? 1.0f : .0f, .0f);
+    }
+
+
+    // ---------- CRAFT ----------
+    public void ExitCraftingMode()
+    { // event for button
+        workingState.canExit = true;
+        GameManager.instance.ChangeState(GameState.Indoor);
+    }
+
+    public void CraftMode()
+    {
+        workingState.workBench = GameManager.instance.shelter.workbench;
         workingState.state = WorkState.Crafting;
         ChangeFSM(workingState);
     }
-
-    public void ExitCraftingMode()
-    {
-        workingState.canExit = true;
-    }
-    #endregion
 }

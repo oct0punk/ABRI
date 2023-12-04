@@ -5,36 +5,41 @@ using UnityEngine;
 
 public class Workbench : MonoBehaviour
 {
-    Lumberjack lumberjack;
-    Shelter shelter;
-    public GameObject bubble;
-    public GameObject[] craftPlans;
+    Lumberjack lumberjack { get { return GameManager.instance.lumberjack; } }
+    Shelter shelter { get { return GameManager.instance.shelter; } }
+    public GameObject openBubble;
+    public GameObject plans;
+    public CraftBubble[] craftPlans;
 
     private void Start()
     {
-        shelter = GetComponentInParent<Shelter>();
-        lumberjack = FindObjectOfType<Lumberjack>();
-        bubble.SetActive(false);
-        foreach (GameObject plan in craftPlans)
+        openBubble.gameObject.SetActive(false);
+        foreach (CraftBubble plan in craftPlans)
         {
-            plan.SetActive(false);
+            plan.gameObject.SetActive(false);
         }
     }
 
+    public void Open()
+    {
+        GameManager.instance.ChangeState(GameState.Craft);
+    }
     public void DisplayPlans()
     {
-        bubble.SetActive(false);
-        Array.ForEach(craftPlans, plan => plan.SetActive(true));
-        Array.ForEach(shelter.pieces, p => p.SetBubbleVisible(true));
-        Array.ForEach(shelter.perchs, p => p.bubble.gameObject.SetActive(true));
+        openBubble.gameObject.SetActive(false);
+        plans.SetActive(true);
+        ModeCraft();
     }
 
+    public void Close()
+    {
+        GameManager.instance.ChangeState(GameState.Indoor);
+    }
     public void HidePlans()
     {
-        bubble.SetActive(true);
-        Array.ForEach(craftPlans, plan => plan.SetActive(false));
-        Array.ForEach(shelter.pieces, p => p.SetBubbleVisible(false));
-        Array.ForEach(shelter.perchs, p => p.bubble.gameObject.SetActive(false));
+        Array.ForEach(craftPlans, plan => plan.SetVisibility(false));
+        plans.SetActive(false);
+        openBubble.gameObject.SetActive(true);
     }
 
     public void Craft(CraftBubble bubble)
@@ -66,12 +71,32 @@ public class Workbench : MonoBehaviour
         }
     }
 
+
+    public void ModeCraft()
+    {
+        shelter.DisplayPieceBubble(false);
+        Array.ForEach(craftPlans, plan => plan.SetVisibility(true));
+    }
+
+    public void ModePieces()
+    {
+        Array.ForEach(craftPlans, plan => plan.gameObject.SetActive(false));
+        shelter.DisplayPieceBubble(true);
+    }
+
+    public void ModeNests()
+    {
+        Array.ForEach(craftPlans, plan => plan.gameObject.SetActive(false));
+        shelter.DisplayNestsBubble(true);
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
-            bubble.SetActive(true);
+            openBubble.gameObject.SetActive(true);
         }
     }
 
@@ -80,7 +105,7 @@ public class Workbench : MonoBehaviour
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
-            bubble.SetActive(false);
+            openBubble.gameObject.SetActive(false);
             foreach (var bubble in craftPlans)
                 bubble.gameObject.SetActive(false);
         }

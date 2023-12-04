@@ -3,16 +3,15 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 [SelectionBase]
 public class Shelter : MonoBehaviour
 {
-    static Shelter instance;
-
     [Header("Enter")]
     [SerializeField] SpriteRenderer ext;
     [SerializeField] new Light2D light;
-    [SerializeField] CinemachineVirtualCamera cam;
+    public CinemachineVirtualCamera cam;
     [Space]
     [Header("Temperature")]
     [SerializeField] float temperature = 20.0f;
@@ -24,14 +23,15 @@ public class Shelter : MonoBehaviour
     Storm storm;
     public Storage storage { get; private set; }
     public Piece[] pieces;
-    
+    public Workbench workbench;
+    public Chimney chimney;
+
     [Space]
-    public NestBox[] perchs;    
+    public NestBox[] perchs;
 
 
     void Awake()
     {
-        instance = this;
         storm = GetComponent<Storm>();
         pieces = GetComponentsInChildren<Piece>();
         storage = GetComponentInChildren<Storage>();
@@ -69,11 +69,12 @@ public class Shelter : MonoBehaviour
 
         thermometer.value = Mathf.Lerp(0.0f, 1.0f, temperature / maxTemperature);
     }
-
     public static void UpdateSpeed(int amount)
     {
-        instance.push += amount;
+        GameManager.instance.shelter.push += amount;
     }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -81,7 +82,8 @@ public class Shelter : MonoBehaviour
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
-            lum.indoor = true;
+            GameManager.instance.ChangeState(GameState.Indoor);
+            OnEnter();
 
             // Free the birds
             if (lum.carryingBird != null)
@@ -92,11 +94,6 @@ public class Shelter : MonoBehaviour
                 lum.carryingBird = null;
             }
 
-            // Visibility
-            ext.enabled = false;
-            light.enabled = true;
-            CameraManager.Possess(cam);
-
             // Store planchs
             RawMaterial mat = RawMatManager.instance.GetRawMatByName("WoodPlanch");
             int iter = lum.storage.Count(mat);
@@ -106,6 +103,13 @@ public class Shelter : MonoBehaviour
             storage.Add(mat, iter);
         }
     }
+    void OnEnter()
+    {
+        // Visibility
+        ext.enabled = false;
+        light.enabled = true;
+    }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -113,19 +117,47 @@ public class Shelter : MonoBehaviour
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
-            lum.indoor = false;
-
-            ext.enabled = true;
-            CameraManager.Possess(lum.cam);
-            light.enabled = false;
+            GameManager.instance.ChangeState(GameState.Explore);
+            OnExit();
 
             // Restore planchs
             RawMaterial material = RawMatManager.instance.GetRawMatByName("WoodPlanch");
             int iter = Mathf.Min(storage.Count(material), lum.storage.CountEmpty(material));
             if (iter == 0) return;
-            Debug.Log("Lum exit : " + iter + " branchs to move");
             lum.storage.Add(material, iter);
             storage.Add(material, -iter);
+        }
+    }
+    void OnExit()
+    {
+        ext.enabled = true;
+        light.enabled = false;
+    }
+
+
+    public void DisplayPieceBubble(bool visible)
+    {
+        SetNestsBubbleVisibility(false);
+        SetPiecesBubbleVisibility(visible);
+    }
+    void SetPiecesBubbleVisibility(bool visible)
+    {
+        foreach (Piece p in pieces)
+        {
+            p.SetBubbleVisible(visible);
+        }
+    }
+
+    public void DisplayNestsBubble(bool visible)
+    {
+        SetPiecesBubbleVisibility(false);
+        SetNestsBubbleVisibility(visible);
+    }
+    void SetNestsBubbleVisibility(bool visible)
+    {
+        foreach (NestBox n in perchs)
+        {
+            n.bubble.gameObject.SetActive(visible);
         }
     }
 }

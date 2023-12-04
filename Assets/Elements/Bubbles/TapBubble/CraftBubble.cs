@@ -9,4 +9,9 @@ public class CraftBubble : ConsumeBubble
         materials = material.craftMaterials;
         action = () => FindObjectOfType<Lumberjack>().storage.Add(material);
     }
+
+    public void SetVisibility(bool visible)
+    {
+        gameObject.SetActive(visible);
+    }
 }
