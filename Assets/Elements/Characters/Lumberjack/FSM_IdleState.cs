@@ -29,7 +29,7 @@ public class FSM_IdleState : FSM_BaseState
             return;
         }
 
-        if (l.indoor) return;
+        if (l.indoor || !Tuto.canBuild) return;
         if (time > 0.0f)
         {
             time -= Time.deltaTime;
