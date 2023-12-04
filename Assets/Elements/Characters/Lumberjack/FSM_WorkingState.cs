@@ -25,10 +25,12 @@ public class FSM_WorkingState : FSM_BaseState
         switch (state)
         {
             case WorkState.Building:
+                GameManager.instance.ChangeState(GameState.Build);
                 updateFunc = BuildingUpdate;
                 l.constructUI.SetActive(true);
                 break;
             case WorkState.Crafting:
+                GameManager.instance.ChangeState(GameState.Craft);
                 updateFunc = CraftUpdate;
                 break;
             case WorkState.Cutting:
@@ -51,7 +53,7 @@ public class FSM_WorkingState : FSM_BaseState
                 workBench.HidePlans();
                 break;
             case WorkState.Cutting:
-                break;
+                break;                
         }
     }
 

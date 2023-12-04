@@ -5,15 +5,23 @@ using UnityEngine;
 
 public class Tuto : MonoBehaviour
 {
-
     public void Launch(Lumberjack lum)
     {
         StartCoroutine(FirstTuto(lum));
     }
+
     public IEnumerator FirstTuto(Lumberjack lum)
     {
-        yield return lum.Message(GameUI.instance.GetBubbleContentByName("leftArrow"), 2.0f);
-        GameManager.instance.ChangeState(GameState.Explore);
+        yield return lum.Message(GameUI.instance.GetBubbleContentByName("shelterCold"), 2.0f);        
+        GameUI.instance.BothMove();
+        GameManager.instance.lumberjack.enabled = true;        
+        yield return lum.Message(GameUI.instance.GetBubbleContentByName("leftArrow"), () => lum.fsm == lum.idleState);        
+        yield return new WaitForSeconds(1);        
+        yield return lum.Message(GameUI.instance.GetBubbleContentByName("seekBranch"), 1.0f);
+        yield return new WaitUntil(() => lum.storage.Count(RawMatManager.instance.GetRawMatByName("WoodBranch")) > 0);        
+        yield return lum.Message(GameUI.instance.GetBubbleContentByName("rightArrowToShelter"), () => !lum.indoor);
+        yield return lum.Message(GameUI.instance.GetBubbleContentByName("workbench"), () => GameManager.instance.gameState != GameState.Craft);
+
     }
 
     //public Lumberjack lum;

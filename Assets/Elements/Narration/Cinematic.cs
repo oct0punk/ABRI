@@ -23,6 +23,6 @@ public class Cinematic : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime((float)videoPlayer.clip.length);
         videoPlayer.enabled = false;
-        GameManager.instance.ChangeState(GameState.Explore);
+        GameManager.instance.ChangeState(GameState.Tuto);
     }
 }

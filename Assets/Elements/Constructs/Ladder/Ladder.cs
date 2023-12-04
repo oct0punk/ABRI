@@ -57,7 +57,8 @@ public class Ladder : MonoBehaviour
             {
                 l.ClimbUp(this);
                 arrow.SetActive(false);
-                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, getHeight() - .5f, 0.0f), Quaternion.Euler(0, 0, 90));
+                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, getHeight() - .5f, 0.0f), Quaternion.identity);
+                arrow.transform.transform.localScale = Vector3.one;
             }
         }
         else if (SwipeManager.ClimbDown()) {
@@ -65,7 +66,8 @@ public class Ladder : MonoBehaviour
             {
                 l.ClimbDown(this);
                 arrow.SetActive(false);
-                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, .5f, 0.0f), Quaternion.Euler(0, 0, -90));
+                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, .5f, 0.0f), Quaternion.identity);
+                arrow.transform.transform.localScale = new Vector3(1, -1, 1);
             }
         }
     }   

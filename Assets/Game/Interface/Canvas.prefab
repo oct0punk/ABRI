@@ -1919,8 +1919,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   images:
-  - name: arrowLeft
-    image: {fileID: 21300000, guid: 84189b4c7caeef3419b6b031b8812685, type: 3}
+  - name: leftArrow
+    prefab: {fileID: 9139794255422948002, guid: 2c8307f4dcd4df046aa0cc99f3a0bcde, type: 3}
+  - name: shelterCold
+    prefab: {fileID: 9139794255422948002, guid: d895d0d25346c964b97ac767da1cbca3, type: 3}
+  - name: seekBranch
+    prefab: {fileID: 9139794255422948002, guid: e34884aa0dd6dfa40923b47ba4fd5c58, type: 3}
+  - name: rightArrowToShelter
+    prefab: {fileID: 9139794255422948002, guid: 31beca7581b4630459c8e1e5d283c1d1, type: 3}
+  - name: workbench
+    prefab: {fileID: 9139794255422948002, guid: a2f4a53c3e7c8d24ea1e55b03d0f9a38, type: 3}
   GamePanel: {fileID: 1019898620606601891}
   moveLeft: {fileID: 304499896530946154}
   moveRight: {fileID: 6977211917058304886}

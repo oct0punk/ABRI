@@ -81,7 +81,6 @@ public class GameUI : MonoBehaviour
         moveRight.color = Color.clear;
         moveLeft.color = new Color(1, 1, 1, .1f);
     }
-
     public void MoveRight()
     {
         moveLeft.color = Color.clear;

@@ -11,7 +11,7 @@ public class NestBox : MonoBehaviour
     public bool isBuilt;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         bubble.action = Build;
         bubble.gameObject.SetActive(false);

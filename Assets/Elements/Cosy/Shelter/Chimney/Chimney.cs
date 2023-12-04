@@ -40,9 +40,11 @@ public class Chimney : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponentInParent<Lumberjack>())
+        Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
+        if (lum != null)
         {
-            bubble.gameObject.SetActive(true);
+            if (lum.storage.Count(RawMatManager.instance.GetRawMatByName("WoodLog")) > 0)
+                bubble.gameObject.SetActive(true);
         }
     }
 }

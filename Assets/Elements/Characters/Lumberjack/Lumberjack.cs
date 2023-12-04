@@ -32,16 +32,13 @@ public class Lumberjack : MonoBehaviour
     public GameObject plans;
     public GameObject thinkObj;
 
-    [Header("Message")]
-    public GameObject messageBubble;
-    Coroutine messageRoutine;
-    Coroutine cdRoutine;
 
     #region Owning Components
     public Animator animator { get; private set; }
     public SpriteRenderer spriteRenderer { get; private set; }
     public List<Pickable> canCutRes { get; private set; }
     public Storage storage { get; private set; }
+    public ThinkBubble thinkBubble;
     #endregion
 
     #region FSM
@@ -76,7 +73,6 @@ public class Lumberjack : MonoBehaviour
 
         constructUI.SetActive(true);
         ThinkOf(false);
-        messageBubble.SetActive(false);
     }
 
     private void Update()
@@ -233,34 +229,15 @@ public class Lumberjack : MonoBehaviour
     }
 
 
-    IEnumerator MessageRoutine(Func<bool> condition) {
 
-        yield return new WaitWhile(() => condition.Invoke());
-        
-        Debug.Log("EndMessage");
-        for (int i = 0; i < messageBubble.transform.childCount; i++) {
-            Destroy(messageBubble.transform.GetChild(i).gameObject);
-        }
-        messageBubble.SetActive(false);
-    }
     public Coroutine Message(GameObject obj, Func<bool> condition)
     {
-        Debug.Log("Message : " + obj.name);
-        if (messageRoutine != null) StopCoroutine(messageRoutine);
-        messageBubble.SetActive(true);
-        for (int i = 0; i < messageBubble.transform.childCount; i++) {
-            Destroy(messageBubble.transform.GetChild(i).gameObject);
-        }
-        Instantiate(obj, messageBubble.transform);        
-        return messageRoutine = StartCoroutine(MessageRoutine(condition));
+        return thinkBubble.Message(obj, condition);
     }
 
     public Coroutine Message(GameObject obj, float time)
     {
-        coolDown = time;
-        if (cdRoutine != null) StopCoroutine(cdRoutine);
-        cdRoutine = StartCoroutine(CoolDown());
-        return Message(obj, () => coolDown > 0.0f);
+        return thinkBubble.Message(obj, time);
     }
     IEnumerator CoolDown()
     {

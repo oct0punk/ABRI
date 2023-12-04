@@ -6,6 +6,7 @@ public enum GameState
 {
     Tuto,
     Explore,
+    Indoor,
     Craft,
     Build,
     Intro,
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
 
     [HideInInspector] public Lumberjack lumberjack;
+    [HideInInspector] public Shelter shelter;
     public GameUI ui;
     Tuto tuto;
 
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         tuto = GetComponent<Tuto>();
         lumberjack = FindObjectOfType<Lumberjack>();
+        shelter = FindObjectOfType<Shelter>();
     }
 
     private void Start()
@@ -45,12 +48,20 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Intro:
                 Time.timeScale = 1.0f;
-                lumberjack.enabled = true;
-                ui.Game();
-                ui.BothMove();
-                // TUTO();
-                tuto.Launch(lumberjack);
+                ui.Game();                
                 break;
+            case GameState.Tuto:
+
+                break;
+            case GameState.Explore: break;
+            case GameState.Indoor: break;
+            case GameState.Craft:
+                // Mode Indoor
+                break;
+            case GameState.Build:
+                // Mode Explore
+                break;
+            case GameState.Outro: break;
         }
     }
 
@@ -62,12 +73,22 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0.0f;
                 lumberjack.enabled = false;
                 break;
-            case GameState.Explore:
-                
-                break;
             case GameState.Tuto:
+                Time.timeScale = 1.0f;
+                lumberjack.enabled = false;
+                ui.Game();
                 tuto.Launch(lumberjack);
                 break;
+            case GameState.Explore: break;
+            case GameState.Indoor: break;
+            case GameState.Craft: 
+                // display all craft plans and broken pieces
+                break;
+            case GameState.Build: 
+                // Hide ...
+                // Display plans
+                break;
+            case GameState.Outro: break;
         }
     }
 
