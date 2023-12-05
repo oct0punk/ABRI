@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Shelter shelter;
     public GameUI ui;
     Tuto tuto;
+    public bool pause { get; private set; }
 
     private void Awake()
     {
@@ -57,11 +58,16 @@ public class GameManager : MonoBehaviour
                 lumberjack.ChangeFSM(lumberjack.idleState);
                 shelter.DisplayPieceBubble(false);
                 shelter.workbench.HidePlans();
+                ui.BothMove();
+                ui.inventory.gameObject.SetActive(false);
                 break;
 
+            case GameState.Build:   
+                ui.inventory.gameObject.SetActive(false);
+                ui.BothMove();
+                break;
 
             case GameState.Indoor:  break;
-            case GameState.Build:   break;
             case GameState.Explore: break;
             case GameState.Outro:   break;            
             case GameState.Tuto:    break;
@@ -92,9 +98,11 @@ public class GameManager : MonoBehaviour
             case GameState.Craft:
                 shelter.workbench.DisplayPlans();
                 lumberjack.CraftMode();
+                ui.inventory.gameObject.SetActive(true);
                 break;
             
-            case GameState.Build: 
+            case GameState.Build:
+                ui.inventory.gameObject.SetActive(true);
                 // Hide ...
                 // Display plans
                 break;
@@ -121,13 +129,18 @@ public class GameManager : MonoBehaviour
 
     public void Resume()
     {
+        if (gameState != GameState.Build &&  gameState != GameState.Craft)
+            ui.inventory.gameObject.SetActive(false);
+        pause = false;
         Time.timeScale = 1.0f;
         ui.Game();
         lumberjack.enabled = true;
     }
 
     public void Pause()
-    {        
+    {
+        pause = true;
+        ui.inventory.gameObject.SetActive(true);
         Time.timeScale = .0f;
         ui.Pause();
     }

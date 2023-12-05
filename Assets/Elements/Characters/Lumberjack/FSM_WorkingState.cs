@@ -46,6 +46,7 @@ public class FSM_WorkingState : FSM_BaseState
         switch (state)
         {
             case WorkState.Building:
+                GameManager.instance.ChangeState(l.indoor ? GameState.Indoor : GameState.Explore);
                 l.ThinkOf(false);
                 break;
             case WorkState.Crafting:

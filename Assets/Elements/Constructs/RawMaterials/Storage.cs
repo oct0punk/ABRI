@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -52,6 +53,7 @@ public class Storage : MonoBehaviour
             content.CopyTo(copy, 0);
             copy[content.Length] = new StockRawMat(material);
             content = copy;
+            // GameUI.instance.inventory.UpdateItem(content[content.Length - 1]);
             return content[content.Length - 1];
         }
     }
@@ -115,11 +117,17 @@ public class Storage : MonoBehaviour
 
     public bool CanCraft(CraftMaterials[] materials)
     {
+        return GetMissedMats(materials).Count == 0;
+    }
+
+    public List<RawMaterial> GetMissedMats(CraftMaterials[] materials)
+    {
+        List<RawMaterial> res = new List<RawMaterial>();
         foreach (var material in materials)
         {
             if (Count(material.rawMaterial) < material.q)
-                return false;
+                res.Add(material.rawMaterial);
         }
-        return true;
+        return res;
     }
 }

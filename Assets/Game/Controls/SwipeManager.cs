@@ -64,7 +64,7 @@ public class SwipeManager : MonoBehaviour
     {
         foreach (var t in Input.touches)
         {
-            if (t.position.x < Screen.width / 4) return true;
+            if (t.position.x < Screen.width * .2f) return true;
         }
         return false;
     }
@@ -72,7 +72,7 @@ public class SwipeManager : MonoBehaviour
     {
         foreach (var t in Input.touches)
         {
-            if (t.position.x > Screen.width * 0.75f) return true;
+            if (t.position.x > Screen.width * (1 - 0.2f)) return true;
         }
         return false;
     }

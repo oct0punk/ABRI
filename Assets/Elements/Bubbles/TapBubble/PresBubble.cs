@@ -5,34 +5,36 @@ using UnityEngine.UI;
 public class PresBubble : MonoBehaviour
 {
     [HideInInspector] public RectTransform rectT;
+    [HideInInspector] public Image im;
     [SerializeField] Image icon;
     [SerializeField] TextMeshProUGUI tmp;
-    CraftMaterials mat;
+    public CraftMaterials cMat { get; private set; }
 
     private void Awake()
     {
         rectT = GetComponent<RectTransform>();
+        im = GetComponent<Image>();
     }
 
     public void Init(CraftMaterials craft)
     {
-        mat = craft;
-        icon.sprite = mat.rawMaterial.icon;
+        cMat = craft;
+        icon.sprite = cMat.rawMaterial.icon;
         
-        if (mat.q > 1)    tmp.text = mat.q.ToString();
+        if (cMat.q > 1)    tmp.text = cMat.q.ToString();
         else                tmp.gameObject.SetActive(false);
 
         UpdateMat();
     }
     public void UpdateMat()
     {
-        int count = GameManager.instance.lumberjack.storage.Count(mat.rawMaterial);
-        if (count >= mat.q)
-            GetComponentInChildren<Image>().color = Color.green;
+        int count = GameManager.instance.lumberjack.storage.Count(cMat.rawMaterial);
+        if (count >= cMat.q)
+            im.color = Color.green;
         else if (count > 0)
-            GetComponentInChildren<Image>().color = Color.yellow;
+            im.color = Color.yellow;
         else
-            GetComponentInChildren<Image>().color = Color.grey;
+            im.color = Color.red;
     }    
     public void Hide()
     {

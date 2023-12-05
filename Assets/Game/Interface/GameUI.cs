@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,6 +25,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] GameObject EndPanel;
     [SerializeField] Cinematic cineIntro;
     [SerializeField] VerticalLayoutGroup PausePanel;
+    [SerializeField] CraftFeedback craftPrefab;
 
 
     #region Layers
@@ -102,5 +101,10 @@ public class GameUI : MonoBehaviour
         if (res == null)
             Debug.LogWarning(name + " not found", this);
         return res;
+    }
+    public void InstantiateCraftFeedback(CraftBubble craftBubble)
+    {
+        CraftFeedback craftFeedback = Instantiate(craftPrefab, transform as RectTransform);
+        //craftFeedback.target = 
     }
 }
