@@ -295,7 +295,7 @@ RectTransform:
   m_GameObject: {fileID: 789001407546406054}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.51, y: 1.51, z: 1.51}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2484488777047603330}
@@ -2083,10 +2083,11 @@ MonoBehaviour:
   moveLeft: {fileID: 304499896530946154}
   moveRight: {fileID: 6977211917058304886}
   inventory: {fileID: 1540651677851400981}
-  GameOverPanel: {fileID: 1376198846121620821}
-  EndPanel: {fileID: 4406940963531560619}
-  cineIntro: {fileID: 4011537275561847125}
+  craftPrefab: {fileID: 0}
   PausePanel: {fileID: 5062988075125415651}
+  GameOverPanel: {fileID: 1376198846121620821}
+  cineIntro: {fileID: 4011537275561847125}
+  EndPanel: {fileID: 4406940963531560619}
 --- !u!1 &8036873230058220739
 GameObject:
   m_ObjectHideFlags: 0

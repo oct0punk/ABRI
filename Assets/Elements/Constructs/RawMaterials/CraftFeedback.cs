@@ -4,5 +4,4 @@ using UnityEngine;
 
 public class CraftFeedback : MonoBehaviour
 {
-    public Vector2 target;
 }

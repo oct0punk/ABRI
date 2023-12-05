@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         pause = true;
+        lumberjack.enabled = false;
         ui.inventory.gameObject.SetActive(true);
         Time.timeScale = .0f;
         ui.Pause();

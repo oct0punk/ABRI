@@ -19,13 +19,16 @@ public class GameUI : MonoBehaviour
     [SerializeField] GameObject GamePanel;
     [SerializeField] Image moveLeft;
     [SerializeField] Image moveRight;
-    public Inventory inventory;
     [Space]
-    [SerializeField] GameObject GameOverPanel;
-    [SerializeField] GameObject EndPanel;
-    [SerializeField] Cinematic cineIntro;
-    [SerializeField] VerticalLayoutGroup PausePanel;
+    [Header("Inventory")]
+    public Inventory inventory;
     [SerializeField] CraftFeedback craftPrefab;
+    [Space]
+    [SerializeField] VerticalLayoutGroup PausePanel;
+    [SerializeField] GameObject GameOverPanel;
+    [Header("Narration")]
+    [SerializeField] Cinematic cineIntro;
+    [SerializeField] GameObject EndPanel;
 
 
     #region Layers
@@ -102,9 +105,5 @@ public class GameUI : MonoBehaviour
             Debug.LogWarning(name + " not found", this);
         return res;
     }
-    public void InstantiateCraftFeedback(CraftBubble craftBubble)
-    {
-        CraftFeedback craftFeedback = Instantiate(craftPrefab, transform as RectTransform);
-        //craftFeedback.target = 
-    }
+
 }

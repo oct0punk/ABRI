@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
+[SelectionBase]
 public class Ladder : MonoBehaviour
 {
     Lumberjack l;

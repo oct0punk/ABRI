@@ -34,7 +34,6 @@ public class CraftBubble : ConsumeBubble
 
     private void OnDisable()
     {
-        Debug.Log(layout);
         layout.Close();
     }
 
@@ -54,10 +53,6 @@ public class CraftBubble : ConsumeBubble
     void UpdatePres()
     {
         Array.ForEach(presentation, pres => pres.UpdateMat());
-    }
-    void LaunchCraftFeedback()
-    {
-        GameUI.instance.InstantiateCraftFeedback(this);
     }
 
     protected override void OnConsumeFeedback()
