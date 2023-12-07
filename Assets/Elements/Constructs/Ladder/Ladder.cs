@@ -37,14 +37,13 @@ public class Ladder : MonoBehaviour
         {
             transform.SetParent(hit.transform);
 
-            transform.localScale = Vector3.one;
-            transform.localScale = new Vector3(1 / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
+            //transform.localScale = new Vector3(1 / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);            
         }
     }
 
     private void Update()
     {
-        transform.rotation = Quaternion.identity;
+        //transform.rotation = Quaternion.identity;
 
         if (l == null) return;
         if (l.fsm != l.movingState && l.fsm != l.idleState) return;

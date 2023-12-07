@@ -88,7 +88,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
                 lumStorage = FindObjectOfType<Lumberjack>().storage;
         }
 
-        if (lumStorage.CanCraft(construction.craftMaterials))
+        if (lumStorage.Count(construction) > 0)
             Enable();
         else
             Block();

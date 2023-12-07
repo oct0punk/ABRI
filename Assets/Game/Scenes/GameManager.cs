@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
                 break;
             
             case GameState.Build:
-                ui.inventory.gameObject.SetActive(true);
+                // ui.inventory.gameObject.SetActive(true);
                 // Hide ...
                 // Display plans
                 break;
