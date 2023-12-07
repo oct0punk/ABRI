@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
 
             case GameState.Craft:
                 lumberjack.ChangeFSM(lumberjack.idleState);
-                shelter.DisplayPieceBubble(false);
                 shelter.workbench.HidePlans();
                 ui.BothMove();
                 ui.inventory.gameObject.SetActive(false);

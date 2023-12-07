@@ -27,7 +27,7 @@ public class Shelter : MonoBehaviour
     public Chimney chimney;
 
     [Space]
-    public NestBox[] perchs;
+    public GameObject[] perchs;
 
 
     void Awake()
@@ -35,7 +35,6 @@ public class Shelter : MonoBehaviour
         storm = GetComponent<Storm>();
         pieces = GetComponentsInChildren<Piece>();
         storage = GetComponentInChildren<Storage>();
-        perchs = GetComponentsInChildren<NestBox>();
     }
 
 
@@ -132,32 +131,5 @@ public class Shelter : MonoBehaviour
     {
         ext.enabled = true;
         light.enabled = false;
-    }
-
-
-    public void DisplayPieceBubble(bool visible)
-    {
-        SetNestsBubbleVisibility(false);
-        SetPiecesBubbleVisibility(visible);
-    }
-    void SetPiecesBubbleVisibility(bool visible)
-    {
-        foreach (Piece p in pieces)
-        {
-            p.SetBubbleVisible(visible);
-        }
-    }
-
-    public void DisplayNestsBubble(bool visible)
-    {
-        SetPiecesBubbleVisibility(false);
-        SetNestsBubbleVisibility(visible);
-    }
-    void SetNestsBubbleVisibility(bool visible)
-    {
-        foreach (NestBox n in perchs)
-        {
-            n.bubble.gameObject.SetActive(visible);
-        }
     }
 }

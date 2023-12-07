@@ -29,8 +29,16 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
     public virtual void OnBeginDrag(PointerEventData eventData)
     {
-        if (!gotTheRawMats) return;
         m_Image.color = gotTheRawMats ? Color.white : new Color(1, 0, 0, .4f);
+        if (!gotTheRawMats )
+        {
+            Debug.Log("Bulle Feedback");
+        }
+        foreach (var dd in transform.parent.GetComponentsInChildren<DragDropBubble>())
+        {
+            if (dd == this) continue;
+            dd.gameObject.SetActive(false);
+        }
     }
 
 
@@ -42,6 +50,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
             OnDragCorrect(eventData);
         else
             OnDragUncorrect(eventData);
+
     }
     public virtual void OnDragCorrect(PointerEventData eventData)
     {
@@ -56,9 +65,17 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
     public virtual void OnEndDrag(PointerEventData eventData)
     {
+        if (Vector2.Distance(eventData.position, eventData.pressPosition) < 100.0f)
+        {
+            Debug.Log("Feedback DND");
+        }
         if (!gotTheRawMats) return;
         if (condition.Invoke(eventData)) OnSuccess(eventData);
-        else OnError(eventData);
+        else OnError(eventData); 
+        foreach (var dd in transform.parent.GetComponentsInChildren<DragDropBubble>())
+        {
+            dd.gameObject.SetActive(true);
+        }
     }
     protected virtual void OnSuccess(PointerEventData eventData)
     {

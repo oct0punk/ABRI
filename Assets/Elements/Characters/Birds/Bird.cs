@@ -53,14 +53,14 @@ public class Bird : MonoBehaviour
     public void CarryBy(Lumberjack lum)
     {
         lum.carryingBird = this;
-        transform.SetParent(lum.transform);
+        transform.SetParent(lum.birdAnchor.transform);
+        transform.localPosition = Vector3.zero;
         ChangeState(carriedState);
         
     }
 
     public void Free()
     {
-        Debug.Log("Free");
         transform.parent = null;
         ChangeState(freeState);
     }

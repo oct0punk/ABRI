@@ -27,6 +27,9 @@ public class Lumberjack : MonoBehaviour
     public GameObject thinkObj;
     public CollectFeedback collectPrefab;
 
+    [Space]
+    [Header("Bird")]
+    public GameObject birdAnchor;
 
     #region Owning Components
     public Animator animator { get; private set; }

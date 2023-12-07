@@ -45,9 +45,7 @@ public class Tuto : MonoBehaviour
 
         // TutoPiece
         Piece p = Array.Find(GameManager.instance.shelter.pieces, p => !p.alive);
-        p.bubble.touchTuto.SetActive(true);
         yield return new WaitUntil(() => p.alive);
-        p.bubble.touchTuto.SetActive(false);
      
         // Exit
         workbench.closeBubble.gameObject.SetActive(true);

@@ -3,22 +3,18 @@ using UnityEngine;
 public class Piece : MonoBehaviour
 {
     public bool alive = true;
-    public GameObject button;
-    public ConsumeBubble bubble;
     public int solid = 1;
     public int life;
+    Collider2D collider;
+
+    private void Awake()
+    {
+        collider = GetComponent<Collider2D>();
+    }
 
     private void Start()
     {
-        SetBubbleVisible(false);
-        button.SetActive(false);
-        bubble.action = Repair;
         if (!alive) Break();
-    }
-
-    public void SetBubbleVisible(bool isActive)
-    {
-        bubble.gameObject.SetActive(isActive);
     }
 
     public void Resist(int windForce)
@@ -37,7 +33,7 @@ public class Piece : MonoBehaviour
     {
         alive = false;
         GetComponent<SpriteRenderer>().color = Color.black;
-        button.SetActive(true);
+        collider.enabled = true;
         Shelter.UpdateSpeed(-1);
     }
 
@@ -45,7 +41,7 @@ public class Piece : MonoBehaviour
     {
         alive = true;
         GetComponent<SpriteRenderer>().color = Color.white;
-        button.SetActive(false);
+        collider.enabled = false;
         life = Random.Range(solid, solid + 4);
         Shelter.UpdateSpeed(1);
     }

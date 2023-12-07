@@ -29,7 +29,6 @@ public class ThinkBubble : MonoBehaviour
 
     public Coroutine Message(GameObject obj, Func<bool> condition)
     {
-        Debug.Log("Message : " + obj.name);
         if (messageRoutine != null) StopCoroutine(messageRoutine);
         isMessaging = true;
         for (int i = 0; i < transform.childCount; i++)
@@ -43,11 +42,7 @@ public class ThinkBubble : MonoBehaviour
 
     public IEnumerator MessageRoutine(Func<bool> condition)
     {
-        Debug.Log(coolDown, this);
         yield return new WaitWhile(() => condition.Invoke());
-        Debug.Log(coolDown, this);
-
-        Debug.Log("EndMessage");
         for (int i = 0; i < transform.childCount; i++)
         {
             Destroy(transform.GetChild(i).gameObject);

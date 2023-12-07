@@ -8,11 +8,12 @@ public class FSM_ClimbingState : FSM_BaseState
     public override void OnEnter(Lumberjack l)
     {
         l.SetSpriteColor(Color.green);
+        l.animator.SetBool("isClimbing", true);
     }
 
     public override void OnExit(Lumberjack l)
     {
-
+        l.animator.SetBool("isClimbing", false);
     }
 
     public override void Update(Lumberjack l)
