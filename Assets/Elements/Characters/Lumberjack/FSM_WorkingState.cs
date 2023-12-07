@@ -27,7 +27,7 @@ public class FSM_WorkingState : FSM_BaseState
             case WorkState.Building:
                 GameManager.instance.ChangeState(GameState.Build);
                 updateFunc = BuildingUpdate;
-                l.constructUI.SetActive(true);
+                l.plans.SetActive(true);
                 break;
             case WorkState.Crafting:
                 updateFunc = CraftUpdate;

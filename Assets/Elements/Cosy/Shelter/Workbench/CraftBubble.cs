@@ -41,16 +41,20 @@ public class CraftBubble : ConsumeBubble
     {
         layout.AutoRoll();
         if (layout.isOpen)
-            Array.ForEach(presentation, p => p.UpdateMat());
+        {
+            UpdatePres();
+            
+            foreach (CraftBubble bubble in transform.parent.GetComponentsInChildren<CraftBubble>())
+            {
+                if (bubble != this)
+                {
+                    bubble.layout.Close();
+                }
+            }
+        }
     }
-    void Open()
-    {
-        layout.gameObject.SetActive(true);
-        Array.ForEach(presentation, p => p.UpdateMat());
 
-    }
-
-    void UpdatePres()
+    public void UpdatePres()
     {
         Array.ForEach(presentation, pres => pres.UpdateMat());
     }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -26,7 +26,8 @@ public class Inventory : MonoBehaviour
             item.mat = stock.material;
             items.Add(item);
             RectTransform rect = content.GetComponent<RectTransform>();
-            rect.sizeDelta = new Vector2(rect.rect.width + 240.0f, rect.rect.height);
+            HorizontalLayoutGroup hLayout = content.GetComponent<HorizontalLayoutGroup>();
+            rect.sizeDelta = new Vector2(rect.rect.width + hLayout.spacing + item.GetComponent<RectTransform>().rect.width, rect.rect.height);
         }
         item.tmp.text = stock.q.ToString() + " / " + stock.maxQ;
     }

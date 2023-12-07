@@ -10,7 +10,6 @@ public class ConsumeBubble : TapBubble
 {
     public Action action;
     public CraftMaterials[] materials;
-    public float offset = 100.0f;
 
     [HideInInspector] public Animator animator;
 

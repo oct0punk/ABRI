@@ -38,16 +38,10 @@ public class Tuto : MonoBehaviour
         workbench.openBubble.touchTuto.SetActive(true);
         yield return lum.Message(GameUI.instance.GetBubbleContentByName("workbench"), () => GameManager.instance.gameState != GameState.Craft);
   
-        workbench.swapBubble.gameObject.SetActive(false);
         workbench.closeBubble.gameObject.SetActive(false);
         workbench.openBubble.touchTuto.SetActive(false);
         yield return new WaitUntil(() => lum.storage.Count(RawMatManager.instance.GetRawMatByName("WoodPlanch")) > 0);
      
-        // TutoSwapMode
-        workbench.swapBubble.gameObject.SetActive(true);
-        workbench.swapBubble.touchTuto.SetActive(true);
-        yield return new WaitUntil(() => workbench.state == CraftState.Piece);
-        workbench.swapBubble.touchTuto.SetActive(false);
 
         // TutoPiece
         Piece p = Array.Find(GameManager.instance.shelter.pieces, p => !p.alive);

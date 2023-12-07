@@ -102,7 +102,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     }
     public static void UpdateAllGotMats()
     {
-        foreach (var bubble in GameManager.instance.lumberjack.constructUI.GetComponentsInChildren<DragDropBubble>())
+        foreach (var bubble in GameManager.instance.lumberjack.plans.GetComponentsInChildren<DragDropBubble>())
         {
             bubble.UpdateGotMats();
         }

@@ -20,6 +20,7 @@ public class PresBubble : MonoBehaviour
     {
         cMat = craft;
         icon.sprite = cMat.rawMaterial.icon;
+        icon.SetNativeSize();
         
         if (cMat.q > 1)    tmp.text = cMat.q.ToString();
         else                tmp.gameObject.SetActive(false);
@@ -28,7 +29,7 @@ public class PresBubble : MonoBehaviour
     }
     public void UpdateMat()
     {
-        int count = GameManager.instance.lumberjack.storage.Count(cMat.rawMaterial);
+        int count = FindObjectOfType<Lumberjack>().storage.Count(cMat.rawMaterial);
         if (count >= cMat.q)
             im.color = Color.green;
         else if (count > 0)

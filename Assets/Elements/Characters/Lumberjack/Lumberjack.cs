@@ -23,7 +23,6 @@ public class Lumberjack : MonoBehaviour
 
     [Space]
     [Header("Constructions")]
-    public GameObject constructUI;
     public GameObject plans;
     public GameObject thinkObj;
     public CollectFeedback collectPrefab;
@@ -55,7 +54,9 @@ public class Lumberjack : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         canCutRes = new List<Pickable>();
         storage = GetComponent<Storage>();
+
         mask = LayerMask.GetMask("Platform");
+        plans.SetActive(false);
 
         // FSM
         movingState = new FSM_MovingState();
@@ -66,7 +67,6 @@ public class Lumberjack : MonoBehaviour
         fsm = idleState;
         fsm.OnEnter(this);
 
-        constructUI.SetActive(true);
         ThinkOf(false);
     }
 
@@ -81,11 +81,6 @@ public class Lumberjack : MonoBehaviour
     }
 
 
-    private void OnDisable()
-    {
-        if (fsm == idleState)
-            idleState.OnEnter(this);
-    }
 
     public void ChangeFSM(FSM_BaseState newState)
     {
@@ -288,7 +283,6 @@ public class Lumberjack : MonoBehaviour
     {
         thinkObj.SetActive(isActive);
         plans.SetActive(false);
-        constructUI.GetComponent<RectTransform>().pivot = new Vector2(spriteRenderer.flipX ? 1.0f : .0f, .0f);
     }
 
 

@@ -22,7 +22,7 @@ public class ScrollLayout : MonoBehaviour
     }
     public void Open()
     {
-        float widthOpen = (rect.childCount) * 100.0f + 50.0f;
+        float widthOpen = (rect.childCount) * 130.0f + 170.0f;
         rect.sizeDelta = new Vector2(widthOpen, rect.sizeDelta.y);
         isOpen = true;
 

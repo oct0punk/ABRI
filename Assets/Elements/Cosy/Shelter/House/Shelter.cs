@@ -95,12 +95,12 @@ public class Shelter : MonoBehaviour
             }
 
             // Store planchs
-            RawMaterial mat = RawMatManager.instance.GetRawMatByName("WoodPlanch");
-            int iter = lum.storage.Count(mat);
-            if (iter == 0) return;
-            Debug.Log("Lum enter : " + iter + " empty emplacements");
-            lum.storage.Add(mat, -iter);
-            storage.Add(mat, iter);
+            //RawMaterial mat = RawMatManager.instance.GetRawMatByName("WoodPlanch");
+            //int iter = lum.storage.Count(mat);
+            //if (iter == 0) return;
+            //Debug.Log("Lum enter : " + iter + " empty emplacements");
+            //lum.storage.Add(mat, -iter);
+            //storage.Add(mat, iter);
         }
     }
     void OnEnter()
@@ -121,11 +121,11 @@ public class Shelter : MonoBehaviour
             OnExit();
 
             // Restore planchs
-            RawMaterial material = RawMatManager.instance.GetRawMatByName("WoodPlanch");
-            int iter = Mathf.Min(storage.Count(material), lum.storage.CountEmpty(material));
-            if (iter == 0) return;
-            lum.storage.Add(material, iter);
-            storage.Add(material, -iter);
+            //RawMaterial material = RawMatManager.instance.GetRawMatByName("WoodPlanch");
+            //int iter = Mathf.Min(storage.Count(material), lum.storage.CountEmpty(material));
+            //if (iter == 0) return;
+            //lum.storage.Add(material, iter);
+            //storage.Add(material, -iter);
         }
     }
     void OnExit()
