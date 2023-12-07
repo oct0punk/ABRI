@@ -1,15 +1,16 @@
 using System;
-using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public RawMaterial construction;
     protected Predicate<PointerEventData> condition;
+
     protected RectTransform m_RectTransform;
     [SerializeField] protected Image m_Image;
-    public Construction construction;
+
     protected bool gotTheRawMats = false;
     protected Storage lumStorage;
 
@@ -17,13 +18,18 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     {
         condition = CanBeBuild;
         m_RectTransform = GetComponent<RectTransform>();
-        lumStorage = FindObjectOfType<Lumberjack>().storage;
+        lumStorage = GameManager.instance.lumberjack.storage;
     }
 
-    
+    private void OnEnable()
+    {
+        UpdateGotMats();
+    }
+
 
     public virtual void OnBeginDrag(PointerEventData eventData)
-    {   
+    {
+        if (!gotTheRawMats) return;
         m_Image.color = gotTheRawMats ? Color.white : new Color(1, 0, 0, .4f);
     }
 
@@ -31,7 +37,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public virtual void OnDrag(PointerEventData eventData)
     {
         if (!gotTheRawMats) return;
-        m_RectTransform.anchoredPosition += eventData.delta / GetComponentInParent<Canvas>().scaleFactor;
+        m_RectTransform.anchoredPosition += eventData.delta/* / GetComponentInParent<Canvas>().scaleFactor*/;
         if (condition.Invoke(eventData))
             OnDragCorrect(eventData);
         else
@@ -47,7 +53,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
     }
 
-    
+
     public virtual void OnEndDrag(PointerEventData eventData)
     {
         if (!gotTheRawMats) return;
@@ -58,7 +64,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     {
         m_Image.color = new Color(1, 1, 1, 1);
         m_RectTransform.anchoredPosition = Vector3.zero;
-        lumStorage.Consume(construction.materials);
+        lumStorage.Add(construction, -1);
         UpdateAllGotMats();
     }
     protected virtual void OnError(PointerEventData eventData)
@@ -66,29 +72,26 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         m_Image.color = new Color(1, 1, 1, .4f);
         m_RectTransform.anchoredPosition = Vector3.zero;
     }
-    
-    
+
+
+    #region Setup
     protected virtual bool CanBeBuild(PointerEventData eventData)
     {
         return gotTheRawMats;
-    }
-    private void OnEnable()
-    {
-        UpdateGotMats();
     }
     public void UpdateGotMats()
     {
         if (lumStorage == null)
         {
-            lumStorage = FindObjectOfType<Lumberjack>().storage;
+            lumStorage = GameManager.instance.lumberjack.storage;
             if (lumStorage == null)
-                return;
+                lumStorage = FindObjectOfType<Lumberjack>().storage;
         }
-        if (lumStorage.CanCraft(construction.materials))        
-            Enable();        
 
+        if (lumStorage.CanCraft(construction.craftMaterials))
+            Enable();
         else
-            Block();        
+            Block();
     }
     public void Enable()
     {
@@ -107,4 +110,5 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
             bubble.UpdateGotMats();
         }
     }
+    #endregion
 }
