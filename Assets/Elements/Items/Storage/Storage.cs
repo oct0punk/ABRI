@@ -66,9 +66,9 @@ public class Storage : MonoBehaviour
         if (stock != null)
         {
             stock.q += count;
-            GameUI.instance.inventory.UpdateItem(stock);
+            GameManager.instance.ui.inventory.UpdateItem(stock);
             for (int i = 0; i < Mathf.Abs(count); i++)
-                GameUI.instance.FeedbackOnCollect(material, count > 0);
+                GameManager.instance.ui.FeedbackOnCollect(material, count > 0);
             if (stock.q > stock.maxQ) Debug.LogWarning("Q out of range : " + stock.material.name, this);
         }
     }

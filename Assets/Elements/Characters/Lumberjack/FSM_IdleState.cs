@@ -28,7 +28,7 @@ public class FSM_IdleState : FSM_BaseState
             l.ChangeFSM(l.movingState);
             return;
         }
-
+        if (!Tuto.canBuild) return;
 
         if (time > 0.0f)
         {

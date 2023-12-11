@@ -22,18 +22,15 @@ public class Lumberjack : MonoBehaviour
     [Space]
     [Header("Constructions")]
     public GameObject plans;
-    public GameObject thinkObj;
-
+    public GameObject openPlans;
     [Space]
-    [Header("Bird")]
-    public GameObject birdAnchor;
+    public ThinkBubble thinkBubble;
 
     #region Owning Components
     public Animator animator { get; private set; }
     public SpriteRenderer spriteRenderer { get; private set; }
     public List<Pickable> canCutRes { get; private set; }
     public Storage storage { get; private set; }
-    public ThinkBubble thinkBubble;
     #endregion
 
     #region FSM
@@ -270,14 +267,14 @@ public class Lumberjack : MonoBehaviour
     // Deploy plans in bubbles
     public void DisplayPlans()
     {
-        thinkObj.SetActive(false);
+        openPlans.SetActive(false);
         plans.SetActive(true);
     }
 
     // Deploy the bubble "..."
     public void ThinkOf(bool isActive)
     {
-        thinkObj.SetActive(isActive);
+        openPlans.SetActive(isActive);
         plans.SetActive(false);
     }
 

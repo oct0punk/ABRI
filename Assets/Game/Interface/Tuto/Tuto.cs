@@ -1,89 +1,108 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tuto : MonoBehaviour
 {
+    public static bool tutoCut = true;
+    public static bool tutoClimb = true;
+
     public static bool canBuild = true;
     public static bool canCraft = true;
+    public static bool updateWind = true;
 
 
     public void Launch(Lumberjack lum)
     {
-        StartCoroutine(FirstTuto(lum));
+        StartCoroutine(ChimneyTuto(lum));
     }
 
-    public IEnumerator FirstTuto(Lumberjack lum)
+    public IEnumerator ChimneyTuto(Lumberjack lum)
     {
+        updateWind = false;
         canBuild = false;
         canCraft = false;
+
+        GameUI ui = GameManager.instance.ui;
         // Apprendre à alimenter la cheminée
 
         // Utiliser l'établi pour réparer l'abri
 
         // Construire ponts et échelles
 
-
-        yield return lum.Message(GameUI.instance.GetBubbleContentByName("shelterCold"), 2.0f);
+        yield return lum.Message(ui.GetBubbleContentByName("shelterCold"), 2.0f);
        
         // TutoMove
-        GameUI.instance.BothMove();
+        ui.BothMove();
         GameManager.instance.lumberjack.enabled = true;        
-        yield return lum.Message(GameUI.instance.GetBubbleContentByName("leftArrow"), () => lum.fsm == lum.idleState);        
+        yield return lum.Message(ui.GetBubbleContentByName("leftArrow"), () => lum.fsm == lum.idleState);        
         yield return new WaitForSeconds(1);
 
         bool cutTuto = false;
         while (!cutTuto)
         {
-            yield return lum.Message(GameUI.instance.GetBubbleContentByName("cutLog"), 1.0f);
-            yield return new WaitUntil(() => lum.storage.Count(RawMatManager.instance.GetRawMatByName("WoodBranch")) > 0 && !lum.indoor);
+            yield return lum.Message(ui.GetBubbleContentByName("cutLog"), 1.0f);
+            yield return new WaitUntil(() => lum.storage.Count(RawMatManager.instance.GetRawMatByName("Log")) > 0 || lum.indoor);
             if (!lum.indoor)
             {
                 cutTuto = true;
             }
 
         }
-        // TutoRes
-        yield return lum.Message(GameUI.instance.GetBubbleContentByName("rightArrowToShelter"), () => !lum.indoor);
-        yield return new WaitForSeconds(.3f);
 
         // Tuto Chimney
-        
-        yield return null ;
+        Chimney chimney = GameManager.instance.shelter.chimney;
+        chimney.bubble.touchTuto.SetActive(true);
+        bool chimneyTuto = false;
+        while (!chimneyTuto)
+        {
+            yield return lum.Message(ui.GetBubbleContentByName("rightArrowToShelter"), () => !lum.indoor);
+            yield return new WaitForSeconds(.3f);
+            yield return lum.Message(ui.GetBubbleContentByName("HotChimney"), () => chimney.GetPower() == 0 && lum.indoor);
+            if (lum.indoor)
+            {
+                chimneyTuto = true;
+            }
+        }
+
+        updateWind = true;
+        Debug.Log("EndTutoChimney");
+    }
+
+    public IEnumerator CraftTuto(Lumberjack lum)
+    {
+        GameUI ui = GameManager.instance.ui;
 
         // TutoCraft
         canCraft = true;
         Workbench workbench = GameManager.instance.shelter.workbench;
         workbench.openBubble.touchTuto.SetActive(true);
-        yield return lum.Message(GameUI.instance.GetBubbleContentByName("workbench"), () => GameManager.instance.gameState != GameState.Craft && lum.indoor);
-  
+        yield return lum.Message(ui.GetBubbleContentByName("workbench"), () => GameManager.instance.gameState != GameState.Craft && lum.indoor);
+
         workbench.closeBubble.gameObject.SetActive(false);
         workbench.openBubble.touchTuto.SetActive(false);
         yield return new WaitUntil(() => lum.storage.Count(RawMatManager.instance.GetRawMatByName("WoodPlanch")) > 0);
-     
+
 
         // TutoPiece
         Piece p = Array.Find(GameManager.instance.shelter.pieces, p => !p.alive);
         yield return new WaitUntil(() => p.alive);
-     
+
         // Exit
         workbench.closeBubble.gameObject.SetActive(true);
         workbench.closeBubble.touchTuto.SetActive(true);
         yield return new WaitUntil(() => GameManager.instance.gameState != GameState.Craft);
         workbench.closeBubble.touchTuto.SetActive(false);
 
-
-        // Tuto chimney ?
     }
+
 
     //public Lumberjack lum;
 
     //[Header("Cut Tuto")]
     //public static bool slideDone = false;
     //public GameObject slideTuto;
-    
+
     //[Header("Climb Tuto")]
     //public static bool canClimb = false;
     //public static bool climbDownDone;

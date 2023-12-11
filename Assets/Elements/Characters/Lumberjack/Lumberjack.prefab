@@ -113,6 +113,65 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &3895695723764804766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6398458672919668309}
+  - component: {fileID: 77721031509927165}
+  - component: {fileID: 6689776286917971614}
+  m_Layer: 5
+  m_Name: ThinkBubble
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6398458672919668309
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3895695723764804766}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 2586259828278028390}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 7.81, y: 179.24}
+  m_SizeDelta: {x: 850, y: 410}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!222 &77721031509927165
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3895695723764804766}
+  m_CullTransparentMesh: 1
+--- !u!114 &6689776286917971614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3895695723764804766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94d914f6c4298f4a97f01e889737b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMessaging: 0
+  coolDown: 0
 --- !u!1 &4305746182318589170
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,11 +395,9 @@ MonoBehaviour:
   force: 1
   indoor: 0
   canCut: 0
-  carryingBird: {fileID: 0}
   cam: {fileID: 0}
   plans: {fileID: 0}
-  thinkObj: {fileID: 8445690234626319009}
-  collectPrefab: {fileID: 0}
+  openPlans: {fileID: 8445690234626319009}
   thinkBubble: {fileID: 0}
 --- !u!114 &7678264919461317884
 MonoBehaviour:
@@ -472,6 +529,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3812177228639490895}
+  - {fileID: 6398458672919668309}
   m_Father: {fileID: 242520415286729038}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -728,7 +786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8845530014406438695, guid: b47c5518590d2a54b85483bcfdd89a19, type: 3}
       propertyPath: m_Name
-      value: ThinkBubble
+      value: OpenPlansBubble
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

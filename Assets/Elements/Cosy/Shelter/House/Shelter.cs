@@ -26,9 +26,6 @@ public class Shelter : MonoBehaviour
     public Workbench workbench;
     public Chimney chimney;
 
-    [Space]
-    public GameObject[] perchs;
-
 
     void Awake()
     {
@@ -41,6 +38,8 @@ public class Shelter : MonoBehaviour
 
     private void Update()
     {
+        if (!Tuto.updateWind) return;
+
         ChangeTemperature(push * Time.deltaTime * speed);
 
         timeBeforeNextGust -= Time.deltaTime;

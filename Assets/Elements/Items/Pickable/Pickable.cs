@@ -10,14 +10,13 @@ public class Pickable : MonoBehaviour
     public int resistance { get; private set; }
     new Collider2D collider;
     public GameObject trail;
-    public Canvas canvas;
+    public GameObject swipeTuto;
 
     private void Start()
     {
         collider = GetComponent<Collider2D>();
         Reset();
         trail.SetActive(false);
-        canvas = GetComponentInChildren<Canvas>();
     }
 
     public void Resist(Lumberjack l)
@@ -30,10 +29,11 @@ public class Pickable : MonoBehaviour
     void OnDie(Lumberjack l)
     {
         alive = false;
+        Tuto.tutoCut = false;
         l.OnResExit(this);
         l.Collect(this);
         collider.enabled = false;
-        transform.localScale = Vector3.down;
+        GetComponentInChildren<SpriteRenderer>().enabled = false;
         if (material.revivable)
         {
             StartCoroutine(Revive());
@@ -51,7 +51,7 @@ public class Pickable : MonoBehaviour
         alive = true;
         collider.enabled = true;
         resistance = maxResistance;
-        transform.localScale = Vector3.one;
+        GetComponentInChildren<SpriteRenderer>().enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,6 +60,7 @@ public class Pickable : MonoBehaviour
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
+            swipeTuto.SetActive(Tuto.tutoCut);
             lum.OnResEnter(this);
         }
     }
@@ -76,5 +77,6 @@ public class Pickable : MonoBehaviour
     public void CanCut(bool canCut, Lumberjack lum)
     {
         trail.SetActive(canCut);
+        swipeTuto.SetActive(canCut && Tuto.tutoCut);
     }
 }

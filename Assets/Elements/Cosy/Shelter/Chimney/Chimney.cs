@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using UnityEngine;
 
 [SelectionBase]
@@ -13,6 +14,11 @@ public class Chimney : MonoBehaviour
         coms = GetComponentsInChildren<Combustible>();
         bubble.action = Reload;
         bubble.gameObject.SetActive(false);
+    }
+
+    public int GetPower()
+    {
+        return Array.FindAll(coms, c => c.active).Length;
     }
 
     public void Reload()

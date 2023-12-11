@@ -7,6 +7,7 @@ public class Ladder : MonoBehaviour
     SpriteRenderer sprite;
     BoxCollider2D box;
     public GameObject arrow;
+    public GameObject swipeTuto;
     
     public void SetHeight(float height)
     {
@@ -85,6 +86,8 @@ public class Ladder : MonoBehaviour
             {
                 arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, getHeight() - .5f, 0.0f), Quaternion.Euler(0, 0, 90));
             }
+            swipeTuto.SetActive(Tuto.tutoClimb);
+
         }
     }
 

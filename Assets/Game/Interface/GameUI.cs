@@ -27,7 +27,6 @@ public struct feedbackValue
 
 public class GameUI : MonoBehaviour
 {
-    public static GameUI instance { get { return GameManager.instance.ui; } }
     [SerializeField] bubbleImage[] images;
 
     [Header("Game")]

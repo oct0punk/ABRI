@@ -7,7 +7,7 @@ public class Combustible : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float consuming;// { get; private set; }
     public int intensity = 2;
-    bool active = false;
+    public bool active { get; private set; }
 
     private void Start()
     {

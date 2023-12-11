@@ -9,6 +9,7 @@ public class FSM_ClimbingState : FSM_BaseState
     {
         l.SetSpriteColor(Color.green);
         l.animator.SetBool("isClimbing", true);
+        Tuto.tutoClimb = false;
     }
 
     public override void OnExit(Lumberjack l)
