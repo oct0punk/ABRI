@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CraftBubble : ConsumeBubble
 {
-    public RawMaterial material;
+    public CraftableMaterial material;
     ScrollLayout layout;
     PresBubble[] presentation;
     public PresBubble presPrefab;

@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,6 +11,18 @@ public struct bubbleImage
 {
     public string name;
     public GameObject prefab;
+}
+
+public struct feedbackValue
+{
+    public RawMaterial mat;
+    public bool add;
+
+    public feedbackValue( RawMaterial mat, bool add )
+    {
+        this.mat = mat;
+        this.add = add;
+    }
 }
 
 public class GameUI : MonoBehaviour
@@ -22,7 +37,9 @@ public class GameUI : MonoBehaviour
     [Space]
     [Header("Inventory")]
     public Inventory inventory;
-    [SerializeField] CraftFeedback craftPrefab;
+    public RectTransform collectFeedbackParent;
+    [SerializeField] CollectFeedback OnCollectPrefab;
+    List<feedbackValue> onCollectValues = new List<feedbackValue>();
     [Space]
     [SerializeField] VerticalLayoutGroup PausePanel;
     [SerializeField] GameObject GameOverPanel;
@@ -104,6 +121,27 @@ public class GameUI : MonoBehaviour
         if (res == null)
             Debug.LogWarning(name + " not found", this);
         return res;
+    }
+
+
+
+    public void FeedbackOnCollect(RawMaterial mat, bool add)
+    {
+        onCollectValues.Add(new feedbackValue(mat, add));
+        if (onCollectValues.Count == 1)
+        {
+            StartCoroutine(StorageFeedback());
+        }
+    }
+
+    IEnumerator StorageFeedback()
+    {
+        CollectFeedback cfb = Instantiate(OnCollectPrefab, collectFeedbackParent);
+        cfb.Init(onCollectValues[0].mat, onCollectValues[0].add);
+        yield return new WaitForSeconds(.3f);
+        onCollectValues.RemoveAt(0);
+        if (onCollectValues.Count > 0)
+            StartCoroutine(StorageFeedback());
     }
 
 }

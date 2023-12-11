@@ -33,6 +33,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         if (!gotTheRawMats )
         {
             Debug.Log("Bulle Feedback");
+            return;
         }
         foreach (var dd in transform.parent.GetComponentsInChildren<DragDropBubble>())
         {
@@ -72,9 +73,9 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         if (!gotTheRawMats) return;
         if (condition.Invoke(eventData)) OnSuccess(eventData);
         else OnError(eventData); 
-        foreach (var dd in transform.parent.GetComponentsInChildren<DragDropBubble>())
+        for (int i = 0; i < transform.parent.childCount; i++)
         {
-            dd.gameObject.SetActive(true);
+            transform.parent.GetChild(i).gameObject.SetActive(true);
         }
     }
     protected virtual void OnSuccess(PointerEventData eventData)

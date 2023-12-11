@@ -5,7 +5,7 @@ public class Piece : MonoBehaviour
     public bool alive = true;
     public int solid = 1;
     public int life;
-    Collider2D collider;
+    new Collider2D collider;
 
     private void Awake()
     {

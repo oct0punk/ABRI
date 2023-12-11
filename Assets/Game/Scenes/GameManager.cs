@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.Craft:
+                lumberjack.enabled = true;
                 lumberjack.ChangeFSM(lumberjack.idleState);
                 shelter.workbench.HidePlans();
                 ui.BothMove();
@@ -97,10 +98,12 @@ public class GameManager : MonoBehaviour
             case GameState.Craft:
                 shelter.workbench.DisplayPlans();
                 lumberjack.CraftMode();
+                lumberjack.enabled = false;
                 ui.inventory.gameObject.SetActive(true);
                 break;
             
             case GameState.Build:
+                lumberjack.enabled = false;
                 // ui.inventory.gameObject.SetActive(true);
                 // Hide ...
                 // Display plans
@@ -116,15 +119,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnNestBuilt()
-    {
-        foreach (NestBox nest in FindObjectsOfType(typeof(NestBox)))
-        {
-            if (!nest.isBuilt) return;
-        }
-
-        Outro();
-    }
 
     public void Resume()
     {

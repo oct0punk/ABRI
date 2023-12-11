@@ -14,8 +14,6 @@ public class Lumberjack : MonoBehaviour
 
     [HideInInspector] public bool indoor = false;
     public bool canCut = false;
-    public Bird carryingBird;
-
     public CinemachineVirtualCamera cam;
     public Pickable pickingResource { get; private set; }
     LayerMask mask;
@@ -25,7 +23,6 @@ public class Lumberjack : MonoBehaviour
     [Header("Constructions")]
     public GameObject plans;
     public GameObject thinkObj;
-    public CollectFeedback collectPrefab;
 
     [Space]
     [Header("Bird")]
@@ -179,9 +176,9 @@ public class Lumberjack : MonoBehaviour
 
 
     // -------- MESSAGE --------
-    public Coroutine Message(GameObject obj, Func<bool> condition)
+    public Coroutine Message(GameObject obj, Func<bool> whileCondition)
     {
-        return thinkBubble.Message(obj, condition);
+        return thinkBubble.Message(obj, whileCondition);
     }
     public Coroutine Message(GameObject obj, float time)
     {
@@ -231,9 +228,7 @@ public class Lumberjack : MonoBehaviour
         {
             if (!storage.CanFill(pickingResource.material))
             {
-                Image image = new GameObject().AddComponent<Image>();
-                image.sprite = pickingResource.material.icon;
-                Message(image.gameObject, 2.0f);
+                //bubble feedback
                 return;
             }
 
@@ -254,8 +249,6 @@ public class Lumberjack : MonoBehaviour
     public void Collect(Pickable res)
     {
         storage.Add(res.material, 1);
-        CollectFeedback inst = Instantiate(collectPrefab, res.transform.position, Quaternion.identity);
-        inst.Init(this, res);
     }
 
 
@@ -298,6 +291,7 @@ public class Lumberjack : MonoBehaviour
 
     public void CraftMode()
     {
+        ThinkOf(false);
         workingState.workBench = GameManager.instance.shelter.workbench;
         workingState.state = WorkState.Crafting;
         ChangeFSM(workingState);

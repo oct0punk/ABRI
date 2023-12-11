@@ -7,6 +7,7 @@ using UnityEngine;
 public class Tuto : MonoBehaviour
 {
     public static bool canBuild = true;
+    public static bool canCraft = true;
 
 
     public void Launch(Lumberjack lum)
@@ -17,26 +18,46 @@ public class Tuto : MonoBehaviour
     public IEnumerator FirstTuto(Lumberjack lum)
     {
         canBuild = false;
+        canCraft = false;
+        // Apprendre à alimenter la cheminée
+
+        // Utiliser l'établi pour réparer l'abri
+
+        // Construire ponts et échelles
+
+
         yield return lum.Message(GameUI.instance.GetBubbleContentByName("shelterCold"), 2.0f);
-        Workbench workbench = GameManager.instance.shelter.workbench;
-        workbench.GetComponent<Collider2D>().enabled = false;
        
         // TutoMove
         GameUI.instance.BothMove();
         GameManager.instance.lumberjack.enabled = true;        
         yield return lum.Message(GameUI.instance.GetBubbleContentByName("leftArrow"), () => lum.fsm == lum.idleState);        
-        yield return new WaitForSeconds(1);        
-    
+        yield return new WaitForSeconds(1);
+
+        bool cutTuto = false;
+        while (!cutTuto)
+        {
+            yield return lum.Message(GameUI.instance.GetBubbleContentByName("cutLog"), 1.0f);
+            yield return new WaitUntil(() => lum.storage.Count(RawMatManager.instance.GetRawMatByName("WoodBranch")) > 0 && !lum.indoor);
+            if (!lum.indoor)
+            {
+                cutTuto = true;
+            }
+
+        }
         // TutoRes
-        yield return lum.Message(GameUI.instance.GetBubbleContentByName("seekBranch"), 1.0f);
-        yield return new WaitUntil(() => lum.storage.Count(RawMatManager.instance.GetRawMatByName("WoodBranch")) > 0);        
         yield return lum.Message(GameUI.instance.GetBubbleContentByName("rightArrowToShelter"), () => !lum.indoor);
         yield return new WaitForSeconds(.3f);
 
+        // Tuto Chimney
+        
+        yield return null ;
+
         // TutoCraft
-        workbench.GetComponent<Collider2D>().enabled = true;
+        canCraft = true;
+        Workbench workbench = GameManager.instance.shelter.workbench;
         workbench.openBubble.touchTuto.SetActive(true);
-        yield return lum.Message(GameUI.instance.GetBubbleContentByName("workbench"), () => GameManager.instance.gameState != GameState.Craft);
+        yield return lum.Message(GameUI.instance.GetBubbleContentByName("workbench"), () => GameManager.instance.gameState != GameState.Craft && lum.indoor);
   
         workbench.closeBubble.gameObject.SetActive(false);
         workbench.openBubble.touchTuto.SetActive(false);

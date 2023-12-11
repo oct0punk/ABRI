@@ -40,7 +40,7 @@ public class Workbench : MonoBehaviour
 
     public void Craft(CraftBubble bubble)
     {
-        RawMaterial craftable = bubble.material;
+        CraftableMaterial craftable = bubble.material;
         foreach (var material in craftable.craftMaterials)
         {
             if (lumberjack.storage.Count(material.rawMaterial) < material.q)
@@ -70,6 +70,7 @@ public class Workbench : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!Tuto.canCraft) return;
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {

@@ -110,6 +110,8 @@ public class SwipeManager : MonoBehaviour
         {
             if (s.SwipeLeft(0.0f)) return true;
             if (s.SwipeRight(0.0f)) return true;
+            if (s.SwipeDown(0.0f)) return true;
+            if (s.SwipeUp(0.0f)) return true;
         }
         return false;
     }

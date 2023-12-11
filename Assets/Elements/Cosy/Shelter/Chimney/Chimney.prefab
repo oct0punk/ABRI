@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consuming: 0
+  intensity: 2
 --- !u!1 &5383363712075950830
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consuming: 0
+  intensity: 2
 --- !u!1 &5648824101823385825
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consuming: 0
+  intensity: 2
 --- !u!1 &6318946643710037563
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,6 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consuming: 0
+  intensity: 2
 --- !u!1 &7118479034488429977
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,6 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consuming: 0
+  intensity: 2
 --- !u!1 &7844371861461528525
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +752,7 @@ PrefabInstance:
     - target: {fileID: 8238296419994688224, guid: a1c130d9596eac240b077653291babb1, type: 3}
       propertyPath: materials.Array.data[0].rawMaterial
       value: 
-      objectReference: {fileID: 11400000, guid: 15ca6439087ba654d8ff70845ea415c8, type: 2}
+      objectReference: {fileID: 11400000, guid: 609a52149a9b357439cd41e4fa8a42d4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

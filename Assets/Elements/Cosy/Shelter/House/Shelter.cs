@@ -84,15 +84,6 @@ public class Shelter : MonoBehaviour
             GameManager.instance.ChangeState(GameState.Indoor);
             OnEnter();
 
-            // Free the birds
-            if (lum.carryingBird != null)
-            {
-                Bird bird = lum.carryingBird;
-                bird.perch = perchs[0].GetComponent<NestBox>();
-                bird.Free();
-                lum.carryingBird = null;
-            }
-
             // Store planchs
             //RawMaterial mat = RawMatManager.instance.GetRawMatByName("WoodPlanch");
             //int iter = lum.storage.Count(mat);

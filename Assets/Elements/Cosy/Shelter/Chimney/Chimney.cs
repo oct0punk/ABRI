@@ -43,7 +43,7 @@ public class Chimney : MonoBehaviour
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
-            if (lum.storage.Count(RawMatManager.instance.GetRawMatByName("WoodLog")) > 0)
+            if (lum.storage.Count(RawMatManager.instance.GetRawMatByName("Log")) > 0)
                 bubble.gameObject.SetActive(true);
         }
     }

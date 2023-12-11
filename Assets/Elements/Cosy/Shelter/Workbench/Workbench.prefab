@@ -29,9 +29,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1427959826033540865}
   - {fileID: 9077914413067801923}
   - {fileID: 4761188683879952657}
+  - {fileID: 1427959826033540865}
   - {fileID: 3600435917754380334}
   m_Father: {fileID: 6443828294186553546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -857,20 +857,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.24
+      value: 0.23
       objectReference: {fileID: 0}
     - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.24
+      value: 0.23
       objectReference: {fileID: 0}
     - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.24
+      value: 0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 17.99
       objectReference: {fileID: 0}
     - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -8.2
       objectReference: {fileID: 0}
     - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -1023,24 +1035,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1333.3333
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 710
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.84
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.84
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.84
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 15
+      value: 48.4
       objectReference: {fileID: 0}
     - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4654452668160020244, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -1230,6 +1250,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1248621459875573284, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4654452668160020244, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
+      propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5272758446663460579, guid: d1c004b3ccf734a4dba91e8a909b78e9, type: 3}
