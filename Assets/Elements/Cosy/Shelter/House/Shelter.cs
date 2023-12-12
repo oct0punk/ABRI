@@ -16,11 +16,13 @@ public class Shelter : MonoBehaviour
     [Header("Temperature")]
     [SerializeField] float temperature = 20.0f;
     [SerializeField] float maxTemperature = 25.0f;
+    [Header("Storm")]
     [SerializeField] float speed = .5f;
     [SerializeField] float timeBeforeNextGust = 1.0f;
     [SerializeField] int push = 0;
-    [SerializeField] Slider thermometer;
     Storm storm;
+    [Space]
+    [SerializeField] Slider thermometer;
     public Storage storage { get; private set; }
     public Piece[] pieces;
     public Workbench workbench;

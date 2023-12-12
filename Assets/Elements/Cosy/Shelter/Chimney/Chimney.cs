@@ -1,24 +1,36 @@
+using Cinemachine;
 using JetBrains.Annotations;
 using System;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 [SelectionBase]
 public class Chimney : MonoBehaviour
 {
     public ConsumeBubble bubble;
+    public CinemachineVirtualCamera cam;
     Combustible[] coms;
-    
+    public PlayableDirector tl;
 
     private void Start()
     {
         coms = GetComponentsInChildren<Combustible>();
-        bubble.action = Reload;
+        //bubble.action = Reload;
+        bubble.action = PlayTimeline;
         bubble.gameObject.SetActive(false);
     }
 
     public int GetPower()
     {
         return Array.FindAll(coms, c => c.active).Length;
+    }
+
+    public void PlayTimeline()
+    {
+        tl.Play();
+        GameManager.instance.lumberjack.enabled = false;
     }
 
     public void Reload()
@@ -35,6 +47,8 @@ public class Chimney : MonoBehaviour
         }
         coms[idx].Activate();
     }
+
+    
 
     private void OnTriggerExit2D(Collider2D collision)
     {

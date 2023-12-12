@@ -17,9 +17,12 @@ public class CameraManager : MonoBehaviour
     }
 
 
-    public static void Possess(ICinemachineCamera newCam)
+    public static float Possess(ICinemachineCamera newCam)
     {
         Instance.brain.ActiveVirtualCamera.Priority = 0;
         newCam.Priority = 1;
+        if (Instance.brain.IsBlending)
+            return Instance.brain.ActiveBlend.Duration;
+        return 0.0f;
     }
 }

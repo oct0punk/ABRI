@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class Tuto : MonoBehaviour
     public static bool canBuild = true;
     public static bool canCraft = true;
     public static bool updateWind = true;
+
+    public static ICinemachineCamera pieceCam;
 
 
     public void Launch(Lumberjack lum)
@@ -64,6 +67,9 @@ public class Tuto : MonoBehaviour
                 chimneyTuto = true;
             }
         }
+        yield return new WaitForSeconds(CameraManager.Possess(chimney.cam));
+
+        yield return new WaitForSeconds(CameraManager.Possess(lum.cam));
 
         updateWind = true;
         Debug.Log("EndTutoChimney");
