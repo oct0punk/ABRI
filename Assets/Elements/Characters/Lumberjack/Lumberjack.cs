@@ -74,7 +74,10 @@ public class Lumberjack : MonoBehaviour
     private void LateUpdate()
     {
         ResetGlobalScale();
-        transform.rotation = Quaternion.identity;
+        if (indoor)
+            transform.localRotation = Quaternion.identity;        
+        else
+            transform.rotation = Quaternion.identity;
     }
 
 

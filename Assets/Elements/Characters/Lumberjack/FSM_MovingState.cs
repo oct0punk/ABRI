@@ -40,7 +40,7 @@ public class FSM_MovingState : FSM_IdleState
                 l.Move(targetPosition);
                 return;
             }
-            else if (TryMove(l, -(r + 2), 2.0f, -h/2))   // TryJump
+            else if (TryMove(l, -(r + 2), 3.0f, -h/2))   // TryJump
             {
                 l.Jump(targetPosition);
                 return;
@@ -54,7 +54,7 @@ public class FSM_MovingState : FSM_IdleState
                 l.Move(targetPosition);
                 return;
             }
-            else if (TryMove(l, r + 2, 2.0f, -h/2))   // TryJump
+            else if (TryMove(l, r + 2, 3.0f, -h/2))   // TryJump
             {
                 l.Jump(targetPosition);
                 return;
