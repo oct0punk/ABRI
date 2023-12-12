@@ -12,12 +12,12 @@ public class Chimney : MonoBehaviour
     public ConsumeBubble bubble;
     public CinemachineVirtualCamera cam;
     Combustible[] coms;
-    public PlayableDirector tl;
+    public PlayableDirector tl { get; private set; }
 
     private void Start()
     {
         coms = GetComponentsInChildren<Combustible>();
-        //bubble.action = Reload;
+        tl = GetComponent<PlayableDirector>();
         bubble.action = PlayTimeline;
         bubble.gameObject.SetActive(false);
     }
@@ -31,6 +31,7 @@ public class Chimney : MonoBehaviour
     {
         tl.Play();
         GameManager.instance.lumberjack.enabled = false;
+        bubble.action = Reload;
     }
 
     public void Reload()

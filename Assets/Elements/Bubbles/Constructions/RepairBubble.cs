@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,8 +9,12 @@ public class RepairBubble : DragDropBubble
     {
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 20.0f);
-        p = hit.transform.GetComponent<Piece>();
-        return p != null;
+        if (hit.collider != null)
+        {
+            p = hit.transform.GetComponent<Piece>();
+            return p != null;
+        }
+        return false;
     }
 
     protected override void OnSuccess(PointerEventData eventData)

@@ -22,7 +22,7 @@ public class Lumberjack : MonoBehaviour
     [Space]
     [Header("Constructions")]
     public GameObject plans;
-    public GameObject openPlans;
+    public TapBubble openPlans;
     [Space]
     public ThinkBubble thinkBubble;
 
@@ -267,14 +267,14 @@ public class Lumberjack : MonoBehaviour
     // Deploy plans in bubbles
     public void DisplayPlans()
     {
-        openPlans.SetActive(false);
+        openPlans.gameObject.SetActive(false);
         plans.SetActive(true);
     }
 
     // Deploy the bubble "..."
     public void ThinkOf(bool isActive)
     {
-        openPlans.SetActive(isActive);
+        openPlans.gameObject.SetActive(isActive);
         plans.SetActive(false);
     }
 

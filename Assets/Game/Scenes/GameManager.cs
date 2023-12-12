@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GameState
@@ -65,6 +61,8 @@ public class GameManager : MonoBehaviour
             case GameState.Build:   
                 ui.inventory.gameObject.SetActive(false);
                 ui.BothMove();
+                lumberjack.enabled = true;
+                shelter.workbench.canvas.gameObject.SetActive(true);
                 break;
 
             case GameState.Indoor:  break;
@@ -104,6 +102,7 @@ public class GameManager : MonoBehaviour
             
             case GameState.Build:
                 lumberjack.enabled = false;
+                shelter.workbench.canvas.gameObject.SetActive(false);
                 // ui.inventory.gameObject.SetActive(true);
                 // Hide ...
                 // Display plans

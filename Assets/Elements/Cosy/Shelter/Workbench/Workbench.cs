@@ -11,6 +11,7 @@ public class Workbench : MonoBehaviour
     public TapBubble openBubble;
     public TapBubble closeBubble;
     public GameObject plans;
+    public Canvas canvas;
 
     private void Start()
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class CraftBubble : ConsumeBubble
 {
     public CraftableMaterial material;
+    public TapBubble craftButton;
     ScrollLayout layout;
     PresBubble[] presentation;
     public PresBubble presPrefab;

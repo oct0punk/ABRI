@@ -29,6 +29,7 @@ public class FSM_IdleState : FSM_BaseState
             return;
         }
         if (!Tuto.canBuild) return;
+        if (GameManager.instance.gameState == GameState.Craft) return;
 
         if (time > 0.0f)
         {

@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5814f6b7a3d26ab4c82360a0ea1431f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  construction: {fileID: 11400000, guid: 6dd07c45083ccad4489efa2d4cf845d2, type: 2}
+  construction: {fileID: 11400000, guid: 31628c91969f2eb4c90118860c1887d2, type: 2}
   m_Image: {fileID: 3057788961240880247}
   ladderPrefab: {fileID: 893141303885138169, guid: f765d529e3c5d1c4584ab62dfcd69a9e, type: 3}
 --- !u!222 &8185925762752021323

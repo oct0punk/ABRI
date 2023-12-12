@@ -140,9 +140,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touchTuto: {fileID: 3234639155227309151}
   materials: []
-  offset: 100
-  presPrefab: {fileID: 2504203939886635047, guid: 74afba8ec619114478a0c212e83dec41, type: 3}
-  isPresenting: 0
   animator: {fileID: 0}
 --- !u!1 &3234639155227309151
 GameObject:
@@ -411,7 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

@@ -397,7 +397,7 @@ MonoBehaviour:
   canCut: 0
   cam: {fileID: 0}
   plans: {fileID: 0}
-  openPlans: {fileID: 8445690234626319009}
+  openPlans: {fileID: 3040736328534168293}
   thinkBubble: {fileID: 0}
 --- !u!114 &7678264919461317884
 MonoBehaviour:
@@ -796,6 +796,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 41984474236140551}
   m_SourcePrefab: {fileID: 100100000, guid: b47c5518590d2a54b85483bcfdd89a19, type: 3}
+--- !u!114 &3040736328534168293 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2721970499214434147, guid: b47c5518590d2a54b85483bcfdd89a19, type: 3}
+  m_PrefabInstance: {fileID: 1149750701432458630}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9b5a0521aad764e8866583c7030331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3185810398207604297 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2576896291968367567, guid: b47c5518590d2a54b85483bcfdd89a19, type: 3}
@@ -893,10 +904,5 @@ MonoBehaviour:
 --- !u!224 &3812177228639490895 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4256797569566416585, guid: b47c5518590d2a54b85483bcfdd89a19, type: 3}
-  m_PrefabInstance: {fileID: 1149750701432458630}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8445690234626319009 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8845530014406438695, guid: b47c5518590d2a54b85483bcfdd89a19, type: 3}
   m_PrefabInstance: {fileID: 1149750701432458630}
   m_PrefabAsset: {fileID: 0}

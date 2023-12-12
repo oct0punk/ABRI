@@ -315,12 +315,6 @@ MonoBehaviour:
   pieces: []
   workbench: {fileID: 0}
   chimney: {fileID: 0}
-  perchs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &3262465680258151783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1277,6 +1271,38 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2186422840731570245, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186422840731570245, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186422840731570245, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186422840731570245, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431841627037447191, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431841627037447191, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431841627037447191, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431841627037447191, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3600435917754380334, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1338,6 +1364,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4761188683879952657, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734694183744888405, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734694183744888405, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734694183744888405, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734694183744888405, guid: 4c49e1d596c5deb44a569990be050102, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
