@@ -71,6 +71,7 @@ public class CraftBubble : ConsumeBubble
             PresBubble pres = Array.Find(presentation, p => p.cMat.rawMaterial == material);
             pres.GetComponent<Animator>().SetTrigger("OK");
         }
+        StartCoroutine(EnumerateMissedMaterials(GameManager.instance.lumberjack, missed));
     }
 
 }

@@ -122,6 +122,14 @@ public class GameUI : MonoBehaviour
         return res;
     }
 
+    public GameObject GetMissBubbleByMat(RawMaterial mat)
+    {
+        GameObject res = Array.Find(images, im => im.name == "miss").prefab;
+        res.GetComponentsInChildren<Image>()[1].sprite = RawMatManager.instance.GetRawMatByName(mat.name).icon;
+        res.GetComponentsInChildren<Image>()[1].SetNativeSize();
+        return res;
+    }
+
 
 
     public void FeedbackOnCollect(RawMaterial mat, bool add)
