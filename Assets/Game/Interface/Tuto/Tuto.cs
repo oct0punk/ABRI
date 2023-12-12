@@ -123,8 +123,13 @@ public class Tuto : MonoBehaviour
         yield return new WaitWhile(() => GameManager.instance.gameState == GameState.Build);
         closePlans.touchTuto.SetActive(false);
         Debug.Log("EndTutoPiece");
+        lum.openPlans.touchTuto.SetActive(false);
 
         updateWind = true;
+
+        RawMatManager.instance.AddBubbleToWorkbench("Bridge");
+        RawMatManager.instance.AddBubbleToWorkbench("Ladder");
+
     }
 
 

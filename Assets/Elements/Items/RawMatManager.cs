@@ -1,9 +1,19 @@
+using System;
 using UnityEngine;
+
+[Serializable]
+public struct DictionaryRawmatBubble
+{
+    public string name;
+    public GameObject bubble;
+}
 
 public class RawMatManager : MonoBehaviour
 {
     public static RawMatManager instance;
     public RawMaterial[] rawMaterials;
+    public DictionaryRawmatBubble[] rawBubbles;
+   Workbench workbench { get { return GameManager.instance.shelter.workbench; } }
 
     private void Awake()
     {
@@ -19,5 +29,10 @@ public class RawMatManager : MonoBehaviour
             return null;
         }
         return res;
+    }
+
+    public void AddBubbleToWorkbench(string matStr)
+    {
+        Array.Find(rawBubbles, mat => mat.name == matStr).bubble.SetActive(true);
     }
 }

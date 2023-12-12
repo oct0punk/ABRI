@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 7849547949214140348}
+  swipeTuto: {fileID: 3483306716893971916}
 --- !u!61 &6512787099984800548
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -389,6 +390,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
+--- !u!1 &3483306716893971916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2037484187475574962, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
+  m_PrefabInstance: {fileID: 3175504008572274046}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6946390008894363757 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5509908931163397395, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}

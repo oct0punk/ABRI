@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consuming: 0
-  intensity: 2
+  intensity: 5
 --- !u!1 &5648824101823385825
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consuming: 0
-  intensity: 2
+  intensity: 6
 --- !u!1 &6318946643710037563
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consuming: 0
-  intensity: 2
+  intensity: 3
 --- !u!1 &6584675050084917353
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consuming: 0
-  intensity: 2
+  intensity: 4
 --- !u!1 &7844371861461528525
 GameObject:
   m_ObjectHideFlags: 0
