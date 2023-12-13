@@ -64,8 +64,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 5, y: 1}
+  m_Offset: {x: 0, y: 0.5}
+  m_Size: {x: 7, y: 2}
   m_Direction: 1
 --- !u!1 &5405567293037834308
 GameObject:
@@ -77,7 +77,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1927359694068376771}
   - component: {fileID: 8629876646372002554}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: sprite (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 7989727699058782295}
   - component: {fileID: 5207767625481944141}
   - component: {fileID: 5479779772746731565}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2569753653707985394}
   - component: {fileID: 6304503575786607393}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +333,8 @@ GameObject:
   - component: {fileID: -4432977480341524791}
   - component: {fileID: 529979184543639882}
   - component: {fileID: 509967184201337140}
-  m_Layer: 7
+  - component: {fileID: 9133452270647750516}
+  m_Layer: 0
   m_Name: AnchorForBridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,10 +371,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bddb51c272978247a89e40ea8376abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildOnStart: 0
   left: {fileID: 2995933529749837109}
   right: {fileID: 7989727699058782295}
-  leftParent: {fileID: 0}
-  rightParent: {fileID: 0}
   bridgePrefab: {fileID: 746705973476448980, guid: 49666b7b908a1614693163c11e4e7282, type: 3}
 --- !u!50 &529979184543639882
 Rigidbody2D:
@@ -418,7 +418,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 2.32, y: -8.028562}
+  m_ConnectedAnchor: {x: -23.7, y: -0.1}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -427,6 +427,51 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!61 &9133452270647750516
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7116487661304340594}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5, y: 2}
+  m_EdgeRadius: 0
 --- !u!1 &9147503392783187224
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +483,7 @@ GameObject:
   - component: {fileID: 2995933529749837109}
   - component: {fileID: 6271066435539188882}
   - component: {fileID: 6035442786908056749}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: left
   m_TagString: Untagged
   m_Icon: {fileID: 0}

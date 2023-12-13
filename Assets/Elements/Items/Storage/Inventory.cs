@@ -20,11 +20,13 @@ public class Inventory : MonoBehaviour
         InventoryItem item = items.Find(im => im.mat == stock.material);
         if (item == null)
         {
+            // Instantiate new item
             item = Instantiate(prefab, content.transform);
             item.gameObject.name = stock.material.name;
             item.image.sprite = RawMatManager.instance.GetRawMatByName(stock.material.name).icon;
             item.mat = stock.material;
             items.Add(item);
+            // update content's width
             RectTransform rect = content.GetComponent<RectTransform>();
             HorizontalLayoutGroup hLayout = content.GetComponent<HorizontalLayoutGroup>();
             rect.sizeDelta = new Vector2(rect.rect.width + hLayout.spacing + item.GetComponent<RectTransform>().rect.width, rect.rect.height);

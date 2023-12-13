@@ -1,10 +1,7 @@
 using Cinemachine;
-using JetBrains.Annotations;
 using System;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.Timeline;
 
 [SelectionBase]
 public class Chimney : MonoBehaviour

@@ -381,9 +381,21 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7113784646251103627, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113784646251103627, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7619900605011811235, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
       propertyPath: m_Name
       value: TrailParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619900605011811235, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

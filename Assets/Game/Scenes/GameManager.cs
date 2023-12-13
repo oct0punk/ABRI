@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Lumberjack lumberjack;
     [HideInInspector] public Shelter shelter;
     public GameUI ui;
-    Tuto tuto;
+    public Tuto tuto { get; private set; }
     public bool pause { get; private set; }
 
     private void Awake()
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
                 shelter.workbench.DisplayPlans();
                 lumberjack.CraftMode();
                 lumberjack.enabled = false;
-                ui.inventory.gameObject.SetActive(true);
+                // ui.inventory.gameObject.SetActive(true);
                 break;
             
             case GameState.Build:

@@ -7,12 +7,10 @@ using UnityEngine;
 public class AnchorForBridge : MonoBehaviour
 {
     public bool buildOnStart;
+    public bool present { get; private set; }
 
     public Transform left;
     public Transform right;
-    //[Space]
-    //public Transform leftParent;
-    //public Transform rightParent;
     [Space]
     public GameObject bridgePrefab;
 
@@ -43,5 +41,24 @@ public class AnchorForBridge : MonoBehaviour
         bridge.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
         
         bridge.Build(left, right);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isBuilt) return;
+        Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
+        if (lum == null) return;
+        present = true;
+
+        if (Tuto.tutoBuildBridge)
+            StartCoroutine(GameManager.instance.tuto.BuildBridgeTuto(lum, this));
+        else if (Tuto.canBuild)
+            lum.Message(GameManager.instance.ui.GetBubbleContentByName("BuildBridge"), () => present && GameManager.instance.gameState != GameState.Build);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponentInParent<Lumberjack>() != null)
+            present = false;
     }
 }

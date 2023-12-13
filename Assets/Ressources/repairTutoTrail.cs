@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class repairTutoTrail : MonoBehaviour
 {
-    public RectTransform repairBubble;
-    public Transform piece;
+    public RectTransform start;
+    public Transform target;
     public TrailRenderer trail;
     public GameObject tuto;
     public AnimationCurve curve;
@@ -16,7 +16,7 @@ public class repairTutoTrail : MonoBehaviour
         {
             tuto.SetActive(true);
             time = -0.3f;
-            transform.position = Camera.main.ScreenToWorldPoint(repairBubble.position);
+            transform.position = Camera.main.ScreenToWorldPoint(start.position);
         }
         else if (time > 1.5f)
         {
@@ -27,7 +27,7 @@ public class repairTutoTrail : MonoBehaviour
         {
             if (time > 0.0f)
             {
-                transform.position = Vector3.Lerp(Camera.main.ScreenToWorldPoint(repairBubble.position), piece.position, curve.Evaluate(time));
+                transform.position = Vector3.Lerp(Camera.main.ScreenToWorldPoint(start.position), target.position, curve.Evaluate(time));
                 trail.emitting = true;
             }
         }
