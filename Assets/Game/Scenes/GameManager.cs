@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public enum GameState
 {
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Lumberjack lumberjack;
     [HideInInspector] public Shelter shelter;
     public GameUI ui;
+    public Volume volume;
     public Tuto tuto { get; private set; }
     public bool pause { get; private set; }
 
@@ -28,6 +31,10 @@ public class GameManager : MonoBehaviour
         tuto = GetComponent<Tuto>();
         lumberjack = FindObjectOfType<Lumberjack>();
         shelter = FindObjectOfType<Shelter>();
+        DepthOfField dof;
+        volume.profile.TryGet<DepthOfField>(out dof);
+        if (dof != null)
+            dof.focalLength.Override(Screen.dpi);
     }
 
     private void Start()

@@ -8,7 +8,6 @@ public class ThinkBubble : MonoBehaviour
 {
     public bool isMessaging = false;
     public float coolDown = 0.0f;
-    private Coroutine messageRoutine;
 
 
     IEnumerator CoolDown()
@@ -29,19 +28,19 @@ public class ThinkBubble : MonoBehaviour
 
     public Coroutine Message(GameObject obj, Func<bool> condition)
     {
-        if (messageRoutine != null) StopCoroutine(messageRoutine);
-        isMessaging = true;
+        //if (messageRoutine != null) StopCoroutine(messageRoutine);
         for (int i = 0; i < transform.childCount; i++)
         {
             Destroy(transform.GetChild(i).gameObject);
         }
         Instantiate(obj, transform);
-        return messageRoutine = StartCoroutine(MessageRoutine(condition));
+        return StartCoroutine(MessageRoutine(condition));
     }
 
 
     public IEnumerator MessageRoutine(Func<bool> condition)
     {
+        isMessaging = true;
         yield return new WaitWhile(() => condition.Invoke());
         for (int i = 0; i < transform.childCount; i++)
         {

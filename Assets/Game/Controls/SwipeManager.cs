@@ -4,8 +4,6 @@ using UnityEngine;
 public class SwipeManager : MonoBehaviour
 {
     [SerializeField] private Swipe[] swipes;
-    public bool buildLadder = false;
-    public bool construct = false;
     static SwipeManager instance;
     bool canConstruct = true;
     private static SwipeManager Instance
@@ -20,16 +18,6 @@ public class SwipeManager : MonoBehaviour
             }
         }
         set { }
-    }
-
-    public static bool GetBuildLadder()
-    {
-        if (Instance.buildLadder)
-        {
-            Instance.buildLadder = false;
-            return true;
-        }
-        return false;
     }
 
 
@@ -66,7 +54,7 @@ public class SwipeManager : MonoBehaviour
         {
             if (t.position.x < Screen.width * .2f) return true;
         }
-        return false;
+        return Input.GetMouseButton(0) && Input.mousePosition.x < Screen.width * .2f;
     }
     private static bool testRight()
     {
@@ -74,7 +62,7 @@ public class SwipeManager : MonoBehaviour
         {
             if (t.position.x > Screen.width * (1 - 0.2f)) return true;
         }
-        return false;
+        return Input.GetMouseButton(0) && Input.mousePosition.x > Screen.width * (1 - 0.2f);
     }
     private static bool MoveCancel()
     {
@@ -103,7 +91,6 @@ public class SwipeManager : MonoBehaviour
     }
     #endregion
 
-    #region Actions
     public static bool Cut()
     {
         foreach (var s in Instance.swipes)
@@ -115,30 +102,4 @@ public class SwipeManager : MonoBehaviour
         }
         return false;
     }
-
-    static bool ConstructMode()
-    {
-        if (instance.construct) {
-            instance.construct = false;
-            return true;
-        }
-        if (!instance.canConstruct) return false;
-        if (instance.swipes.Length < 2) return false;
-
-        int countDown = 0;
-        bool foundZero = false;
-        foreach (var s in Instance.swipes)
-        {
-            if (s.SwipeDown(.4f)) {
-                countDown++;
-                if (s.SwipeDown(0.0f)) foundZero = true;
-            }
-        }
-        
-        bool res = countDown > 1 && foundZero;
-        if (res)
-            instance.canConstruct = false;
-        return res;
-    }
-    #endregion
 }
