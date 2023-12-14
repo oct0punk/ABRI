@@ -152,7 +152,7 @@ public class Tuto : MonoBehaviour
             lum.Message(ui.GetBubbleContentByName("rightArrowToShelter"), () => !lum.indoor);
             yield return new WaitWhile(() => !lum.indoor);
             yield return new WaitForSeconds(.2f);
-            lum.Message(ui.GetBubbleContentByName("CraftBridge"), () => lum.indoor && cond.Invoke());
+            lum.Message(ui.GetBubbleContentByName("CraftBridge"), () => lum.indoor && GameManager.instance.gameState != GameState.Craft);
             yield return new WaitWhile(() => lum.indoor && cond.Invoke());
         }
         // Construire le pont
