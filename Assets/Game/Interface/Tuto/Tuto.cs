@@ -9,15 +9,26 @@ public class Tuto : MonoBehaviour
     public static bool tutoCut = true;
     public static bool tutoClimb = true;
     public static bool tutoBuildBridge = true;
+    public static bool skip = false;
 
     public static bool canBuild = true;
     public static bool canCraft = true;
     public static bool updateWind = true;
 
-    public static ICinemachineCamera pieceCam;
     public repairTutoTrail pieceTrail;
     public repairTutoTrail bridgeTrail;
     public TapBubble closePlans;
+
+    [Header("CameraSpots")]
+    public CinemachineVirtualCamera shelterCam;
+    public CinemachineVirtualCamera woodCam;
+    public CinemachineVirtualCamera chimneyCam;
+    public CinemachineVirtualCamera pieceCam;
+
+    [Header("PlayerPos")]
+    public Transform chimneyPos;
+    public Transform workbenchPos;
+
 
 
     public void Launch(Lumberjack lum)
@@ -33,27 +44,45 @@ public class Tuto : MonoBehaviour
         canCraft = false;
 
         GameUI ui = GameManager.instance.ui;
+
         #region  Apprendre à alimenter la cheminée
-
-
-        yield return lum.Message(ui.GetBubbleContentByName("shelterCold"), 2.0f);
-       
-        // TutoMove
-        ui.BothMove();
-        GameManager.instance.lumberjack.enabled = true;        
-        yield return lum.Message(ui.GetBubbleContentByName("leftArrow"), () => lum.fsm == lum.idleState);        
-        yield return new WaitForSeconds(1);
-
-        bool cutTuto = false;
-        while (!cutTuto)
+        // First Cine
         {
-            yield return lum.Message(ui.GetBubbleContentByName("cutLog"), 1.0f);
-            yield return new WaitUntil(() => lum.storage.Count(RawMatManager.instance.GetRawMatByName("Log")) > 0 || lum.indoor);
-            if (!lum.indoor)
-            {
-                cutTuto = true;
-            }
+            yield return new WaitForSeconds(CameraManager.Possess(shelterCam));
+            yield return lum.Message(ui.GetBubbleContentByName("shelterCold"), () => Input.touches.Length == 0);
+            lum.enabled = true;
+            lum.AutoMoveTo(chimneyPos.position, true);
+            yield return new WaitUntil(() => lum.fsm == lum.idleState);
+            lum.enabled = false;
+            yield return new WaitForSeconds(CameraManager.Possess(chimneyCam));
+            yield return lum.Message(ui.GetBubbleContentByName("chimneyOff"), () => Input.touches.Length == 0);
+            yield return new WaitForSeconds(CameraManager.Possess(woodCam));
+            yield return lum.Message(ui.GetBubbleContentByName("burn"), () => Input.touches.Length == 0);
+            yield return new WaitForSeconds(CameraManager.Possess(lum.cam));
+        }
 
+        // TutoMove
+        {
+            ui.BothMove();
+            lum.enabled = true;
+            yield return lum.Message(ui.GetBubbleContentByName("leftArrow"), () => lum.fsm == lum.idleState);
+            yield return new WaitForSeconds(1);
+        }
+
+        // TutoCut
+        {
+            bool cutTuto = false;
+            while (!cutTuto)
+            {
+                yield return lum.Message(ui.GetBubbleContentByName("cutLog"), 1.0f);
+                yield return new WaitUntil(() => lum.storage.Count(RawMatManager.instance.GetRawMatByName("Branch")) > 1
+                                              && lum.storage.Count(RawMatManager.instance.GetRawMatByName("Log")) > 0 || lum.indoor);
+
+                if (!lum.indoor)
+                {
+                    cutTuto = true;
+                }
+            }
         }
 
         // Tuto Chimney
@@ -74,7 +103,7 @@ public class Tuto : MonoBehaviour
         }
         chimney.bubble.touchTuto.SetActive(false);
 
-        yield return new WaitForSeconds((float)chimney.tl.duration);
+        // =§§yield return new WaitForSeconds((float)chimney.tl.duration);
 
         #endregion
 
@@ -85,7 +114,7 @@ public class Tuto : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         yield return lum.Message(ui.GetBubbleContentByName("light"), 1.0f);
         yield return lum.Message(ui.GetBubbleContentByName("cutBranch"), () => lum.storage.Count(RawMatManager.instance.GetRawMatByName("Branch")) <= 0);
-        
+
         // TutoCraft
         canCraft = true;
         Workbench workbench = GameManager.instance.shelter.workbench;
@@ -126,7 +155,7 @@ public class Tuto : MonoBehaviour
         closePlans.touchTuto.SetActive(true);
         yield return new WaitWhile(() => GameManager.instance.gameState == GameState.Build);
         closePlans.touchTuto.SetActive(false);
-        
+
         lum.openPlans.touchTuto.SetActive(false);
         #endregion
 
@@ -137,6 +166,7 @@ public class Tuto : MonoBehaviour
 
         tutoBuildBridge = true;
     }
+
 
     public IEnumerator BuildBridgeTuto(Lumberjack lum, AnchorForBridge bridge)
     {

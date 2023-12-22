@@ -12,6 +12,7 @@ public class FSM_IdleState : FSM_BaseState
 
     public override void OnEnter(Lumberjack l)
     {
+        if (l.autoMoveState.isAutoMoving) l.ChangeFSM(l.autoMoveState);
         GameManager.instance.ui.NoMove();
         l.SetSpriteColor(Color.white);
         l.animator.SetBool("isWalking", false);
@@ -45,7 +46,7 @@ public class FSM_IdleState : FSM_BaseState
     {
         l.Stabilize();
 
-
+        
         if (l.canCut)
         {
             if (SwipeManager.Cut())

@@ -1,17 +1,12 @@
-
-
 using UnityEngine;
-
 
 public class FSM_MovingState : FSM_IdleState
 {
     LayerMask mask = LayerMask.GetMask("Platform");
-    Vector3 targetPosition;
+    protected Vector3 targetPosition;
 
     public override void OnEnter(Lumberjack l)
     {
-        l.SetSpriteColor(Color.blue);
-
         if (SwipeManager.MoveLeft())
             GameManager.instance.ui.MoveLeft();
         else if (SwipeManager.MoveRight())
@@ -65,7 +60,7 @@ public class FSM_MovingState : FSM_IdleState
         
     }
 
-    bool TryMove(Lumberjack l, float far, float depth, float drop)
+    protected bool TryMove(Lumberjack l, float far, float depth, float drop)
     {
         // Simple step
         Vector2 start = l.transform.position + new Vector3(far, h - drop, 0);

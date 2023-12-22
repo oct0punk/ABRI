@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ public class Workbench : MonoBehaviour
 {
     Lumberjack lumberjack { get { return GameManager.instance.lumberjack; } }
     Shelter shelter { get { return GameManager.instance.shelter; } }
+    public CinemachineVirtualCamera cam;
     public TapBubble openBubble;
     public TapBubble closeBubble;
     public GameObject plans;

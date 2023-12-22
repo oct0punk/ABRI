@@ -16,13 +16,11 @@ public class CameraManager : MonoBehaviour
         brain = GetComponent<CinemachineBrain>();
     }
 
-
     public static float Possess(ICinemachineCamera newCam)
     {
+        ICinemachineCamera from = Instance.brain.ActiveVirtualCamera;
         Instance.brain.ActiveVirtualCamera.Priority = 0;
         newCam.Priority = 1;
-        if (Instance.brain.IsBlending)
-            return Instance.brain.ActiveBlend.Duration;
-        return 0.0f;
+        return Instance.brain.m_CustomBlends.GetBlendForVirtualCameras(from.Name, newCam.Name, new CinemachineBlendDefinition()).m_Time;
     }
 }

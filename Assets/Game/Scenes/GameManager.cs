@@ -1,6 +1,8 @@
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Timeline;
 
 public enum GameState
 {
@@ -31,10 +33,11 @@ public class GameManager : MonoBehaviour
         tuto = GetComponent<Tuto>();
         lumberjack = FindObjectOfType<Lumberjack>();
         shelter = FindObjectOfType<Shelter>();
+        ui.inventory.gameObject.SetActive(false);
         DepthOfField dof;
         volume.profile.TryGet<DepthOfField>(out dof);
         if (dof != null)
-            dof.focalLength.Override(Screen.dpi);
+            dof.focalLength.Override(Screen.dpi / 4);
     }
 
     private void Start()
@@ -63,6 +66,7 @@ public class GameManager : MonoBehaviour
                 shelter.workbench.HidePlans();
                 ui.BothMove();
                 ui.inventory.gameObject.SetActive(false);
+                CameraManager.Possess(lumberjack.cam);
                 break;
 
             case GameState.Build:   
@@ -104,6 +108,7 @@ public class GameManager : MonoBehaviour
                 shelter.workbench.DisplayPlans();
                 lumberjack.CraftMode();
                 lumberjack.enabled = false;
+                CameraManager.Possess(shelter.workbench.cam);
                 // ui.inventory.gameObject.SetActive(true);
                 break;
             

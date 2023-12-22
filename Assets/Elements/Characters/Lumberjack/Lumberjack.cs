@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [SelectionBase]
 public class Lumberjack : MonoBehaviour
@@ -25,6 +24,7 @@ public class Lumberjack : MonoBehaviour
     public TapBubble openPlans;
     [Space]
     public ThinkBubble thinkBubble;
+    public Transform thinkBubbleTarget;
 
     #region Owning Components
     public Animator animator { get; private set; }
@@ -35,8 +35,9 @@ public class Lumberjack : MonoBehaviour
 
     #region FSM
     public FSM_BaseState fsm { get; private set; }
-    public FSM_MovingState movingState { get; private set; }
     public FSM_IdleState idleState { get; private set; }
+    public FSM_MovingState movingState { get; private set; }
+    public FSM_AutoMove autoMoveState { get; private set; }
     public FSM_ClimbingState climbingState { get; private set; }
     public FSM_JumpingState jumpingState{ get; private set; }
     public FSM_WorkingState workingState { get; private set; }
@@ -56,8 +57,9 @@ public class Lumberjack : MonoBehaviour
         plans.SetActive(false);
 
         // FSM
-        movingState = new FSM_MovingState();
         idleState = new FSM_IdleState();
+        movingState = new FSM_MovingState();
+        autoMoveState = new FSM_AutoMove();
         climbingState = new FSM_ClimbingState();
         jumpingState = new FSM_JumpingState();
         workingState = new FSM_WorkingState();
@@ -124,6 +126,12 @@ public class Lumberjack : MonoBehaviour
         jumpingState.land = landAt;
         ChangeFSM(jumpingState);
     }
+    public void AutoMoveTo(Vector3 pos, bool flipX)
+    {
+        autoMoveState.targetPos = pos;
+        autoMoveState.flip = flipX;
+        ChangeFSM(autoMoveState);
+    }
 
     public void Stabilize()
     {
@@ -184,6 +192,7 @@ public class Lumberjack : MonoBehaviour
     {
         return thinkBubble.Message(obj, time);
     }
+
     IEnumerator CoolDown()
     {
         while (coolDown > 0)

@@ -6,9 +6,14 @@ using UnityEngine;
 
 public class ThinkBubble : MonoBehaviour
 {
-    public bool isMessaging = false;
     public float coolDown = 0.0f;
+    GameObject content;
+    bubbleAnchor anchor;
 
+    private void Awake()
+    {
+        anchor = GetComponent<bubbleAnchor>();
+    }
 
     IEnumerator CoolDown()
     {
@@ -29,23 +34,22 @@ public class ThinkBubble : MonoBehaviour
     public Coroutine Message(GameObject obj, Func<bool> condition)
     {
         //if (messageRoutine != null) StopCoroutine(messageRoutine);
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            Destroy(transform.GetChild(i).gameObject);
-        }
-        Instantiate(obj, transform);
-        return StartCoroutine(MessageRoutine(condition));
+        if (content != null)
+            Destroy(content);
+        return StartCoroutine(MessageRoutine(obj, condition));
     }
 
 
-    public IEnumerator MessageRoutine(Func<bool> condition)
+    public IEnumerator MessageRoutine(GameObject obj, Func<bool> condition)
     {
-        isMessaging = true;
+        anchor.enabled = true;
+        yield return anchor.DisplayDots();
+        content = Instantiate(obj, transform);
         yield return new WaitWhile(() => condition.Invoke());
         for (int i = 0; i < transform.childCount; i++)
         {
             Destroy(transform.GetChild(i).gameObject);
         }
-        isMessaging = false;
+        GetComponent<bubbleAnchor>().enabled = false;
     }
 }

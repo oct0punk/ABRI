@@ -1,7 +1,6 @@
 using Cinemachine;
 using System;
 using UnityEngine;
-using UnityEngine.Playables;
 
 [SelectionBase]
 public class Chimney : MonoBehaviour
@@ -9,26 +8,16 @@ public class Chimney : MonoBehaviour
     public ConsumeBubble bubble;
     public CinemachineVirtualCamera cam;
     Combustible[] coms;
-    public PlayableDirector tl { get; private set; }
 
     private void Start()
     {
         coms = GetComponentsInChildren<Combustible>();
-        tl = GetComponent<PlayableDirector>();
-        bubble.action = PlayTimeline;
         bubble.gameObject.SetActive(false);
     }
 
     public int GetPower()
     {
         return Array.FindAll(coms, c => c.active).Length;
-    }
-
-    public void PlayTimeline()
-    {
-        tl.Play();
-        GameManager.instance.lumberjack.enabled = false;
-        bubble.action = Reload;
     }
 
     public void Reload()
