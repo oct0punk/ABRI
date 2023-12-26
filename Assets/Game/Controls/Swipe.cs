@@ -32,18 +32,15 @@ public class Swipe
 
         if (Input.GetMouseButtonDown(index))
         {
-            Debug.Log("click");
             startTouch = Input.mousePosition;
             isDragging = true;
         }
         if (Input.GetMouseButtonUp(index))
         {
-            Debug.Log("end");
             Reset();
         }
         if (Input.GetMouseButton(index))
         {
-            Debug.Log("hold");
             if (isDragging)
             {
                 swipeDelta = (Vector2)Input.mousePosition - startTouch;

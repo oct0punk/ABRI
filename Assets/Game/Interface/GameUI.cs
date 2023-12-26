@@ -118,7 +118,9 @@ public class GameUI : MonoBehaviour
     {
         GameObject res = Array.Find(images, im => im.name == name).prefab;
         if (res == null)
+        {
             Debug.LogWarning(name + " not found", this);
+        }
         return res;
     }
 

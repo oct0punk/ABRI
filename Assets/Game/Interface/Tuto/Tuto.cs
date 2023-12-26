@@ -50,10 +50,9 @@ public class Tuto : MonoBehaviour
         {
             yield return new WaitForSeconds(CameraManager.Possess(shelterCam));
             yield return lum.Message(ui.GetBubbleContentByName("shelterCold"), () => Input.touches.Length == 0);
-            lum.enabled = true;
-            lum.AutoMoveTo(chimneyPos.position, true);
-            yield return new WaitUntil(() => lum.fsm == lum.idleState);
-            lum.enabled = false;
+            lum.AutoMoveTo(chimneyPos.position, () => { lum.spriteRenderer.flipX = true; });
+            yield return new WaitWhile(() => lum.isAutoMoving);
+
             yield return new WaitForSeconds(CameraManager.Possess(chimneyCam));
             yield return lum.Message(ui.GetBubbleContentByName("chimneyOff"), () => Input.touches.Length == 0);
             yield return new WaitForSeconds(CameraManager.Possess(woodCam));
@@ -86,84 +85,100 @@ public class Tuto : MonoBehaviour
         }
 
         // Tuto Chimney
-        Chimney chimney = GameManager.instance.shelter.chimney;
-        chimney.bubble.touchTuto.SetActive(true);
-        bool chimneyTuto = false;
-        while (!chimneyTuto)
         {
-            yield return lum.Message(ui.GetBubbleContentByName("rightArrowToShelter"), () => !lum.indoor);
-            yield return new WaitForSeconds(.3f);
-            yield return new WaitWhile(() => chimney.GetPower() <= 0 && lum.indoor);
-            if (lum.indoor)
+            Chimney chimney = GameManager.instance.shelter.chimney;
+            chimney.bubble.touchTuto.SetActive(true);
+            bool chimneyTuto = false;
+            chimney.bubble.action = () => { chimneyTuto = true; };
+            while (!chimneyTuto)
             {
-                yield return new WaitForSeconds(1.3f);
-                lum.Message(ui.GetBubbleContentByName("HotChimney"), 1.0f);
-                chimneyTuto = true;
+                yield return lum.Message(ui.GetBubbleContentByName("rightArrowToShelter"), () => !lum.indoor);
+                yield return new WaitForSeconds(.3f);
+                yield return new WaitUntil(() => chimneyTuto || !lum.indoor);
+
+                // ChimneyCine
+                if (chimneyTuto)
+                {
+                    chimney.bubble.touchTuto.SetActive(false);
+                    chimney.bubble.gameObject.SetActive(false);
+                    lum.AutoMoveTo(chimneyPos.position, () => { lum.spriteRenderer.flipX = true; lum.enabled = false; });
+                    yield return new WaitForSeconds(CameraManager.Possess(chimney.cam));
+                    chimney.Reload();
+                    yield return new WaitForSeconds(.3f);
+                    yield return lum.Message(ui.GetBubbleContentByName("HotChimney"), () => Input.touches.Length == 0);
+
+                    chimney.bubble.action = () => { chimney.Reload(); };
+                    chimneyTuto = true;
+                }
             }
         }
-        chimney.bubble.touchTuto.SetActive(false);
-
-        // =§§yield return new WaitForSeconds((float)chimney.tl.duration);
 
         #endregion
 
-
-        #region  Utiliser l'établi
-        // Le bûcheron réfléchit, puis trouve une idée
-        yield return lum.Message(ui.GetBubbleContentByName("think"), 1.5f);
-        yield return new WaitForSeconds(.1f);
-        yield return lum.Message(ui.GetBubbleContentByName("light"), 1.0f);
-        yield return lum.Message(ui.GetBubbleContentByName("cutBranch"), () => lum.storage.Count(RawMatManager.instance.GetRawMatByName("Branch")) <= 0);
+        #region  Réparer le trou
 
         // TutoCraft
-        canCraft = true;
-        Workbench workbench = GameManager.instance.shelter.workbench;
-        bool craftTuto = false;
-        while (!craftTuto)
         {
-            yield return lum.Message(ui.GetBubbleContentByName("rightArrowToShelter"), () => !lum.indoor);
-            yield return new WaitForSeconds(.3f);
+            yield return new WaitForSeconds(CameraManager.Possess(pieceCam));
+            yield return new WaitForSeconds(1.0f);
+            Piece p = GameManager.instance.shelter.pieces[0];
+            yield return new WaitForSeconds(1.0f);
+            p.Break();
+
+            yield return new WaitForSeconds(CameraManager.Possess(lum.cam));
+            yield return lum.Message(ui.GetBubbleContentByName("holeRefreshShelter"), () => Input.touches.Length == 0);
+            yield return lum.Message(ui.GetBubbleContentByName("TransformWood"), () => Input.touches.Length == 0);
+
+            lum.AutoMoveTo(workbenchPos.position);
+            yield return new WaitWhile(() => lum.isAutoMoving);
+
+            Workbench workbench = GameManager.instance.shelter.workbench;
+            canCraft = true;
+            workbench.openBubble.gameObject.SetActive(true);
+
+            // Craft Planch
             workbench.openBubble.touchTuto.SetActive(true);
-            yield return lum.Message(ui.GetBubbleContentByName("workbench"), () => GameManager.instance.gameState != GameState.Craft && lum.indoor);
-            if (lum.indoor)
-            {   // Tuto workbench
-                workbench.closeBubble.gameObject.SetActive(false);
-                CraftBubble planchBubble = Array.Find(workbench.plans.GetComponentsInChildren<CraftBubble>(), b => b.material == RawMatManager.instance.GetRawMatByName("WoodPlanch"));
-                planchBubble.touchTuto.SetActive(true);
-                planchBubble.craftButton.touchTuto.SetActive(true);
-                yield return new WaitUntil(() => lum.storage.Count(RawMatManager.instance.GetRawMatByName("WoodPlanch")) > 0);
-                planchBubble.craftButton.touchTuto.SetActive(false);
-                craftTuto = true;
-            }
+            workbench.closeBubble.gameObject.SetActive(false);
+            CraftBubble planchBubble = Array.Find(workbench.plans.GetComponentsInChildren<CraftBubble>(), b => b.material == RawMatManager.instance.GetRawMatByName("WoodPlanch"));
+            planchBubble.touchTuto.SetActive(true);
+            planchBubble.craftButton.touchTuto.SetActive(true);
+            yield return new WaitUntil(() => lum.storage.Count(RawMatManager.instance.GetRawMatByName("WoodPlanch")) > 0);
+            planchBubble.craftButton.touchTuto.SetActive(false);
+
+            // Exit workbench
+            workbench.closeBubble.gameObject.SetActive(true);
+            workbench.closeBubble.touchTuto.SetActive(true);
+            workbench.openBubble.touchTuto.SetActive(false);
+            yield return new WaitWhile(() => GameManager.instance.gameState == GameState.Craft);
+            workbench.closeBubble.touchTuto.SetActive(false);
         }
-        workbench.closeBubble.gameObject.SetActive(true);
-        workbench.closeBubble.touchTuto.SetActive(true);
-        workbench.openBubble.touchTuto.SetActive(false);
-        yield return new WaitWhile(() => GameManager.instance.gameState == GameState.Craft);
-        workbench.closeBubble.touchTuto.SetActive(false);
-        Debug.Log("EndTutoCraft");
+
+
+        // TutoRepair
+        {
+            canBuild = true;
+            lum.openPlans.gameObject.SetActive(true);
+            lum.openPlans.touchTuto.SetActive(true);
+            yield return lum.Message(ui.GetBubbleContentByName("RepairPiece"), () => GameManager.instance.gameState != GameState.Build);
+
+            pieceTrail.gameObject.SetActive(true);
+            yield return new WaitUntil(() => pieceTrail.target.GetComponent<Piece>().alive);
+
+            Destroy(pieceTrail.gameObject);
+            closePlans.touchTuto.SetActive(true);
+            yield return new WaitWhile(() => GameManager.instance.gameState == GameState.Build);
+            closePlans.touchTuto.SetActive(false);
+
+            lum.openPlans.touchTuto.SetActive(false);
+        }
         #endregion
 
-        #region  pour réparer l'abri
-
-        canBuild = true;
-        lum.openPlans.touchTuto.SetActive(true);
-        yield return new WaitUntil(() => GameManager.instance.gameState == GameState.Build);
-        pieceTrail.gameObject.SetActive(true);
-        yield return new WaitUntil(() => pieceTrail.target.GetComponent<Piece>().alive);
-        Destroy(pieceTrail.gameObject);
-        closePlans.touchTuto.SetActive(true);
-        yield return new WaitWhile(() => GameManager.instance.gameState == GameState.Build);
-        closePlans.touchTuto.SetActive(false);
-
-        lum.openPlans.touchTuto.SetActive(false);
-        #endregion
-
-        updateWind = true;
+        lum.enabled = true;
 
         RawMatManager.instance.AddBubbleToWorkbench("Bridge");
         RawMatManager.instance.AddBubbleToWorkbench("Ladder");
 
+        updateWind = true;
         tutoBuildBridge = true;
     }
 

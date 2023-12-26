@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 892766922904875582}
   - component: {fileID: 2466051029319736335}
   m_Layer: 5
-  m_Name: shelterCold (2)
+  m_Name: arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 8095026972732343861}
   - component: {fileID: 3632160047802594220}
   - component: {fileID: 4309318930305254268}
+  - component: {fileID: 3268210247166268208}
   m_Layer: 5
   m_Name: rightArrowToShelter
   m_TagString: Untagged
@@ -227,3 +228,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &3268210247166268208
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139794255422948002}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e87e80272d6e12143b33cd35f1d8a91d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

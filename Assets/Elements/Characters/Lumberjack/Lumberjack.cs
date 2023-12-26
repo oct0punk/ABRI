@@ -12,6 +12,7 @@ public class Lumberjack : MonoBehaviour
     public int force = 1;
 
     [HideInInspector] public bool indoor = false;
+    public bool isAutoMoving = false;
     public bool canCut = false;
     public CinemachineVirtualCamera cam;
     public Pickable pickingResource { get; private set; }
@@ -126,10 +127,10 @@ public class Lumberjack : MonoBehaviour
         jumpingState.land = landAt;
         ChangeFSM(jumpingState);
     }
-    public void AutoMoveTo(Vector3 pos, bool flipX)
+    public void AutoMoveTo(Vector3 pos, Action action = null)
     {
         autoMoveState.targetPos = pos;
-        autoMoveState.flip = flipX;
+        autoMoveState.action = action;
         ChangeFSM(autoMoveState);
     }
 

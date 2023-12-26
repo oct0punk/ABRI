@@ -1,18 +1,17 @@
-
-
-using TMPro;
+using System;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 
 public class FSM_AutoMove : FSM_MovingState
 {
-    public bool isAutoMoving = false;
     public Vector3 targetPos;
-    public bool flip;
+    public Action action;
+    bool disableOnExit = false;
 
     public override void OnEnter(Lumberjack l)
     {
-        isAutoMoving = true;
+        disableOnExit = !l.enabled;
+        l.enabled = true;
+        l.isAutoMoving = true;
         GameManager.instance.ui.NoMove();
     }
 
@@ -22,10 +21,11 @@ public class FSM_AutoMove : FSM_MovingState
 
     public override void Update(Lumberjack l)
     {
-        if (Mathf.Abs((targetPos - l.transform.position).x) < .1f)
+        if (Mathf.Abs((targetPos - l.transform.position).x) < .01f)
         {
-            isAutoMoving = false;
-            l.spriteRenderer.flipX = flip;
+            l.isAutoMoving = false;
+            if (action != null) action();
+            if (disableOnExit)  l.enabled = false;
             l.ChangeFSM(l.idleState);
             return;
         }

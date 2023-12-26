@@ -21,6 +21,8 @@ public class CameraManager : MonoBehaviour
         ICinemachineCamera from = Instance.brain.ActiveVirtualCamera;
         Instance.brain.ActiveVirtualCamera.Priority = 0;
         newCam.Priority = 1;
-        return Instance.brain.m_CustomBlends.GetBlendForVirtualCameras(from.Name, newCam.Name, new CinemachineBlendDefinition()).m_Time;
+        float res = Instance.brain.m_CustomBlends.GetBlendForVirtualCameras(from.Name, newCam.Name, new CinemachineBlendDefinition()).m_Time;
+        if (res < .1f) return Instance.brain.m_DefaultBlend.BlendTime;
+        return res;
     }
 }

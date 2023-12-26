@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 1016030311451364124}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8095026972732343861}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 1533833021033418536}
   - component: {fileID: 682886014263663622}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 8095026972732343861}
   - component: {fileID: 3632160047802594220}
   - component: {fileID: 4309318930305254268}
+  - component: {fileID: 8478216277244288597}
   m_Layer: 5
   m_Name: missMat
   m_TagString: Untagged
@@ -227,3 +228,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &8478216277244288597
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139794255422948002}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3499d1d12ee2c8448b9470b1576116c7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
