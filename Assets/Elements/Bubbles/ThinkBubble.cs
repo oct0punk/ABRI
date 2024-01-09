@@ -17,6 +17,7 @@ public class ThinkBubble : MonoBehaviour
 
     IEnumerator CoolDown()
     {
+        yield return new WaitUntil(() => anchor.dotsDisplayed);
         while (coolDown > 0)
         {
             coolDown -= Time.deltaTime;

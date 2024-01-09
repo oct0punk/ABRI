@@ -73,7 +73,7 @@ public class Tuto : MonoBehaviour
             bool cutTuto = false;
             while (!cutTuto)
             {
-                yield return lum.Message(ui.GetBubbleContentByName("cutLog"), 1.0f);
+                yield return lum.Message(ui.GetBubbleContentByName("cutLog"), () => !lum.canCut);
                 yield return new WaitUntil(() => lum.storage.Count(RawMatManager.instance.GetRawMatByName("Branch")) > 1
                                               && lum.storage.Count(RawMatManager.instance.GetRawMatByName("Log")) > 0 || lum.indoor);
 
@@ -122,8 +122,8 @@ public class Tuto : MonoBehaviour
             yield return new WaitForSeconds(CameraManager.Possess(pieceCam));
             yield return new WaitForSeconds(1.0f);
             Piece p = GameManager.instance.shelter.pieces[0];
-            yield return new WaitForSeconds(1.0f);
             p.Break();
+            yield return new WaitForSeconds(1.0f);
 
             yield return new WaitForSeconds(CameraManager.Possess(lum.cam));
             yield return lum.Message(ui.GetBubbleContentByName("holeRefreshShelter"), () => Input.touches.Length == 0);

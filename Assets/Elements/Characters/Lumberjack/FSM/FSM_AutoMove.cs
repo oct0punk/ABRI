@@ -21,11 +21,11 @@ public class FSM_AutoMove : FSM_MovingState
 
     public override void Update(Lumberjack l)
     {
-        if (Mathf.Abs((targetPos - l.transform.position).x) < .01f)
+        if (Mathf.Abs((targetPos - l.transform.position).x) < .1f)
         {
             l.isAutoMoving = false;
-            if (action != null) action();
             if (disableOnExit)  l.enabled = false;
+            if (action != null) action();
             l.ChangeFSM(l.idleState);
             return;
         }

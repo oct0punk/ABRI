@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         EnterState(gameState);
     }
 
-    void ExitState(GameState state) { 
+    void ExitState(GameState state) {
         switch (state)
         {
             case GameState.Intro:
@@ -105,11 +105,8 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.Craft:
-                shelter.workbench.DisplayPlans();
-                lumberjack.CraftMode();
-                lumberjack.enabled = false;
                 CameraManager.Possess(shelter.workbench.cam);
-                // ui.inventory.gameObject.SetActive(true);
+                lumberjack.AutoMoveTo(shelter.workbench.transform.position, () => { lumberjack.CraftMode(shelter.workbench); });
                 break;
             
             case GameState.Build:

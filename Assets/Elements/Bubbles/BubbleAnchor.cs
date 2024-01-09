@@ -10,12 +10,14 @@ public class bubbleAnchor : MonoBehaviour
     RectTransform rect;
     public Vector2 offset = Vector2.one * .1f;
     public BubbleDot[] dots;
+    public bool dotsDisplayed { get; private set; }
 
     // Start is called before the first frame update
     protected void Start()
     {
         lum = GameManager.instance.lumberjack;
         rect = GetComponent<RectTransform>();
+        dotsDisplayed = false;
     }
 
 
@@ -24,6 +26,7 @@ public class bubbleAnchor : MonoBehaviour
         foreach (BubbleDot dot in dots)
         {
             dot.go.gameObject.SetActive(false);
+            dotsDisplayed = false;
         }
     }
 
@@ -33,6 +36,7 @@ public class bubbleAnchor : MonoBehaviour
             dots[i].go.gameObject.SetActive(true);
             yield return new WaitForSeconds(.2f);
         }
+        dotsDisplayed = true;
     }
 
     // Update is called once per frame

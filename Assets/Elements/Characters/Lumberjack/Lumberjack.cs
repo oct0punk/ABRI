@@ -292,18 +292,13 @@ public class Lumberjack : MonoBehaviour
     }
 
 
-    // ---------- CRAFT ----------
-    public void ExitCraftingMode()
-    { // event for button
-        workingState.canExit = true;
-        GameManager.instance.ChangeState(GameState.Indoor);
-    }
-
-    public void CraftMode()
+    // ---------- CRAFT ----------    
+    public void CraftMode(Workbench workbench)
     {
-        ThinkOf(false);
-        workingState.workBench = GameManager.instance.shelter.workbench;
+        workbench.DisplayPlans();
+        workingState.workBench = workbench;
         workingState.state = WorkState.Crafting;
         ChangeFSM(workingState);
+        enabled = false;
     }
 }
