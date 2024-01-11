@@ -17,7 +17,6 @@ public class Lumberjack : MonoBehaviour
     public CinemachineVirtualCamera cam;
     public Pickable pickingResource { get; private set; }
     LayerMask mask;
-    float coolDown = 0.0f;
 
     [Space]
     [Header("Constructions")]
