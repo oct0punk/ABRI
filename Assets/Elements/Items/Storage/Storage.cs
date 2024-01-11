@@ -42,9 +42,9 @@ public class Storage : MonoBehaviour
 
     StockRawMat GetMatInContent(RawMaterial material)
     {
-        StockRawMat mat = Array.Find(content, Mat => Mat.material.name == material.name);
-        if (mat != null)
-            return mat;
+        StockRawMat stock = Array.Find(content, Mat => Mat.material == material);
+        if (stock != null)
+            return stock;
         else { 
 
             // Create a new slot for the material

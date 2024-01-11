@@ -22,7 +22,7 @@ public class FSM_ClimbingState : FSM_BaseState
         l.Move(targetPos);
         if (Vector3.Distance(targetPos, l.transform.position) < .1f)
         {
-            l.ChangeFSM(l.movingState);                
+            l.ChangeFSM(l.idleState);
         }
     }
 }

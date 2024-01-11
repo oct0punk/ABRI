@@ -194,16 +194,6 @@ public class Lumberjack : MonoBehaviour
         return thinkBubble.Message(obj, time);
     }
 
-    IEnumerator CoolDown()
-    {
-        while (coolDown > 0)
-        {
-            coolDown -= Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-    }
-
-
     // ---------- CUTTING ----------
 
     public void OnResEnter(Pickable res)

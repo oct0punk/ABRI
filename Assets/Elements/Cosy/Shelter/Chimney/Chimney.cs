@@ -13,6 +13,7 @@ public class Chimney : MonoBehaviour
     {
         coms = GetComponentsInChildren<Combustible>();
         bubble.gameObject.SetActive(false);
+        bubble.action = () => { Reload(); };
     }
 
     public int GetPower()

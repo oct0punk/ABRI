@@ -170,7 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e94d914f6c4298f4a97f01e889737b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMessaging: 0
   coolDown: 0
 --- !u!1 &4305746182318589170
 GameObject:
@@ -394,11 +393,13 @@ MonoBehaviour:
   speed: 4
   force: 1
   indoor: 0
+  isAutoMoving: 0
   canCut: 0
   cam: {fileID: 0}
   plans: {fileID: 0}
   openPlans: {fileID: 3040736328534168293}
   thinkBubble: {fileID: 0}
+  thinkBubbleTarget: {fileID: 0}
 --- !u!114 &7678264919461317884
 MonoBehaviour:
   m_ObjectHideFlags: 0

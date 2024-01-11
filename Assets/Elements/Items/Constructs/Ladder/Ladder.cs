@@ -36,9 +36,7 @@ public class Ladder : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 3, LayerMask.GetMask("Platform"));
         if (hit)
         {
-            transform.SetParent(hit.transform);
-
-            //transform.localScale = new Vector3(1 / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);            
+            transform.SetParent(hit.transform);        
         }
     }
 

@@ -58,7 +58,6 @@ public class FSM_WorkingState : FSM_BaseState
 
     public override void Update(Lumberjack l)
     {
-        Debug.Log(canExit);
         if (condition.Invoke())
         {
             l.ChangeFSM(l.movingState);
