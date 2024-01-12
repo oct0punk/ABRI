@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6804816713165182165}
   - component: {fileID: 1122818843759967774}
   - component: {fileID: 380517034906365682}
+  - component: {fileID: 4936875077745782818}
   m_Layer: 0
   m_Name: Director
   m_TagString: MainCamera
@@ -56,6 +57,7 @@ MonoBehaviour:
   lumberjack: {fileID: 0}
   shelter: {fileID: 0}
   ui: {fileID: 0}
+  volume: {fileID: 0}
 --- !u!20 &80961404534833638
 Camera:
   m_ObjectHideFlags: 0
@@ -220,8 +222,6 @@ MonoBehaviour:
   swipes:
   - index: 0
   - index: 1
-  buildLadder: 0
-  construct: 0
 --- !u!114 &1122818843759967774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +234,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dc240e21a651e7498b8a9c4da674ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pieceTrail: {fileID: 0}
+  bridgeTrail: {fileID: 0}
+  closePlans: {fileID: 0}
+  shelterCam: {fileID: 0}
+  woodCam: {fileID: 0}
+  chimneyCam: {fileID: 0}
+  pieceCam: {fileID: 0}
+  chimneyPos: {fileID: 0}
+  workbenchPos: {fileID: 0}
 --- !u!114 &380517034906365682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,3 +261,139 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 680bd55be467dc043a530c07ac6a3656, type: 2}
   - {fileID: 11400000, guid: 31628c91969f2eb4c90118860c1887d2, type: 2}
   - {fileID: 11400000, guid: b1d8f1a80019d5d46b7ecf0148358321, type: 2}
+  rawBubbles: []
+--- !u!114 &4936875077745782818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3025364026344135649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ec0b184f679fe41b4ce6d1a3cadf95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OrthographicSize: 6
+  objectSettings:
+  - title: Shelter
+    theGameObject: {fileID: 0}
+    cullingAction: 2
+    size: {x: 6, y: 4}
+    offset: {x: 0, y: 4}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 0, g: 0.8978114, b: 1, a: 1}
+    showBorders: 1
+  - title: tree (2)
+    theGameObject: {fileID: 0}
+    cullingAction: 0
+    size: {x: 8.397639, y: 24.622427}
+    offset: {x: 3.838481, y: 23.811821}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 0.27660847, g: 1, b: 0, a: 1}
+    showBorders: 0
+  - title: tree (3)
+    theGameObject: {fileID: 0}
+    cullingAction: 0
+    size: {x: 8.397639, y: 24.622427}
+    offset: {x: 3.838478, y: 23.811821}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 0, g: 1, b: 0.3662486, a: 1}
+    showBorders: 0
+  - title: tree (1)
+    theGameObject: {fileID: 0}
+    cullingAction: 0
+    size: {x: 8.397639, y: 24.622427}
+    offset: {x: 3.838482, y: 23.811821}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 0, g: 1, b: 0.3662486, a: 1}
+    showBorders: 0
+  - title: tree (4)
+    theGameObject: {fileID: 0}
+    cullingAction: 0
+    size: {x: 8.397639, y: 24.622427}
+    offset: {x: 3.838478, y: 23.811821}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 0, g: 1, b: 0.3662486, a: 1}
+    showBorders: 0
+  - title: tree (2)
+    theGameObject: {fileID: 0}
+    cullingAction: 0
+    size: {x: 8.397639, y: 24.622427}
+    offset: {x: 3.838481, y: 23.811821}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 0, g: 1, b: 0.3662486, a: 1}
+    showBorders: 1
+  - title: tree (5)
+    theGameObject: {fileID: 0}
+    cullingAction: 0
+    size: {x: 8.397639, y: 24.622427}
+    offset: {x: 3.838482, y: 23.811821}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 0, g: 1, b: 0.3662486, a: 1}
+    showBorders: 0
+  - title: Platform
+    theGameObject: {fileID: 0}
+    cullingAction: 2
+    size: {x: 7.2571015, y: 0.5000017}
+    offset: {x: 0, y: 0}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 1, g: 0, b: 0.020187855, a: 1}
+    showBorders: 0
+  - title: Platform (1)
+    theGameObject: {fileID: 0}
+    cullingAction: 2
+    size: {x: 4.0552163, y: 0.5}
+    offset: {x: 0, y: 0}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 1, g: 0, b: 0.020187855, a: 1}
+    showBorders: 0
+  - title: Platform (3)
+    theGameObject: {fileID: 0}
+    cullingAction: 2
+    size: {x: 3.3679628, y: 0.5000004}
+    offset: {x: 0, y: 0}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 1, g: 0, b: 0.020187855, a: 1}
+    showBorders: 0
+  - title: Platform (5)
+    theGameObject: {fileID: 0}
+    cullingAction: 2
+    size: {x: 4.0552163, y: 0.50000024}
+    offset: {x: 0, y: 0}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 1, g: 0, b: 0.020187855, a: 1}
+    showBorders: 0
+  - title: Platform (6)
+    theGameObject: {fileID: 0}
+    cullingAction: 2
+    size: {x: 4.0552163, y: 0.5000005}
+    offset: {x: 0, y: 0}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 1, g: 0, b: 0.020187855, a: 1}
+    showBorders: 0
+  - title: Platform (1)
+    theGameObject: {fileID: 0}
+    cullingAction: 2
+    size: {x: 4.0552163, y: 0.50000095}
+    offset: {x: 0, y: 0}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 1, g: 0, b: 0.020187855, a: 1}
+    showBorders: 0
+  - title: Platform
+    theGameObject: {fileID: 0}
+    cullingAction: 2
+    size: {x: 4.0552163, y: 0.5000005}
+    offset: {x: 0, y: 0}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 1, g: 0, b: 0.020187855, a: 1}
+    showBorders: 0
+  - title: Platform
+    theGameObject: {fileID: 0}
+    cullingAction: 2
+    size: {x: 4.0552163, y: 0.5000005}
+    offset: {x: 0, y: 0}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 1, g: 0, b: 0.020187855, a: 1}
+    showBorders: 0
+  updateRateInSeconds: 0.1

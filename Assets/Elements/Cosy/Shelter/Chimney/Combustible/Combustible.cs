@@ -18,7 +18,7 @@ public class Combustible : MonoBehaviour
         if (consuming < 1.0f)
         {
             active = true;
-            Shelter.UpdateSpeed(intensity);
+            GameManager.instance.shelter.UpdateSpeed(intensity);
         }
     }
     private void Update()
@@ -35,7 +35,7 @@ public class Combustible : MonoBehaviour
     public void Activate()
     {
         if (!active)
-            Shelter.UpdateSpeed(intensity);
+            GameManager.instance.shelter.UpdateSpeed(intensity);
         consuming = 0.0f;
         active = true;
     }
@@ -43,7 +43,7 @@ public class Combustible : MonoBehaviour
     {
         if (!active) return;
         
-        Shelter.UpdateSpeed(-intensity);        
+        GameManager.instance.shelter.UpdateSpeed(-intensity);        
         active = false;
     }
 

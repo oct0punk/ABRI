@@ -128,6 +128,7 @@ public class Lumberjack : MonoBehaviour
     }
     public void AutoMoveTo(Vector3 pos, Action action = null)
     {
+        pos.z = transform.position.z;
         autoMoveState.targetPos = pos;
         autoMoveState.action = action;
         ChangeFSM(autoMoveState);

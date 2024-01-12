@@ -5,6 +5,7 @@ using UnityEngine;
 [SelectionBase]
 public class Chimney : MonoBehaviour
 {
+    public Transform reloadPos;
     public ConsumeBubble bubble;
     public CinemachineVirtualCamera cam;
     Combustible[] coms;
@@ -13,7 +14,7 @@ public class Chimney : MonoBehaviour
     {
         coms = GetComponentsInChildren<Combustible>();
         bubble.gameObject.SetActive(false);
-        bubble.action = () => { Reload(); };
+        bubble.action = () => { GameManager.instance.lumberjack.AutoMoveTo(reloadPos.position, () => Reload()); };
     }
 
     public int GetPower()

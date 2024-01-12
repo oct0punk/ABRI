@@ -46,7 +46,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public virtual void OnDrag(PointerEventData eventData)
     {
         if (!gotTheRawMats) return;
-        m_RectTransform.anchoredPosition += eventData.delta/* / GetComponentInParent<Canvas>().scaleFactor*/;
+        m_RectTransform.anchoredPosition += eventData.delta / GetComponentInParent<Canvas>().scaleFactor;
         if (condition.Invoke(eventData))
             OnDragCorrect(eventData);
         else

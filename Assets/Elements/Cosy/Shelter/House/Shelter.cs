@@ -1,14 +1,13 @@
-using System;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
-using Unity.VisualScripting;
+using UnityEditor;
+using System;
 
 [SelectionBase]
 public class Shelter : MonoBehaviour
 {
-    [Header("Enter")]
     [SerializeField] SpriteRenderer ext;
     [SerializeField] new Light2D light;
     public CinemachineVirtualCamera cam;
@@ -23,6 +22,8 @@ public class Shelter : MonoBehaviour
     Storm storm;
     [Space]
     [SerializeField] Slider thermometer;
+    [Space]
+    public AudioSource brokenWind;
     public Storage storage { get; private set; }
     public Piece[] pieces;
     public Workbench workbench;
@@ -69,9 +70,19 @@ public class Shelter : MonoBehaviour
 
         thermometer.value = Mathf.Lerp(0.0f, 1.0f, temperature / maxTemperature);
     }
-    public static void UpdateSpeed(int amount)
+    public void UpdateSpeed(int amount)
     {
-        GameManager.instance.shelter.push += amount;
+        push += amount;
+        if (Array.TrueForAll<Piece>(pieces, p => p.alive))
+        {
+            if (brokenWind.isPlaying)
+            brokenWind.Stop();
+        }
+        else
+        {
+            if (!brokenWind.isPlaying)
+            brokenWind.Play();
+        }
     }
 
 

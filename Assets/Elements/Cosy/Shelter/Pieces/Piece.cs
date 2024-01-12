@@ -34,7 +34,7 @@ public class Piece : MonoBehaviour
         alive = false;
         GetComponent<SpriteRenderer>().color = Color.black;
         collider.enabled = true;
-        Shelter.UpdateSpeed(-1);
+        GameManager.instance.shelter.UpdateSpeed(-1);
     }
 
     public void Repair()
@@ -43,7 +43,7 @@ public class Piece : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.white;
         collider.enabled = false;
         life = Random.Range(solid, solid + 4);
-        Shelter.UpdateSpeed(1);
+        GameManager.instance.shelter.UpdateSpeed(1);
     }
 
     /*USP : 
