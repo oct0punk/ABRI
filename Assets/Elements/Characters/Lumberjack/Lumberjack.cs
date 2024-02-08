@@ -90,11 +90,6 @@ public class Lumberjack : MonoBehaviour
         fsm = newState;
         fsm.OnEnter(this);
     }
-
-    public void SetSpriteColor(Color c)
-    {
-        GetComponentInChildren<SpriteRenderer>().color = c;
-    }
     public void ResetGlobalScale()
     {
         transform.localScale = Vector3.one;

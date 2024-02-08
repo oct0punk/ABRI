@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6321055dbc335e84a8f9169caa6f0a6f, type: 3}
   m_Name: Branch
   m_EditorClassIdentifier: 
-  resistance: 0
+  resistance: 1
   icon: {fileID: 3382772228669368103, guid: 6f99b1c74e8f34545b453133fa068fb2, type: 3}
   timeBeforeRevive: {x: 30, y: 40}
+  audioName: BranchCut

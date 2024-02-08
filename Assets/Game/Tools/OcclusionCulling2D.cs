@@ -10,8 +10,6 @@ public enum CullingAction
 
 public class OcclusionCulling2D : MonoBehaviour
 {
-    public float OrthographicSize = 10.0f;
-
     [System.Serializable]
     public class ObjectSettings
     {
@@ -51,7 +49,7 @@ public class OcclusionCulling2D : MonoBehaviour
     {
         camera = GetComponent<Camera>();
 
-        cameraHalfWidth = OrthographicSize * ((float)Screen.width / (float)Screen.height);
+        cameraHalfWidth = camera.orthographicSize * ((float)Screen.width / (float)Screen.height) * 10;
 
         foreach (ObjectSettings o in objectSettings)
         {

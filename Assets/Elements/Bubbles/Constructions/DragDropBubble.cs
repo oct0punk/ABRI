@@ -84,6 +84,7 @@ public class DragDropBubble : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         m_RectTransform.anchoredPosition = Vector3.zero;
         lumStorage.Add(construction, -1);
         UpdateAllGotMats();
+        AudioManager.Instance.Play("Build");
     }
     protected virtual void OnError(PointerEventData eventData)
     {

@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -7,15 +6,23 @@ public struct Sound
 {
     public string name;
     public AudioClip clip;
-    public AudioSource source;
+    [HideInInspector] public AudioSource source;
+    [Range(0f,1f)] public float volume;
     public bool loop;
     public bool playOnAwake;
+}
+
+[Serializable]
+public struct Fade
+{
+    public string name;
+    public AudioFade audio;
 }
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
-    public AudioFade windFade;
+    public Fade[] fades;
     [SerializeField] Sound[] sounds;
 
     private void Awake()
@@ -27,6 +34,7 @@ public class AudioManager : MonoBehaviour
             if (sounds[i].source != null) continue;
             AudioSource source = gameObject.AddComponent<AudioSource>();
             source.clip = sounds[i].clip; 
+            source.volume = sounds[i].volume;
             source.loop = sounds[i].loop;
             if (sounds[i].playOnAwake) {
                 source.playOnAwake = true;
@@ -43,5 +51,10 @@ public class AudioManager : MonoBehaviour
             sound.source.Play();
         else
             Debug.LogWarning("Sound " + name + " not found.");
+    }
+
+    public AudioFade GetFadeByName(string name)
+    {
+        return Array.Find(fades, f => f.name == name).audio;
     }
 }

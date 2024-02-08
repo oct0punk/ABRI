@@ -15,13 +15,16 @@ public class Pickable : MonoBehaviour
     private void Start()
     {
         collider = GetComponent<Collider2D>();
+        maxResistance = material.resistance;
         Reset();
         trail.SetActive(false);
+        GetComponentInChildren<SpriteRenderer>().sprite = material.icon;
     }
 
     public void Resist(Lumberjack l)
     {
         resistance -= l.force;
+        AudioManager.Instance.Play(material.audioName);
         if (resistance <= 0)
             OnDie(l);
     }

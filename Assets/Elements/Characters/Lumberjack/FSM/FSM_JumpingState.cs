@@ -17,7 +17,6 @@ public class FSM_JumpingState : FSM_BaseState
     {
         parent = null;
         t = .0f;
-        l.SetSpriteColor(Color.yellow);
         l.animator.SetBool("isJumping", true);
         start = l.transform.position;
 

@@ -20,7 +20,6 @@ public class FSM_WorkingState : FSM_BaseState
     {
         canExit = false;
         condition = () => canExit == true;
-        l.SetSpriteColor(Color.red);
         l.animator.SetBool("isWorking", true);
         switch (state)
         {

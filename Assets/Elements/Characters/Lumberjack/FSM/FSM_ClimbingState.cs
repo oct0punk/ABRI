@@ -7,7 +7,6 @@ public class FSM_ClimbingState : FSM_BaseState
     public Vector3 targetPos;
     public override void OnEnter(Lumberjack l)
     {
-        l.SetSpriteColor(Color.green);
         l.animator.SetBool("isClimbing", true);
         Tuto.tutoClimb = false;
     }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class repairTutoTrail : MonoBehaviour
 {
+    [Tooltip("bonjour")]
     public RectTransform start;
     public Transform target;
     public TrailRenderer trail;
@@ -11,12 +12,16 @@ public class repairTutoTrail : MonoBehaviour
 
     private void Update()
     {
+        Vector3 startPos = Camera.main.ScreenToWorldPoint(start.position);
+        Vector3 endPos = target.position;
+        startPos.z = endPos.z = -9;
         time += Time.deltaTime;
+
         if (time > 2.0f)
         {
             tuto.SetActive(true);
             time = -0.3f;
-            transform.position = Camera.main.ScreenToWorldPoint(start.position);
+            transform.position = startPos;
         }
         else if (time > 1.5f)
         {
@@ -27,7 +32,7 @@ public class repairTutoTrail : MonoBehaviour
         {
             if (time > 0.0f)
             {
-                transform.position = Vector3.Lerp(Camera.main.ScreenToWorldPoint(start.position), target.position, curve.Evaluate(time));
+                transform.position = Vector3.Lerp(startPos, endPos, curve.Evaluate(time));
                 trail.emitting = true;
             }
         }
