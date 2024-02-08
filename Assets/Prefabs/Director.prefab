@@ -4845,7 +4845,6 @@ GameObject:
   - component: {fileID: 7355041408745163962}
   - component: {fileID: 4777251525425930465}
   - component: {fileID: 6804816713165182165}
-  - component: {fileID: 1122818843759967774}
   - component: {fileID: 380517034906365682}
   - component: {fileID: 4936875077745782818}
   m_Layer: 0
@@ -4924,7 +4923,7 @@ Camera:
   far clip plane: 5000
   field of view: 32.65
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -5053,27 +5052,6 @@ MonoBehaviour:
   swipes:
   - index: 0
   - index: 1
---- !u!114 &1122818843759967774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3025364026344135649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dc240e21a651e7498b8a9c4da674ee3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pieceTrail: {fileID: 0}
-  bridgeTrail: {fileID: 0}
-  closePlans: {fileID: 0}
-  shelterCam: {fileID: 0}
-  woodCam: {fileID: 0}
-  chimneyCam: {fileID: 0}
-  pieceCam: {fileID: 0}
-  chimneyPos: {fileID: 0}
-  workbenchPos: {fileID: 0}
 --- !u!114 &380517034906365682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5086,12 +5064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdde21cf9604d624db1893ce7279e616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawMaterials:
-  - {fileID: 11400000, guid: 609a52149a9b357439cd41e4fa8a42d4, type: 2}
-  - {fileID: 11400000, guid: 015369227cd87d04cbb0f62846ba3218, type: 2}
-  - {fileID: 11400000, guid: 680bd55be467dc043a530c07ac6a3656, type: 2}
-  - {fileID: 11400000, guid: 31628c91969f2eb4c90118860c1887d2, type: 2}
-  - {fileID: 11400000, guid: b1d8f1a80019d5d46b7ecf0148358321, type: 2}
+  rawMaterials: []
   rawBubbles: []
 --- !u!114 &4936875077745782818
 MonoBehaviour:
@@ -5105,7 +5078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7ec0b184f679fe41b4ce6d1a3cadf95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OrthographicSize: 6
   objectSettings:
   - title: Shelter
     theGameObject: {fileID: 0}
@@ -10082,13 +10054,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4641000349547103412}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.9166822, w: 0.39961714}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 9.950879, y: -1.2210306, z: 16.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1522959856338995960}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 132.892}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!198 &2897975996206485958
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -10172,7 +10144,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 10
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -10720,11 +10692,11 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 2
-    angle: 8.5
+    type: 12
+    angle: 0
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0.01
+    radiusThickness: 0
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -10807,13 +10779,13 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 6.37
-      mode: 0
+      value: 5.9
+      mode: 2
       spread: 0
       speed:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 11.5
+        scalar: 22
         minScalar: 1
         maxCurve:
           serializedVersion: 2
@@ -10864,7 +10836,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
     arc:
-      value: 90
+      value: 0
       mode: 0
       spread: 0
       speed:
@@ -11551,7 +11523,7 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -11.9
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -11604,7 +11576,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 9.31
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -11816,8 +11788,8 @@ ParticleSystem:
     orbitalZ:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.91
-      minScalar: -0.46
+      scalar: 0
+      minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -12131,7 +12103,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    inWorldSpace: 1
+    inWorldSpace: 0
   InheritVelocityModule:
     enabled: 0
     m_Mode: 0
