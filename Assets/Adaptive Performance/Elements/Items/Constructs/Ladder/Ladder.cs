@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 [SelectionBase]
 public class Ladder : MonoBehaviour
@@ -8,7 +9,31 @@ public class Ladder : MonoBehaviour
     BoxCollider2D box;
     public GameObject arrow;
     public GameObject swipeTuto;
-    
+
+
+    private void Awake()
+    {
+        sprite = GetComponentInChildren<SpriteRenderer>();
+        box = GetComponent<BoxCollider2D>();
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Platform"));
+        if (hit)
+        {
+            transform.SetParent(hit.transform);
+            transform.position = new Vector3(hit.point.x, hit.point.y, 3);
+        }
+        hit = Physics2D.Raycast(transform.position + Vector3.up , Vector2.up, Mathf.Infinity, LayerMask.GetMask("Platform"));
+        if (hit)
+        {
+            hit = Physics2D.Raycast(hit.point + Vector2.up * 2, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Platform"));
+            if (hit)
+                SetHeight(Vector3.Distance(transform.position, hit.point));
+        }
+    }
+
+    public float getHeight()
+    {
+        return sprite.bounds.size.y;
+    }
     public void SetHeight(float height)
     {
         sprite.transform.localScale = new Vector3(1, height, 1);
@@ -16,29 +41,11 @@ public class Ladder : MonoBehaviour
         box.size = new Vector2(1, height);
         box.offset = new Vector2(0, height / 2);
     }
-
-    private void Awake()
+    public Vector3 Top()
     {
-        sprite = GetComponentInChildren<SpriteRenderer>();
-        box = GetComponent<BoxCollider2D>();
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Platform"));
-        if (hit)
-            transform.SetParent(hit.transform);
+        return transform.position + transform.up * getHeight();
     }
 
-    public float getHeight()
-    {
-        return sprite.bounds.size.y;
-    }
-
-    private void Start()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 3, LayerMask.GetMask("Platform"));
-        if (hit)
-        {
-            transform.SetParent(hit.transform);        
-        }
-    }
 
     private void Update()
     {
@@ -47,7 +54,8 @@ public class Ladder : MonoBehaviour
         if (l == null) return;
         if (l.fsm != l.movingState && l.fsm != l.idleState) return;
 
-        if (SwipeManager.ClimbUp()) {
+        if (SwipeManager.ClimbUp())
+        {
             if (isAtBottom(l))
             {
                 l.ClimbUp(this);
@@ -56,7 +64,8 @@ public class Ladder : MonoBehaviour
                 arrow.transform.transform.localScale = Vector3.one;
             }
         }
-        else if (SwipeManager.ClimbDown()) {
+        else if (SwipeManager.ClimbDown())
+        {
             if (!isAtBottom(l))
             {
                 l.ClimbDown(this);
@@ -65,7 +74,7 @@ public class Ladder : MonoBehaviour
                 arrow.transform.transform.localScale = new Vector3(1, -1, 1);
             }
         }
-    }   
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -75,17 +84,7 @@ public class Ladder : MonoBehaviour
             l = p;
             enabled = true;
 
-            arrow.SetActive(GameManager.instance.gameState != GameState.Tuto);            
-            if (isAtBottom(l))
-            {
-                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, .5f, 0.0f), Quaternion.Euler(0, 0, -90));
-            } 
-            else
-            {
-                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, getHeight() - .5f, 0.0f), Quaternion.Euler(0, 0, 90));
-            }
-            swipeTuto.SetActive(Tuto.tutoClimb);
-
+            ActivateArrow(l);
         }
     }
 
@@ -100,9 +99,23 @@ public class Ladder : MonoBehaviour
         }
     }
 
+
     bool isAtBottom(Lumberjack lum)
     {
-        return  Vector3.Distance(lum.transform.position, transform.position) < 
+        return Vector3.Distance(lum.transform.position, transform.position) <
                 Vector3.Distance(lum.transform.position, transform.position + Vector3.up * getHeight());
+    }
+    public void ActivateArrow(Lumberjack l)
+    {
+        arrow.SetActive(true);
+        if (isAtBottom(l))
+        {
+            arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.5f, .5f, 0.0f), Quaternion.Euler(0, 0, -90));
+        }
+        else
+        {
+            arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.5f, getHeight() - .5f, 0.0f), Quaternion.Euler(0, 0, 90));
+        }
+        swipeTuto.SetActive(true);
     }
 }

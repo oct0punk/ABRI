@@ -5,24 +5,40 @@ using UnityEngine;
 
 public class Bridge : MonoBehaviour
 {
+    public bool buildOnStart;
+
     public Transform left;
     public Transform right;
 
 
     public GameObject fill;
-    [Min(.1f)]
-    public float l;
+    [Min(.1f)] public float distBetweenEachPlanchs;
 
     List<HingeJoint2D> joints;
 
-
-    public void Build(Transform left, Transform right)
+    private void Awake()
     {
-        Building(left, right);
-        // StartCoroutine(ComputeJoints(joints));
+        RaycastHit2D hit = Physics2D.Raycast(left.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Platform"));
+        if (hit)
+        {
+            left.transform.SetParent(hit.transform);
+        }
+        hit = Physics2D.Raycast(right.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Platform"));
+        if (hit)
+        {
+            right.transform.SetParent(hit.transform);
+        }
+
+        if (buildOnStart)
+            Build();
     }
 
-    public void Building(Transform left, Transform right)
+    public void Build()
+    {
+        Build(left, right);
+    }
+
+    public void Build(Transform left, Transform right)
     {
         // Init
         this.left = left;
@@ -33,15 +49,13 @@ public class Bridge : MonoBehaviour
         Vector3 vec = this.right.transform.position - this.left.transform.position;
 
         // Fill
-        for (float t = l / 2; t < dist; t += l)
+        for (float t = distBetweenEachPlanchs / 2; t < dist; t += distBetweenEachPlanchs)
         {
             Vector3 pos = Vector3.Lerp(left.transform.position, right.transform.position, t / dist);
             Quaternion rot = Quaternion.Euler(0, 0, Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg);
             GameObject go = Instantiate(fill, transform);
             go.transform.SetLocalPositionAndRotation(pos, rot);
             go.name = t.ToString();
-            //go.GetComponent<HingeJoint2D>().connectedAnchor = new Vector2(.5f, 0.0f);
-            //go.GetComponent<HingeJoint2D>().autoConfigureConnectedAnchor = false;
             joints.Add(go.GetComponent<HingeJoint2D>());
         }
         joints.Add(right.GetComponent<HingeJoint2D>());
@@ -49,6 +63,7 @@ public class Bridge : MonoBehaviour
 
         // Setup joints 
         joints[0].connectedBody = left.GetComponent<Rigidbody2D>();
+        joints[0].connectedAnchor = new Vector2(fill.transform.localScale.x / 2, 0);
         for (int i = 1; i < joints.Count; i++)
         {
             joints[i].connectedBody = joints[i - 1].GetComponent<Rigidbody2D>();
@@ -72,7 +87,7 @@ public class Bridge : MonoBehaviour
         float dist = Vector3.Distance(left.transform.position, right.transform.position);
         Vector3 vec = right.transform.position - left.transform.position;
 
-        for (float t = l / 2; t < dist; t += l)
+        for (float t = distBetweenEachPlanchs / 2; t < dist; t += distBetweenEachPlanchs)
         {
             Vector3 pos = Vector3.Lerp(left.transform.position, right.transform.position, t / dist);
             Quaternion rot = Quaternion.Euler(0, 0, Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg);

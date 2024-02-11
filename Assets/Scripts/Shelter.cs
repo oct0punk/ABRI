@@ -24,25 +24,19 @@ public class Shelter : MonoBehaviour
     [SerializeField] Slider thermometer;
     [Space]
     public AudioSource brokenWind;
-    public Storage storage { get; private set; }
     public Piece[] pieces;
-    public Workbench workbench;
-    public Chimney chimney;
 
 
     void Awake()
     {
         storm = GetComponent<Storm>();
         pieces = GetComponentsInChildren<Piece>();
-        storage = GetComponentInChildren<Storage>();
     }
 
 
 
     private void Update()
     {
-        if (!Tuto.updateWind) return;
-
         ChangeTemperature(push * Time.deltaTime * speed);
 
         timeBeforeNextGust -= Time.deltaTime;
@@ -54,7 +48,6 @@ public class Shelter : MonoBehaviour
                 p.Resist(storm.wind);
             }
         }
-
     }
 
 
@@ -95,14 +88,6 @@ public class Shelter : MonoBehaviour
         {
             GameManager.instance.ChangeState(GameState.Indoor);
             OnEnter();
-
-            // Store planchs
-            //RawMaterial mat = RawMatManager.instance.GetRawMatByName("WoodPlanch");
-            //int iter = lum.storage.Count(mat);
-            //if (iter == 0) return;
-            //Debug.Log("Lum enter : " + iter + " empty emplacements");
-            //lum.storage.Add(mat, -iter);
-            //storage.Add(mat, iter);
         }
     }
     void OnEnter()
@@ -121,13 +106,6 @@ public class Shelter : MonoBehaviour
         {
             GameManager.instance.ChangeState(GameState.Explore);
             OnExit();
-
-            // Restore planchs
-            //RawMaterial material = RawMatManager.instance.GetRawMatByName("WoodPlanch");
-            //int iter = Mathf.Min(storage.Count(material), lum.storage.CountEmpty(material));
-            //if (iter == 0) return;
-            //lum.storage.Add(material, iter);
-            //storage.Add(material, -iter);
         }
     }
     void OnExit()

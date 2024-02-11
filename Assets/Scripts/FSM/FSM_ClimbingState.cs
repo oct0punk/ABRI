@@ -1,23 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class FSM_ClimbingState : FSM_BaseState
 {
-    public Vector3 targetPos;
+    public Ladder ladder;
+    public bool climbDown;
+    Vector3 targetPos;
+
     public override void OnEnter(Lumberjack l)
     {
+        l.transform.SetParent(ladder.transform);
         l.animator.SetBool("isClimbing", true);
-        Tuto.tutoClimb = false;
     }
 
     public override void OnExit(Lumberjack l)
     {
         l.animator.SetBool("isClimbing", false);
+        ladder.ActivateArrow(l);
     }
 
     public override void Update(Lumberjack l)
     {
+        targetPos = climbDown ? ladder.transform.position : ladder.Top();
         l.Move(targetPos);
         if (Vector3.Distance(targetPos, l.transform.position) < .1f)
         {

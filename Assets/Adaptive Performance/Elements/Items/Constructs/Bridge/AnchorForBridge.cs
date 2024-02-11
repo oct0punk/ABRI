@@ -40,7 +40,7 @@ public class AnchorForBridge : MonoBehaviour
         Bridge bridge = Instantiate(bridgePrefab).GetComponent<Bridge>();
         bridge.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
         
-        bridge.Build(left, right);
+        // bridge.Build(left, right);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,11 +49,6 @@ public class AnchorForBridge : MonoBehaviour
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum == null) return;
         present = true;
-
-        if (Tuto.tutoBuildBridge)
-            StartCoroutine(GameManager.instance.tuto.BuildBridgeTuto(lum, this));
-        else if (Tuto.canBuild)
-            lum.Message(GameManager.instance.ui.GetBubbleContentByName("BuildBridge"), () => present && GameManager.instance.gameState != GameState.Build);
     }
 
     private void OnTriggerExit2D(Collider2D collision)

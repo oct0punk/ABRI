@@ -1,58 +1,25 @@
 using System;
-using UnityEngine;
-
-public enum WorkState
-{
-    Cutting,
-    Building,
-    Crafting,
-}
 
 public class FSM_WorkingState : FSM_BaseState
 {
-    public WorkState state;
     Func<bool> condition;
     public bool canExit = false;
     Action<Lumberjack> updateFunc;
-    internal Workbench workBench;
 
     public override void OnEnter(Lumberjack l)
     {
         canExit = false;
         condition = () => canExit == true;
         l.animator.SetBool("isWorking", true);
-        switch (state)
-        {
-            case WorkState.Building:
-                GameManager.instance.ChangeState(GameState.Build);
-                updateFunc = BuildingUpdate;
-                l.plans.SetActive(true);
-                break;
-            case WorkState.Crafting:
-                updateFunc = CraftUpdate;
-                break;
-            case WorkState.Cutting:
-                updateFunc = CuttingUpdate;
-                condition = () => !l.pickingResource.alive;
-                break;
-        }
+        
+        updateFunc = CuttingUpdate;
+        condition = () => !l.pickingResource.alive;
     }
 
 
     public override void OnExit(Lumberjack l)
     {
         l.animator.SetBool("isWorking", false);
-        switch (state)
-        {
-            case WorkState.Building:
-                GameManager.instance.ChangeState(l.indoor ? GameState.Indoor : GameState.Explore);
-                l.ThinkOf(false);
-                break;
-            case WorkState.Crafting:
-                break;
-            case WorkState.Cutting:
-                break;                
-        }
     }
 
     public override void Update(Lumberjack l)

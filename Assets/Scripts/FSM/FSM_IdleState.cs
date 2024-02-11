@@ -15,7 +15,6 @@ public class FSM_IdleState : FSM_BaseState
         if (l.isAutoMoving) l.ChangeFSM(l.autoMoveState);
         GameManager.instance.ui.NoMove();
         l.animator.SetBool("isWalking", false);
-        l.ThinkOf(false);
 
         time = 1.0f;
     }
@@ -27,17 +26,6 @@ public class FSM_IdleState : FSM_BaseState
         if (SwipeManager.MoveLeft() || SwipeManager.MoveRight()) {
             l.ChangeFSM(l.movingState);
             return;
-        }
-        if (!Tuto.canBuild) return;
-        if (GameManager.instance.gameState == GameState.Craft) return;
-
-        if (time > 0.0f)
-        {
-            time -= Time.deltaTime;
-            if (time <= 0.0f)
-            {
-                l.ThinkOf(true);
-            }
         }
     }
 
@@ -59,6 +47,6 @@ public class FSM_IdleState : FSM_BaseState
 
     public override void OnExit(Lumberjack l)
     {
-        l.ThinkOf(false);
+
     }
 }

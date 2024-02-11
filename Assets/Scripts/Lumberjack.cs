@@ -17,11 +17,6 @@ public class Lumberjack : MonoBehaviour
     public CinemachineVirtualCamera cam;
     public Pickable pickingResource { get; private set; }
     LayerMask mask;
-
-    [Space]
-    [Header("Constructions")]
-    public GameObject plans;
-    public TapBubble openPlans;
     [Space]
     public ThinkBubble thinkBubble;
     public Transform thinkBubbleTarget;
@@ -30,7 +25,6 @@ public class Lumberjack : MonoBehaviour
     public Animator animator { get; private set; }
     public SpriteRenderer spriteRenderer { get; private set; }
     public List<Pickable> canCutRes { get; private set; }
-    public Storage storage { get; private set; }
     #endregion
 
     #region FSM
@@ -51,10 +45,8 @@ public class Lumberjack : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         canCutRes = new List<Pickable>();
-        storage = GetComponent<Storage>();
 
         mask = LayerMask.GetMask("Platform");
-        plans.SetActive(false);
 
         // FSM
         idleState = new FSM_IdleState();
@@ -65,8 +57,6 @@ public class Lumberjack : MonoBehaviour
         workingState = new FSM_WorkingState();
         fsm = idleState;
         fsm.OnEnter(this);
-
-        ThinkOf(false);
     }
 
     private void Update()
@@ -148,29 +138,17 @@ public class Lumberjack : MonoBehaviour
     #region Climb
     public void ClimbUp(Ladder ladder)
     {
-        Vector3 pos = ladder.transform.position + Vector3.up * ladder.getHeight();
-        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.down, 2, LayerMask.GetMask("Platform"));
-        if (hit)
-            pos = hit.point;
-
-        Climb(ladder, pos);
+        Climb(ladder, false);
     }
     public void ClimbDown(Ladder ladder)
     {
-        Climb(ladder, ladder.transform.position);
+        Climb(ladder, true);
     }
-    void Climb(Ladder ladder, Vector3 pos)
+    void Climb(Ladder ladder, bool climbDown)
     {
-        climbingState.targetPos = pos;
-        transform.SetParent(ladder.transform);
+        climbingState.ladder = ladder;
+        climbingState.climbDown = climbDown;
         ChangeFSM(climbingState);
-        StartCoroutine(WaitEndOfLadder(ladder));
-    }
-
-    IEnumerator WaitEndOfLadder(Ladder ladder)
-    {
-        yield return new WaitWhile(() => fsm == climbingState);
-        ladder.arrow.SetActive(true);
     }
     #endregion
     #endregion
@@ -220,14 +198,7 @@ public class Lumberjack : MonoBehaviour
     {
         pickingResource = canCutRes[0];
         if (pickingResource != null) 
-        {
-            if (!storage.CanFill(pickingResource.material))
-            {
-                //bubble feedback
-                return;
-            }
-
-            workingState.state = WorkState.Cutting;
+        {          
             ChangeFSM(workingState);
             Cut();
         }
@@ -243,47 +214,6 @@ public class Lumberjack : MonoBehaviour
     }
     public void Collect(Pickable res)
     {
-        storage.Add(res.material, 1);
-    }
-
-
-    // ---------- BUILD ----------
-    public void ConstructMode(bool active)
-    {
-        if (active)
-        {
-            DisplayPlans();
-            workingState.state = WorkState.Building;
-            ChangeFSM(workingState);
-        }
-        else
-        {
-            ThinkOf(false);
-            ChangeFSM(idleState);
-        }
-    }
-    // Deploy plans in bubbles
-    public void DisplayPlans()
-    {
-        openPlans.gameObject.SetActive(false);
-        plans.SetActive(true);
-    }
-
-    // Deploy the bubble "..."
-    public void ThinkOf(bool isActive)
-    {
-        openPlans.gameObject.SetActive(isActive);
-        plans.SetActive(false);
-    }
-
-
-    // ---------- CRAFT ----------    
-    public void CraftMode(Workbench workbench)
-    {
-        workbench.DisplayPlans();
-        workingState.workBench = workbench;
-        workingState.state = WorkState.Crafting;
-        ChangeFSM(workingState);
-        enabled = false;
+        Debug.Log("Collect");
     }
 }
