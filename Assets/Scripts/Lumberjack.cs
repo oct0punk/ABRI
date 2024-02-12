@@ -12,8 +12,8 @@ public class Lumberjack : MonoBehaviour
     public int force = 1;
 
     [HideInInspector] public bool indoor = false;
-    public bool isAutoMoving = false;
-    public bool canCut = false;
+    [HideInInspector] public bool isAutoMoving = false;
+    public bool canCut { get; private set; }
     public CinemachineVirtualCamera cam;
     public Pickable pickingResource { get; private set; }
     LayerMask mask;

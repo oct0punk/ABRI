@@ -6,55 +6,32 @@ using UnityEngine.UI;
 
 public class bubbleAnchor : MonoBehaviour
 {
-    Lumberjack lum;
-    RectTransform rect;
-    public Vector2 offset = Vector2.one * .1f;
-    public BubbleDot[] dots;
-    public bool dotsDisplayed { get; private set; }
+    [SerializeField] Vector2 offset;
+    Vector2 defaultPos;
+    RectTransform rectTr;
 
-    // Start is called before the first frame update
-    protected void Start()
+    private void Start()
     {
-        lum = GameManager.instance.lumberjack;
-        rect = GetComponent<RectTransform>();
-        dotsDisplayed = false;
-    }
-
-
-    private void OnDisable()
-    {
-        foreach (BubbleDot dot in dots)
-        {
-            dot.go.gameObject.SetActive(false);
-            dotsDisplayed = false;
-        }
-    }
-
-    public IEnumerator DisplayDots()
-    {
-        for (int i = dots.Length - 1; i >= 0; i--) { 
-            dots[i].go.gameObject.SetActive(true);
-            yield return new WaitForSeconds(.2f);
-        }
-        dotsDisplayed = true;
+        rectTr = GetComponent<RectTransform>();
+        defaultPos = rectTr.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 pos = Camera.main.WorldToScreenPoint(lum.thinkBubbleTarget.position);
+        Vector3 pos = rectTr.position;
         pos.x = Mathf.Clamp(pos.x, Screen.width * offset.x, Screen.width * (1 - offset.x));
-        pos.y = Mathf.Clamp(pos.y, 50.0f, Screen.height - offset.y);
+        //pos.y = Mathf.Clamp(pos.y, 50.0f, Screen.height - offset.y);
+        //transform.position = pos;
 
 
+        //rect.pivot = new Vector2(
+        //    Mathf.InverseLerp(Screen.width * offset.x, Screen.width * (1 - offset.x), pos.x), 0);
 
-        rect.pivot = new Vector2(
-            Mathf.InverseLerp(Screen.width * offset.x, Screen.width * (1 - offset.x), pos.x), 0);
+        //rect.position = pos;
 
-        rect.position = pos;
-
-        foreach (var dot in dots)
-            dot.Update(pos, lum);
+        //foreach (var dot in dots)
+        //    dot.Update(pos, lum);
 
     }
 }

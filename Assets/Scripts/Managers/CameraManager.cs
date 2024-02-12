@@ -7,12 +7,11 @@ using System.ComponentModel;
 public class CameraManager : MonoBehaviour
 {    
     CinemachineBrain brain;
-    public static CameraManager Instance { get; private set; } 
+    public static CameraManager Instance { get { return GameManager.instance.GetComponent<CameraManager>(); } } 
 
     // Start is called before the first frame update
     void Awake()
     {
-        Instance = this;
         brain = GetComponent<CinemachineBrain>();
     }
 

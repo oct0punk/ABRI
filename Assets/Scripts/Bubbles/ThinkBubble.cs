@@ -17,12 +17,13 @@ public class ThinkBubble : MonoBehaviour
 
     IEnumerator CoolDown()
     {
-        yield return new WaitUntil(() => anchor.dotsDisplayed);
-        while (coolDown > 0)
-        {
-            coolDown -= Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
+        yield return null;
+        //yield return new WaitUntil(() => anchor.dotsDisplayed);
+        //while (coolDown > 0)
+        //{
+        //    coolDown -= Time.deltaTime;
+        //    yield return new WaitForEndOfFrame();
+        //}
     }
 
     public Coroutine Message(GameObject obj, float time)
@@ -44,7 +45,7 @@ public class ThinkBubble : MonoBehaviour
     public IEnumerator MessageRoutine(GameObject obj, Func<bool> condition)
     {
         anchor.enabled = true;
-        yield return anchor.DisplayDots();
+        //yield return anchor.DisplayDots();
         content = Instantiate(obj, transform);
         yield return new WaitWhile(() => condition.Invoke());
         for (int i = 0; i < transform.childCount; i++)

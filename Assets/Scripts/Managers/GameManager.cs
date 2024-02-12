@@ -56,12 +56,12 @@ public class GameManager : MonoBehaviour
             case GameState.Indoor:
                 lumberjack.indoor = true;
                 CameraManager.Possess(shelter.cam);
-                AudioManager.Instance.GetFadeByName("Wind").target = 0.0f;
+                // AudioManager.Instance.GetFadeByName("Wind").target = 0.0f;
                 break;
             case GameState.Explore:
                 lumberjack.indoor = false;
                 CameraManager.Possess(lumberjack.cam);
-                AudioManager.Instance.GetFadeByName("Wind").target = 1.0f;
+                // AudioManager.Instance.GetFadeByName("Wind").target = 1.0f;
                 break;
         }
     }

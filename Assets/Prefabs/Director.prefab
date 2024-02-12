@@ -4846,6 +4846,7 @@ GameObject:
   - component: {fileID: 4777251525425930465}
   - component: {fileID: 6804816713165182165}
   - component: {fileID: 4936875077745782818}
+  - component: {fileID: 6017094924878776072}
   m_Layer: 0
   m_Name: Director
   m_TagString: MainCamera
@@ -4867,7 +4868,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1522959856338995960}
-  - {fileID: 4862990565138626983}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7945414056979597917
@@ -5065,6 +5065,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectSettings: []
   updateRateInSeconds: 0.1
+--- !u!114 &6017094924878776072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3025364026344135649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10eecb5841a6d474d9a8f488cefd9353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fades:
+  - name: Wind
+    audio: {fileID: 0}
+  sounds:
+  - name: BranchCut
+    clip: {fileID: 8300000, guid: 189efddf0be6ed644ad6ab89e599b657, type: 3}
+    source: {fileID: 0}
+    volume: 0
+    loop: 0
+    playOnAwake: 0
+  - name: LogCut
+    clip: {fileID: 8300000, guid: bf5505068ed8eda4982a271a74bb8e90, type: 3}
+    source: {fileID: 0}
+    volume: 0
+    loop: 1
+    playOnAwake: 1
+  - name: Build
+    clip: {fileID: 8300000, guid: ef3b45de27da1a144bc4269dfc6bd90d, type: 3}
+    source: {fileID: 0}
+    volume: 0
+    loop: 0
+    playOnAwake: 0
 --- !u!1 &3886306726263319524
 GameObject:
   m_ObjectHideFlags: 0
@@ -14722,157 +14756,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!1 &6615798984242246659
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5807557713247243506}
-  - component: {fileID: 3852253108634345291}
-  m_Layer: 0
-  m_Name: WindAudio
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5807557713247243506
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6615798984242246659}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4862990565138626983}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3852253108634345291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6615798984242246659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46b3063c3aa31db4b94000c8049ef9a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound1:
-    name: 
-    clip: {fileID: 8300000, guid: 3e0fd64d0ece0f44a91628240de072ef, type: 3}
-    source: {fileID: 0}
-    volume: 1
-    loop: 1
-    playOnAwake: 1
-  sound2:
-    name: 
-    clip: {fileID: 8300000, guid: b22bbd861c3f1714b9551ab3052aec85, type: 3}
-    source: {fileID: 0}
-    volume: 1
-    loop: 1
-    playOnAwake: 1
-  fadeAlpha: 1
-  target: 0
-  fadeCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!1 &8183932175136584742
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4862990565138626983}
-  - component: {fileID: 3820605284314255361}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4862990565138626983
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8183932175136584742}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5807557713247243506}
-  m_Father: {fileID: 7959769529078016007}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3820605284314255361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8183932175136584742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10eecb5841a6d474d9a8f488cefd9353, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fades:
-  - name: Wind
-    audio: {fileID: 3852253108634345291}
-  sounds:
-  - name: BranchCut
-    clip: {fileID: 8300000, guid: 189efddf0be6ed644ad6ab89e599b657, type: 3}
-    source: {fileID: 0}
-    volume: 0
-    loop: 0
-    playOnAwake: 0
-  - name: LogCut
-    clip: {fileID: 8300000, guid: bf5505068ed8eda4982a271a74bb8e90, type: 3}
-    source: {fileID: 0}
-    volume: 0
-    loop: 1
-    playOnAwake: 1
-  - name: Build
-    clip: {fileID: 8300000, guid: ef3b45de27da1a144bc4269dfc6bd90d, type: 3}
-    source: {fileID: 0}
-    volume: 0
-    loop: 0
-    playOnAwake: 0
 --- !u!1 &8311743035736806185
 GameObject:
   m_ObjectHideFlags: 0

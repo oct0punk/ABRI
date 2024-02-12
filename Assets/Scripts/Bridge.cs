@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bridge : MonoBehaviour
+public class Bridge : Construction
 {
-    public bool buildOnStart;
-
+    [Header("Bridge")]
     public Transform left;
     public Transform right;
 
@@ -16,7 +15,7 @@ public class Bridge : MonoBehaviour
 
     List<HingeJoint2D> joints;
 
-    private void Awake()
+    new void Awake()
     {
         RaycastHit2D hit = Physics2D.Raycast(left.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Platform"));
         if (hit)
@@ -28,14 +27,14 @@ public class Bridge : MonoBehaviour
         {
             right.transform.SetParent(hit.transform);
         }
-
-        if (buildOnStart)
-            Build();
+        base.Awake();
     }
 
-    public void Build()
+    public override void Build()
     {
+        base.Build();
         Build(left, right);
+        enabled = true;
     }
 
     public void Build(Transform left, Transform right)
@@ -72,33 +71,6 @@ public class Bridge : MonoBehaviour
         joints[joints.Count - 2].transform.rotation = Quaternion.identity;
     }
 
-    IEnumerator ComputeJoints(List<HingeJoint2D> arr)
-    {
-        yield return new WaitForSeconds(.1f);
-        foreach (var joint in arr)
-        {
-            joint.autoConfigureConnectedAnchor = false;
-        }
-    }
-
-    public void Preview(Transform left, Transform right)
-    {
-        enabled = false;
-        float dist = Vector3.Distance(left.transform.position, right.transform.position);
-        Vector3 vec = right.transform.position - left.transform.position;
-
-        for (float t = distBetweenEachPlanchs / 2; t < dist; t += distBetweenEachPlanchs)
-        {
-            Vector3 pos = Vector3.Lerp(left.transform.position, right.transform.position, t / dist);
-            Quaternion rot = Quaternion.Euler(0, 0, Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg);
-            GameObject go = Instantiate(fill, transform);
-            go.transform.SetLocalPositionAndRotation(pos, rot);
-            go.name = t.ToString();
-            go.GetComponent<Rigidbody2D>().simulated = false;
-            go.GetComponent<HingeJoint2D>().enabled = false;
-            go.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .4f);
-        }
-    }
 
 
     private void Update()
@@ -111,3 +83,22 @@ public class Bridge : MonoBehaviour
     }
 
 }
+
+    //public void Preview(Transform left, Transform right)
+    //{
+    //    enabled = false;
+    //    float dist = Vector3.Distance(left.transform.position, right.transform.position);
+    //    Vector3 vec = right.transform.position - left.transform.position;
+
+    //    for (float t = distBetweenEachPlanchs / 2; t < dist; t += distBetweenEachPlanchs)
+    //    {
+    //        Vector3 pos = Vector3.Lerp(left.transform.position, right.transform.position, t / dist);
+    //        Quaternion rot = Quaternion.Euler(0, 0, Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg);
+    //        GameObject go = Instantiate(fill, transform);
+    //        go.transform.SetLocalPositionAndRotation(pos, rot);
+    //        go.name = t.ToString();
+    //        go.GetComponent<Rigidbody2D>().simulated = false;
+    //        go.GetComponent<HingeJoint2D>().enabled = false;
+    //        go.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .4f);
+    //    }
+    //}

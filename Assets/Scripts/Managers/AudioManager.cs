@@ -21,14 +21,12 @@ public struct Fade
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
+    public static AudioManager Instance { get { return GameManager.instance.GetComponent<AudioManager>(); } }
     public Fade[] fades;
     [SerializeField] Sound[] sounds;
 
     private void Awake()
     {
-        Instance = this;
-
         for (int i = 0; i < sounds.Length; i++)
         {
             if (sounds[i].source != null) continue;
@@ -55,6 +53,11 @@ public class AudioManager : MonoBehaviour
 
     public AudioFade GetFadeByName(string name)
     {
-        return Array.Find(fades, f => f.name == name).audio;
+        AudioFade fade = Array.Find(fades, f => f.name == name).audio;
+        if (fade != null)
+            return fade;
+        else
+            Debug.LogWarning("Fade " + name + " not found.");
+        return null;
     }
 }
