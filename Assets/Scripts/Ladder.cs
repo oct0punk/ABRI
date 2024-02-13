@@ -49,6 +49,7 @@ public class Ladder : Construction
     public override void Build()
     {
         base.Build();
+        if (!build) return;
         sprite.enabled = true;
         box.enabled = true;
     }

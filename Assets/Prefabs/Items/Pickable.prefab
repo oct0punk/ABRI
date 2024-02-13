@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780654307082380267}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8090103043121339311}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4262412630393967680
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!1 &3685502088407769354
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6842043644818452884}
   - component: {fileID: 7280821055981441921}
   m_Layer: 0
-  m_Name: Pickable_Prefab
+  m_Name: Pickable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3685502088407769354}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.98, y: 2.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -118,7 +118,7 @@ Transform:
   - {fileID: 8817376593498648794}
   - {fileID: 166511469595853340}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6842043644818452884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3a41707e5d5ef41be61267908efbeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 11400000, guid: 015369227cd87d04cbb0f62846ba3218, type: 2}
   maxResistance: 1
+  amount: 1
   alive: 1
   trail: {fileID: 2848494381323142316}
   swipeTuto: {fileID: 5944233245213204413}
@@ -168,7 +168,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.610049, y: 1.0710545}
+  m_Offset: {x: -1.4, y: 1.4}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.035504658, y: 0.2939162}
@@ -179,7 +179,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.220098, y: 3.3421092}
+  m_Size: {x: 2.7, y: 2.7}
   m_EdgeRadius: 0
 --- !u!1001 &5636450330221027087
 PrefabInstance:
@@ -190,12 +190,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 8090103043121339311}
     m_Modifications:
     - target: {fileID: 5509908931163397395, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
+      propertyPath: m_LocalScale.y
+      value: -0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509908931163397395, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.76
+      value: 1.84
       objectReference: {fileID: 0}
     - target: {fileID: 5509908931163397395, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.65
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 5509908931163397395, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
       propertyPath: m_LocalPosition.z
@@ -229,9 +233,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5509908931163397395, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7619900605011811235, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
       propertyPath: m_Name
       value: TrailParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619900605011811235, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

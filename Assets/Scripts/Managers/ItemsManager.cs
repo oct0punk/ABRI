@@ -4,15 +4,28 @@ public class ItemsManager : MonoBehaviour
 {
     public static ItemsManager Instance { get { return GameManager.instance.GetComponent<ItemsManager>(); } }
     public int wood { get;private set; }
+    StorageUI Pack;
+    StorageUI pack { get { return Pack != null ? Pack : FindObjectOfType<StorageUI>(); } }
 
 
     public void CollectWood(int amount)
     {
         wood += amount;
+        pack.Display(wood, 1.0f);
     }
     
-    public void Build(Construction construction)
+    public bool Build(Construction construction)
     {
-        wood -= construction.required;
+        if (wood >= construction.required)
+        {            
+            CollectWood(-construction.required);
+            return true;
+        }
+        else
+        {
+            pack.Required(construction.required);
+            return false;
+        }
+
     }
 }

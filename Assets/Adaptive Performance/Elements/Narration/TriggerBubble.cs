@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TriggerBubble : MonoBehaviour
 {
-    public GameObject content;
+    public string content;
     public float time;
     public bool doOnce;
 

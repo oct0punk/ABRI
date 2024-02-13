@@ -1,57 +1,54 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class ThinkBubble : MonoBehaviour
 {
-    public float coolDown = 0.0f;
-    GameObject content;
-    bubbleAnchor anchor;
+    [SerializeField] protected TextMeshProUGUI Tmp;
+    protected string content;
+    protected float coolDown = 0.0f;
+    protected Coroutine routine;
 
-    private void Awake()
-    {
-        anchor = GetComponent<bubbleAnchor>();
-    }
 
     IEnumerator CoolDown()
     {
-        yield return null;
-        //yield return new WaitUntil(() => anchor.dotsDisplayed);
-        //while (coolDown > 0)
-        //{
-        //    coolDown -= Time.deltaTime;
-        //    yield return new WaitForEndOfFrame();
-        //}
+        while (coolDown > 0)
+        {
+            coolDown -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
     }
 
-    public Coroutine Message(GameObject obj, float time)
+    public Coroutine Message(string text, float time)
     {
         coolDown = time;
         StartCoroutine(CoolDown());
-        return Message(obj, () => coolDown > 0.0f);
+        return Message(text, () => coolDown > 0.0f);
     }
 
-    public Coroutine Message(GameObject obj, Func<bool> condition)
+    public Coroutine Message(string text, Func<bool> condition)
     {
-        //if (messageRoutine != null) StopCoroutine(messageRoutine);
-        if (content != null)
-            Destroy(content);
-        return StartCoroutine(MessageRoutine(obj, condition));
+        if (routine != null) StopCoroutine(routine);
+        return StartCoroutine(MessageRoutine(text, condition));
     }
 
 
-    public IEnumerator MessageRoutine(GameObject obj, Func<bool> condition)
+    public virtual IEnumerator MessageRoutine(string text, Func<bool> condition)
     {
-        anchor.enabled = true;
-        //yield return anchor.DisplayDots();
-        content = Instantiate(obj, transform);
-        yield return new WaitWhile(() => condition.Invoke());
-        for (int i = 0; i < transform.childCount; i++)
+        transform.GetChild(0).gameObject.SetActive(true);
+        content = text;
+        text = "";
+        for (int c = 0; c < content.Length; c++)
         {
-            Destroy(transform.GetChild(i).gameObject);
+            text += content[c];
+            Tmp.text = text;
+            yield return new WaitForSeconds(.03f);
         }
-        GetComponent<bubbleAnchor>().enabled = false;
+        yield return new WaitForSeconds(content.Length * .03f);
+        yield return new WaitWhile(() => condition.Invoke());
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 }

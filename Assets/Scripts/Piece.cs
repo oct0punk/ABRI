@@ -1,25 +1,26 @@
 using UnityEngine;
 
-public class Piece : MonoBehaviour
+public class Piece : Construction
 {
-    public bool alive = true;
+    [Header("Piece")]
     public int solid = 1;
     public int life;
     new Collider2D collider;
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
         collider = GetComponent<Collider2D>();
     }
 
     private void Start()
     {
-        if (!alive) Break();
+        if (!build) Break();
     }
 
     public void Resist(int windForce)
     {
-        if (!alive) return;
+        if (!build) return;
         if (Random.Range(1, solid) > windForce) return;
 
         life--;
@@ -29,9 +30,9 @@ public class Piece : MonoBehaviour
         }
     }
 
-    public void Break()
+    public override void Break()
     {
-        alive = false;
+        base.Break();
         GetComponent<SpriteRenderer>().color = Color.black;
         collider.enabled = true;
         GameManager.instance.shelter.UpdateSpeed(-1);
@@ -39,7 +40,7 @@ public class Piece : MonoBehaviour
 
     public void Repair()
     {
-        alive = true;
+        build = true;
         GetComponent<SpriteRenderer>().color = Color.white;
         collider.enabled = false;
         life = Random.Range(solid, solid + 4);

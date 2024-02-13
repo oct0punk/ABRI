@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Construction : MonoBehaviour
@@ -10,6 +11,7 @@ public class Construction : MonoBehaviour
 
     protected void Awake()
     {
+        SetTextAmount();
         if (buildOnStart)
         {
             required = 0;
@@ -19,12 +21,27 @@ public class Construction : MonoBehaviour
 
     public virtual void Build()
     {
-        build = true;
-        ItemsManager.Instance.Build(this);
-        foreach (GameObject item in taps)
+        if (ItemsManager.Instance.Build(this))
         {
-            item.SetActive(false);
+            foreach (GameObject item in taps)
+            {
+                item.SetActive(false);
+            }
+            build = true;
         }
+    }
+
+    public virtual void Break()
+    {
+        build = false;
+    }
+
+
+    [ContextMenu("SetTMP")]
+    protected void SetTextAmount()
+    {
+        foreach (GameObject item in taps)
+            item.GetComponentInChildren<TextMeshProUGUI>().text = required.ToString();
     }
 }
 

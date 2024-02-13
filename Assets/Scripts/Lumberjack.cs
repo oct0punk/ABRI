@@ -19,7 +19,6 @@ public class Lumberjack : MonoBehaviour
     LayerMask mask;
     [Space]
     public ThinkBubble thinkBubble;
-    public Transform thinkBubbleTarget;
 
     #region Owning Components
     public Animator animator { get; private set; }
@@ -57,6 +56,8 @@ public class Lumberjack : MonoBehaviour
         workingState = new FSM_WorkingState();
         fsm = idleState;
         fsm.OnEnter(this);
+
+        Message("Le soleil est couché, et Odin pionce. Pour moi aussi, il est temps d'aller se coucher...", 3.0f);
     }
 
     private void Update()
@@ -87,11 +88,11 @@ public class Lumberjack : MonoBehaviour
     }
 
     #region Move
-    public void Move(Vector3 targetPos)
+    public void Move(Vector2 targetPos)
     {
-        Vector3 delta = targetPos - transform.position;
-        delta = Vector3.ClampMagnitude(delta, Time.deltaTime * speed);
-        transform.position += delta;
+        Vector2 delta = targetPos - (Vector2)transform.position;
+        delta = Vector2.ClampMagnitude(delta, Time.deltaTime * speed);
+        transform.position += (Vector3)delta;
         if (delta.magnitude >= Time.deltaTime * speed)
         {
             bool res = (int)Mathf.Sign(delta.x) == -1;
@@ -158,13 +159,15 @@ public class Lumberjack : MonoBehaviour
 
 
     // -------- MESSAGE --------
-    public Coroutine Message(GameObject obj, Func<bool> whileCondition)
+    public Coroutine Message(string text, Func<bool> whileCondition)
     {
-        return thinkBubble.Message(obj, whileCondition);
+        thinkBubble.gameObject.SetActive(true);
+        return thinkBubble.Message(text, whileCondition);
     }
-    public Coroutine Message(GameObject obj, float time)
+    public Coroutine Message(string text, float time)
     {
-        return thinkBubble.Message(obj, time);
+        thinkBubble.gameObject.SetActive(true);
+        return thinkBubble.Message(text, time);
     }
 
     // ---------- CUTTING ----------
@@ -212,8 +215,9 @@ public class Lumberjack : MonoBehaviour
     { // event for animation
         pickingResource.Resist(this);
     }
-    public void Collect(Pickable res)
+    public void Collect(Pickable pickable)
     {
-        Debug.Log("Collect");
+        Move(pickable.transform.position);
+        ItemsManager.Instance.CollectWood(pickable.amount);
     }
 }

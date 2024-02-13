@@ -5,17 +5,30 @@ using UnityEngine;
 public class Pickable : MonoBehaviour
 {
     public int maxResistance = 1;
+    public int amount = 1;
     public bool alive = true;
-    public int resistance { get; private set; }
-    new Collider2D collider;
+    [Space]
     public GameObject trail;
     public GameObject swipeTuto;
+    public int resistance { get; private set; }
+    new Collider2D collider;
 
-    private void Start()
+    private void Awake()
     {
         collider = GetComponent<Collider2D>();
-        Reset();
-        trail.SetActive(false);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Platform"));
+        if (hit)
+        {
+            transform.position = hit.point;
+            transform.SetParent(hit.transform);
+        }
+
+        if (alive)
+            Reset();
+        else
+        {
+            OnDie();            
+        }
     }
 
     public void Resist(Lumberjack l)
@@ -25,14 +38,18 @@ public class Pickable : MonoBehaviour
             OnDie(l);
     }
 
-    void OnDie(Lumberjack l)
+    void OnDie()
     {
         alive = false;
-        l.OnResExit(this);
-        l.Collect(this);
         collider.enabled = false;
         GetComponentInChildren<SpriteRenderer>().enabled = false;
-        StartCoroutine(Revive());        
+        StartCoroutine(Revive());
+    }
+    void OnDie(Lumberjack l)
+    {
+        OnDie();
+        l.OnResExit(this);
+        l.Collect(this);
     }
 
     IEnumerator Revive()

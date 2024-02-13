@@ -33,6 +33,7 @@ public class Bridge : Construction
     public override void Build()
     {
         base.Build();
+        if (!build) return;
         Build(left, right);
         enabled = true;
     }

@@ -66,7 +66,7 @@ public class Shelter : MonoBehaviour
     public void UpdateSpeed(int amount)
     {
         push += amount;
-        if (Array.TrueForAll<Piece>(pieces, p => p.alive))
+        if (Array.TrueForAll(pieces, p => p.build))
         {
             if (brokenWind.isPlaying)
             brokenWind.Stop();

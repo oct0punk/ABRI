@@ -6,7 +6,7 @@ public class FSM_ClimbingState : FSM_BaseState
 {
     public Ladder ladder;
     public bool climbDown;
-    Vector3 targetPos;
+    Vector2 targetPos;
 
     public override void OnEnter(Lumberjack l)
     {
