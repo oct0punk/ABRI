@@ -35,16 +35,18 @@ public class Piece : Construction
         base.Break();
         GetComponent<SpriteRenderer>().color = Color.black;
         collider.enabled = true;
-        GameManager.instance.shelter.UpdateSpeed(-1);
+        Shelter.instance.UpdateSpeed(-1);
     }
 
-    public void Repair()
+    public override void Build()
     {
+        base.Build();
+        if (!build) return;
         build = true;
         GetComponent<SpriteRenderer>().color = Color.white;
         collider.enabled = false;
         life = Random.Range(solid, solid + 4);
-        GameManager.instance.shelter.UpdateSpeed(1);
+        Shelter.instance.UpdateSpeed(1);
     }
 
     /*USP : 

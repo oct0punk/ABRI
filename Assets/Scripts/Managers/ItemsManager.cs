@@ -7,7 +7,10 @@ public class ItemsManager : MonoBehaviour
     StorageUI Pack;
     StorageUI pack { get { return Pack != null ? Pack : FindObjectOfType<StorageUI>(); } }
 
-
+    public void Reset()
+    {
+        wood = 0;
+    }
     public void CollectWood(int amount)
     {
         wood += amount;

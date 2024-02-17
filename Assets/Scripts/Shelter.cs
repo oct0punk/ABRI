@@ -8,6 +8,7 @@ using System;
 [SelectionBase]
 public class Shelter : MonoBehaviour
 {
+    public static Shelter instance;
     [SerializeField] SpriteRenderer ext;
     [SerializeField] new Light2D light;
     public CinemachineVirtualCamera cam;
@@ -27,8 +28,10 @@ public class Shelter : MonoBehaviour
     public Piece[] pieces;
 
 
+    [ContextMenu("Init")]
     void Awake()
     {
+        instance = this;
         storm = GetComponent<Storm>();
         pieces = GetComponentsInChildren<Piece>();
     }
@@ -50,13 +53,14 @@ public class Shelter : MonoBehaviour
         }
     }
 
-
+    
     void ChangeTemperature(float amount)
     {
         temperature = Mathf.Clamp(temperature + amount, 0.0f, maxTemperature);
         if (temperature <= 0.0f)
         {
-            GameManager.instance.GameOver();
+            GameManager.instance.ChangeState(GameState.GameOver);
+            enabled = false;
             return;
         }
 
@@ -65,11 +69,12 @@ public class Shelter : MonoBehaviour
     }
     public void UpdateSpeed(int amount)
     {
-        push += amount;
+        push = Mathf.Min(push, 0) + amount;
         if (Array.TrueForAll(pieces, p => p.build))
         {
             if (brokenWind.isPlaying)
             brokenWind.Stop();
+            push = 2;
         }
         else
         {
@@ -79,7 +84,17 @@ public class Shelter : MonoBehaviour
     }
 
 
-
+    void OnEnter()
+    {
+        // Visibility
+        ext.enabled = false;
+        light.enabled = true;
+    }
+    void OnExit()
+    {
+        ext.enabled = true;
+        light.enabled = false;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Le bucheron ENTRE dans la cabane
@@ -90,14 +105,6 @@ public class Shelter : MonoBehaviour
             OnEnter();
         }
     }
-    void OnEnter()
-    {
-        // Visibility
-        ext.enabled = false;
-        light.enabled = true;
-    }
-
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         // Le bucheron SORT
@@ -107,10 +114,5 @@ public class Shelter : MonoBehaviour
             GameManager.instance.ChangeState(GameState.Explore);
             OnExit();
         }
-    }
-    void OnExit()
-    {
-        ext.enabled = true;
-        light.enabled = false;
     }
 }

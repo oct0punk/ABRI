@@ -7,11 +7,12 @@ using UnityEngine;
 [SelectionBase]
 public class Lumberjack : MonoBehaviour
 {
+    public static Lumberjack Instance;
+
     [Min(0)]
     public int speed = 3;
     public int force = 1;
 
-    [HideInInspector] public bool indoor = false;
     [HideInInspector] public bool isAutoMoving = false;
     public bool canCut { get; private set; }
     public CinemachineVirtualCamera cam;
@@ -40,6 +41,7 @@ public class Lumberjack : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         // Component
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -55,11 +57,12 @@ public class Lumberjack : MonoBehaviour
         jumpingState = new FSM_JumpingState();
         workingState = new FSM_WorkingState();
         fsm = idleState;
-        fsm.OnEnter(this);
-
-        Message("Le soleil est couché, et Odin pionce. Pour moi aussi, il est temps d'aller se coucher...", 3.0f);
     }
-
+    private void Start()
+    {
+        fsm.OnEnter(this);
+    }
+    
     private void Update()
     {
         fsm.Update(this);
@@ -67,7 +70,7 @@ public class Lumberjack : MonoBehaviour
     private void LateUpdate()
     {
         ResetGlobalScale();
-        if (indoor)
+        if (GameManager.instance.gameState == GameState.Indoor)
             transform.localRotation = Quaternion.identity;        
         else
             transform.rotation = Quaternion.identity;
@@ -100,9 +103,9 @@ public class Lumberjack : MonoBehaviour
             {
                 // changeDir feedback
                 if (delta.x > 0)
-                    GameManager.instance.ui.MoveRight();
+                    GameUI.instance.MoveRight();
                 else
-                    GameManager.instance.ui.MoveLeft();
+                    GameUI.instance.MoveLeft();
             }
             spriteRenderer.flipX = res;
         }
@@ -153,12 +156,9 @@ public class Lumberjack : MonoBehaviour
     }
     #endregion
     #endregion
-    
-
-    
 
 
-    // -------- MESSAGE --------
+    #region Message
     public Coroutine Message(string text, Func<bool> whileCondition)
     {
         thinkBubble.gameObject.SetActive(true);
@@ -169,9 +169,11 @@ public class Lumberjack : MonoBehaviour
         thinkBubble.gameObject.SetActive(true);
         return thinkBubble.Message(text, time);
     }
+    #endregion
 
-    // ---------- CUTTING ----------
-
+    
+    #region Cutting
+    
     public void OnResEnter(Pickable res)
     {
         canCutRes.Add(res);
@@ -219,5 +221,11 @@ public class Lumberjack : MonoBehaviour
     {
         Move(pickable.transform.position);
         ItemsManager.Instance.CollectWood(pickable.amount);
+    }
+    #endregion
+
+    private void OnLevelWasLoaded(int level)
+    {
+        Message("Début du jeu", 1.0f);
     }
 }

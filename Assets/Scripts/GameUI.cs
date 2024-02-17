@@ -1,44 +1,62 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
+    public static GameUI instance;
+
     [Header("Inputs")]
     [SerializeField] Image moveLeft;
     [SerializeField] Image moveRight;
     
     [Header("Panels")]
     [SerializeField] GameObject GamePanel;
-    [SerializeField] VerticalLayoutGroup PausePanel;
+    [SerializeField] GameObject PausePanel;
     [SerializeField] GameObject GameOverPanel;
     [SerializeField] GameObject EndPanel;
+
+    Canvas[] UI_WorldArray;
+
+    private void Awake()
+    {
+        instance = this;
+        UI_WorldArray = Array.FindAll(FindObjectsOfType<Canvas>(), can => can.renderMode == RenderMode.WorldSpace);
+    }
 
 
     #region Layers
     public void Game()
     {
-        NoHUD();
-        GamePanel.gameObject.SetActive(true);
+        NoHUD(); GamePanel.gameObject.SetActive(true);
+        GameManager.instance.SetPause(false);
+
+        foreach (Canvas canvas in UI_WorldArray)
+        {
+            canvas.gameObject.SetActive(true);
+        }
     }
     public void Pause()
     {
-        NoHUD();
-        PausePanel.gameObject.SetActive(true);
+        NoHUD(); PausePanel.SetActive(true);
+        GameManager.instance.SetPause(true);
+
+        foreach (Canvas canvas in UI_WorldArray)
+        {
+            if (canvas.renderMode == RenderMode.WorldSpace)
+            {
+                canvas.gameObject.SetActive(false);
+            }
+        }
     }
     public void GameOver()
     {
-        NoHUD();
-        GameOverPanel.SetActive(true);
+        NoHUD(); GameOverPanel.SetActive(true);
     }
     public void NoHUD()
     {
         GamePanel.SetActive(false);
-        PausePanel.gameObject.SetActive(false);
+        PausePanel.SetActive(false);
         EndPanel.SetActive(false);
         GameOverPanel.SetActive(false);
     }
@@ -47,11 +65,13 @@ public class GameUI : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene(0);
+        GameManager.instance.ChangeState(GameState.Menu);
     }
     public void Reload()
     {
-        SceneManager.LoadScene(1);
+        GameManager.instance.Launch();
+        Time.timeScale = 1.0f;
+        Game();
     }
 
 

@@ -8,9 +8,9 @@ public class FSM_MovingState : FSM_IdleState
     public override void OnEnter(Lumberjack l)
     {
         if (SwipeManager.MoveLeft())
-            GameManager.instance.ui.MoveLeft();
+            GameUI.instance.MoveLeft();
         else if (SwipeManager.MoveRight())
-            GameManager.instance.ui.MoveRight();
+            GameUI.instance.MoveRight();
     }
 
     public override void OnExit(Lumberjack l)

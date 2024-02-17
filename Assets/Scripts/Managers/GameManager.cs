@@ -1,11 +1,16 @@
+
+using System.Collections;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
-    Explore,
+    Menu,    
     Indoor,
+    Explore,
+    GameOver,
+    End
 }
 
 public class GameManager : MonoBehaviour
@@ -13,30 +18,45 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameState gameState;
 
-    [HideInInspector] public Lumberjack lumberjack;
-    [HideInInspector] public Shelter shelter;
-    public GameUI ui;
-    public Volume volume;
     public bool pause { get; private set; }
 
     private void Awake()
     {
-        instance = this;
-        lumberjack = FindObjectOfType<Lumberjack>();
-        shelter = FindObjectOfType<Shelter>();
-        DepthOfField dof;
-        volume.profile.TryGet<DepthOfField>(out dof);
-        if (dof != null)
-            dof.focalLength.Override(Screen.dpi / 4);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        }
+        else
+        {
+            if (instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
     }
-
     private void Start()
     {
         EnterState(gameState);
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            
+        }
+        else if (Input.GetKeyDown(KeyCode.D)) {
+
+        }
+    }
+
+
+    #region GameState
 
     public void ChangeState(GameState newState)
     {
+        Debug.Log("From " + gameState.ToString() + " to " + newState.ToString());
         ExitState(gameState);
         gameState = newState;
         EnterState(gameState);
@@ -45,8 +65,12 @@ public class GameManager : MonoBehaviour
     void ExitState(GameState state) {
         switch (state)
         {
-            case GameState.Indoor:  break;
-            case GameState.Explore: break;
+            case GameState.GameOver:
+                Time.timeScale = 1.0f;
+                break;
+            case GameState.End: 
+                Time.timeScale = 1.0f; 
+                break;
         }
     }
 
@@ -54,44 +78,39 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Indoor:
-                lumberjack.indoor = true;
-                CameraManager.Possess(shelter.cam);
-                // AudioManager.Instance.GetFadeByName("Wind").target = 0.0f;
+                if (CameraManager.Instance != null)
+                    CameraManager.Possess(Shelter.instance.cam);
                 break;
             case GameState.Explore:
-                lumberjack.indoor = false;
-                CameraManager.Possess(lumberjack.cam);
-                // AudioManager.Instance.GetFadeByName("Wind").target = 1.0f;
+                CameraManager.Possess(Lumberjack.Instance.cam);
+                break;
+            case GameState.Menu:
+                SceneManager.LoadScene(0);
+                break;
+            case GameState.End:
+                Debug.Log("End, VICTORY");
+                ChangeState(GameState.Menu);
+                break;
+            case GameState.GameOver:
+                GameUI.instance.GameOver();
+                Time.timeScale = 0.0f;
+                Lumberjack.Instance.enabled = false;
                 break;
         }
     }
 
+    #endregion
 
-    public void Resume()
+
+    public void Launch()
     {
-        pause = false;
-        Time.timeScale = 1.0f;
-        ui.Game();
-        lumberjack.enabled = true;
+        ItemsManager.Instance.Reset();
+        SceneManager.LoadScene(1);
     }
 
-    public void Pause()
+    public void SetPause(bool pause)
     {
-        pause = true;
-        lumberjack.enabled = false;
-        Time.timeScale = .0f;
-        ui.Pause();
-    }
-
-    public void GameOver()
-    {
-        ui.GameOver();
-        lumberjack.enabled = false;
-    }
-
-    public void Outro()
-    {
-        lumberjack.enabled = false;
-        Time.timeScale = .0f;
+        this.pause = pause;
+        Time.timeScale = pause ? 0.0f : 1.0f;
     }
 }

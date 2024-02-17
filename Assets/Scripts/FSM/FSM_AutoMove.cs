@@ -12,7 +12,7 @@ public class FSM_AutoMove : FSM_MovingState
         disableOnExit = !l.enabled;
         l.enabled = true;
         l.isAutoMoving = true;
-        GameManager.instance.ui.NoMove();
+        GameUI.instance.NoMove();
     }
 
     public override void OnExit(Lumberjack l)

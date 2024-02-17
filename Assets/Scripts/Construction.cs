@@ -29,6 +29,10 @@ public class Construction : MonoBehaviour
             }
             build = true;
         }
+        else
+        {
+            Lumberjack.Instance.Message("Faut plus de bois pour réparer ça.", 2.0f);
+        }
     }
 
     public virtual void Break()
