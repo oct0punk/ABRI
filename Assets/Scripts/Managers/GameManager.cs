@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeState(GameState newState)
     {
-        Debug.Log("From " + gameState.ToString() + " to " + newState.ToString());
+        if (gameState == newState) return;
         ExitState(gameState);
         gameState = newState;
         EnterState(gameState);
@@ -88,8 +88,7 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(0);
                 break;
             case GameState.End:
-                Debug.Log("End, VICTORY");
-                ChangeState(GameState.Menu);
+                SceneManager.LoadScene(2);
                 break;
             case GameState.GameOver:
                 GameUI.instance.GameOver();
