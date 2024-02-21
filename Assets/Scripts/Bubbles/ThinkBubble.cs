@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ThinkBubble : MonoBehaviour
@@ -12,20 +10,17 @@ public class ThinkBubble : MonoBehaviour
     protected float coolDown = 0.0f;
     protected Coroutine routine;
 
-
-    IEnumerator CoolDown()
+    private void Update()
     {
-        while (coolDown > 0)
-        {
-            coolDown -= Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
+        coolDown -= Time.deltaTime;
+        if (coolDown < 0.0f)
+            enabled = false;
     }
 
     public Coroutine Message(string text, float time)
     {
         coolDown = time;
-        StartCoroutine(CoolDown());
+        enabled = true;
         return Message(text, () => coolDown > 0.0f);
     }
 

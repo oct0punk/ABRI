@@ -45,6 +45,9 @@ public class Shelter : MonoBehaviour
         timeBeforeNextGust -= Time.deltaTime;
         if (timeBeforeNextGust < 0.0f)
         {
+            FindObjectOfType<Bird>().OnGuts();
+            CameraManager.Instance.EmitFeathers();
+            Lumberjack.Instance.Message("Ouf, quelle rafale! J'espère que mon abri l'a encaissé...");
             timeBeforeNextGust = UnityEngine.Random.Range(40.0f, 100.0f);
             foreach (Piece p in pieces)
             {

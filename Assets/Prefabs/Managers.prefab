@@ -88,6 +88,12 @@ MonoBehaviour:
     volume: 0
     loop: 0
     playOnAwake: 0
+  - name: Bird
+    clip: {fileID: 8300000, guid: 8c3823bbb6835bf48b97feb12ea1a68b, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    loop: 0
+    playOnAwake: 0
 --- !u!114 &6983163530661955671
 MonoBehaviour:
   m_ObjectHideFlags: 0

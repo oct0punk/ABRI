@@ -7,7 +7,8 @@ public class CameraManager : MonoBehaviour
 {    
     CinemachineBrain brain;
     public static CameraManager Instance;
-    public Volume volume;
+    [SerializeField] Volume volume;
+    [SerializeField] ParticleSystem feathers;
 
     // Start is called before the first frame update
     void Awake()
@@ -32,5 +33,10 @@ public class CameraManager : MonoBehaviour
         }
         newCam.Priority = 1;
         return res;
+    }
+
+    public void EmitFeathers()
+    {
+        feathers.Play();
     }
 }
