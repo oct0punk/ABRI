@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b51c154ee941e46bafdfc2da8e5160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oscillationSpeed: 0
-  angle: {x: 0, y: 0}
+  oscillationSpeed: 1
+  angle: {x: 0, y: 2}
 --- !u!1 &6396887324514367226
 GameObject:
   m_ObjectHideFlags: 0

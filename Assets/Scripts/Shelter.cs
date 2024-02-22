@@ -8,7 +8,8 @@ using System;
 [SelectionBase]
 public class Shelter : MonoBehaviour
 {
-    public static Shelter instance;
+    public static Shelter instance {  get {  if (Instance == null) Instance = FindObjectOfType<Shelter>(); return Instance; } }
+    static Shelter Instance;
     [SerializeField] SpriteRenderer ext;
     [SerializeField] new Light2D light;
     public CinemachineVirtualCamera cam;
@@ -31,7 +32,6 @@ public class Shelter : MonoBehaviour
     [ContextMenu("Init")]
     void Awake()
     {
-        instance = this;
         storm = GetComponent<Storm>();
         pieces = GetComponentsInChildren<Piece>();
     }
@@ -40,7 +40,7 @@ public class Shelter : MonoBehaviour
 
     private void Update()
     {
-        ChangeTemperature(push * Time.deltaTime * speed);
+        // ChangeTemperature(push * Time.deltaTime * speed);
 
         timeBeforeNextGust -= Time.deltaTime;
         if (timeBeforeNextGust < 0.0f)
@@ -82,6 +82,12 @@ public class Shelter : MonoBehaviour
         {
             if (!brokenWind.isPlaying)
             brokenWind.Play();
+
+            if (Array.TrueForAll(pieces, p => !p.build))
+            {
+                GameManager.instance.ChangeState(GameState.GameOver);
+                enabled = false;
+            }
         }
     }
 

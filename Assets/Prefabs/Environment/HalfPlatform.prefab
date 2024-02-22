@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4324047298590863347, guid: becc643b1e752204f9900a30ada0a739, type: 3}
+      propertyPath: m_Points.Array.data[0].x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324047298590863347, guid: becc643b1e752204f9900a30ada0a739, type: 3}
+      propertyPath: m_Points.Array.data[1].x
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4350817441848574063, guid: becc643b1e752204f9900a30ada0a739, type: 3}
       propertyPath: m_Size.x
       value: 10

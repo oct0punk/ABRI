@@ -21,11 +21,13 @@ public class Bridge : Construction
         RaycastHit2D hit = Physics2D.Raycast(left.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Platform"));
         if (hit)
         {
+            left.transform.position = hit.point;
             left.transform.SetParent(hit.transform);
         }
         hit = Physics2D.Raycast(right.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Platform"));
         if (hit)
         {
+            right.transform.position = hit.point;
             right.transform.SetParent(hit.transform);
         }
         base.Awake();

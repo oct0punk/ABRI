@@ -6,9 +6,9 @@ public class Piece : Construction
     public int solid = 1;
     public int life;
 
-
-    private void Start()
+    private new void Awake()
     {
+        base.Awake();
         if (!build) Break();
     }
 

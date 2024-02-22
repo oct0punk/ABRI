@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.U2D;
 
 public enum GameState
 {
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        QualitySettings.vSyncCount = 2;
+        Application.targetFrameRate = 60;
         if (instance == null)
         {
             instance = this;

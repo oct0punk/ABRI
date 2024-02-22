@@ -8,6 +8,7 @@ public class Bird : MonoBehaviour
     [SerializeField] Material fsShader;
     float timer;
     bool logAudio;
+    bool first = true;
     static Bird instance;
 
     private void Awake()
@@ -52,7 +53,14 @@ public class Bird : MonoBehaviour
             tap.SetActive(true);
             if (!logAudio)
             {
-                Lumberjack.Instance.Message("L'oiseau est audible. Il n'est pas loin.");
+                if (first) {
+                    Lumberjack.Instance.Message("L'oiseau est audible. Il n'est pas loin.");
+                    first = false;
+                }
+                else {
+                    Lumberjack.Instance.Message("L'oiseau est de nouveau audible. J'ai retrouvé sa trace.");
+                }
+
                 logAudio = true;
             }
         }
@@ -82,9 +90,9 @@ public class Bird : MonoBehaviour
 
     void SendClue()
     {
-        if (transform.position.x > Lumberjack.Instance.transform.position.x + 15.0f)
+        if (Lumberjack.Instance.transform.position.x < transform.position.x - 15.0f)
             CameraManager.Instance.EmitFeathers();
-        else if (!enabled)
+        else if (Lumberjack.Instance.transform.position.x > transform.position.x + 15.0f)
         {
             Lumberjack.Instance.Message("Aucun signe de l'oiseau dans cette direction. Je devrais faire demi-tour");
             logAudio = false;
