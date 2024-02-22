@@ -5,13 +5,7 @@ public class Piece : Construction
     [Header("Piece")]
     public int solid = 1;
     public int life;
-    new Collider2D collider;
 
-    private new void Awake()
-    {
-        base.Awake();
-        collider = GetComponent<Collider2D>();
-    }
 
     private void Start()
     {
@@ -34,7 +28,6 @@ public class Piece : Construction
     {
         base.Break();
         GetComponent<SpriteRenderer>().color = Color.black;
-        collider.enabled = true;
         Shelter.instance.UpdateSpeed(-1);
     }
 
@@ -44,7 +37,6 @@ public class Piece : Construction
         if (!build) return;
         build = true;
         GetComponent<SpriteRenderer>().color = Color.white;
-        collider.enabled = false;
         life = Random.Range(solid, solid + 4);
         Shelter.instance.UpdateSpeed(1);
     }

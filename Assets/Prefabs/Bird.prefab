@@ -347,12 +347,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6638469453954627834}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dc9564bea7ba594bb6543c870458a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tap: {fileID: 6992251227121130754}
+  fsShader: {fileID: 2100000, guid: f6e8db4045454f4479fd3a15895a34e6, type: 2}
 --- !u!1 &6992251227121130754
 GameObject:
   m_ObjectHideFlags: 0

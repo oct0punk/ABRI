@@ -153,6 +153,8 @@ public class Lumberjack : MonoBehaviour
         climbingState.ladder = ladder;
         climbingState.climbDown = climbDown;
         ChangeFSM(climbingState);
+                
+        Bird.SendClueToPlayer(2, 3);
     }
     #endregion
     #endregion

@@ -305,14 +305,16 @@ MonoBehaviour:
   cam: {fileID: 6750577495154648533}
   temperature: 20
   maxTemperature: 25
-  speed: 0.5
+  speed: 0.1
   timeBeforeNextGust: 1
-  push: 0
+  push: 2
   thermometer: {fileID: 3132507242148490621}
   brokenWind: {fileID: 0}
-  pieces: []
-  workbench: {fileID: 0}
-  chimney: {fileID: 0}
+  pieces:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &3262465680258151783
 MonoBehaviour:
   m_ObjectHideFlags: 0

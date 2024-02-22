@@ -80,8 +80,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: bf5505068ed8eda4982a271a74bb8e90, type: 3}
     source: {fileID: 0}
     volume: 0
-    loop: 1
-    playOnAwake: 1
+    loop: 0
+    playOnAwake: 0
   - name: Build
     clip: {fileID: 8300000, guid: ef3b45de27da1a144bc4269dfc6bd90d, type: 3}
     source: {fileID: 0}

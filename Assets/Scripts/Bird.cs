@@ -7,6 +7,8 @@ public class Bird : MonoBehaviour
     [SerializeField] GameObject tap;
     [SerializeField] Material fsShader;
     float timer;
+    bool logAudio;
+    static Bird instance;
 
     private void Awake()
     {
@@ -36,7 +38,7 @@ public class Bird : MonoBehaviour
         AudioManager.Instance.Play("Bird").panStereo = transform.position.x - Lumberjack.Instance.transform.position.x;
         timer = Random.Range(5.0f, 10.0f);
         fsShader.SetFloat("_Alpha", 1);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.4f);
         fsShader.SetFloat("_Alpha", 0);
     }
 
@@ -46,8 +48,13 @@ public class Bird : MonoBehaviour
         if (collision.GetComponentInParent<Lumberjack>() != null)
         {
             enabled = true;
-            MakeNoise();
+            StartCoroutine(MakeNoise());
             tap.SetActive(true);
+            if (!logAudio)
+            {
+                Lumberjack.Instance.Message("L'oiseau est audible. Il n'est pas loin.");
+                logAudio = true;
+            }
         }
     }
 
@@ -66,9 +73,21 @@ public class Bird : MonoBehaviour
         GameManager.instance.ChangeState(GameState.End);
     }
 
-    public void OnGuts()
+    public static void SendClueToPlayer(int time = 0, int chance = 0)
     {
-        if (transform.position.x > Lumberjack.Instance.transform.position.x + 15.0f && !enabled)
+        if (Random.Range(0, chance) != 0) return;
+        if (instance == null) instance = FindObjectOfType<Bird>();
+        instance.Invoke("SendClue", time);
+    }
+
+    void SendClue()
+    {
+        if (transform.position.x > Lumberjack.Instance.transform.position.x + 15.0f)
             CameraManager.Instance.EmitFeathers();
+        else if (!enabled)
+        {
+            Lumberjack.Instance.Message("Aucun signe de l'oiseau dans cette direction. Je devrais faire demi-tour");
+            logAudio = false;
+        }
     }
 }

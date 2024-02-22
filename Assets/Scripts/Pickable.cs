@@ -11,11 +11,9 @@ public class Pickable : MonoBehaviour
     public GameObject trail;
     public GameObject swipeTuto;
     public int resistance { get; private set; }
-    new Collider2D collider;
 
     private void Awake()
     {
-        collider = GetComponent<Collider2D>();
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Platform"));
         if (hit)
         {
@@ -41,7 +39,6 @@ public class Pickable : MonoBehaviour
     void OnDie()
     {
         alive = false;
-        collider.enabled = false;
         GetComponentInChildren<SpriteRenderer>().enabled = false;
         StartCoroutine(Revive());
     }
@@ -61,14 +58,16 @@ public class Pickable : MonoBehaviour
     private void Reset()
     {
         alive = true;
-        collider.enabled = true;
         resistance = maxResistance;
         GetComponentInChildren<SpriteRenderer>().enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!alive) return;
+        if (!alive) {
+            Bird.SendClueToPlayer(2, 5);
+            return;
+        }
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
