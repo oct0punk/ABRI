@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +16,11 @@ public class GameUI : MonoBehaviour
     [SerializeField] GameObject PausePanel;
     [SerializeField] GameObject GameOverPanel;
     [SerializeField] GameObject EndPanel;
-
     Canvas[] UI_WorldArray;
+    [Space]
+    public Image fade;
+    [SerializeField] [Min(1)] int fadeSpeed;
+    public bool isTransitionning { get; private set; }
 
     private void Awake()
     {
@@ -62,6 +66,18 @@ public class GameUI : MonoBehaviour
     }
     #endregion
 
+
+    public IEnumerator Transition(float alpha)
+    {
+        isTransitionning = true;
+        while (fade.color.a != alpha)
+        {
+            fade.color = new Color(0, 0, 0, Mathf.Clamp(alpha, fade.color.a - Time.deltaTime * fadeSpeed, fade.color.a + Time.deltaTime * fadeSpeed));
+            yield return new WaitForEndOfFrame();
+        }
+        fade.color = new Color(0, 0, 0, alpha);
+        isTransitionning = false;
+    }
 
     public void BackToMenu()
     {

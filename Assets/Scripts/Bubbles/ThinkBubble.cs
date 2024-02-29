@@ -20,7 +20,6 @@ public class ThinkBubble : MonoBehaviour
     public Coroutine Message(string text, float time)
     {
         coolDown = time;
-        enabled = true;
         return Message(text, () => coolDown > 0.0f);
     }
 
@@ -31,8 +30,9 @@ public class ThinkBubble : MonoBehaviour
     }
 
 
-    public virtual IEnumerator MessageRoutine(string text, Func<bool> condition)
+    public IEnumerator MessageRoutine(string text, Func<bool> condition)
     {
+        AudioManager.Instance.Play("Speak");
         transform.GetChild(0).gameObject.SetActive(true);
         content = text;
         text = "";
@@ -42,8 +42,9 @@ public class ThinkBubble : MonoBehaviour
             Tmp.text = text;
             yield return new WaitForSeconds(.03f);
         }
-        yield return new WaitForSeconds(content.Length * .03f);
+        enabled = true;
         yield return new WaitWhile(() => condition.Invoke());
+        enabled = false;
         transform.GetChild(0).gameObject.SetActive(false);
     }
 }

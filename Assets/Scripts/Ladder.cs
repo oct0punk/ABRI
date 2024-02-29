@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [SelectionBase]
-public class Ladder : Construction
+public class Ladder : Construction, IFix
 {
     [Header("Ladder")]
     [SerializeField] SpriteRenderer sprite;
@@ -37,13 +37,12 @@ public class Ladder : Construction
     public void SetHeight(float height)
     {
         this.height = height;
-        sprite.transform.localScale = new Vector3(1, height, 1);
-        sprite.transform.localPosition = new Vector3(0, height / 2, 0);
+        sprite.size = new Vector2(sprite.size.x, height);
         box.size = new Vector2(1, height);
         box.offset = new Vector2(0, height / 2);
 
-        spriteDown.transform.localPosition = new Vector3(0, -.5f, 0);
-        spriteUp.transform.localPosition = new Vector3(0, height, 0);
+        spriteDown.transform.localPosition = Vector3.zero;
+        spriteUp.transform.localPosition = new Vector3(0, height - 1.0f, 0);
     }
 
     public override void Build()

@@ -7,7 +7,7 @@ public class AudioFade : MonoBehaviour
     [SerializeField] Sound sound1;
     [SerializeField] Sound sound2;
     [SerializeField] [Range(0.0f, 1.0f)] float fadeAlpha;
-    [HideInInspector] public float target;
+    /*[HideInInspector]*/ public float target;
     [SerializeField] AnimationCurve fadeCurve;
 
     private void Awake()

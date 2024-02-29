@@ -28,7 +28,7 @@ public class Piece : Construction
     {
         base.Break();
         GetComponent<SpriteRenderer>().color = Color.black;
-        Shelter.instance.UpdateSpeed(-1);
+        Shelter.instance.OnPieceUpdated(false);
     }
 
     public override void Build()
@@ -38,7 +38,7 @@ public class Piece : Construction
         build = true;
         GetComponent<SpriteRenderer>().color = Color.white;
         life = Random.Range(solid, solid + 4);
-        Shelter.instance.UpdateSpeed(1);
+        Shelter.instance.OnPieceUpdated(true);
     }
 
     /*USP : 

@@ -56,6 +56,18 @@ public class AudioManager : MonoBehaviour
         return sound.source;
     }
 
+    public AudioSource Stop(string name)
+    {
+        Sound sound = Array.Find(sounds, s => s.name == name);
+        if (sound.source != null)
+            sound.source.Stop();
+        else
+            Debug.LogWarning("Sound " + name + " not found.");
+        return sound.source;
+    }
+
+
+
     public AudioFade GetFadeByName(string name)
     {
         AudioFade fade = Array.Find(fades, f => f.name == name).audio;

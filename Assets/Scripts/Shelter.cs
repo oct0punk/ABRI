@@ -8,28 +8,22 @@ using System;
 [SelectionBase]
 public class Shelter : MonoBehaviour
 {
-    public static Shelter instance {  get {  if (Instance == null) Instance = FindObjectOfType<Shelter>(); return Instance; } }
+    public static Shelter instance { get { if (Instance == null) Instance = FindObjectOfType<Shelter>(); return Instance; } }
     static Shelter Instance;
     [SerializeField] SpriteRenderer ext;
-    [SerializeField] new Light2D light;
-    public CinemachineVirtualCamera cam;
+    [SerializeField] CinemachineVirtualCamera cam;
     [Space]
-    [Header("Temperature")]
-    [SerializeField] float temperature = 20.0f;
-    [SerializeField] float maxTemperature = 25.0f;
+    [SerializeField] GameObject tapEnter;
+    [SerializeField] GameObject tapExit;
+    [Space]
     [Header("Storm")]
-    [SerializeField] float speed = .5f;
     [SerializeField] float timeBeforeNextGust = 1.0f;
-    [SerializeField] int push = 0;
     Storm storm;
     [Space]
-    [SerializeField] Slider thermometer;
-    [Space]
-    public AudioSource brokenWind;
     public Piece[] pieces;
+    bool restored = true;
 
 
-    [ContextMenu("Init")]
     void Awake()
     {
         storm = GetComponent<Storm>();
@@ -40,87 +34,121 @@ public class Shelter : MonoBehaviour
 
     private void Update()
     {
-        // ChangeTemperature(push * Time.deltaTime * speed);
-
         timeBeforeNextGust -= Time.deltaTime;
         if (timeBeforeNextGust < 0.0f)
         {
             Bird.SendClueToPlayer(5);
-            Lumberjack.Instance.Message("Ouf, quelle rafale! J'espère que mon abri l'a encaissé...");
             timeBeforeNextGust = UnityEngine.Random.Range(40.0f, 100.0f);
             foreach (Piece p in pieces)
             {
                 p.Resist(storm.wind);
             }
-        }
-    }
 
-    
-    void ChangeTemperature(float amount)
-    {
-        temperature = Mathf.Clamp(temperature + amount, 0.0f, maxTemperature);
-        if (temperature <= 0.0f)
-        {
-            GameManager.instance.ChangeState(GameState.GameOver);
-            enabled = false;
-            return;
-        }
-
-
-        thermometer.value = Mathf.Lerp(0.0f, 1.0f, temperature / maxTemperature);
-    }
-    public void UpdateSpeed(int amount)
-    {
-        push = Mathf.Min(push, 0) + amount;
-        if (Array.TrueForAll(pieces, p => p.build))
-        {
-            if (brokenWind.isPlaying)
-            brokenWind.Stop();
-            push = 2;
-        }
-        else
-        {
-            if (!brokenWind.isPlaying)
-            brokenWind.Play();
-
-            if (Array.TrueForAll(pieces, p => !p.build))
+            if (GameManager.instance.gameState == GameState.Explore)
             {
-                GameManager.instance.ChangeState(GameState.GameOver);
+                if (Array.TrueForAll(pieces, p => p.life < 2))
+                {
+                    if (Array.TrueForAll(pieces, p => p.life == 1))
+                        pieces[0].life = 3;
+                    else
+                        Lumberjack.Instance.Message("J'ai un mauvais pressentiment. Mon abri a sûrement besoin d'être réfistolé!");
+                }
+                else
+                {
+                    Lumberjack.Instance.Message("Ouf, quelle rafale! J'espère que mon abri l'a encaissé...");
+                }
+            }
+            else
+            {
+                if (Array.TrueForAll(pieces, p => p.build))
+                {
+                    Lumberjack.Instance.Message("ça souffle bien dehors.");
+                    restored = true;
+                }
+                else
+                {
+                    Lumberjack.Instance.Message("Wouaaahh !! La tempête a fait un trou dans le mur !");
+                    restored = false;
+                }
+            }
+        }
+    }
+
+    public void OnPieceUpdated(bool isGood)
+    {
+        if (!isGood)
+        {
+            if (Array.TrueForAll(pieces, p => !p.build))
+            { // Abri détruit
                 enabled = false;
+                GameManager.instance.ChangeState(GameState.GameOver);
             }
         }
     }
 
 
-    void OnEnter()
+    public void OnEnter()
     {
         // Visibility
-        ext.enabled = false;
-        light.enabled = true;
-    }
-    void OnExit()
-    {
-        ext.enabled = true;
-        light.enabled = false;
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Le bucheron ENTRE dans la cabane
-        Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
-        if (lum != null)
+        ext.gameObject.SetActive(false);
+        tapEnter.SetActive(false);
+        tapExit.SetActive(true);
+        cam.Priority = 1;
+
+        if (restored)
         {
-            GameManager.instance.ChangeState(GameState.Indoor);
-            OnEnter();
+            if (!Array.TrueForAll(pieces, p => p.build))
+            {
+                restored = false;
+                Lumberjack.Instance.Message("Il y a des trous dans mon abri. Si ça continue, je ne pourrai pas sauver l'oiseau...", 3.0f);
+            }
         }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        // Le bucheron SORT
-        Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
-        if (lum != null)
+        Vector3 pos = ext.transform.position;
+        pos.z = 0;
+        Lumberjack.Instance.transform.position = pos;
+
+        foreach (var collider in FindObjectsOfType<EdgeCollider2D>())
         {
-            GameManager.instance.ChangeState(GameState.Explore);
-            OnExit();
+            collider.enabled = false;
         }
+        GetComponent<Collider2D>().enabled = true;
+    }
+    public void OnExit()
+    {
+        ext.gameObject.SetActive(true);
+        tapEnter.SetActive(true);
+        tapExit.SetActive(false);
+        cam.Priority = -1;
+
+        if (!restored)
+        {
+            if (Array.TrueForAll(pieces, p => p.build))
+            {
+                Lumberjack.Instance.Message("Tout est en ordre, je peux reprendre les recherches.");
+                restored = true;
+            }
+            else
+                Lumberjack.Instance.Message("Il me faut du bois pour réparer mon abri.");
+        }
+        Vector3 pos = ext.transform.position;
+        pos.z = 0;
+        Lumberjack.Instance.transform.position = pos;
+
+        foreach (var collider in FindObjectsOfType<EdgeCollider2D>())
+        {
+            collider.enabled = true;
+        }
+        GetComponent<Collider2D>().enabled = false;
+    }
+
+    public void Enter()
+    {
+        if (GameManager.instance.gameState == GameState.Indoor) return;
+        GameManager.instance.ChangeState(GameState.Indoor);
+    }
+    public void Exit()
+    {
+        if (GameManager.instance.gameState == GameState.Explore) return;
+        GameManager.instance.ChangeState(GameState.Explore);
     }
 }

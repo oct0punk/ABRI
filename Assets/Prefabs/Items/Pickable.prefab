@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3382772228669368103, guid: 6f99b1c74e8f34545b453133fa068fb2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c2ae6cc175db674fae9d98c6eedf9b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -136,6 +136,10 @@ MonoBehaviour:
   alive: 1
   trail: {fileID: 2848494381323142316}
   swipeTuto: {fileID: 5944233245213204413}
+  sprites:
+  - {fileID: 21300000, guid: 1c2ae6cc175db674fae9d98c6eedf9b1, type: 3}
+  - {fileID: 21300000, guid: a40828b70d5e4364d82554efeac93eea, type: 3}
+  - {fileID: 21300000, guid: 4734d6ca7864fc14c8b9b3c19b344030, type: 3}
 --- !u!61 &7280821055981441921
 BoxCollider2D:
   m_ObjectHideFlags: 0

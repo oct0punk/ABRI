@@ -9,6 +9,7 @@ public class CameraManager : MonoBehaviour
     public static CameraManager Instance;
     [SerializeField] Volume volume;
     [SerializeField] ParticleSystem feathers;
+    int noticeFeathers = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -38,5 +39,15 @@ public class CameraManager : MonoBehaviour
     public void EmitFeathers()
     {
         feathers.Play();
+        if (GameManager.instance.gameState != GameState.Indoor)
+        {
+            if (noticeFeathers == 0)            
+                Lumberjack.Instance.Message("Ce sont les plumes de l'oiseau que je cherche!");
+            
+            else if  (noticeFeathers == 4)            
+                Lumberjack.Instance.Message("Encore des plumes, j'espère qu'il n'est plus très loin.");
+            
+                noticeFeathers++;
+        }
     }
 }

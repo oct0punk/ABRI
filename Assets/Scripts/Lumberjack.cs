@@ -9,7 +9,7 @@ public class Lumberjack : MonoBehaviour
 {
     public static Lumberjack Instance;
 
-    [Min(0)]
+    [Min(1)]
     public int speed = 3;
     public int force = 1;
 
@@ -17,7 +17,6 @@ public class Lumberjack : MonoBehaviour
     public bool canCut { get; private set; }
     public CinemachineVirtualCamera cam;
     public Pickable pickingResource { get; private set; }
-    LayerMask mask;
     [Space]
     public ThinkBubble thinkBubble;
 
@@ -36,6 +35,7 @@ public class Lumberjack : MonoBehaviour
     public FSM_JumpingState jumpingState{ get; private set; }
     public FSM_WorkingState workingState { get; private set; }
     #endregion
+    LayerMask mask;
 
 
 
@@ -228,6 +228,14 @@ public class Lumberjack : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        Message("Début du jeu", 1.0f);
+        StartCoroutine(Intro());
+    }
+
+    IEnumerator Intro()
+    {
+        enabled = false;
+        yield return Message("Cette tempête est féroce.", () => !Input.anyKey);
+        yield return Message("je dois à tout prix trouver l'oiseau en voie d'extinction qui vit dans cette forêt", () => !Input.anyKey);
+        enabled = true;
     }
 }

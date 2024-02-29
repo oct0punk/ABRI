@@ -28,15 +28,19 @@ public class Construction : MonoBehaviour
                 item.SetActive(false);
             }
             build = true;
+            AudioManager.Instance.Play("Build");
         }
         else
         {
             Lumberjack.Instance.Message("Faut plus de bois pour réparer ça.", 2.0f);
+            ItemsManager.Instance.CollectWood(0);
         }
     }
 
     public virtual void Break()
     {
+        foreach (GameObject item in taps)
+            item.SetActive(true);
         build = false;
     }
 

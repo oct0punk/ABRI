@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bird : MonoBehaviour
+public class Bird : MonoBehaviour, IFix
 {
     [SerializeField] GameObject tap;
     [SerializeField] Material fsShader;
@@ -13,11 +13,8 @@ public class Bird : MonoBehaviour
 
     private void Awake()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Platform"));
-        if (hit)
-        {
-            transform.SetParent(hit.transform);
-        }
+        IFix fix = this;
+        fix.Fix(transform);
     }
 
     private void Update()

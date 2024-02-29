@@ -11,6 +11,7 @@ public class Pickable : MonoBehaviour
     public GameObject trail;
     public GameObject swipeTuto;
     public int resistance { get; private set; }
+    [SerializeField] Sprite[] sprites;
 
     private void Awake()
     {
@@ -23,15 +24,15 @@ public class Pickable : MonoBehaviour
 
         if (alive)
             Reset();
-        else
-        {
+        else        
             OnDie();            
-        }
+        
     }
 
     public void Resist(Lumberjack l)
     {
         resistance -= l.force;
+        AudioManager.Instance.Play("Cut");
         if (resistance <= 0)
             OnDie(l);
     }
@@ -39,8 +40,10 @@ public class Pickable : MonoBehaviour
     void OnDie()
     {
         alive = false;
+        AudioManager.Instance.Play("Collect");
         GetComponentInChildren<SpriteRenderer>().enabled = false;
         StartCoroutine(Revive());
+        Shelter.instance.enabled = true;
     }
     void OnDie(Lumberjack l)
     {
@@ -55,10 +58,15 @@ public class Pickable : MonoBehaviour
         Reset();
     }
 
+    [ContextMenu("Reset")]
     private void Reset()
     {
         alive = true;
         resistance = maxResistance;
+        GetComponentInChildren<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
+        bool rand = (int)(Time.timeSinceLevelLoad + transform.position.x) % 2 == 0;
+        GetComponentInChildren<SpriteRenderer>().flipX = rand;
+        GetComponent<Collider2D>().offset = new Vector2(rand ? -1.4f : 1.4f, 1.4f);
         GetComponentInChildren<SpriteRenderer>().enabled = true;
     }
 

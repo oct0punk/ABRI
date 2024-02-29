@@ -1,9 +1,9 @@
-
+using System;
 using System.Collections;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.U2D;
 
 public enum GameState
 {
@@ -17,7 +17,8 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameState gameState;
+    public GameState gameState;                   // True if doing fade animation 
+    bool isTransitionning;
 
     public bool pause { get; private set; }
 
@@ -42,16 +43,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         EnterState(gameState);
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            
-        }
-        else if (Input.GetKeyDown(KeyCode.D)) {
-
-        }
     }
 
 
@@ -81,11 +72,20 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Indoor:
-                if (CameraManager.Instance != null)
-                    CameraManager.Possess(Shelter.instance.cam);
+                if (isTransitionning) return;
+                StartCoroutine(Transition(() => {
+                    Shelter.instance.OnEnter();
+                    AudioManager.Instance.Play("Indoor");
+                    AudioManager.Instance.Stop("Outdoor");
+                }));
                 break;
             case GameState.Explore:
-                CameraManager.Possess(Lumberjack.Instance.cam);
+                if (isTransitionning) return;
+                StartCoroutine(Transition(() => {
+                    Shelter.instance.OnExit();
+                    AudioManager.Instance.Play("Outdoor");
+                    AudioManager.Instance.Stop("Indoor");
+                }));
                 break;
             case GameState.Menu:
                 SceneManager.LoadScene(0);
@@ -102,6 +102,15 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+
+    IEnumerator Transition(Action func)
+    {
+        isTransitionning = true;
+        yield return GameUI.instance.Transition(1);
+        func();
+        yield return GameUI.instance.Transition(0);
+        isTransitionning = false;
+    }
 
 
     public void Launch()

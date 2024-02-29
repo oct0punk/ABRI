@@ -1,10 +1,8 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [SelectionBase]
-public class Bridge : Construction
+public class Bridge : Construction, IFix
 {
     [Header("Bridge")]
     public Transform left;
@@ -18,18 +16,10 @@ public class Bridge : Construction
 
     new void Awake()
     {
-        RaycastHit2D hit = Physics2D.Raycast(left.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Platform"));
-        if (hit)
-        {
-            left.transform.position = hit.point;
-            left.transform.SetParent(hit.transform);
-        }
-        hit = Physics2D.Raycast(right.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Platform"));
-        if (hit)
-        {
-            right.transform.position = hit.point;
-            right.transform.SetParent(hit.transform);
-        }
+        IFix fix = this;
+        fix.Fix(left.transform, true);
+        fix.Fix(right.transform, true);
+
         base.Awake();
     }
 
