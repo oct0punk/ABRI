@@ -1,8 +1,5 @@
 using UnityEngine;
 using Cinemachine;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.UI;
-using UnityEditor;
 using System;
 
 [SelectionBase]
@@ -10,11 +7,7 @@ public class Shelter : MonoBehaviour
 {
     public static Shelter instance { get { if (Instance == null) Instance = FindObjectOfType<Shelter>(); return Instance; } }
     static Shelter Instance;
-    [SerializeField] SpriteRenderer ext;
     [SerializeField] CinemachineVirtualCamera cam;
-    [Space]
-    [SerializeField] GameObject tapEnter;
-    [SerializeField] GameObject tapExit;
     [Space]
     [Header("Storm")]
     [SerializeField] float timeBeforeNextGust = 1.0f;
@@ -89,10 +82,6 @@ public class Shelter : MonoBehaviour
 
     public void OnEnter()
     {
-        // Visibility
-        ext.gameObject.SetActive(false);
-        tapEnter.SetActive(false);
-        tapExit.SetActive(true);
         cam.Priority = 1;
 
         if (restored)
@@ -103,21 +92,10 @@ public class Shelter : MonoBehaviour
                 Lumberjack.Instance.Message("Il y a des trous dans mon abri. Si ça continue, je ne pourrai pas sauver l'oiseau...", 3.0f);
             }
         }
-        Vector3 pos = ext.transform.position;
-        pos.z = 0;
-        Lumberjack.Instance.transform.position = pos;
-
-        foreach (var collider in FindObjectsOfType<EdgeCollider2D>())
-        {
-            collider.enabled = false;
-        }
-        GetComponent<Collider2D>().enabled = true;
     }
+
     public void OnExit()
     {
-        ext.gameObject.SetActive(true);
-        tapEnter.SetActive(true);
-        tapExit.SetActive(false);
         cam.Priority = -1;
 
         if (!restored)
@@ -130,25 +108,17 @@ public class Shelter : MonoBehaviour
             else
                 Lumberjack.Instance.Message("Il me faut du bois pour réparer mon abri.");
         }
-        Vector3 pos = ext.transform.position;
-        pos.z = 0;
-        Lumberjack.Instance.transform.position = pos;
-
-        foreach (var collider in FindObjectsOfType<EdgeCollider2D>())
-        {
-            collider.enabled = true;
-        }
-        GetComponent<Collider2D>().enabled = false;
     }
 
-    public void Enter()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (GameManager.instance.gameState == GameState.Indoor) return;
-        GameManager.instance.ChangeState(GameState.Indoor);
+        if (collision.GetComponentInParent<Lumberjack>() != null)
+            GameManager.instance.ChangeState(GameState.Indoor);
     }
-    public void Exit()
+
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (GameManager.instance.gameState == GameState.Explore) return;
-        GameManager.instance.ChangeState(GameState.Explore);
+        if (collision.GetComponentInParent<Lumberjack>() != null)
+            GameManager.instance.ChangeState(GameState.Explore);
     }
 }

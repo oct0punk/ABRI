@@ -49,7 +49,11 @@ public class Construction : MonoBehaviour
     protected void SetTextAmount()
     {
         foreach (GameObject item in taps)
-            item.GetComponentInChildren<TextMeshProUGUI>().text = required.ToString();
+        {
+            TextMeshProUGUI tmp = item.GetComponentInChildren<TextMeshProUGUI>();
+            if (tmp != null)
+                tmp.text = required.ToString();
+        }
     }
 }
 

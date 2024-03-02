@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,7 +14,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameState gameState;                   // True if doing fade animation 
-    bool isTransitionning;
 
     public bool pause { get; private set; }
 
@@ -59,6 +54,9 @@ public class GameManager : MonoBehaviour
     void ExitState(GameState state) {
         switch (state)
         {
+            case GameState.Indoor:
+                Shelter.instance.OnExit();
+                break;
             case GameState.GameOver:
                 Time.timeScale = 1.0f;
                 break;
@@ -72,20 +70,7 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Indoor:
-                if (isTransitionning) return;
-                StartCoroutine(Transition(() => {
-                    Shelter.instance.OnEnter();
-                    AudioManager.Instance.Play("Indoor");
-                    AudioManager.Instance.Stop("Outdoor");
-                }));
-                break;
-            case GameState.Explore:
-                if (isTransitionning) return;
-                StartCoroutine(Transition(() => {
-                    Shelter.instance.OnExit();
-                    AudioManager.Instance.Play("Outdoor");
-                    AudioManager.Instance.Stop("Indoor");
-                }));
+                Shelter.instance.OnEnter();
                 break;
             case GameState.Menu:
                 SceneManager.LoadScene(0);
@@ -102,15 +87,6 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
-
-    IEnumerator Transition(Action func)
-    {
-        isTransitionning = true;
-        yield return GameUI.instance.Transition(1);
-        func();
-        yield return GameUI.instance.Transition(0);
-        isTransitionning = false;
-    }
 
 
     public void Launch()

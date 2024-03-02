@@ -796,7 +796,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   force: 1
-  indoor: 0
   isAutoMoving: 0
   cam: {fileID: 0}
   thinkBubble: {fileID: 988298801751022457}

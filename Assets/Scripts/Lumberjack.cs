@@ -32,7 +32,7 @@ public class Lumberjack : MonoBehaviour
     public FSM_MovingState movingState { get; private set; }
     public FSM_AutoMove autoMoveState { get; private set; }
     public FSM_ClimbingState climbingState { get; private set; }
-    public FSM_JumpingState jumpingState{ get; private set; }
+    public FSM_JumpingState jumpingState { get; private set; }
     public FSM_WorkingState workingState { get; private set; }
     #endregion
     LayerMask mask;
@@ -62,7 +62,7 @@ public class Lumberjack : MonoBehaviour
     {
         fsm.OnEnter(this);
     }
-    
+
     private void Update()
     {
         fsm.Update(this);
@@ -70,17 +70,14 @@ public class Lumberjack : MonoBehaviour
     private void LateUpdate()
     {
         ResetGlobalScale();
-        if (GameManager.instance.gameState == GameState.Indoor)
-            transform.localRotation = Quaternion.identity;        
-        else
-            transform.rotation = Quaternion.identity;
+        transform.rotation = Quaternion.identity;
     }
 
 
 
     public void ChangeFSM(FSM_BaseState newState)
     {
-        fsm.OnExit(this);        
+        fsm.OnExit(this);
         fsm = newState;
         fsm.OnEnter(this);
     }
@@ -153,7 +150,7 @@ public class Lumberjack : MonoBehaviour
         climbingState.ladder = ladder;
         climbingState.climbDown = climbDown;
         ChangeFSM(climbingState);
-                
+
         Bird.SendClueToPlayer(2, 3);
     }
     #endregion
@@ -173,9 +170,9 @@ public class Lumberjack : MonoBehaviour
     }
     #endregion
 
-    
+
     #region Cutting
-    
+
     public void OnResEnter(Pickable res)
     {
         canCutRes.Add(res);
@@ -204,8 +201,8 @@ public class Lumberjack : MonoBehaviour
     public void StartCutting()
     {
         pickingResource = canCutRes[0];
-        if (pickingResource != null) 
-        {          
+        if (pickingResource != null)
+        {
             ChangeFSM(workingState);
             Cut();
         }

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6daab16ef158c4fb7ac89b8207fa69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: 0
+  gameState: 2
 --- !u!81 &6959806912068194694
 AudioListener:
   m_ObjectHideFlags: 0
