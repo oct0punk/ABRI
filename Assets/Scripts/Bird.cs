@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bird : MonoBehaviour, IFix
@@ -75,6 +74,10 @@ public class Bird : MonoBehaviour, IFix
 
     public void Catch()
     {
+        GetComponent<Collider2D>().enabled = false;
+        enabled = false;
+        tap.SetActive(false);
+        Lumberjack.Instance.OnCatch(this);
         GameManager.instance.ChangeState(GameState.End);
     }
 

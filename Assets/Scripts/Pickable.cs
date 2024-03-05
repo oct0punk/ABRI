@@ -79,6 +79,7 @@ public class Pickable : MonoBehaviour
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
+            if (lum.hasCaught) return;
             swipeTuto.SetActive(true);
             lum.OnResEnter(this);
         }
@@ -89,6 +90,7 @@ public class Pickable : MonoBehaviour
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
+            if (lum.hasCaught) return;
             lum.OnResExit(this);
         }
     }

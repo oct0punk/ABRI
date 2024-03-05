@@ -121,4 +121,16 @@ public class Shelter : MonoBehaviour
         if (collision.GetComponentInParent<Lumberjack>() != null)
             GameManager.instance.ChangeState(GameState.Explore);
     }
+
+    public void End()
+    {
+        if (Lumberjack.Instance.hasCaught)
+        {
+            GameManager.instance.ChangeState(GameState.End);
+        }
+        else
+        {
+            Lumberjack.Instance.Message("Où est l'oiseau ? Il n'y a pas de temps à perdre...");
+        }
+    }
 }

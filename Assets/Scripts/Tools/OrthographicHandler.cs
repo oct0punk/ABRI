@@ -13,7 +13,7 @@ public class OrthographicHandler : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         transform.localScale = Vector3.one * cam.orthographicSize;
     }

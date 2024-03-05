@@ -36,7 +36,7 @@ public class Lumberjack : MonoBehaviour
     public FSM_WorkingState workingState { get; private set; }
     #endregion
     LayerMask mask;
-
+    public bool hasCaught { get; private set; }
 
 
     private void Awake()
@@ -73,7 +73,17 @@ public class Lumberjack : MonoBehaviour
         transform.rotation = Quaternion.identity;
     }
 
-
+    public void OnCatch(Bird bird)
+    {
+        hasCaught = true;
+        animator.SetBool("Catch", true);
+        
+        foreach (var construction in FindObjectsOfType<Construction>())
+        {
+            foreach (var ui in GetComponentsInChildren<Canvas>())
+                ui.gameObject.SetActive(false);
+        }
+    }
 
     public void ChangeFSM(FSM_BaseState newState)
     {

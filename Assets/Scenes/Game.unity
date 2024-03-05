@@ -4968,7 +4968,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -5207,7 +5207,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.4
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10283,7 +10283,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 100}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 12.3, y: 12.3, z: 12.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1339354803}
@@ -18847,11 +18847,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4320717964751143390, guid: 9e1b2531ac8f920418139d43b6fd95c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 84.93
+      value: 79
       objectReference: {fileID: 0}
     - target: {fileID: 4320717964751143390, guid: 9e1b2531ac8f920418139d43b6fd95c8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 44.93
+      value: 73.3
       objectReference: {fileID: 0}
     - target: {fileID: 4320717964751143390, guid: 9e1b2531ac8f920418139d43b6fd95c8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18991,7 +18991,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 0}
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

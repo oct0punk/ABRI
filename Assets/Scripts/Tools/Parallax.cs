@@ -22,11 +22,11 @@ public class Parallax : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         camDelta = (Vector2)cam.transform.position - lastCamPos;
         offset -= camDelta * speed * Time.deltaTime;
-        mat.SetTextureOffset("_MainTex", offset);
+        mat.SetVector("_Offset", offset);
         lastCamPos = cam.transform.position;
     }
 }
