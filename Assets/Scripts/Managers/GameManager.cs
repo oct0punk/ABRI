@@ -13,7 +13,7 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameState gameState;                   // True if doing fade animation 
+    public GameState gameState;
 
     public bool pause { get; private set; }
 

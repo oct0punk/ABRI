@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwipeManager : MonoBehaviour
@@ -20,6 +19,8 @@ public class SwipeManager : MonoBehaviour
         set { }
     }
 
+    public static bool buttonPressed;
+
 
     private void Start()
     {
@@ -38,12 +39,14 @@ public class SwipeManager : MonoBehaviour
     #region Walk
     public static bool MoveLeft()
     {
+        if (buttonPressed) return false;
         if (MoveCancel()) return false;
         return testLeft();
     }
 
     public static bool MoveRight()
     {
+        if (buttonPressed) return false;
         if (MoveCancel()) return false;
         return testRight();
     }
@@ -52,20 +55,21 @@ public class SwipeManager : MonoBehaviour
     {
         foreach (var t in Input.touches)
         {
-            if (t.position.x < Screen.width * .2f) return true;
+            if (t.position.x < Screen.width * .5f) return true;
         }
-        return Input.GetMouseButton(0) && Input.mousePosition.x < Screen.width * .2f;
+        return Input.GetMouseButton(0) && Input.mousePosition.x < Screen.width * .5f;
     }
     private static bool testRight()
     {
         foreach (var t in Input.touches)
         {
-            if (t.position.x > Screen.width * (1 - 0.2f)) return true;
+            if (t.position.x > Screen.width * .5f) return true;
         }
-        return Input.GetMouseButton(0) && Input.mousePosition.x > Screen.width * (1 - 0.2f);
+        return Input.GetMouseButton(0) && Input.mousePosition.x > Screen.width * .5f;
     }
     private static bool MoveCancel()
     {
+        if (buttonPressed) return true;
         return testLeft() && testRight();
     }
     #endregion

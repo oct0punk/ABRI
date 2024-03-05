@@ -11,10 +11,6 @@ public class ThinkBubble : MonoBehaviour
     bool isRunning;
     LinkedList<string> standby = new LinkedList<string>();
 
-    private void Update()
-    {
-        Debug.Log(standby.Count);
-    }
 
     public void Message(string text, float time)
     {

@@ -11,10 +11,10 @@ public class ItemsManager : MonoBehaviour
     {
         wood = 0;
     }
-    public void CollectWood(int amount)
+    public void CollectWood(int amount, float time = 3.0f)
     {
         wood += amount;
-        pack.Display(wood, 1.0f);
+        pack.Display(wood, time);
     }
     
     public bool Build(Construction construction)

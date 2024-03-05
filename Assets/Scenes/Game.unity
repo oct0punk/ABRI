@@ -3583,6 +3583,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 35.85
       objectReference: {fileID: 0}
+    - target: {fileID: 5560149450051468676, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5696636563677190584, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
