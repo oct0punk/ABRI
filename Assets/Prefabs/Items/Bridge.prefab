@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8553668948806908974}
-  - {fileID: 1379147675381091969}
+  - {fileID: 9163480561961437538}
   m_Father: {fileID: 7262989942983561488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &3363600034989091629
@@ -145,6 +145,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2889935303084656129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9163480561961437538}
+  m_Layer: 0
+  m_Name: TapAnchor_L
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9163480561961437538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889935303084656129}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1379147675381091969}
+  m_Father: {fileID: 1110303808269950406}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5148660442660896360
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,8 +208,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2193891034343981564}
   - {fileID: 5614521801724521140}
-  - {fileID: 1382680697865634361}
   m_Father: {fileID: 7262989942983561488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &5970650754708749367
@@ -316,6 +348,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8647309127899636652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2193891034343981564}
+  m_Layer: 0
+  m_Name: TapAnchor_R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2193891034343981564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8647309127899636652}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1382680697865634361}
+  m_Father: {fileID: 1974296981791464912}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8987630325907334291
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +442,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1974296981791464912}
+    m_TransformParent: {fileID: 2193891034343981564}
     m_Modifications:
     - target: {fileID: 1506702908128738997, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: anchor
@@ -387,7 +451,7 @@ PrefabInstance:
     - target: {fileID: 2010284230338619307, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: anchor
       value: 
-      objectReference: {fileID: 1974296981791464912}
+      objectReference: {fileID: 2193891034343981564}
     - target: {fileID: 2547787455269023817, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: m_Name
       value: Tap
@@ -509,7 +573,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1110303808269950406}
+    m_TransformParent: {fileID: 9163480561961437538}
     m_Modifications:
     - target: {fileID: 1506702908128738997, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: anchor
@@ -518,7 +582,7 @@ PrefabInstance:
     - target: {fileID: 2010284230338619307, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: anchor
       value: 
-      objectReference: {fileID: 1110303808269950406}
+      objectReference: {fileID: 9163480561961437538}
     - target: {fileID: 2547787455269023817, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: m_Name
       value: Tap

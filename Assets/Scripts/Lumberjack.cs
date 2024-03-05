@@ -173,10 +173,10 @@ public class Lumberjack : MonoBehaviour
         thinkBubble.gameObject.SetActive(true);
         return thinkBubble.Message(text, whileCondition);
     }
-    public Coroutine Message(string text, float time = 2.0f)
+    public void Message(string text, float time = 2.0f)
     {
         thinkBubble.gameObject.SetActive(true);
-        return thinkBubble.Message(text, time);
+        thinkBubble.Message(text, time);
     }
     #endregion
 

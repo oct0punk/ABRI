@@ -4917,8 +4917,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7469237931873342781}
   - {fileID: 6563438436710102958}
+  - {fileID: 538425483693456654}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5079758298616066108
@@ -4993,13 +4993,45 @@ MonoBehaviour:
   - {fileID: 1130309349334740687}
   solid: 1
   life: 1
+--- !u!1 &8573343555172129869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 538425483693456654}
+  m_Layer: 0
+  m_Name: TapAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &538425483693456654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573343555172129869}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.66, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7469237931873342781}
+  m_Father: {fileID: 3648356222522587521}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3485575351988048689
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3648356222522587521}
+    m_TransformParent: {fileID: 538425483693456654}
     m_Modifications:
     - target: {fileID: 1506702908128738997, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: anchor
@@ -5008,7 +5040,7 @@ PrefabInstance:
     - target: {fileID: 2010284230338619307, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: anchor
       value: 
-      objectReference: {fileID: 3648356222522587521}
+      objectReference: {fileID: 538425483693456654}
     - target: {fileID: 2216733435810055714, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0

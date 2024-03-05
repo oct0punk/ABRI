@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,31 +8,33 @@ public class ThinkBubble : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI Tmp;
     protected string content;
-    protected float coolDown = 0.0f;
-    protected Coroutine routine;
+    bool isRunning;
+    LinkedList<string> standby = new LinkedList<string>();
 
     private void Update()
     {
-        coolDown -= Time.deltaTime;
-        if (coolDown < 0.0f)
-            enabled = false;
+        Debug.Log(standby.Count);
     }
 
-    public Coroutine Message(string text, float time)
+    public void Message(string text, float time)
     {
-        coolDown = time;
-        return Message(text, () => coolDown > 0.0f);
+        if (standby.Contains(text)) return;
+        if (isRunning)
+        {
+            if (content != text)
+                standby.AddLast(text);        
+        }
+        else
+            StartCoroutine(MessageRoutine(text, time));
     }
-
     public Coroutine Message(string text, Func<bool> condition)
     {
-        if (routine != null) StopCoroutine(routine);
         return StartCoroutine(MessageRoutine(text, condition));
     }
 
-
     public IEnumerator MessageRoutine(string text, Func<bool> condition)
     {
+        isRunning = true;
         AudioManager.Instance.Play("Speak");
         transform.GetChild(0).gameObject.SetActive(true);
         content = text;
@@ -42,9 +45,34 @@ public class ThinkBubble : MonoBehaviour
             Tmp.text = text;
             yield return new WaitForSeconds(.03f);
         }
-        enabled = true;
         yield return new WaitWhile(() => condition.Invoke());
-        enabled = false;
         transform.GetChild(0).gameObject.SetActive(false);
+        isRunning = false;
+    }
+    public IEnumerator MessageRoutine(string text, float time)
+    {
+        isRunning = true;
+        AudioManager.Instance.Play("Speak");
+        transform.GetChild(0).gameObject.SetActive(true);
+        content = text;
+        text = "";
+        for (int c = 0; c < content.Length; c++)
+        {
+            text += content[c];
+            Tmp.text = text;
+            yield return new WaitForSeconds(.03f);
+        }
+        yield return new WaitForSeconds(time);
+        transform.GetChild(0).gameObject.SetActive(false);
+        
+        if (standby.Count > 0)
+        {
+            StartCoroutine(MessageRoutine(standby.First.Value, 2.0f));
+            standby.RemoveFirst();
+        }
+        else
+        {
+            isRunning = false;
+        }
     }
 }

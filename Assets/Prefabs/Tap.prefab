@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 9107407973523820483}
   m_Layer: 5
   m_Name: Tap
-  m_TagString: Untagged
+  m_TagString: Tap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -312,7 +312,7 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 85, y: 78}
-  m_Pivot: {x: 0.5, y: -0.3}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8965614337142853480
 CanvasRenderer:
   m_ObjectHideFlags: 0
