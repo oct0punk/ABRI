@@ -18,7 +18,8 @@ public class Parallax : MonoBehaviour
 
         float ratio = 1.0f * Screen.width / Screen.height;
         transform.localScale = new Vector3(ratio * .2f, .2f, .2f);
-        mat.SetTextureScale("_MainTex", new Vector2(ratio, 1.0f));
+        mat.SetTextureScale("_MainTex", new Vector2(ratio, -1.0f));
+
     }
 
     // Update is called once per frame

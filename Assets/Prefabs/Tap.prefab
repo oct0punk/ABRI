@@ -162,7 +162,7 @@ RectTransform:
   m_GameObject: {fileID: 2547787455269023817}
   m_LocalRotation: {x: -0, y: -0, z: 0.00000020861623, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.20000002}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7801690432018507712}
@@ -182,7 +182,7 @@ Canvas:
   m_GameObject: {fileID: 2547787455269023817}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -208,12 +208,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 8965614337142853480}
   - component: {fileID: 6106429450549001611}
   - component: {fileID: 3765346260486799702}
+  - component: {fileID: 2010284230338619307}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -301,7 +302,7 @@ RectTransform:
   m_GameObject: {fileID: 3764141657804977879}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6292009651876814341}
@@ -311,7 +312,7 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 85, y: 78}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: -0.3}
 --- !u!222 &8965614337142853480
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -406,6 +407,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2010284230338619307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3764141657804977879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1dd855031ed0e04381cce13328f761c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchor: {fileID: 0}
 --- !u!1 &5583566663476737563
 GameObject:
   m_ObjectHideFlags: 0

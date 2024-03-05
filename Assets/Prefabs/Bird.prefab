@@ -148,6 +148,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1506702908128738997, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
+      propertyPath: anchor
+      value: 
+      objectReference: {fileID: 4320717964751143390}
+    - target: {fileID: 2010284230338619307, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
+      propertyPath: anchor
+      value: 
+      objectReference: {fileID: 6897597588611166167}
     - target: {fileID: 2547787455269023817, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: m_Name
       value: Tap
