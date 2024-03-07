@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 [SelectionBase]
@@ -43,6 +44,10 @@ public class Ladder : Construction, IFix
 
         spriteDown.transform.localPosition = Vector3.zero;
         spriteUp.transform.localPosition = new Vector3(0, height - 1.0f, 0);
+
+        fx.transform.localPosition = new Vector3(0, height / 2, -5);
+        var shape = fx.shape;
+        shape.scale = new Vector3(1, height, 1);
     }
 
     public override void Build()
