@@ -1,19 +1,29 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class StorageUI : ThinkBubble
+public class StorageUI : MonoBehaviour
 {
-    public void Display(int amount,  float time)
+    [SerializeField] TextMeshProUGUI Tmp;
+    float timer = .0f;
+
+    private void Update()
     {
-        Message(amount.ToString(), time);
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0.0f)
+            {
+                enabled = false;
+                transform.GetChild(0).gameObject.SetActive(false);
+            }
+        }
     }
 
-    public void Display(int amount)
+    public void Display(int amount, float time)
     {
         Tmp.text = amount.ToString();
+        timer = time;
+        enabled = true;
         transform.GetChild(0).gameObject.SetActive(true);
     }
 

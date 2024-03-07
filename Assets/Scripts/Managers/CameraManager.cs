@@ -37,13 +37,14 @@ public class CameraManager : MonoBehaviour
 
     public void EmitFeathers()
     {
-        feathers.Play();
+        if (GameManager.instance.gameState == GameState.Indoor) return; 
+
 
         if (noticeFeathers == 0)
-            Lumberjack.Instance.Message("Ce sont les plumes de l'oiseau que je cherche!");
+            Lumberjack.Instance.Message("Ce sont les plumes de l'oiseau que je cherche!", 1.0f, feathers.Play, true);
 
         else if (noticeFeathers == 4)
-            Lumberjack.Instance.Message("Encore des plumes, j'espère qu'il n'est plus très loin.");
+            Lumberjack.Instance.Message("Encore des plumes, j'espère qu'il n'est plus très loin.", 1.0f, feathers.Play, true);
 
         noticeFeathers++;
     }

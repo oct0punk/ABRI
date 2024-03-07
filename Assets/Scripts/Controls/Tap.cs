@@ -5,12 +5,6 @@ public class Tap : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoint
 {
     bool pressed;
 
-    private void Update()
-    {
-        if (pressed)
-        Debug.Log(pressed, this);
-    }
-
     public void OnPointerDown(PointerEventData eventData)
     {
         pressed = true;

@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 using System;
+using System.Collections.Generic;
 
 [SelectionBase]
 public class Shelter : MonoBehaviour
@@ -10,62 +11,25 @@ public class Shelter : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera cam;
     [Space]
     [Header("Storm")]
-    [SerializeField] float timeBeforeNextGust = 1.0f;
-    Storm storm;
     [Space]
     public Piece[] pieces;
-    bool restored = true;
+    [HideInInspector] public bool restored = true;
+    List<GameObject> tapsInside = new();
+    List<GameObject> tapsOutside = new();
 
 
     void Awake()
     {
-        storm = GetComponent<Storm>();
-        pieces = GetComponentsInChildren<Piece>();
-    }
-
-
-
-    private void Update()
-    {
-        timeBeforeNextGust -= Time.deltaTime;
-        if (timeBeforeNextGust < 0.0f)
+        pieces = GetComponentsInChildren<Piece>();        
+        foreach (var tap in FindObjectsOfType<Tap>())
         {
-            Bird.SendClueToPlayer(5);
-            timeBeforeNextGust = UnityEngine.Random.Range(40.0f, 100.0f);
-            foreach (Piece p in pieces)
-            {
-                p.Resist(storm.wind);
-            }
-
-            if (GameManager.instance.gameState == GameState.Explore)
-            {
-                if (Array.TrueForAll(pieces, p => p.life < 2))
-                {
-                    if (Array.TrueForAll(pieces, p => p.life == 1))
-                        pieces[0].life = 3;
-                    else
-                        Lumberjack.Instance.Message("J'ai un mauvais pressentiment. Mon abri a sûrement besoin d'être réfistolé!");
-                }
-                else
-                {
-                    Lumberjack.Instance.Message("Ouf, quelle rafale! J'espère que mon abri l'a encaissé...");
-                }
-            }
+            if (tap.GetComponentInParent<Shelter>())
+                tapsInside.Add(tap.GetComponentInParent<Canvas>().gameObject);
             else
-            {
-                if (Array.TrueForAll(pieces, p => p.build))
-                {
-                    Lumberjack.Instance.Message("ça souffle bien dehors.");
-                    restored = true;
-                }
-                else
-                {
-                    Lumberjack.Instance.Message("Wouaaahh !! La tempête a fait un trou dans le mur !");
-                    restored = false;
-                }
-            }
+                tapsOutside.Add(tap.GetComponentInParent<Canvas>().gameObject);
         }
     }
+
 
     public void OnPieceUpdated(bool isGood)
     {
@@ -73,7 +37,6 @@ public class Shelter : MonoBehaviour
         {
             if (Array.TrueForAll(pieces, p => !p.build))
             { // Abri détruit
-                enabled = false;
                 GameManager.instance.ChangeState(GameState.GameOver);
             }
         }
@@ -92,6 +55,12 @@ public class Shelter : MonoBehaviour
                 Lumberjack.Instance.Message("Il y a des trous dans mon abri. Si ça continue, je ne pourrai pas sauver l'oiseau...", 3.0f);
             }
         }
+
+        foreach (var go in tapsInside)
+        { go.SetActive(true); }
+
+        foreach (var go in tapsOutside)
+        { go.SetActive(false); }
     }
 
     public void OnExit()
@@ -108,6 +77,12 @@ public class Shelter : MonoBehaviour
             else
                 Lumberjack.Instance.Message("Il me faut du bois pour réparer mon abri.");
         }
+
+        foreach (var go in tapsInside)
+        { go.SetActive(false); }
+
+        foreach (var go in tapsOutside)
+        { go.SetActive(true); }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -130,7 +105,8 @@ public class Shelter : MonoBehaviour
         }
         else
         {
-            Lumberjack.Instance.Message("Où est l'oiseau ? Il n'y a pas de temps à perdre...");
+            GetComponentInChildren<Tap>().gameObject.SetActive(false);
+            Lumberjack.Instance.Message("Il faut retrouver cet oiseau, il ne survivra pas à cette tempête infernale.");
         }
     }
 }

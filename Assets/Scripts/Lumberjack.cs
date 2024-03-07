@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 [SelectionBase]
@@ -73,7 +74,7 @@ public class Lumberjack : MonoBehaviour
         transform.rotation = Quaternion.identity;
     }
 
-    public void OnCatch(Bird bird)
+    public void OnCatch()
     {
         hasCaught = true;
         animator.SetBool("Catch", true);
@@ -173,10 +174,10 @@ public class Lumberjack : MonoBehaviour
         thinkBubble.gameObject.SetActive(true);
         return thinkBubble.Message(text, whileCondition);
     }
-    public void Message(string text, float time = 2.0f)
+    public void Message(string text, float time = 0.0f, Action action = null, bool priority = false)
     {
         thinkBubble.gameObject.SetActive(true);
-        thinkBubble.Message(text, time);
+        thinkBubble.Message(text, time, action, priority);
     }
     #endregion
 
@@ -187,14 +188,14 @@ public class Lumberjack : MonoBehaviour
     {
         canCutRes.Add(res);
         if (res == canCutRes[0])
-            res.CanCut(true, this);
+            res.CanCut(true);
         canCut = true;
         animator.SetBool("CanCut", true);
         // Trail emits
     }
     public void OnResExit(Pickable res)
     {
-        res.CanCut(false, this);
+        res.CanCut(false);
         canCutRes.Remove(res);
         if (canCutRes.Count == 0)
         {
@@ -204,7 +205,7 @@ public class Lumberjack : MonoBehaviour
         }
         else
         {
-            canCutRes[0].CanCut(true, this);
+            canCutRes[0].CanCut(true);
         }
     }
 

@@ -22,7 +22,7 @@ public class Bird : MonoBehaviour, IFix
         viewportPos.x = Mathf.Clamp01(viewportPos.x);
         viewportPos.y = Mathf.Clamp01(viewportPos.y);
         fsShader.SetVector("_Pos", viewportPos);
-        
+
         timer -= Time.deltaTime;
         if (timer < 0)
         {
@@ -41,7 +41,7 @@ public class Bird : MonoBehaviour, IFix
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        timer = Random.Range(5.0f, 10.0f);
+        timer = UnityEngine.Random.Range(5.0f, 10.0f);
         if (collision.GetComponentInParent<Lumberjack>() != null)
         {
             enabled = true;
@@ -49,11 +49,13 @@ public class Bird : MonoBehaviour, IFix
             tap.SetActive(true);
             if (!logAudio)
             {
-                if (first) {
+                if (first)
+                {
                     Lumberjack.Instance.Message("L'oiseau est audible. Il n'est pas loin.");
                     first = false;
                 }
-                else {
+                else
+                {
                     Lumberjack.Instance.Message("L'oiseau est de nouveau audible. J'ai retrouvé sa trace.");
                 }
 
@@ -77,7 +79,7 @@ public class Bird : MonoBehaviour, IFix
         GetComponent<Collider2D>().enabled = false;
         enabled = false;
         tap.SetActive(false);
-        Lumberjack.Instance.OnCatch(this);
+        Lumberjack.Instance.OnCatch();
         GameManager.instance.ChangeState(GameState.End);
     }
 
@@ -85,7 +87,7 @@ public class Bird : MonoBehaviour, IFix
     {
         if (Random.Range(0, chance) != 0) return;
         if (instance == null) instance = FindObjectOfType<Bird>();
-        instance.Invoke("SendClue", time);
+        instance.Invoke(nameof(SendClue), time);
     }
 
     void SendClue()
@@ -94,7 +96,7 @@ public class Bird : MonoBehaviour, IFix
             CameraManager.Instance.EmitFeathers();
         else if (Lumberjack.Instance.transform.position.x > transform.position.x + 15.0f)
         {
-            Lumberjack.Instance.Message("Aucun signe de l'oiseau dans cette direction. Je devrais faire demi-tour");
+            Lumberjack.Instance.Message("Aucun signe de l'oiseau dans cette direction. Je devrais faire demi-tour", 0.0f, null, true);
             logAudio = false;
         }
     }

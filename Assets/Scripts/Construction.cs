@@ -14,8 +14,10 @@ public class Construction : MonoBehaviour
         SetTextAmount();
         if (buildOnStart)
         {
+            int temp = required;
             required = 0;
             Build();
+            required = temp;
         }
     }
 
@@ -32,7 +34,7 @@ public class Construction : MonoBehaviour
         }
         else
         {
-            Lumberjack.Instance.Message("Faut plus de bois pour réparer ça.", 2.0f);
+            Lumberjack.Instance.Message("Faut plus de bois pour réparer ça.");
             ItemsManager.Instance.CollectWood(0);
         }
     }

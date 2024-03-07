@@ -56,6 +56,9 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Indoor:
                 Shelter.instance.OnExit();
+                foreach (var tap in FindObjectsOfType<Tap>()) {
+                    tap.enabled = tap.GetComponentInParent<Shelter>() == null;
+                }
                 break;
             case GameState.GameOver:
                 Time.timeScale = 1.0f;
@@ -71,6 +74,9 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Indoor:
                 Shelter.instance.OnEnter();
+                foreach (var tap in FindObjectsOfType<Tap>()){
+                    tap.enabled = tap.GetComponentInParent<Shelter>() != null;
+                }
                 break;
             case GameState.Menu:
                 SceneManager.LoadScene(0);

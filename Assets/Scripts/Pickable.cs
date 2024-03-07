@@ -46,7 +46,8 @@ public class Pickable : MonoBehaviour
         StartCoroutine(Revive());
         if (doOnce)
         {
-            Shelter.instance.enabled = true;
+            doOnce = false;
+            FindObjectOfType<Storm>().enabled = true;
             Lumberjack.Instance.Message("Une p'tite branche pour construire le chemin");
         }
     }
@@ -103,7 +104,7 @@ public class Pickable : MonoBehaviour
         }
     }
 
-    public void CanCut(bool canCut, Lumberjack lum)
+    public void CanCut(bool canCut)
     {
         trail.SetActive(canCut);
         swipeTuto.SetActive(canCut);

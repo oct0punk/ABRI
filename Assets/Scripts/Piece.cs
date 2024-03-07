@@ -9,7 +9,7 @@ public class Piece : Construction
     private new void Awake()
     {
         base.Awake();
-        if (!build) Break();
+        if (!buildOnStart) Break();
     }
 
     public void Resist(int windForce)
