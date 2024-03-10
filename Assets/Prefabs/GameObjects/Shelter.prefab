@@ -206,12 +206,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 6750577495154648533}
-  timeBeforeNextGust: 1
   pieces:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  restored: 1
 --- !u!114 &3262465680258151783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,12 +219,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2156627239026741030}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d71baa88004e41f4ea13dfeb37f5d45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wind: 1
+  gutsFrequency: {x: 50, y: 120}
+  timeBeforeNextGust: 1
 --- !u!61 &4710316112812515936
 BoxCollider2D:
   m_ObjectHideFlags: 0

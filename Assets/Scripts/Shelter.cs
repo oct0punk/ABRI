@@ -2,6 +2,7 @@ using UnityEngine;
 using Cinemachine;
 using System;
 using System.Collections.Generic;
+using TMPro;
 
 [SelectionBase]
 public class Shelter : MonoBehaviour
@@ -14,20 +15,17 @@ public class Shelter : MonoBehaviour
     [Space]
     public Piece[] pieces;
     [HideInInspector] public bool restored = true;
-    List<GameObject> tapsInside = new();
     List<GameObject> tapsOutside = new();
+    public Tap tap { get; private set; }
 
 
     void Awake()
     {
+        tap = GetComponentInChildren<Tap>();
         pieces = GetComponentsInChildren<Piece>();        
         foreach (var tap in FindObjectsOfType<Tap>())
-        {
-            if (tap.GetComponentInParent<Shelter>())
-                tapsInside.Add(tap.GetComponentInParent<Canvas>().gameObject);
-            else
-                tapsOutside.Add(tap.GetComponentInParent<Canvas>().gameObject);
-        }
+            if (tap != this.tap)
+                tapsOutside.Add(tap.GetComponentInParent<Canvas>().gameObject);        
     }
 
 
@@ -56,8 +54,11 @@ public class Shelter : MonoBehaviour
             }
         }
 
-        foreach (var go in tapsInside)
-        { go.SetActive(true); }
+        foreach (var piece in pieces)
+            if (!piece.build)
+                foreach (var t in piece.taps)
+                    if (t.GetComponentInChildren<Canvas>() != null)
+                        t.SetActive(true);
 
         foreach (var go in tapsOutside)
         { go.SetActive(false); }
@@ -78,8 +79,10 @@ public class Shelter : MonoBehaviour
                 Lumberjack.Instance.Message("Il me faut du bois pour réparer mon abri.");
         }
 
-        foreach (var go in tapsInside)
-        { go.SetActive(false); }
+        foreach (var piece in pieces)
+            foreach (var t in piece.taps)
+                if (t.GetComponentInChildren<Canvas>() != null)
+                    t.SetActive(false);
 
         foreach (var go in tapsOutside)
         { go.SetActive(true); }
@@ -101,11 +104,11 @@ public class Shelter : MonoBehaviour
     {
         if (Lumberjack.Instance.hasCaught)
         {
-            GameManager.instance.ChangeState(GameState.End);
+            GameManager.instance.End();
         }
         else
         {
-            GetComponentInChildren<Tap>().gameObject.SetActive(false);
+            tap.gameObject.SetActive(false);
             Lumberjack.Instance.Message("Il faut retrouver cet oiseau, il ne survivra pas à cette tempête infernale.");
         }
     }

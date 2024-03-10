@@ -56,9 +56,6 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Indoor:
                 Shelter.instance.OnExit();
-                foreach (var tap in FindObjectsOfType<Tap>()) {
-                    tap.enabled = tap.GetComponentInParent<Shelter>() == null;
-                }
                 break;
             case GameState.GameOver:
                 Time.timeScale = 1.0f;
@@ -74,15 +71,16 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Indoor:
                 Shelter.instance.OnEnter();
-                foreach (var tap in FindObjectsOfType<Tap>()){
-                    tap.enabled = tap.GetComponentInParent<Shelter>() != null;
-                }
                 break;
             case GameState.Menu:
                 SceneManager.LoadScene(0);
                 break;
             case GameState.End:
-                SceneManager.LoadScene(2);
+                foreach (var c in FindObjectsOfType<Construction>()) {
+                    foreach (var t in c.taps)
+                        if (t.GetComponentInChildren<Canvas>() != null)
+                            t.SetActive(false);
+                }
                 break;
             case GameState.GameOver:
                 GameUI.instance.GameOver();
@@ -105,5 +103,10 @@ public class GameManager : MonoBehaviour
     {
         this.pause = pause;
         Time.timeScale = pause ? 0.0f : 1.0f;
+    }
+
+    public void End()
+    {
+        SceneManager.LoadScene(2);
     }
 }

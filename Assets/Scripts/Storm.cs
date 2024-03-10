@@ -6,8 +6,8 @@ public class Storm : MonoBehaviour
     [Range(1, 5)]
     public int wind;
 
-    [SerializeField]
-    float timeBeforeNextGust = 1.0f;
+    [SerializeField] Vector2 gutsFrequency;
+    [SerializeField] float timeBeforeNextGust = 1.0f;
     Shelter shelter;
 
     private void Awake()
@@ -34,17 +34,20 @@ public class Storm : MonoBehaviour
 
     public void Guts()
     {
-        if (GameManager.instance.gameState == GameState.End) return;
-
         Bird.SendClueToPlayer(5);
-        timeBeforeNextGust = UnityEngine.Random.Range(40.0f, 100.0f);
+        timeBeforeNextGust = UnityEngine.Random.Range(gutsFrequency.x, gutsFrequency.y);
         enabled = true;
+
+        if (Lumberjack.Instance.hasCaught)
+        {
+            return;
+        }
+        
 
         foreach (Piece p in shelter.pieces)
         {
             p.Resist(wind);
         }
-
 
         if (GameManager.instance.gameState == GameState.Explore)
         {

@@ -76,15 +76,14 @@ public class Bird : MonoBehaviour, IFix
 
     public void Catch()
     {
-        GetComponent<Collider2D>().enabled = false;
-        enabled = false;
-        tap.SetActive(false);
         Lumberjack.Instance.OnCatch();
         GameManager.instance.ChangeState(GameState.End);
+        Destroy(gameObject);
     }
 
     public static void SendClueToPlayer(int time = 0, int chance = 0)
     {
+        if (Lumberjack.Instance.hasCaught) return;
         if (Random.Range(0, chance) != 0) return;
         if (instance == null) instance = FindObjectOfType<Bird>();
         instance.Invoke(nameof(SendClue), time);

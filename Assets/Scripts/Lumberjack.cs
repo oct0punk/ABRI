@@ -83,12 +83,8 @@ public class Lumberjack : MonoBehaviour
     {
         hasCaught = true;
         animator.SetBool("Catch", true);
-        
-        foreach (var construction in FindObjectsOfType<Construction>())
-        {
-            foreach (var ui in GetComponentsInChildren<Canvas>())
-                ui.gameObject.SetActive(false);
-        }
+        Message("Te voilà, mon petit... C'est de rentrer à la maison");
+        Shelter.instance.tap.gameObject.SetActive(true);
     }
 
     public void ChangeFSM(FSM_BaseState newState)

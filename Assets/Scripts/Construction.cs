@@ -7,7 +7,7 @@ public class Construction : MonoBehaviour
     public int required;
     [HideInInspector] public bool build = false;
     public bool buildOnStart;
-    [SerializeField] GameObject[] taps;
+    public GameObject[] taps;
     [SerializeField] protected ParticleSystem fx;
 
     protected void Awake()
