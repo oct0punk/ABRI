@@ -25,27 +25,23 @@ public class Bridge : Construction, IFix
 
     public override void Build()
     {
-        Debug.Log("Bridge build");
         base.Build();
         if (!build) return;
-        Debug.Log("build");
         Build(left, right);
         enabled = true;
     }
 
     void Build(Transform left, Transform right)
     {
-        Debug.Log("Construction LtoR");
         // Init
         this.left = left;
         this.right = right;
 
         Vector2 leftToRight = left.position - right.position;
-        fx.transform.position = left.position;
+        fx.transform.position = (left.position + right.position) / 2;
         fx.transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(leftToRight.y, leftToRight.x) * Mathf.Rad2Deg);
-        Debug.Log(fx.transform.eulerAngles.z);
         var sh = fx.shape;
-        sh.scale = new Vector3(Vector3.Distance(left.position, right.position), 2, 1);
+        sh.scale = new Vector3(Vector3.Distance(left.position, right.position) + 1, 3, 1);
 
         float dist = Vector3.Distance(this.left.transform.position, this.right.transform.position);
         Vector3 vec = this.right.transform.position - this.left.transform.position;

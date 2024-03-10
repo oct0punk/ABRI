@@ -312,9 +312,9 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -867,7 +867,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    gravitySource: 0
+    gravitySource: 1
     maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
@@ -1244,7 +1244,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 10
+        scalar: 32
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -5315,7 +5315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   required: 3
   build: 0
-  buildOnStart: 1
+  buildOnStart: 0
   taps:
   - {fileID: 7462298221630535876}
   - {fileID: 7466013764172018812}

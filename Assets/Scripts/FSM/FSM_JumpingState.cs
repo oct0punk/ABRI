@@ -38,7 +38,7 @@ public class FSM_JumpingState : FSM_BaseState
 
     public override void Update(Lumberjack l)
     {
-        t += Time.deltaTime;
+        t += Time.deltaTime / l.jumpDuration;
         
         if (parent)
         {
@@ -47,8 +47,8 @@ public class FSM_JumpingState : FSM_BaseState
         }
 
         
-        l.transform.position = Vector3.Lerp(start, land, t);
-        l.transform.position += Vector3.up * Mathf.Sin(t * Mathf.PI);
+        l.transform.position = Vector3.Lerp(start, land, l.jumpForwardCurve.Evaluate(t));
+        l.transform.position += Vector3.up * l.jumpHeightCurve.Evaluate(t);
 
         if (t > 1.0f)
         {

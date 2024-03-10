@@ -14,9 +14,14 @@ public class Lumberjack : MonoBehaviour
     public int speed = 3;
     public int force = 1;
 
+    [Space]
+    public AnimationCurve jumpForwardCurve;
+    public AnimationCurve jumpHeightCurve;
+    [Range(0.1f, 1.0f)] public float jumpDuration;
+    [Space]
+    public CinemachineVirtualCamera cam;
     [HideInInspector] public bool isAutoMoving = false;
     public bool canCut { get; private set; }
-    public CinemachineVirtualCamera cam;
     public Pickable pickingResource { get; private set; }
     [Space]
     public ThinkBubble thinkBubble;
