@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using TMPro;
 using UnityEngine;
 
-struct MessageStruct
+class MessageStruct
 {
     public string text;
     public float time;
@@ -57,6 +58,7 @@ public class ThinkBubble : MonoBehaviour
         else
             StartCoroutine(MessageRoutine(text, time, action));
     }
+
     public IEnumerator MessageRoutine(string text, float time, Action action = null)
     {
         isRunning = true;
@@ -86,6 +88,9 @@ public class ThinkBubble : MonoBehaviour
             isRunning = false;
         }
     }
+
+
+
 
 
     public Coroutine Message(string text, Func<bool> condition)

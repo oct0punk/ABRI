@@ -14,6 +14,7 @@ public class FSM_WorkingState : FSM_BaseState
         
         updateFunc = CuttingUpdate;
         condition = () => !l.pickingResource.alive;
+        AudioManager.Instance.Play("Whoosh");
     }
 
 

@@ -77,6 +77,7 @@ public class Bird : MonoBehaviour, IFix
     public void Catch()
     {
         Lumberjack.Instance.OnCatch();
+        AudioManager.Instance.Play("OnCatch");
         GameManager.instance.ChangeState(GameState.End);
         Destroy(gameObject);
     }

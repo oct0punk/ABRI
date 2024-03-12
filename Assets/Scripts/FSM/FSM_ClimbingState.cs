@@ -10,12 +10,14 @@ public class FSM_ClimbingState : FSM_BaseState
 
     public override void OnEnter(Lumberjack l)
     {
+        AudioManager.Instance.Play("Climb");
         l.transform.SetParent(ladder.transform);
         l.animator.SetBool("isClimbing", true);
     }
 
     public override void OnExit(Lumberjack l)
     {
+        AudioManager.Instance.Stop("Climb");
         l.animator.SetBool("isClimbing", false);
         ladder.ActivateArrow(l);
     }

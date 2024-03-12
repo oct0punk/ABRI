@@ -40,8 +40,8 @@ AnimationClip:
       value: {fileID: 21300000, guid: 337cff5767b931041b335888b420bbc8, type: 3}
     - time: 0.3
       value: {fileID: 21300000, guid: f50de04b36f474d43b962c267110ffd4, type: 3}
-    - time: 0.33333334
-      value: {fileID: 21300000, guid: 66fd4b1f235e3a945989af67f25d7b03, type: 3}
+    - time: 0.36666667
+      value: {fileID: 21300000, guid: f50de04b36f474d43b962c267110ffd4, type: 3}
     attribute: m_Sprite
     path: Sprite
     classID: 212
@@ -74,13 +74,13 @@ AnimationClip:
     - {fileID: 21300000, guid: bda795a2bbd9d324bb5884a24d3b6f4c, type: 3}
     - {fileID: 21300000, guid: 337cff5767b931041b335888b420bbc8, type: 3}
     - {fileID: 21300000, guid: f50de04b36f474d43b962c267110ffd4, type: 3}
-    - {fileID: 21300000, guid: 66fd4b1f235e3a945989af67f25d7b03, type: 3}
+    - {fileID: 21300000, guid: f50de04b36f474d43b962c267110ffd4, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.35000002
+    m_StopTime: 0.38333336
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -100,7 +100,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.33333334
+  - time: 0.25
     functionName: ResistRes
     data: 
     objectReferenceParameter: {fileID: 0}

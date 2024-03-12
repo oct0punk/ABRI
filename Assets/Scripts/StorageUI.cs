@@ -29,6 +29,7 @@ public class StorageUI : MonoBehaviour
 
     public void Required(int amount)
     {
-
+        Display(amount, 3.0f);
     }
+    
 }

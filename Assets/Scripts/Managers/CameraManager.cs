@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.Rendering;
+using System.Collections;
 
 public class CameraManager : MonoBehaviour
 {
@@ -47,5 +48,21 @@ public class CameraManager : MonoBehaviour
             Lumberjack.Instance.Message("Encore des plumes, j'espère qu'il n'est plus très loin.", 1.0f, feathers.Play, true);
 
         noticeFeathers++;
+    }
+
+    public void CamShake()
+    {
+        StartCoroutine(CamShakeRoutine());
+    }
+    IEnumerator CamShakeRoutine()
+    {
+        WaitForEndOfFrame wait = new WaitForEndOfFrame();
+        CinemachineBasicMultiChannelPerlin noise = Lumberjack.Instance.cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        for (float t = 0; t < Mathf.PI; t += Time.deltaTime / .666f)
+        {
+            noise.m_FrequencyGain = Mathf.Lerp(.1f, .5f, Mathf.Sin(t));
+            yield return wait;
+        }
+        noise.m_FrequencyGain = .1f;
     }
 }

@@ -119,8 +119,13 @@ public class Lumberjack : MonoBehaviour
             spriteRenderer.flipX = res;
         }
     }
+    public void Step()
+    {
+        AudioManager.Instance.Play("Step");
+    }
     public void Jump(Vector3 landAt)
     {
+        AudioManager.Instance.Play("Jump");
         jumpingState.land = landAt;
         ChangeFSM(jumpingState);
     }

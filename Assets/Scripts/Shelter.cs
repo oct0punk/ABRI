@@ -84,8 +84,14 @@ public class Shelter : MonoBehaviour
                 if (t.GetComponentInChildren<Canvas>() != null)
                     t.SetActive(false);
 
-        foreach (var go in tapsOutside)
-        { go.SetActive(true); }
+        foreach (var cons in FindObjectsOfType<Construction>())
+        {
+            if (cons is not Piece)
+            {
+                if (!cons.build)
+                    Array.ForEach(cons.taps, t => t.gameObject.SetActive(true));
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

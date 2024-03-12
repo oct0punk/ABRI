@@ -26,7 +26,7 @@ public class ItemsManager : MonoBehaviour
         }
         else
         {
-            pack.Required(construction.required);
+            pack.Required(wood);
             return false;
         }
 

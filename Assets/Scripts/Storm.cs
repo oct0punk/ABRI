@@ -16,7 +16,7 @@ public class Storm : MonoBehaviour
     {
         shelter = GetComponent<Shelter>();
     }
-
+    
     private void Update()
     {
         timeBeforeNextGust -= Time.deltaTime;
@@ -40,7 +40,8 @@ public class Storm : MonoBehaviour
         timeBeforeNextGust = UnityEngine.Random.Range(gutsFrequency.x, gutsFrequency.y);
         enabled = true;
         Array.ForEach(fx, f => f.Play());
-
+        CameraManager.Instance.CamShake();
+        AudioManager.Instance.Play("Guts");
 
         if (Lumberjack.Instance.hasCaught)
         {

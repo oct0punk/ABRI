@@ -27,6 +27,8 @@ public class Piece : Construction
     public override void Break()
     {
         base.Break();
+        if (GameManager.instance.gameState == GameState.Indoor)
+            AudioManager.Instance.Play("OnPieceDie");
         GetComponent<SpriteRenderer>().color = Color.black;
         Shelter.instance.OnPieceUpdated(false);
     }

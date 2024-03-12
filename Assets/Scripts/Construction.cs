@@ -37,7 +37,6 @@ public class Construction : MonoBehaviour
         else
         {
             Lumberjack.Instance.Message("Faut plus de bois pour réparer ça.");
-            ItemsManager.Instance.CollectWood(0);
         }
     }
 
