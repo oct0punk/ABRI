@@ -10,6 +10,8 @@ public class Storm : MonoBehaviour
     [SerializeField] float timeBeforeNextGust = 1.0f;
     Shelter shelter;
 
+    [SerializeField] ParticleSystem[] fx;
+
     private void Awake()
     {
         shelter = GetComponent<Shelter>();
@@ -34,9 +36,11 @@ public class Storm : MonoBehaviour
 
     public void Guts()
     {
-        Bird.SendClueToPlayer(5);
+        Bird.SendClueToPlayer(2);
         timeBeforeNextGust = UnityEngine.Random.Range(gutsFrequency.x, gutsFrequency.y);
         enabled = true;
+        Array.ForEach(fx, f => f.Play());
+
 
         if (Lumberjack.Instance.hasCaught)
         {

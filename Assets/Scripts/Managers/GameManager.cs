@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
 
     public void ChangeState(GameState newState)
     {
-        if (gameState == newState) return;
         ExitState(gameState);
         gameState = newState;
         EnterState(gameState);
