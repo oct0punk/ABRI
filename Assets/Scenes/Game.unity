@@ -8458,6 +8458,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3777269549429706884, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -242.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777269549429706884, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
@@ -8976,6 +8980,10 @@ PrefabInstance:
     - target: {fileID: 7549068542118083394, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549068542118083394, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7678264919461317884, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
       propertyPath: content.Array.size

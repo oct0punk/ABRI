@@ -11,17 +11,23 @@ public class ItemsManager : MonoBehaviour
     {
         wood = 0;
     }
-    public void CollectWood(int amount, float time = 3.0f)
+    public void CollectWood(int amount)
     {
         wood += amount;
-        pack.Display(wood, time);
+        pack.Add(wood);
+    }
+
+    public void ConsumeWood(int amount)
+    {
+        wood -= amount;
+        pack.Remove(wood);
     }
     
     public bool Build(Construction construction)
     {
         if (wood >= construction.required)
         {            
-            CollectWood(-construction.required);
+            ConsumeWood(construction.required);
             return true;
         }
         else
