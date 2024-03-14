@@ -13,7 +13,6 @@ public class GameUI : MonoBehaviour
     [Header("Panels")]
     [SerializeField] GameObject GamePanel;
     [SerializeField] GameObject PausePanel;
-    [SerializeField] GameObject GameOverPanel;
     [SerializeField] GameObject EndPanel;
     Canvas[] UI_WorldArray;
     [Space]
@@ -51,16 +50,11 @@ public class GameUI : MonoBehaviour
             }
         }
     }
-    public void GameOver()
-    {
-        NoHUD(); GameOverPanel.SetActive(true);
-    }
     public void NoHUD()
     {
         GamePanel.SetActive(false);
         PausePanel.SetActive(false);
         EndPanel.SetActive(false);
-        GameOverPanel.SetActive(false);
     }
     #endregion
 

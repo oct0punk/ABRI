@@ -82,9 +82,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.GameOver:
-                GameUI.instance.GameOver();
-                Time.timeScale = 0.0f;
-                Lumberjack.Instance.enabled = false;
+                SceneManager.LoadScene(3);
                 break;
         }
     }

@@ -27,7 +27,7 @@ public class ThinkBubble : MonoBehaviour
     readonly LinkedList<MessageStruct> standby = new();
 
     [SerializeField] protected float timeBtw = 0.02f;
-    [SerializeField] protected float timeEnd = 1.3f;
+    [Tooltip("How long do the text stay still before disappear")][SerializeField] protected float timeEnd = 1.3f;
 
 
 
