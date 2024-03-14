@@ -8886,6 +8886,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6877017816282018764, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877017816282018764, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877017816282018764, guid: 3a5816d3ebc6eb74d9cb591a98795604, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
