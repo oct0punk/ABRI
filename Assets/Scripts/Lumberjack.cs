@@ -13,7 +13,7 @@ public class Lumberjack : MonoBehaviour
     [Min(1)]
     public int speed = 3;
     public int force = 1;
-
+    [SerializeField] ParticleSystem jump_fx;
     [Space]
     public AnimationCurve jumpForwardCurve;
     public AnimationCurve jumpHeightCurve;
@@ -123,6 +123,11 @@ public class Lumberjack : MonoBehaviour
     {
         AudioManager.Instance.Play("Step");
     }
+    public void JumpFX()
+    {
+        jump_fx.Play();
+    }
+
     public void Jump(Vector3 landAt)
     {
         AudioManager.Instance.Play("Jump");

@@ -13,7 +13,7 @@ public class Pickable : MonoBehaviour
     public int resistance { get; private set; }
     [SerializeField] Sprite[] sprites;
     static bool doOnce = true;
-    [SerializeField] ParticleSystem fx;
+    [SerializeField] ParticleSystem[] fx;
 
     private void Awake()
     {
@@ -45,7 +45,9 @@ public class Pickable : MonoBehaviour
         AudioManager.Instance.Play("Collect");
         GetComponentInChildren<SpriteRenderer>().enabled = false;
         StartCoroutine(Revive());
-        fx.Play();
+        foreach (var f in fx)
+            f.Play();
+        
         if (doOnce)
         {
             doOnce = false;
@@ -76,10 +78,8 @@ public class Pickable : MonoBehaviour
 
         SpriteRenderer sprRen = GetComponentInChildren<SpriteRenderer>();
         sprRen.sprite = sprites[Random.Range(0, sprites.Length)];
-        sprRen.flipX = rand;
+        transform.localScale = rand ? Vector3.one : new Vector3(-1, 1, 1);
         sprRen.enabled = true;
-        GetComponent<Collider2D>().offset = new Vector2(rand ? -1.4f : 1.4f, 1.4f);
-        fx.transform.localPosition = new Vector2(rand ? -1.4f : 1.4f, 1.4f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
