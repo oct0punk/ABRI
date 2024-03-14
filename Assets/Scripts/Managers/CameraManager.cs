@@ -2,6 +2,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.Rendering;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 public class CameraManager : MonoBehaviour
 {
@@ -16,11 +17,6 @@ public class CameraManager : MonoBehaviour
     {
         Instance = this;
         brain = GetComponent<CinemachineBrain>();
-
-        //DepthOfField dof;
-        //volume.profile.TryGet(out dof);
-        //if (dof != null)
-        //    dof.focalLength.Override(Screen.dpi / 4);
     }
 
     public static float Possess(ICinemachineCamera newCam)
@@ -64,5 +60,14 @@ public class CameraManager : MonoBehaviour
             yield return wait;
         }
         noise.m_FrequencyGain = .1f;
+    }
+
+    public void Blur(bool active)
+    {
+        DepthOfField dof;
+        volume.profile.TryGet(out dof);
+        Debug.Log(dof);
+        dof.focalLength.Override(active ? 100 : 0);
+        Debug.Log(dof.focalLength);
     }
 }

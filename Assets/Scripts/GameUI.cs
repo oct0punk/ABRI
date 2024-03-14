@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,11 +14,9 @@ public class GameUI : MonoBehaviour
     [Header("Panels")]
     [SerializeField] GameObject GamePanel;
     [SerializeField] GameObject PausePanel;
-    [SerializeField] GameObject EndPanel;
     Canvas[] UI_WorldArray;
     [Space]
-    public Image fade;
-    [SerializeField][Min(1)] int fadeSpeed;
+    [SerializeField] TextMeshProUGUI woodCount;
 
     private void Awake()
     {
@@ -36,6 +35,7 @@ public class GameUI : MonoBehaviour
         {
             canvas.gameObject.SetActive(true);
         }
+        CameraManager.Instance.Blur(false);
     }
     public void Pause()
     {
@@ -49,12 +49,14 @@ public class GameUI : MonoBehaviour
                 canvas.gameObject.SetActive(false);
             }
         }
+
+        woodCount.text = ItemsManager.Instance.wood.ToString();
+        CameraManager.Instance.Blur(true);
     }
     public void NoHUD()
     {
         GamePanel.SetActive(false);
         PausePanel.SetActive(false);
-        EndPanel.SetActive(false);
     }
     #endregion
 
