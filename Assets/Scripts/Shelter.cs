@@ -54,11 +54,14 @@ public class Shelter : MonoBehaviour
             }
         }
 
-        foreach (var piece in pieces)
-            if (!piece.build)
-                foreach (var t in piece.taps)
-                    if (t.GetComponentInChildren<Canvas>() != null)
-                        t.SetActive(true);
+        if (Lumberjack.Instance.hasCaught)
+        {
+            foreach (var piece in pieces)
+                if (!piece.build)
+                    foreach (var t in piece.taps)
+                        if (t.GetComponentInChildren<Canvas>() != null)
+                            t.SetActive(true);
+        }
 
         foreach (var go in tapsOutside)
         { go.SetActive(false); }

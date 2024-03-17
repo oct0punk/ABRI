@@ -76,7 +76,7 @@ public class Ladder : Construction, IFix
             {
                 l.ClimbUp(this);
                 arrow.SetActive(false);
-                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, height - .5f, 0.0f), Quaternion.identity);
+                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.76f, height - .5f, 0.0f), Quaternion.identity);
                 arrow.transform.transform.localScale = Vector3.one;
             }
         }
@@ -86,7 +86,7 @@ public class Ladder : Construction, IFix
             {
                 l.ClimbDown(this);
                 arrow.SetActive(false);
-                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.0f, .5f, 0.0f), Quaternion.identity);
+                arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.76f, .5f, 0.0f), Quaternion.identity);
                 arrow.transform.transform.localScale = new Vector3(1, -1, 1);
             }
         }

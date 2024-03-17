@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Indoor:
+                if (Shelter.instance != null)
                 Shelter.instance.OnExit();
                 break;
             case GameState.GameOver:
