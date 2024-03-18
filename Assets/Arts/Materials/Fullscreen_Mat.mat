@@ -49,6 +49,6 @@ Material:
     - _BoundsColor: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 0}
     - _Color: {r: 1, g: 0.6666667, b: 0, a: 1}
     - _PointColor: {r: 0.7018868, g: 1, b: 1, a: 0}
-    - _Pos: {r: 0, g: 0, b: 0, a: 0}
+    - _Pos: {r: 0.9375785, g: 0.61825657, b: 0, a: 0}
     - _Vector2: {r: 1, g: 0.1, b: 0, a: 0}
   m_BuildTextureStacks: []

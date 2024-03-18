@@ -201,7 +201,6 @@ public class Lumberjack : MonoBehaviour
         if (res == canCutRes[0])
             res.CanCut(true);
         canCut = true;
-        animator.SetBool("CanCut", true);
         // Trail emits
     }
     public void OnResExit(Pickable res)
@@ -210,7 +209,6 @@ public class Lumberjack : MonoBehaviour
         canCutRes.Remove(res);
         if (canCutRes.Count == 0)
         {
-            animator.SetBool("CanCut", false);
             canCut = false;
             // Trail doesn't emit
         }

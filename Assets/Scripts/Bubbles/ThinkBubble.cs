@@ -22,6 +22,7 @@ class MessageStruct
 public class ThinkBubble : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI Tmp;
+    [SerializeField] GameObject bubble;
     protected string content;
     public bool isRunning { get; private set; }
     readonly LinkedList<MessageStruct> standby = new();
@@ -65,7 +66,7 @@ public class ThinkBubble : MonoBehaviour
         action?.Invoke();
         yield return new WaitForSeconds(time);
         AudioManager.Instance.Play("Speak");
-        transform.GetChild(0).gameObject.SetActive(true);
+        bubble.gameObject.SetActive(true);
         content = text;
         text = "";
         for (int c = 0; c < content.Length; c++)
@@ -75,7 +76,7 @@ public class ThinkBubble : MonoBehaviour
             yield return new WaitForSeconds(timeBtw);
         }
         yield return new WaitForSeconds(timeEnd);
-        transform.GetChild(0).gameObject.SetActive(false);
+        bubble.gameObject.SetActive(false);
         
         if (standby.Count > 0)
         {
@@ -101,7 +102,7 @@ public class ThinkBubble : MonoBehaviour
     {
         isRunning = true;
         AudioManager.Instance.Play("Speak");
-        transform.GetChild(0).gameObject.SetActive(true);
+        bubble.gameObject.SetActive(true);
         content = text;
         text = "";
         for (int c = 0; c < content.Length; c++)
@@ -111,7 +112,7 @@ public class ThinkBubble : MonoBehaviour
             yield return new WaitForSeconds(timeBtw);
         }
         yield return new WaitWhile(() => condition.Invoke());
-        transform.GetChild(0).gameObject.SetActive(false);
+        bubble.gameObject.SetActive(false);
         isRunning = false;
     }
 }
