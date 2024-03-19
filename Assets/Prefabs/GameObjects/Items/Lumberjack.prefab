@@ -1185,6 +1185,7 @@ MonoBehaviour:
   hBox: {fileID: 1417992696735697674}
   isAutoMoving: 0
   thinkBubble: {fileID: 8319817671211124663}
+  hasCaught: 0
 --- !u!82 &1774569577399463010
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1439,7 +1440,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 509.393, y: 0}
+  m_AnchoredPosition: {x: 509.39304, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2223976388550018922

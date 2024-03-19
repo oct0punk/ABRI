@@ -74,8 +74,10 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Menu:
                 SceneManager.LoadScene(0);
+                Time.timeScale = 1.0f;
                 break;
             case GameState.End:
+                Time.timeScale = 1.0f;
                 foreach (var c in FindObjectsOfType<Construction>()) {
                     foreach (var t in c.taps)
                         if (t.GetComponentInChildren<Canvas>() != null)
@@ -83,6 +85,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.GameOver:
+                Time.timeScale = 1.0f;
                 SceneManager.LoadScene(3);
                 break;
         }
@@ -93,8 +96,15 @@ public class GameManager : MonoBehaviour
 
     public void Launch()
     {
-        ItemsManager.Instance.Reset();
+        Reset();
         SceneManager.LoadScene(1);
+    }
+
+    private void Reset()
+    {
+        Time.timeScale = 1.0f;
+        ItemsManager.Instance.Reset();
+        Lumberjack.Instance.hasCaught = false;
     }
 
     public void SetPause(bool pause)

@@ -44,7 +44,7 @@ public class Lumberjack : MonoBehaviour
     public FSM_WorkingState workingState { get; private set; }
     #endregion
     LayerMask mask;
-    public bool hasCaught { get; private set; }
+    [HideInInspector]  public bool hasCaught;
 
 
     private void Awake()

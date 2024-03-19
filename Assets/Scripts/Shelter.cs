@@ -54,7 +54,7 @@ public class Shelter : MonoBehaviour
             }
         }
 
-        if (Lumberjack.Instance.hasCaught)
+        if (!Lumberjack.Instance.hasCaught)
         {
             foreach (var piece in pieces)
                 if (!piece.build)

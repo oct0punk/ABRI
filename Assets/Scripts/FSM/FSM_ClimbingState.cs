@@ -18,6 +18,7 @@ public class FSM_ClimbingState : FSM_BaseState
     public override void OnExit(Lumberjack l)
     {
         AudioManager.Instance.Stop("Climb");
+        l.spriteRenderer.flipX = false;
         l.animator.SetBool("isClimbing", false);
         ladder.ActivateArrow(l);
     }

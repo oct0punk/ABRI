@@ -76,6 +76,11 @@ public class Bird : MonoBehaviour, IFix
 
     public void Catch()
     {
+        Lumberjack.Instance.AutoMoveTo(transform.position, OnCatch);
+    }
+
+    void OnCatch()
+    {
         Lumberjack.Instance.OnCatch();
         AudioManager.Instance.Play("OnCatch");
         GameManager.instance.ChangeState(GameState.End);
