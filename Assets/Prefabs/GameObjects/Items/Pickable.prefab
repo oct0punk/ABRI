@@ -53,7 +53,7 @@ MonoBehaviour:
   amount: 1
   alive: 1
   trail: {fileID: 2848494381323142316}
-  swipeTuto: {fileID: 5944233245213204413}
+  swipeTuto: {fileID: 1668994545292978304}
   sprites:
   - {fileID: 21300000, guid: 1c2ae6cc175db674fae9d98c6eedf9b1, type: 3}
   - {fileID: 21300000, guid: a40828b70d5e4364d82554efeac93eea, type: 3}
@@ -10004,13 +10004,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5509908931163397395, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
   m_PrefabInstance: {fileID: 5636450330221027087}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1668994545292978304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6418126467363092367, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
+  m_PrefabInstance: {fileID: 5636450330221027087}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2848494381323142316 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7619900605011811235, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
-  m_PrefabInstance: {fileID: 5636450330221027087}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5944233245213204413 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2037484187475574962, guid: d1f6b919d26fb8e43a396bc61130b115, type: 3}
   m_PrefabInstance: {fileID: 5636450330221027087}
   m_PrefabAsset: {fileID: 0}

@@ -14,6 +14,7 @@ public class Pickable : MonoBehaviour
     [SerializeField] Sprite[] sprites;
     static bool doOnce = true;
     [SerializeField] ParticleSystem[] fx;
+    static bool Tuto = true;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class Pickable : MonoBehaviour
     void OnDie()
     {
         alive = false;
+        Tuto = false;
         AudioManager.Instance.Play("Collect");
         GetComponentInChildren<SpriteRenderer>().enabled = false;
         StartCoroutine(Revive());
@@ -111,5 +113,6 @@ public class Pickable : MonoBehaviour
     {
         trail.SetActive(canCut);
         swipeTuto.SetActive(canCut);
+        swipeTuto.SetActive(Tuto);
     }
 }

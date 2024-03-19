@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.UI;
 
 [SelectionBase]
 public class Lumberjack : MonoBehaviour
@@ -20,6 +21,7 @@ public class Lumberjack : MonoBehaviour
     [Range(0.1f, 1.0f)] public float jumpDuration;
     [Space]
     public CinemachineVirtualCamera cam;
+    [SerializeField] HorizontalLayoutGroup hBox;
     [HideInInspector] public bool isAutoMoving = false;
     public bool canCut { get; private set; }
     public Pickable pickingResource { get; private set; }
@@ -105,11 +107,13 @@ public class Lumberjack : MonoBehaviour
         Vector2 delta = targetPos - (Vector2)transform.position;
         delta = Vector2.ClampMagnitude(delta, Time.deltaTime * speed);
         transform.position += (Vector3)delta;
+        if (fsm == climbingState) return;
         if (delta.magnitude >= Time.deltaTime * speed)
         {
             bool res = (int)Mathf.Sign(delta.x) == -1;
             if (res != spriteRenderer.flipX)
             {
+                hBox.reverseArrangement = delta.x < 0;
                 // changeDir feedback
                 if (delta.x > 0)
                     GameUI.instance.MoveRight();
@@ -169,6 +173,7 @@ public class Lumberjack : MonoBehaviour
     }
     void Climb(Ladder ladder, bool climbDown)
     {
+        Ladder.Tuto = false;
         climbingState.ladder = ladder;
         climbingState.climbDown = climbDown;
         ChangeFSM(climbingState);

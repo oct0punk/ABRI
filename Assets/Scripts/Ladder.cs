@@ -8,6 +8,7 @@ public class Ladder : Construction, IFix
     [SerializeField] SpriteRenderer spriteUp;
     [SerializeField] SpriteRenderer spriteDown;
     [Space]
+    public static bool Tuto = true;
     public GameObject arrow;
     public GameObject swipeTuto;
     
@@ -130,8 +131,8 @@ public class Ladder : Construction, IFix
         }
         else
         {
-            arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.5f, height - .5f, 0.0f), Quaternion.Euler(0, 0, 90));
+            arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.5f, height, 0.0f), Quaternion.Euler(0, 0, 90));
         }
-        swipeTuto.SetActive(true);
+        swipeTuto.SetActive(Tuto);
     }
 }
