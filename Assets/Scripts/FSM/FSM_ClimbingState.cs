@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class FSM_ClimbingState : FSM_BaseState
 {

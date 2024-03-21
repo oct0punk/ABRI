@@ -17,7 +17,7 @@ public class Swipe
 
     public int index;
 
-    float distanceToDrag = 100.0f;
+    const float distanceToDrag = 50.0f;
 
 
 

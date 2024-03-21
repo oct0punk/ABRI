@@ -89,7 +89,7 @@ public class Bird : MonoBehaviour, IFix
 
     public static void SendClueToPlayer(int time = 0, int chance = 0)
     {
-        if (Lumberjack.Instance.hasCaught) return;
+        if (Lumberjack.hasCaught) return;
         if (Random.Range(0, chance) != 0) return;
         if (instance == null) instance = FindObjectOfType<Bird>();
         instance.Invoke(nameof(SendClue), time);

@@ -15,6 +15,7 @@ public class Pickable : MonoBehaviour
     static bool doOnce = true;
     [SerializeField] ParticleSystem[] fx;
     static bool Tuto = true;
+    public bool flipped { get; private set; }
 
     private void Awake()
     {
@@ -27,9 +28,9 @@ public class Pickable : MonoBehaviour
 
         if (alive)
             Reset();
-        else        
-            OnDie();            
-        
+        else
+            OnDie();
+
     }
 
     public void Resist(Lumberjack l)
@@ -49,7 +50,7 @@ public class Pickable : MonoBehaviour
         StartCoroutine(Revive());
         foreach (var f in fx)
             f.Play();
-        
+
         if (doOnce)
         {
             doOnce = false;
@@ -76,24 +77,25 @@ public class Pickable : MonoBehaviour
         alive = true;
         resistance = maxResistance;
 
-        bool rand = (int)(Time.timeSinceLevelLoad + transform.position.x) % 2 == 0;
+        flipped = (int)(Time.timeSinceLevelLoad + transform.position.x) % 2 != 0;
 
         SpriteRenderer sprRen = GetComponentInChildren<SpriteRenderer>();
         sprRen.sprite = sprites[Random.Range(0, sprites.Length)];
-        transform.localScale = rand ? Vector3.one : new Vector3(-1, 1, 1);
+        transform.localScale = flipped ? Vector3.one : new Vector3(-1, 1, 1);
         sprRen.enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!alive) {
+        if (!alive)
+        {
             Bird.SendClueToPlayer(2, 5);
             return;
         }
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
-            if (lum.hasCaught) return;
+            if (Lumberjack.hasCaught) return;
             swipeTuto.SetActive(true);
             lum.OnResEnter(this);
         }
@@ -104,7 +106,7 @@ public class Pickable : MonoBehaviour
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
-            if (lum.hasCaught) return;
+            if (Lumberjack.hasCaught) return;
             lum.OnResExit(this);
         }
     }

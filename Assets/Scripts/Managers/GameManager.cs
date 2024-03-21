@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         ItemsManager.Instance.Reset();
-        Lumberjack.Instance.hasCaught = false;
+        Lumberjack.hasCaught = false;
     }
 
     public void SetPause(bool pause)

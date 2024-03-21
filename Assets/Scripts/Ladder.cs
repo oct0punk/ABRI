@@ -39,14 +39,14 @@ public class Ladder : Construction, IFix
     {
         this.height = height;
         sprite.size = new Vector2(sprite.size.x, height);
-        box.size = new Vector2(1, height);
+        box.size = new Vector2(3, height);
         box.offset = new Vector2(0, height / 2);
 
         spriteDown.transform.localPosition = Vector3.zero;
         spriteUp.transform.localPosition = new Vector3(0, height - 1.0f, 0);
 
-        fx.transform.localPosition = new Vector3(0, height / 2, -5);
-        var shape = fx.shape;
+        buildFX.transform.localPosition = new Vector3(0, height / 2, -5);
+        var shape = buildFX.shape;
         shape.scale = new Vector3(1, height, 1);
     }
 
@@ -69,13 +69,14 @@ public class Ladder : Construction, IFix
         //transform.rotation = Quaternion.identity;
 
         if (l == null) return;
-        if (l.fsm != l.movingState && l.fsm != l.idleState) return;
+        if (l.fsm == l.climbingState) return;
+        if (l.fsm == l.workingState) return;
 
         if (SwipeManager.ClimbUp())
         {
             if (isAtBottom(l))
             {
-                l.ClimbUp(this);
+                l.AutoMoveTo(transform.position, () => l.Climb(this, false));
                 arrow.SetActive(false);
                 arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.76f, height - .5f, 0.0f), Quaternion.identity);
                 arrow.transform.transform.localScale = Vector3.one;
@@ -85,7 +86,7 @@ public class Ladder : Construction, IFix
         {
             if (!isAtBottom(l))
             {
-                l.ClimbDown(this);
+                l.AutoMoveTo(Top(), () => l.Climb(this, true));
                 arrow.SetActive(false);
                 arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.76f, .5f, 0.0f), Quaternion.identity);
                 arrow.transform.transform.localScale = new Vector3(1, -1, 1);

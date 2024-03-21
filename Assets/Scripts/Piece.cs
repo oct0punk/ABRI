@@ -5,6 +5,7 @@ public class Piece : Construction
     [Header("Piece")]
     public int solid = 1;
     public int life;
+    Rigidbody2D rb;
 
     private new void Awake()
     {
@@ -24,23 +25,38 @@ public class Piece : Construction
         }
     }
 
+    private void Start()
+    {
+        rb = gameObject.AddComponent<Rigidbody2D>();
+        Destroy(gameObject, 5);
+    }
+    private void Update()
+    {
+        rb.AddForce(Vector2.right * -1);
+        rb.AddTorque(-Random.Range(0.0f, 2.0f));
+    }
+
     public override void Break()
     {
+        if (enabled) return;
         base.Break();
         if (GameManager.instance.gameState == GameState.Indoor)
             AudioManager.Instance.Play("OnPieceDie");
-        GetComponent<SpriteRenderer>().color = Color.black;
         Shelter.instance.OnPieceUpdated(false);
+        Debug.Log("instance");
+        GetComponent<SpriteRenderer>().enabled = false;
+        Piece clone = Instantiate(this);
+        clone.enabled = true;
     }
 
     public override void Build()
     {
         base.Build();
         if (!build) return;
-        build = true;
-        GetComponent<SpriteRenderer>().color = Color.white;
         life = Random.Range(solid, solid + 4);
         Shelter.instance.OnPieceUpdated(true);
+
+        GetComponent<SpriteRenderer>().enabled = true;
     }
 
     /*USP : 
@@ -51,4 +67,5 @@ Faites face à la tempête qui pourrait vous coûter la vie
 Les animaux apeurés de la forêt seront d’un grand réconfort dans votre foyer. 
 Construisez pour progresser sans tomber!
 */
+
 }

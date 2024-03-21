@@ -433,7 +433,7 @@ MonoBehaviour:
   taps:
   - {fileID: 7462298221630535876}
   - {fileID: 7466013764172018812}
-  fx: {fileID: 3023507991297164182}
+  buildFX: {fileID: 3023507991297164182}
   left: {fileID: 1110303808269950406}
   right: {fileID: 1974296981791464912}
   fill: {fileID: 2571859456330610336, guid: 1b00eae74d1d62a41836e38a28f56663, type: 3}
@@ -446,6 +446,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7262989942983561488}
     m_Modifications:
+    - target: {fileID: 567084717370510826, guid: 1c6b3f418bf08d1419aa9a90374a6b7b, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5757525940613758070, guid: 1c6b3f418bf08d1419aa9a90374a6b7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

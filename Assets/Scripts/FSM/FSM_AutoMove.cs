@@ -11,7 +11,11 @@ public class FSM_AutoMove : FSM_MovingState
     {
         disableOnExit = !l.enabled;
         l.enabled = true;
-        l.isAutoMoving = true;
+        if (!l.isAutoMoving)
+        {
+            l.isAutoMoving = true;
+            AudioManager.Instance.Play("AutoMove");
+        }
         GameUI.instance.NoMove();
     }
 
@@ -25,8 +29,8 @@ public class FSM_AutoMove : FSM_MovingState
         {
             l.isAutoMoving = false;
             if (disableOnExit)  l.enabled = false;
-            if (action != null) action();
             l.ChangeFSM(l.idleState);
+            if (action != null) action();
             return;
         }
 

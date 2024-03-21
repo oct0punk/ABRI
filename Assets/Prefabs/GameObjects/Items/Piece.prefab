@@ -4988,11 +4988,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   required: 1
   build: 0
-  buildOnStart: 0
+  buildOnStart: 1
   taps:
   - {fileID: 1370448205092447096}
-  - {fileID: 1130309349334740687}
-  fx: {fileID: 3047654111558527621}
+  buildFX: {fileID: 3047654111558527621}
   solid: 1
   life: 1
 --- !u!1 &8573343555172129869

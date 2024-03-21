@@ -56,7 +56,7 @@ MonoBehaviour:
   taps:
   - {fileID: 7455525136594307852}
   - {fileID: 1257753724331303741}
-  fx: {fileID: 7005846444911592216}
+  buildFX: {fileID: 7005846444911592216}
   sprite: {fileID: 1837055598212237541}
   spriteUp: {fileID: 5138401665689295690}
   spriteDown: {fileID: 5692328377915385246}
@@ -105,7 +105,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 8}
+  m_Size: {x: 3, y: 8}
   m_EdgeRadius: 0
 --- !u!1 &1162547926999036081
 GameObject:
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
+  m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
@@ -671,7 +671,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.3, y: 0.74}
 --- !u!222 &4302396090245998566
 CanvasRenderer:

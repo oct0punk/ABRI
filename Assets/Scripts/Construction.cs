@@ -8,7 +8,7 @@ public class Construction : MonoBehaviour
     [HideInInspector] public bool build = false;
     public bool buildOnStart;
     public GameObject[] taps;
-    [SerializeField] protected ParticleSystem fx;
+    [SerializeField] protected ParticleSystem buildFX;
 
     protected void Awake()
     {
@@ -31,7 +31,7 @@ public class Construction : MonoBehaviour
                 item.SetActive(false);
             }
             build = true;
-            fx.Play();
+            if (required != 0) buildFX.Play();
             AudioManager.Instance.Play("Build");
         }
         else

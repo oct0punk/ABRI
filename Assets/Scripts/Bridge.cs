@@ -38,9 +38,9 @@ public class Bridge : Construction, IFix
         this.right = right;
 
         Vector2 leftToRight = left.position - right.position;
-        fx.transform.position = (left.position + right.position) / 2;
-        fx.transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(leftToRight.y, leftToRight.x) * Mathf.Rad2Deg);
-        var sh = fx.shape;
+        buildFX.transform.position = (left.position + right.position) / 2;
+        buildFX.transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(leftToRight.y, leftToRight.x) * Mathf.Rad2Deg);
+        var sh = buildFX.shape;
         sh.scale = new Vector3(Vector3.Distance(left.position, right.position) + 1, 3, 1);
 
         float dist = Vector3.Distance(this.left.transform.position, this.right.transform.position);

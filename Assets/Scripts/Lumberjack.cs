@@ -2,7 +2,6 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,7 +43,7 @@ public class Lumberjack : MonoBehaviour
     public FSM_WorkingState workingState { get; private set; }
     #endregion
     LayerMask mask;
-    [HideInInspector]  public bool hasCaught;
+    public static bool hasCaught;
 
 
     private void Awake()
@@ -91,6 +90,7 @@ public class Lumberjack : MonoBehaviour
 
     public void ChangeFSM(FSM_BaseState newState)
     {
+        // Debug.Log("FSM : Exit " + fsm.ToString() + ", Enter " + newState.ToString());
         fsm.OnExit(this);
         fsm = newState;
         fsm.OnEnter(this);
@@ -163,15 +163,7 @@ public class Lumberjack : MonoBehaviour
     }
 
     #region Climb
-    public void ClimbUp(Ladder ladder)
-    {
-        Climb(ladder, false);
-    }
-    public void ClimbDown(Ladder ladder)
-    {
-        Climb(ladder, true);
-    }
-    void Climb(Ladder ladder, bool climbDown)
+    public void Climb(Ladder ladder, bool climbDown)
     {
         Ladder.Tuto = false;
         climbingState.ladder = ladder;
@@ -228,8 +220,11 @@ public class Lumberjack : MonoBehaviour
         pickingResource = canCutRes[0];
         if (pickingResource != null)
         {
-            ChangeFSM(workingState);
-            Cut();
+            AutoMoveTo(pickingResource.transform.position, () => {
+                spriteRenderer.flipX = !pickingResource.flipped;
+                ChangeFSM(workingState); 
+                Cut();
+            });
         }
     }
     public void Cut()

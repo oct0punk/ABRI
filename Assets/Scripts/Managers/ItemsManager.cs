@@ -25,6 +25,7 @@ public class ItemsManager : MonoBehaviour
     
     public bool Build(Construction construction)
     {
+        if (construction.required == 0) return true;
         if (wood >= construction.required)
         {            
             ConsumeWood(construction.required);

@@ -10,9 +10,6 @@ public class Shelter : MonoBehaviour
     public static Shelter instance { get { if (Instance == null) Instance = FindObjectOfType<Shelter>(); return Instance; } }
     static Shelter Instance;
     [SerializeField] CinemachineVirtualCamera cam;
-    [Space]
-    [Header("Storm")]
-    [Space]
     public Piece[] pieces;
     [HideInInspector] public bool restored = true;
     List<GameObject> tapsOutside = new();
@@ -28,9 +25,16 @@ public class Shelter : MonoBehaviour
                 tapsOutside.Add(tap.GetComponentInParent<Canvas>().gameObject);        
     }
 
+    [ContextMenu("InitPieces")]
+    void InitPieces()
+    {
+        pieces = GetComponentsInChildren<Piece>();
+    }
+
 
     public void OnPieceUpdated(bool isGood)
     {
+        return;
         if (!isGood)
         {
             if (Array.TrueForAll(pieces, p => !p.build))
@@ -54,7 +58,7 @@ public class Shelter : MonoBehaviour
             }
         }
 
-        if (!Lumberjack.Instance.hasCaught)
+        if (!Lumberjack.hasCaught)
         {
             foreach (var piece in pieces)
                 if (!piece.build)
@@ -111,7 +115,7 @@ public class Shelter : MonoBehaviour
 
     public void End()
     {
-        if (Lumberjack.Instance.hasCaught)
+        if (Lumberjack.hasCaught)
         {
             GameManager.instance.End();
         }
