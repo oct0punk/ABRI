@@ -17,8 +17,10 @@ public class Lumberjack : MonoBehaviour
     [Space]
     public AnimationCurve jumpForwardCurve;
     public AnimationCurve jumpHeightCurve;
-    [Range(0.1f, 1.0f)] public float jumpDuration;
+    [Range(0.1f, 1.0f)] 
+    public float jumpDuration;
     [Space]
+    public GameObject autoTarget;
     public CinemachineVirtualCamera cam;
     [SerializeField] HorizontalLayoutGroup hBox;
     [HideInInspector] public bool isAutoMoving = false;
@@ -138,11 +140,12 @@ public class Lumberjack : MonoBehaviour
         jumpingState.land = landAt;
         ChangeFSM(jumpingState);
     }
-    public void AutoMoveTo(Vector3 pos, Action action = null)
+    public void AutoMoveTo(Vector3 pos, Action action = null, Func<Vector3> autoUpdateTarget = null)
     {
         pos.z = transform.position.z;
         autoMoveState.targetPos = pos;
         autoMoveState.action = action;
+        autoMoveState.updateTarget = autoUpdateTarget;
         ChangeFSM(autoMoveState);
     }
 
@@ -223,8 +226,8 @@ public class Lumberjack : MonoBehaviour
             AutoMoveTo(pickingResource.transform.position, () => {
                 spriteRenderer.flipX = !pickingResource.flipped;
                 ChangeFSM(workingState); 
-                Cut();
-            });
+                Cut(); }, 
+                () => pickingResource.transform.position);
         }
     }
     public void Cut()

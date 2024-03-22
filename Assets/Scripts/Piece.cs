@@ -5,7 +5,6 @@ public class Piece : Construction
     [Header("Piece")]
     public int solid = 1;
     public int life;
-    Rigidbody2D rb;
 
     private new void Awake()
     {
@@ -25,28 +24,23 @@ public class Piece : Construction
         }
     }
 
-    private void Start()
-    {
-        rb = gameObject.AddComponent<Rigidbody2D>();
-        Destroy(gameObject, 5);
-    }
-    private void Update()
-    {
-        rb.AddForce(Vector2.right * -1);
-        rb.AddTorque(-Random.Range(0.0f, 2.0f));
-    }
-
     public override void Break()
     {
         if (enabled) return;
         base.Break();
+        Shelter.instance.OnPieceUpdated(false);
+
+        // Feedbacks
         if (GameManager.instance.gameState == GameState.Indoor)
             AudioManager.Instance.Play("OnPieceDie");
-        Shelter.instance.OnPieceUpdated(false);
-        Debug.Log("instance");
+
         GetComponent<SpriteRenderer>().enabled = false;
-        Piece clone = Instantiate(this);
-        clone.enabled = true;
+        
+        GameObject clone = Instantiate(new GameObject(), transform.position, transform.rotation);
+        clone.transform.localScale = transform.lossyScale;
+        clone.AddComponent<SpriteRenderer>().sprite = GetComponent<SpriteRenderer>().sprite;
+        clone.AddComponent<Rigidbody2D>().angularVelocity = Random.Range(-10.0f, -100.0f);
+        Destroy(clone, 5.0f);
     }
 
     public override void Build()

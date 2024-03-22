@@ -76,7 +76,7 @@ public class Bird : MonoBehaviour, IFix
 
     public void Catch()
     {
-        Lumberjack.Instance.AutoMoveTo(transform.position, OnCatch);
+        Lumberjack.Instance.AutoMoveTo(transform.position, OnCatch, () => transform.position);
     }
 
     void OnCatch()

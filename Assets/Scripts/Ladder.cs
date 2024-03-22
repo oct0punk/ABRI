@@ -76,7 +76,7 @@ public class Ladder : Construction, IFix
         {
             if (isAtBottom(l))
             {
-                l.AutoMoveTo(transform.position, () => l.Climb(this, false));
+                l.AutoMoveTo(transform.position, () => l.Climb(this, false), () => transform.position);
                 arrow.SetActive(false);
                 arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.76f, height - .5f, 0.0f), Quaternion.identity);
                 arrow.transform.transform.localScale = Vector3.one;
@@ -86,7 +86,7 @@ public class Ladder : Construction, IFix
         {
             if (!isAtBottom(l))
             {
-                l.AutoMoveTo(Top(), () => l.Climb(this, true));
+                l.AutoMoveTo(Top(), () => l.Climb(this, true), () => Top());
                 arrow.SetActive(false);
                 arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.76f, .5f, 0.0f), Quaternion.identity);
                 arrow.transform.transform.localScale = new Vector3(1, -1, 1);

@@ -19635,6 +19635,10 @@ PrefabInstance:
       propertyPath: volume
       value: 
       objectReference: {fileID: 89871114}
+    - target: {fileID: 7945414056979597917, guid: 220ea60f27bb10440981c4a338adc3db, type: 3}
+      propertyPath: gameState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7959769529078016007, guid: 220ea60f27bb10440981c4a338adc3db, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
