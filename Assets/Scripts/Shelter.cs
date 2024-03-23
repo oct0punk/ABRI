@@ -13,12 +13,11 @@ public class Shelter : MonoBehaviour
     public Piece[] pieces;
     [HideInInspector] public bool restored = true;
     List<GameObject> tapsOutside = new();
-    public Tap tap { get; private set; }
+    public Tap tap;
 
 
     void Awake()
     {
-        tap = GetComponentInChildren<Tap>();
         pieces = GetComponentsInChildren<Piece>();        
         foreach (var tap in FindObjectsOfType<Tap>())
             if (tap != this.tap)
@@ -34,7 +33,6 @@ public class Shelter : MonoBehaviour
 
     public void OnPieceUpdated(bool isGood)
     {
-        return;
         if (!isGood)
         {
             if (Array.TrueForAll(pieces, p => !p.build))
@@ -91,14 +89,23 @@ public class Shelter : MonoBehaviour
                 if (t.GetComponentInChildren<Canvas>() != null)
                     t.SetActive(false);
 
-        foreach (var cons in FindObjectsOfType<Construction>())
+        foreach (var tap in tapsOutside)
         {
-            if (cons is not Piece)
-            {
-                if (!cons.build)
-                    Array.ForEach(cons.taps, t => t.gameObject.SetActive(true));
-            }
+            Construction cons = tap.GetComponentInParent<Construction>();
+            if (cons != null)
+                tap.SetActive(!cons.build);            
+            else
+                tap.SetActive(true);
         }
+
+        //foreach (var cons in FindObjectsOfType<Construction>())
+        //{
+        //    if (cons is not Piece)
+        //    {
+        //        if (!cons.build)
+        //            Array.ForEach(cons.taps, t => t.gameObject.SetActive(true));
+        //    }
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -121,6 +128,7 @@ public class Shelter : MonoBehaviour
         }
         else
         {
+            Debug.Log("End");
             tap.gameObject.SetActive(false);
             Lumberjack.Instance.Message("Il faut retrouver cet oiseau, il ne survivra pas à cette tempête infernale.");
         }

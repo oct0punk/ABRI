@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IFix
 {
-    public void Fix(UnityEngine.Transform transform, bool paste = false)
+    public void Fix(Transform transform, bool paste = false)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Platform"));
         if (hit)

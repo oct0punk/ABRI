@@ -107,7 +107,7 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
   - name: Bird
-    clip: {fileID: 8300000, guid: 19a71103c189b434482eea689711f4da, type: 3}
+    clip: {fileID: 8300000, guid: 8c3823bbb6835bf48b97feb12ea1a68b, type: 3}
     source: {fileID: 0}
     volume: 1
     loop: 0
@@ -164,13 +164,13 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: beca43f3644ff3647b253146996663f9, type: 3}
     source: {fileID: 0}
     volume: 1
-    loop: 1
+    loop: 0
     playOnAwake: 0
   - name: OnPieceDie
     clip: {fileID: 8300000, guid: de63375afd9d9ac4da2c9e9308905ace, type: 3}
     source: {fileID: 0}
     volume: 1
-    loop: 1
+    loop: 0
     playOnAwake: 0
 --- !u!114 &6983163530661955671
 MonoBehaviour:
