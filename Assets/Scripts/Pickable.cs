@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [SelectionBase]
-public class Pickable : MonoBehaviour
+public class Pickable : MonoBehaviour, IFix
 {
     public int maxResistance = 1;
     public int amount = 1;
@@ -19,12 +19,8 @@ public class Pickable : MonoBehaviour
 
     private void Awake()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Platform"));
-        if (hit)
-        {
-            transform.position = hit.point;
-            transform.SetParent(hit.transform);
-        }
+        IFix fix = this;
+        fix.Fix(transform, true);
 
         if (alive)
             Reset();

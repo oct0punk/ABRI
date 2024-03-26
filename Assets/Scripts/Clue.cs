@@ -9,7 +9,10 @@ public interface IFix
         {
             transform.SetParent(hit.transform);
             if (paste)
-                transform.position = hit.point;
+            {
+                float z = transform.position.z;
+                transform.position = new Vector3(hit.point.x, hit.point.y, z);
+            }
         }
     }
 }
