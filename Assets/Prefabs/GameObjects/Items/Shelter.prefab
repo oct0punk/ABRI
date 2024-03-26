@@ -194,7 +194,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8a4e4bd230478a640a733455df8901b0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.90334636, g: 0.9161199, b: 0.9433962, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   - {fileID: 6302629555737500865}
   - {fileID: 3960372552837177837}
   restored: 1
-  tap: {fileID: 3284284357605169159}
+  tap: {fileID: 1516418910796764860}
 --- !u!114 &3262465680258151783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6329,14 +6329,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
---- !u!224 &2412565966506611642 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6338622978610546188, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
-  m_PrefabInstance: {fileID: 8542334488102245814}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3284284357605169159 stripped
+--- !u!114 &1516418910796764860 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6564111689917828529, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7171719632558932746, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
   m_PrefabInstance: {fileID: 8542334488102245814}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -6345,6 +6340,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16be28964e6b8194fad114acfa53686c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2412565966506611642 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6338622978610546188, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
+  m_PrefabInstance: {fileID: 8542334488102245814}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8968818738549816480
 PrefabInstance:
   m_ObjectHideFlags: 0

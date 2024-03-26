@@ -87,6 +87,7 @@ public class Bird : MonoBehaviour, IFix
         Destroy(gameObject);
     }
 
+    
     public static void SendClueToPlayer(int time = 0, int chance = 0)
     {
         if (Lumberjack.hasCaught) return;

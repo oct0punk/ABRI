@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
 
     private void Reset()
     {
+        Pickable.doOnce = true;
         Time.timeScale = 1.0f;
         ItemsManager.Instance.Reset();
         Lumberjack.hasCaught = false;

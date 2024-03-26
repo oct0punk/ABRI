@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 
 public class Tap : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public Construction cons;
     bool pressed;
 
     public void OnPointerDown(PointerEventData eventData)

@@ -43,7 +43,7 @@ public class Storm : MonoBehaviour
         CameraManager.Instance.CamShake();
         AudioManager.Instance.Play("Guts");
 
-        if (Lumberjack.hasCaught)
+        if (GameManager.instance.gameState == GameState.End)
         {
             return;
         }

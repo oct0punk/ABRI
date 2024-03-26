@@ -66,8 +66,6 @@ public class CameraManager : MonoBehaviour
     {
         DepthOfField dof;
         volume.profile.TryGet(out dof);
-        Debug.Log(dof);
         dof.focalLength.Override(active ? 100 : 0);
-        Debug.Log(dof.focalLength);
     }
 }

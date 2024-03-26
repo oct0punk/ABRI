@@ -35,7 +35,7 @@ public class GameUI : MonoBehaviour
         {
             canvas.gameObject.SetActive(true);
         }
-        CameraManager.Instance.Blur(false);
+        // CameraManager.Instance.Blur(false);
     }
     public void Pause()
     {
@@ -51,7 +51,7 @@ public class GameUI : MonoBehaviour
         }
 
         woodCount.text = ItemsManager.Instance.wood.ToString();
-        CameraManager.Instance.Blur(true);
+        // CameraManager.Instance.Blur(true);
     }
     public void NoHUD()
     {

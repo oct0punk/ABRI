@@ -253,9 +253,11 @@ public class Lumberjack : MonoBehaviour
 
     IEnumerator Intro()
     {
+        Shelter.instance.tap.gameObject.SetActive(false);
         enabled = false;
         yield return Message("Cette tempête est féroce.", () => !Input.anyKey);
         yield return Message("je dois à tout prix trouver l'oiseau en voie d'extinction qui vit dans cette forêt", () => !Input.anyKey);
         enabled = true;
+        Shelter.instance.tap.gameObject.SetActive(true);
     }
 }

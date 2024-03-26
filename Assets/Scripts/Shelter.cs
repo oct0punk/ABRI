@@ -12,7 +12,7 @@ public class Shelter : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera cam;
     public Piece[] pieces;
     [HideInInspector] public bool restored = true;
-    List<GameObject> tapsOutside = new();
+    List<Tap> tapsOutside = new();
     public Tap tap;
 
 
@@ -20,8 +20,11 @@ public class Shelter : MonoBehaviour
     {
         pieces = GetComponentsInChildren<Piece>();        
         foreach (var tap in FindObjectsOfType<Tap>())
-            if (tap != this.tap)
-                tapsOutside.Add(tap.GetComponentInParent<Canvas>().gameObject);        
+        {
+            if (tap == this.tap) continue;
+            if (tap.GetComponentInParent<Piece>() != null) continue;
+            tapsOutside.Add(tap);        
+        }
     }
 
     [ContextMenu("InitPieces")]
@@ -66,7 +69,7 @@ public class Shelter : MonoBehaviour
         }
 
         foreach (var go in tapsOutside)
-        { go.SetActive(false); }
+        { go.gameObject.SetActive(false); }
     }
 
     public void OnExit()
@@ -91,21 +94,9 @@ public class Shelter : MonoBehaviour
 
         foreach (var tap in tapsOutside)
         {
-            Construction cons = tap.GetComponentInParent<Construction>();
-            if (cons != null)
-                tap.SetActive(!cons.build);            
-            else
-                tap.SetActive(true);
+            if (tap.cons != null)
+                tap.gameObject.SetActive(!tap.cons.build);
         }
-
-        //foreach (var cons in FindObjectsOfType<Construction>())
-        //{
-        //    if (cons is not Piece)
-        //    {
-        //        if (!cons.build)
-        //            Array.ForEach(cons.taps, t => t.gameObject.SetActive(true));
-        //    }
-        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -128,7 +119,6 @@ public class Shelter : MonoBehaviour
         }
         else
         {
-            Debug.Log("End");
             tap.gameObject.SetActive(false);
             Lumberjack.Instance.Message("Il faut retrouver cet oiseau, il ne survivra pas à cette tempête infernale.");
         }

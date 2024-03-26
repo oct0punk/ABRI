@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 5565011866147314648}
   - component: {fileID: 2216733435810055714}
   - component: {fileID: 9107407973523820483}
+  - component: {fileID: 7171719632558932746}
   m_Layer: 5
   m_Name: Tap
   m_TagString: Tap
@@ -236,6 +237,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7171719632558932746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2547787455269023817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16be28964e6b8194fad114acfa53686c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cons: {fileID: 0}
 --- !u!1 &3502675248085550338
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +300,6 @@ GameObject:
   - component: {fileID: 6106429450549001611}
   - component: {fileID: 3765346260486799702}
   - component: {fileID: 2010284230338619307}
-  - component: {fileID: 6564111689917828529}
   - component: {fileID: 7063756364563391637}
   m_Layer: 5
   m_Name: Button
@@ -422,18 +435,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anchor: {fileID: 0}
---- !u!114 &6564111689917828529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3764141657804977879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16be28964e6b8194fad114acfa53686c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &7063756364563391637
 Animator:
   serializedVersion: 5
@@ -520,7 +521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 14eeb153b5b0de146b334580b800dff6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3e0c931ce9731474ab332eaba9ca9532, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

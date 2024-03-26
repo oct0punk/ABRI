@@ -12,7 +12,7 @@ public class Pickable : MonoBehaviour, IFix
     public GameObject swipeTuto;
     public int resistance { get; private set; }
     [SerializeField] Sprite[] sprites;
-    static bool doOnce = true;
+    public static bool doOnce = true;
     [SerializeField] ParticleSystem[] fx;
     static bool Tuto = true;
     public bool flipped { get; private set; }

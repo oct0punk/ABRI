@@ -18,7 +18,7 @@ public class Parallax : MonoBehaviour
 
         float ratio = 1.0f * Screen.width / Screen.height;
         transform.localScale = new Vector3(ratio * .2f, .2f, .2f);
-        mat.SetTextureScale("_MainTex", new Vector2(ratio, -1.0f));
+        mat.SetTextureScale("_MainTex", new Vector2(ratio, 1.0f));
 
     }
 
@@ -27,7 +27,7 @@ public class Parallax : MonoBehaviour
     {
         camDelta = (Vector2)cam.transform.position - lastCamPos;
         offset -= camDelta * speed * Time.deltaTime;
-        mat.SetVector("_Offset", offset);
+        mat.SetVector("_Offset", -offset);
         lastCamPos = cam.transform.position;
     }
 }
