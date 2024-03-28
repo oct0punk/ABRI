@@ -8,7 +8,7 @@ public class GameOverUI : MonoBehaviour
 
     private void Awake()
     {
-        bubble.Message("L'abri est détruit, tout est perdu...", () => true);
+        bubble.Message("L'abri est détruit. Je n'ai nulle part pour abriter l'oiseau... \r\nC foutu", () => true);
     }
 
     public void Exit()

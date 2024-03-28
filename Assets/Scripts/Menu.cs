@@ -4,6 +4,7 @@ using UnityEngine;
 public class Menu : MonoBehaviour
 {
     public ThinkBubble bubble;
+    [TextArea]
     public string[] texts;
     [Tooltip("How long is the interval between each text")] public int waitFor;
     int lastIndex = -1;
