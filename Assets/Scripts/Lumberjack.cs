@@ -86,7 +86,7 @@ public class Lumberjack : MonoBehaviour
     {
         hasCaught = true;
         animator.SetBool("Catch", true);
-        Message("Te voilà, mon petit... C'est de rentrer à la maison");
+        Message("OnCatch");
         Shelter.instance.tap.gameObject.SetActive(true);
     }
 
@@ -255,8 +255,8 @@ public class Lumberjack : MonoBehaviour
     {
         Shelter.instance.tap.gameObject.SetActive(false);
         enabled = false;
-        yield return Message("Cette tempête est féroce.", () => !Input.anyKey);
-        yield return Message("je dois à tout prix trouver l'oiseau en voie d'extinction qui vit dans cette forêt", () => !Input.anyKey);
+        yield return Message("intro1", () => !Input.anyKey);
+        yield return Message("intro2", () => !Input.anyKey);
         enabled = true;
         Shelter.instance.tap.gameObject.SetActive(true);
     }

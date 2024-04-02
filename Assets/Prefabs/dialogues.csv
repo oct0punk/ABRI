@@ -1,0 +1,20 @@
+NeedMoreWood¤ I need more wood to repair that¤ Faut plus de bois pour réparer ça.
+intro1¤ Powerful storm...¤ Cette tempête est féroce.
+intro2¤ Need to find that bird...¤ je dois à tout prix trouver l'oiseau en voie d'extinction qui vit dans cette forêt
+OnBirdEnter¤ ¤ L'oiseau est audible. Il n'est pas loin.
+OnBirdEnterAgain¤ ¤ L'oiseau est de nouveau audible. J'ai retrouvé sa trace.
+OnBirdExit¤ ¤ Aucun signe de l'oiseau dans cette direction. Je devrais faire demi-tour
+OnCatch¤ ¤ Te voilà, mon petit... C'est l'heure de rentrer à la maison
+FirstFeathers¤ ¤ Ce sont les plumes de l'oiseau que je cherche!
+FeathersAgain¤ ¤ Encore des plumes, j'espère qu'il n'est plus très loin.
+FirstCut¤ ¤ Une p'tite branche pour construire le chemin
+HolesInShelter¤ ¤ Il y a des trous dans mon abri. Si ça continue, je ne pourrai pas sauver l'oiseau...
+ShelterIsFine¤ ¤ Tout est en ordre, je peux reprendre les recherches.
+NeedMoreWoodForShelter¤ ¤ Il me faut du bois pour réparer mon abri.
+Motivation¤ ¤ Il faut retrouver cet oiseau, il ne survivra pas à cette tempête infernale.
+GutOutside¤ ¤ Ouf, quelle rafale! J'espère que mon abri l'a encaissé...
+GutInside¤ ¤ ça souffle bien dehors.
+ShelterCritical¤ ¤ J'ai un mauvais pressentiment. Mon abri a sûrement besoin d'être rafistolé!
+OnHoleInsode¤ ¤ Wouaaahh !! La tempête a fait un trou dans le mur !
+ClueShit¤ ¤ Y'a de la merde partout, l'oiseau doit se trouver plus haut
+ClueVers¤ ¤ Des vers sont tombés de haut. L'oiseau doit être au-dessus.

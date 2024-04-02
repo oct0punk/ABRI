@@ -51,7 +51,7 @@ public class Pickable : MonoBehaviour, IFix
         {
             doOnce = false;
             FindObjectOfType<Storm>().enabled = true;
-            Lumberjack.Instance.Message("Une p'tite branche pour construire le chemin");
+            Lumberjack.Instance.Message("FirstCut");
         }
     }
     void OnDie(Lumberjack l)

@@ -36,7 +36,7 @@ public class Construction : MonoBehaviour
         }
         else
         {
-            Lumberjack.Instance.Message("Faut plus de bois pour réparer ça.");
+            Lumberjack.Instance.Message("NeedMoreWood");
         }
     }
 

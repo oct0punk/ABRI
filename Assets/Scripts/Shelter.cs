@@ -55,7 +55,7 @@ public class Shelter : MonoBehaviour
             if (!Array.TrueForAll(pieces, p => p.build))
             {
                 restored = false;
-                Lumberjack.Instance.Message("Il y a des trous dans mon abri. Si ça continue, je ne pourrai pas sauver l'oiseau...", 3.0f);
+                Lumberjack.Instance.Message("HolesInShelter", 3.0f);
             }
         }
 
@@ -80,11 +80,11 @@ public class Shelter : MonoBehaviour
         {
             if (Array.TrueForAll(pieces, p => p.build))
             {
-                Lumberjack.Instance.Message("Tout est en ordre, je peux reprendre les recherches.");
+                Lumberjack.Instance.Message("ShelterIsFine");
                 restored = true;
             }
             else
-                Lumberjack.Instance.Message("Il me faut du bois pour réparer mon abri.");
+                Lumberjack.Instance.Message("NeedMoreWoodForShelter");
         }
 
         foreach (var piece in pieces)
@@ -120,7 +120,7 @@ public class Shelter : MonoBehaviour
         else
         {
             tap.gameObject.SetActive(false);
-            Lumberjack.Instance.Message("Il faut retrouver cet oiseau, il ne survivra pas à cette tempête infernale.");
+            Lumberjack.Instance.Message("Motivation");
         }
     }
 }

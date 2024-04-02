@@ -25,11 +25,11 @@ public class Storm : MonoBehaviour
             enabled = false;
             if (GameManager.instance.gameState == GameState.Explore)
             {
-                Lumberjack.Instance.Message("Ouf, quelle rafale! J'espère que mon abri l'a encaissé...", 1.0f, Guts);
+                Lumberjack.Instance.Message("GutOutside", 1.0f, Guts);
             }
             else if (GameManager.instance.gameState == GameState.Indoor)
             {
-                Lumberjack.Instance.Message("ça souffle bien dehors.", .5f, Guts);
+                Lumberjack.Instance.Message("GutInside", .5f, Guts);
             }
         }
     }
@@ -61,7 +61,7 @@ public class Storm : MonoBehaviour
                 if (Array.TrueForAll(shelter.pieces, p => p.life == 1))
                     shelter.pieces[0].life = 3;
                 else
-                    Lumberjack.Instance.Message("J'ai un mauvais pressentiment. Mon abri a sûrement besoin d'être rafistolé!");
+                    Lumberjack.Instance.Message("ShelterCritical");
             }
         }
         else if (GameManager.instance.gameState == GameState.Indoor)
@@ -72,7 +72,7 @@ public class Storm : MonoBehaviour
             }
             else
             {
-                Lumberjack.Instance.Message("Wouaaahh !! La tempête a fait un trou dans le mur !");
+                Lumberjack.Instance.Message("OnHoleInside");
                 shelter.restored = false;
             }
         }

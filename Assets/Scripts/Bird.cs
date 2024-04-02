@@ -51,12 +51,12 @@ public class Bird : MonoBehaviour, IFix
             {
                 if (first)
                 {
-                    Lumberjack.Instance.Message("L'oiseau est audible. Il n'est pas loin.");
+                    Lumberjack.Instance.Message("OnBirdEnter");
                     first = false;
                 }
                 else
                 {
-                    Lumberjack.Instance.Message("L'oiseau est de nouveau audible. J'ai retrouvé sa trace.");
+                    Lumberjack.Instance.Message("OnBirdEnterAgain");
                 }
 
                 logAudio = true;
@@ -102,7 +102,7 @@ public class Bird : MonoBehaviour, IFix
             CameraManager.Instance.EmitFeathers();
         else if (Lumberjack.Instance.transform.position.x > transform.position.x + 15.0f)
         {
-            Lumberjack.Instance.Message("Aucun signe de l'oiseau dans cette direction. Je devrais faire demi-tour", 0.0f, null, true);
+            Lumberjack.Instance.Message("OnBirdExit", 0.0f, null, true);
             logAudio = false;
         }
     }

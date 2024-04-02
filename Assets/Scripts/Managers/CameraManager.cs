@@ -38,10 +38,10 @@ public class CameraManager : MonoBehaviour
 
 
         if (noticeFeathers == 0)
-            Lumberjack.Instance.Message("Ce sont les plumes de l'oiseau que je cherche!", 1.0f, feathers.Play, true);
+            Lumberjack.Instance.Message("FirstFeathers", 1.0f, feathers.Play, true);
 
         else if (noticeFeathers == 4)
-            Lumberjack.Instance.Message("Encore des plumes, j'espère qu'il n'est plus très loin.", 1.0f, feathers.Play, true);
+            Lumberjack.Instance.Message("FeathersAgain", 1.0f, feathers.Play, true);
 
         noticeFeathers++;
     }

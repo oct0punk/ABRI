@@ -51,13 +51,13 @@ public class ThinkBubble : MonoBehaviour
             if (content != text)
             {
                 if (priority)
-                    standby.AddFirst(new MessageStruct(text, time, action));
+                    standby.AddFirst(new MessageStruct(DialogueManager.GetString(text), time, action));
                 else
-                    standby.AddLast(new MessageStruct(text, time, action));
+                    standby.AddLast(new MessageStruct(DialogueManager.GetString(text), time, action));
             }
         }    
         else
-            StartCoroutine(MessageRoutine(text, time, action));
+            StartCoroutine(MessageRoutine(DialogueManager.GetString(text), time, action));
     }
 
     public IEnumerator MessageRoutine(string text, float time, Action action = null)
@@ -96,7 +96,7 @@ public class ThinkBubble : MonoBehaviour
 
     public Coroutine Message(string text, Func<bool> condition)
     {
-        return StartCoroutine(MessageRoutine(text, condition));
+        return StartCoroutine(MessageRoutine(DialogueManager.GetString(text), condition));
     }
     public IEnumerator MessageRoutine(string text, Func<bool> condition)
     {
