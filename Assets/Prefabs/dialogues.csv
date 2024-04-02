@@ -1,20 +1,35 @@
-NeedMoreWood¤ I need more wood to repair that¤ Faut plus de bois pour réparer ça.
-intro1¤ Powerful storm...¤ Cette tempête est féroce.
-intro2¤ Need to find that bird...¤ je dois à tout prix trouver l'oiseau en voie d'extinction qui vit dans cette forêt
-OnBirdEnter¤ ¤ L'oiseau est audible. Il n'est pas loin.
-OnBirdEnterAgain¤ ¤ L'oiseau est de nouveau audible. J'ai retrouvé sa trace.
-OnBirdExit¤ ¤ Aucun signe de l'oiseau dans cette direction. Je devrais faire demi-tour
-OnCatch¤ ¤ Te voilà, mon petit... C'est l'heure de rentrer à la maison
-FirstFeathers¤ ¤ Ce sont les plumes de l'oiseau que je cherche!
-FeathersAgain¤ ¤ Encore des plumes, j'espère qu'il n'est plus très loin.
-FirstCut¤ ¤ Une p'tite branche pour construire le chemin
-HolesInShelter¤ ¤ Il y a des trous dans mon abri. Si ça continue, je ne pourrai pas sauver l'oiseau...
-ShelterIsFine¤ ¤ Tout est en ordre, je peux reprendre les recherches.
-NeedMoreWoodForShelter¤ ¤ Il me faut du bois pour réparer mon abri.
-Motivation¤ ¤ Il faut retrouver cet oiseau, il ne survivra pas à cette tempête infernale.
-GutOutside¤ ¤ Ouf, quelle rafale! J'espère que mon abri l'a encaissé...
-GutInside¤ ¤ ça souffle bien dehors.
-ShelterCritical¤ ¤ J'ai un mauvais pressentiment. Mon abri a sûrement besoin d'être rafistolé!
-OnHoleInsode¤ ¤ Wouaaahh !! La tempête a fait un trou dans le mur !
-ClueShit¤ ¤ Y'a de la merde partout, l'oiseau doit se trouver plus haut
-ClueVers¤ ¤ Des vers sont tombés de haut. L'oiseau doit être au-dessus.
+NeedMoreWood¤ We're low on wood for any kind of repairs.*Looks like we're short on logs.*Can't afford to slack off now, not when there's wood to be had.¤ Faut plus de bois pour réparer ça.*Il me manque encore du bois. où est-ce que je peux bien en couper..?
+intro1¤ This storm's fierce/ Gotta hustle, my shelter's on the brink of collapse.¤ Cette tempête est féroce. Mon abri risque à tout moment de s'éfondrer
+intro2¤ However, I must find the last bird of its kind in these woods, no matter what.¤ Mais je dois à tout prix trouver le dernier oiseau de son espèce qui vit dans cette forêt. 
+OnBirdEnter¤ Hear that? The bird's song ain't too distant.*Time to see if these old ears can still track it down.¤ L'oiseau est audible. Il n'est pas loin.
+OnBirdExit¤ Lost track of that bird's song. Time to turn back and find my bearings¤ Aucun signe de l'oiseau dans cette direction. Je devrais faire demi-tour.
+OnBirdEnterAgain¤ Aha! That familiar tune ticklin' my ears again.*Our feathered friend must be within reach once more!¤ L'oiseau est de nouveau audible. J'ai retrouvé sa trace.
+OnCatch¤ You're in good hands now. Let's get you back home.¤ Te voilà, mon petit... C'est l'heure de rentrer à la maison
+FirstFeathers¤ Is that its feathers? That's our bird, no doubt about it.¤ Est-ce que ce sont ses plumes ? C'est notre oiseau, cela ne fait aucun doute.
+FeathersAgain¤ More feathers ? The bird's leaving us a trail to follow, like nature's own treasure map.¤ Encore des plumes, elles semblent provenir de par là-bas.
+FirstCut¤ Let's put this branch to good use in our constructions*Branch by branch, we forge our path.*Branch by branch, we forge our path.¤ Branche après branche, nous traçons notre chemin.*Faisons bon usage de cette branche dans nos constructions.*Une p'tite branche pour construire le chemin.
+HolesInShelter¤ Can't build a sturdy cabin without enough timber.*Gonna have to make every board count.¤ Il y a des trous dans mon abri. Si ça continue, je ne pourrai pas sauver l'oiseau...
+NeedMoreWoodForShelter¤ The cabin won't fix itself.*Running low on wood to mend her.¤ Je manque de bois pour la réparer.*Il me faut du bois pour réparer mon abri.*La cabane ne va pas se réparer toute seule.
+ShelterIsFine¤ ¤ 
+Tout est en ordre, je peux reprendre les recherches.
+
+Motivation¤ ¤ 
+Il faut retrouver cet oiseau, il ne survivra pas à cette tempête infernale.
+
+GutOutside¤ ¤ 
+Ouf, quelle rafale! J'espère que mon abri l'a encaissé...
+
+GutInside¤ ¤ 
+ça souffle bien dehors.
+
+ShelterCritical¤ ¤ 
+J'ai un mauvais pressentiment. Mon abri a sûrement besoin d'être rafistolé!
+
+OnHoleInsode¤ ¤ 
+Wouaaahh !! La tempête a fait un trou dans le mur !
+
+ClueShit¤ ¤ 
+Y'a de la merde partout, l'oiseau doit se trouver plus haut
+
+ClueVers¤ ¤ 
+Des vers sont tombés de haut. L'oiseau doit être au-dessus.

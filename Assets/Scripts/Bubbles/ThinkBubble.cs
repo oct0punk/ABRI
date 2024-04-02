@@ -24,6 +24,7 @@ public class ThinkBubble : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI Tmp;
     [SerializeField] GameObject bubble;
     protected string content;
+    protected string playingText;
     public bool isRunning { get; private set; }
     readonly LinkedList<MessageStruct> standby = new();
 
@@ -48,16 +49,16 @@ public class ThinkBubble : MonoBehaviour
         if (FindNode(standby, m => m.text == text) != null) return;
         if (isRunning)
         {
-            if (content != text)
+            if (playingText != text)
             {
                 if (priority)
-                    standby.AddFirst(new MessageStruct(DialogueManager.GetString(text), time, action));
+                    standby.AddFirst(new MessageStruct(text, time, action));
                 else
-                    standby.AddLast(new MessageStruct(DialogueManager.GetString(text), time, action));
+                    standby.AddLast(new MessageStruct(text, time, action));
             }
         }    
         else
-            StartCoroutine(MessageRoutine(DialogueManager.GetString(text), time, action));
+            StartCoroutine(MessageRoutine(text, time, action));
     }
 
     public IEnumerator MessageRoutine(string text, float time, Action action = null)
@@ -67,6 +68,8 @@ public class ThinkBubble : MonoBehaviour
         yield return new WaitForSeconds(time);
         AudioManager.Instance.Play("Speak");
         bubble.gameObject.SetActive(true);
+        playingText = text;
+        text = DialogueManager.GetString(text);
         content = text;
         text = "";
         for (int c = 0; c < content.Length; c++)
@@ -96,13 +99,15 @@ public class ThinkBubble : MonoBehaviour
 
     public Coroutine Message(string text, Func<bool> condition)
     {
-        return StartCoroutine(MessageRoutine(DialogueManager.GetString(text), condition));
+        return StartCoroutine(MessageRoutine(text, condition));
     }
     public IEnumerator MessageRoutine(string text, Func<bool> condition)
     {
         isRunning = true;
         AudioManager.Instance.Play("Speak");
         bubble.gameObject.SetActive(true);
+        playingText = text;
+        text = DialogueManager.GetString(text);
         content = text;
         text = "";
         for (int c = 0; c < content.Length; c++)

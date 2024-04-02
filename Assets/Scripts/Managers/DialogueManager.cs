@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using UnityEditor.SceneTemplate;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
@@ -29,16 +28,11 @@ public class DialogueManager : MonoBehaviour
         var lines = fileData.Split('\n');
         foreach (var line in lines)
         {
-            Debug.Log(line);
             string[] rows = line.Split("¤ ");
-            foreach (var row in rows)
-            {
-                Debug.Log(row);
-            }
             if (rows[0] == name)
             {
-                Debug.Log("return " + rows[1 + instance.locale]);
-                return rows[1 + instance.locale];
+                string[] sentences = rows[1 + instance.locale].Split('*');
+                return sentences[UnityEngine.Random.Range(0, sentences.Length)];
             }
         }
         Debug.LogWarning(name + " not found");
