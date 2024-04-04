@@ -96,6 +96,8 @@ public class Shelter : MonoBehaviour
         {
             if (tap.cons != null)
                 tap.gameObject.SetActive(!tap.cons.build);
+            else
+                tap.gameObject.SetActive(true);
         }
     }
 

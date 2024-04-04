@@ -4,32 +4,17 @@ intro2¤ However, I must find the last bird of its kind in these woods, no matte
 OnBirdEnter¤ Hear that? The bird's song ain't too distant.*Time to see if these old ears can still track it down.¤ L'oiseau est audible. Il n'est pas loin.
 OnBirdExit¤ Lost track of that bird's song. Time to turn back and find my bearings¤ Aucun signe de l'oiseau dans cette direction. Je devrais faire demi-tour.
 OnBirdEnterAgain¤ Aha! That familiar tune ticklin' my ears again.*Our feathered friend must be within reach once more!¤ L'oiseau est de nouveau audible. J'ai retrouvé sa trace.
-OnCatch¤ You're in good hands now. Let's get you back home.¤ Te voilà, mon petit... C'est l'heure de rentrer à la maison
+OnCatch¤ You're quite the charmer with that little tail of yours. Let's get us to safety now..¤ Que tu es mignon avec ta petite queue. Bon, je vais te mettre à l'abri maintenant. 
 FirstFeathers¤ Is that its feathers? That's our bird, no doubt about it.¤ Est-ce que ce sont ses plumes ? C'est notre oiseau, cela ne fait aucun doute.
 FeathersAgain¤ More feathers ? The bird's leaving us a trail to follow, like nature's own treasure map.¤ Encore des plumes, elles semblent provenir de par là-bas.
 FirstCut¤ Let's put this branch to good use in our constructions*Branch by branch, we forge our path.*Branch by branch, we forge our path.¤ Branche après branche, nous traçons notre chemin.*Faisons bon usage de cette branche dans nos constructions.*Une p'tite branche pour construire le chemin.
 HolesInShelter¤ Can't build a sturdy cabin without enough timber.*Gonna have to make every board count.¤ Il y a des trous dans mon abri. Si ça continue, je ne pourrai pas sauver l'oiseau...
 NeedMoreWoodForShelter¤ The cabin won't fix itself.*Running low on wood to mend her.¤ Je manque de bois pour la réparer.*Il me faut du bois pour réparer mon abri.*La cabane ne va pas se réparer toute seule.
-ShelterIsFine¤ ¤ 
-Tout est en ordre, je peux reprendre les recherches.
-
-Motivation¤ ¤ 
-Il faut retrouver cet oiseau, il ne survivra pas à cette tempête infernale.
-
-GutOutside¤ ¤ 
-Ouf, quelle rafale! J'espère que mon abri l'a encaissé...
-
-GutInside¤ ¤ 
-ça souffle bien dehors.
-
-ShelterCritical¤ ¤ 
-J'ai un mauvais pressentiment. Mon abri a sûrement besoin d'être rafistolé!
-
-OnHoleInsode¤ ¤ 
-Wouaaahh !! La tempête a fait un trou dans le mur !
-
-ClueShit¤ ¤ 
-Y'a de la merde partout, l'oiseau doit se trouver plus haut
-
-ClueVers¤ ¤ 
-Des vers sont tombés de haut. L'oiseau doit être au-dessus.
+ShelterIsFine¤ Repairs done, it's time to resume the search. Everything's fine, let's get back to the search¤ Tout est en ordre, je peux reprendre les recherches* C'est mieux. Je devrais avoir un peu de temps pour reprendre les recherches.
+Motivation¤ Before we head back, we've got to find that bird. It won't survive this infernal storm¤ Avant de rentrer, il faut retrouver cet oiseau, il ne survivra pas à cette tempête infernale.
+GutInside¤ Looks like it's blowing quite a bit out there.*The wind's really raging outside¤ Oh, ça souffle bien dehors.*Entendre le vent me fait me sentir à l'abri ici. 
+GutOutside¤ Phew, what a gust! I hope my shelter held up...* If the cabin couldn't withstand that gust, I'd be facing quite a task to repair it.*Phew, that was a close one. I nearly took a tumble.¤ J'espère que l'abri a encaissé cette bourrasque. Sinon, il y aurait bien trop de boulot pour cacher l'oiseau.*Ouf, quelle rafale! J'espère que mon abri l'a encaissé...*Ouf, c'était limite. J'ai failli tomber.
+ShelterCritical¤ I've got a bad feeling about this. My shelter probably needs some patching up!*It's been too long since I've checked on my shelter.¤ J'ai un mauvais pressentiment. Mon abri a sûrement besoin d'être rafistolé!* Bon, ça fait trop longtemps que je ne suis pas retourné voir ma cabane.
+OnHoleInside¤ Whoa!! The storm blew a hole in the wall!*Oh no, that piece got blown away...¤ Wouaaahh !! La tempête a fait un trou dans le mur !*Oh non, cette pièce s'est envolée..
+ClueShit¤ Traces of the bird... It must be higher up, on that tree. ¤ Des traces de l'oiseau... Il est sûrement plus haut, sur cet arbre.
+ClueVers¤ This branch shows signs of wear, as if something had wrapped around it. I reckon this bird can hang from its tail...¤ Cette branche est usée, comme si quelque chose s'était enroulée autour. Il me semble que cet oiseau peut se suspendre avec sa queue... 

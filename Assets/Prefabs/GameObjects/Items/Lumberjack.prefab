@@ -1087,7 +1087,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5738,6 +5738,14 @@ PrefabInstance:
       propertyPath: anchor
       value: 
       objectReference: {fileID: 6492812186816662684}
+    - target: {fileID: 5906552179977491450, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
+      propertyPath: timeBtw
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906552179977491450, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
+      propertyPath: timeEnd
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6680310397986181555, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5840,7 +5848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7512151809693935007, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 509.39304
+      value: 509.393
       objectReference: {fileID: 0}
     - target: {fileID: 7512151809693935007, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
       propertyPath: m_AnchoredPosition.y
