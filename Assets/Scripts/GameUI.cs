@@ -17,11 +17,15 @@ public class GameUI : MonoBehaviour
     Canvas[] UI_WorldArray;
     [Space]
     [SerializeField] TextMeshProUGUI woodCount;
+    [Space]
+    [SerializeField] Toggle tog;
+    public SMenuText[] sMenuTexts;
 
     private void Awake()
     {
         instance = this;
         UI_WorldArray = Array.FindAll(FindObjectsOfType<Canvas>(), can => can.renderMode == RenderMode.WorldSpace);
+        tog.onValueChanged.AddListener(ToggleFunc);
     }
 
 
@@ -93,4 +97,13 @@ public class GameUI : MonoBehaviour
         moveLeft.color = moveRight.color = new Color(1, 1, 1, .1f);
     }
     #endregion
+
+    public void ToggleFunc(bool val)
+    {
+        DialogueManager.Translate(val);
+        foreach (var txt in sMenuTexts)
+        {
+            txt.tmp.text = DialogueManager.GetString(txt.registerName);
+        }
+    }
 }

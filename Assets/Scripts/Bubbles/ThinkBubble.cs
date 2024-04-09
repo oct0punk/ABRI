@@ -44,7 +44,7 @@ public class ThinkBubble : MonoBehaviour
         return node;
     }
 
-    public void Message(string text, float time, Action action = null, bool priority = false)
+    public void Message(string text, float time = 0, Action action = null, bool priority = false)
     {
         if (FindNode(standby, m => m.text == text) != null) return;
         if (isRunning)
@@ -61,7 +61,7 @@ public class ThinkBubble : MonoBehaviour
             StartCoroutine(MessageRoutine(text, time, action));
     }
 
-    public IEnumerator MessageRoutine(string text, float time, Action action = null)
+    public IEnumerator MessageRoutine(string text, float time = 0, Action action = null)
     {
         isRunning = true;
         action?.Invoke();

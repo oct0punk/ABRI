@@ -13,8 +13,19 @@ NeedMoreWoodForShelter¤ The cabin won't fix itself.*Running low on wood to mend
 ShelterIsFine¤ Repairs done, it's time to resume the search. Everything's fine, let's get back to the search¤ Tout est en ordre, je peux reprendre les recherches* C'est mieux. Je devrais avoir un peu de temps pour reprendre les recherches.
 Motivation¤ Before we head back, we've got to find that bird. It won't survive this infernal storm¤ Avant de rentrer, il faut retrouver cet oiseau, il ne survivra pas à cette tempête infernale.
 GutInside¤ Looks like it's blowing quite a bit out there.*The wind's really raging outside¤ Oh, ça souffle bien dehors.*Entendre le vent me fait me sentir à l'abri ici. 
-GutOutside¤ Phew, what a gust! I hope my shelter held up...* If the cabin couldn't withstand that gust, I'd be facing quite a task to repair it.*Phew, that was a close one. I nearly took a tumble.¤ J'espère que l'abri a encaissé cette bourrasque. Sinon, il y aurait bien trop de boulot pour cacher l'oiseau.*Ouf, quelle rafale! J'espère que mon abri l'a encaissé...*Ouf, c'était limite. J'ai failli tomber.
+GutOutside¤ Phew, what a gust! I hope my shelter held up...* If the cabin couldn't withstand that gust, I'd be facing quite a task to repair it.*Phew, that was a close one. I nearly took a tumble.¤ J'espère que l'abri a encaissé cette bourrasque. Sinon, il y aurait bien trop de boulot pour cacher l'oiseau.*Ouf, quelle rafale! J'espère que mon abri l'a encaissé...*ça c'est du zef... C'que j'aimerais rentrer maintenant...
 ShelterCritical¤ I've got a bad feeling about this. My shelter probably needs some patching up!*It's been too long since I've checked on my shelter.¤ J'ai un mauvais pressentiment. Mon abri a sûrement besoin d'être rafistolé!* Bon, ça fait trop longtemps que je ne suis pas retourné voir ma cabane.
 OnHoleInside¤ Whoa!! The storm blew a hole in the wall!*Oh no, that piece got blown away...¤ Wouaaahh !! La tempête a fait un trou dans le mur !*Oh non, cette pièce s'est envolée..
 ClueShit¤ Traces of the bird... It must be higher up, on that tree. ¤ Des traces de l'oiseau... Il est sûrement plus haut, sur cet arbre.
 ClueVers¤ This branch shows signs of wear, as if something had wrapped around it. I reckon this bird can hang from its tail...¤ Cette branche est usée, comme si quelque chose s'était enroulée autour. Il me semble que cet oiseau peut se suspendre avec sa queue... 
+Credits¤ Programmer: Emile Elric, Art: Alix KIM, Sound Design: lasonotheque.org. A big thank you to David Elahee and Damien Chauveau for their support, as well as to you, the players, for trying out this game.¤ Programmeur :  Emile Elric, Arts : Alix KIM, Sound Design : lasonotheque.org, Un grand merci à David Elahee, Damien Chauveau pour leur suivi, ainsi qu'à vous les joueurs pour avoir essayer ce jeu.
+Menu0¤ Gosh darn, what a heck of a storm! It's blowing like crazy.¤ Nom d'un chien, c'que c'est une sacrée tempête ! Ça souffle comme un diable.
+Menu1¤ I gotta find that darn bird before it gets itself killed in the storm.¤ Faut que j'arrive à retrouver ce fichu oiseau avant qu'il se fasse plumer par la tempête.
+Menu2¤ Plus, my shacks got torn down. Gotta rebuild 'em to get to that darn bird.¤ En plus, mes bicoques ont été démolies. Va falloir les r'bâtir pour aller jusqu'à ce foutu oiseau.
+Menu3¤ My spot to crash might not hold up either. Gotta figure out how to patch it up.¤ Mon coin pour pioncer risque d'pas faire long feu non plus. Va falloir qu'j'me débrouille pour le raccommoder.
+NewGameButton¤ Launch game¤ Lancer le jeu
+TranslateButton¤ Translate in french¤ Traduire en français
+CreditsButton¤ Credits¤ Credits
+QuitButton¤ Quit¤ Quitter
+ResumeButton¤ Resume¤ Reprendre
+TitleScreenButton¤ Title Screen¤ Ecran titre
