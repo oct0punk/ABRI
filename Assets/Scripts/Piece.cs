@@ -47,7 +47,7 @@ public class Piece : Construction
     {
         base.Build();
         if (!build) return;
-        life = Random.Range(solid, solid + 4);
+        life = Random.Range(solid, solid + 3);
         Shelter.instance.OnPieceUpdated(true);
 
         GetComponent<SpriteRenderer>().enabled = true;

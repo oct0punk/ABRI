@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    [Range(0, 1)] public int locale;
     static DialogueManager instance;
     static Dictionary<string, string> register = new();
     PlayerPrefs prefs;
 
     private void Awake()
     {
+        Translate(PlayerPrefs.GetInt("Locale") == 1);
         if (instance == null)
         {
             instance = this;
