@@ -25,7 +25,9 @@ public class GameUI : MonoBehaviour
     {
         instance = this;
         UI_WorldArray = Array.FindAll(FindObjectsOfType<Canvas>(), can => can.renderMode == RenderMode.WorldSpace);
+        tog.isOn = PlayerPrefs.GetInt("Locale") == 1;
         tog.onValueChanged.AddListener(ToggleFunc);
+        Translate();
     }
 
 
@@ -101,6 +103,10 @@ public class GameUI : MonoBehaviour
     public void ToggleFunc(bool val)
     {
         DialogueManager.Translate(val);
+        Translate();
+    }
+    void Translate()
+    {
         foreach (var txt in sMenuTexts)
         {
             txt.tmp.text = DialogueManager.GetString(txt.registerName);

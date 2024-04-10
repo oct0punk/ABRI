@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,12 +23,14 @@ public class Lumberjack : MonoBehaviour
     [Space]
     public GameObject autoTarget;
     public CinemachineVirtualCamera cam;
-    [SerializeField] HorizontalLayoutGroup hBox;
     [HideInInspector] public bool isAutoMoving = false;
     public bool canCut { get; private set; }
     public Pickable pickingResource { get; private set; }
     [Space]
+    public HorizontalLayoutGroup hBox;
     public ThinkBubble thinkBubble;
+    public Image[] imgs;
+    public TextMeshProUGUI[] txts;
 
     #region Owning Components
     public Animator animator { get; private set; }
@@ -56,6 +59,7 @@ public class Lumberjack : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         canCutRes = new List<Pickable>();
 
+
         mask = LayerMask.GetMask("Platform");
 
         // FSM
@@ -80,6 +84,14 @@ public class Lumberjack : MonoBehaviour
     {
         ResetGlobalScale();
         transform.rotation = Quaternion.identity;
+    }
+
+    public void OnPause(bool pause)
+    {
+        foreach (var t in txts)
+            t.enabled = !pause;
+        foreach (var i in imgs)
+            i.enabled = !pause;
     }
 
     public void OnCatch()

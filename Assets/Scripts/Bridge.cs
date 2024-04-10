@@ -22,27 +22,25 @@ public class Bridge : Construction, IFix
 
         base.Awake();
     }
-
-    public override void Build()
+    public override void BuildWithFX()
     {
-        base.Build();
-        if (!build) return;
-        Build(left, right);
-        enabled = true;
-    }
-
-    void Build(Transform left, Transform right)
-    {
-        // Init
-        this.left = left;
-        this.right = right;
-
         Vector2 leftToRight = left.position - right.position;
         buildFX.transform.position = (left.position + right.position) / 2;
         buildFX.transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(leftToRight.y, leftToRight.x) * Mathf.Rad2Deg);
         var sh = buildFX.shape;
         sh.scale = new Vector3(Vector3.Distance(left.position, right.position) + 1, 3, 1);
+        base.BuildWithFX();
+    }
+    public override void Build()
+    {
+        base.Build();
+        if (!build) return;
+        BuildBridge();
+        enabled = true;
+    }
 
+    void BuildBridge()
+    {
         float dist = Vector3.Distance(this.left.transform.position, this.right.transform.position);
         Vector3 vec = this.right.transform.position - this.left.transform.position;
 

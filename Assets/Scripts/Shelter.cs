@@ -87,10 +87,11 @@ public class Shelter : MonoBehaviour
                 Lumberjack.Instance.Message("NeedMoreWoodForShelter");
         }
 
-        foreach (var piece in pieces)
+        foreach (var piece in pieces) {
             foreach (var t in piece.taps)
                 if (t.GetComponentInChildren<Canvas>() != null)
                     t.SetActive(false);
+        }
 
         foreach (var tap in tapsOutside)
         {

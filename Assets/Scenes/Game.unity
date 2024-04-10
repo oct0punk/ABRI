@@ -17037,7 +17037,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3023507991297164182, guid: 86707d1608f309946a883409be855462, type: 3}
       propertyPath: lengthInSec
-      value: 1
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3023507991297164182, guid: 86707d1608f309946a883409be855462, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 25.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 3023507991297164182, guid: 86707d1608f309946a883409be855462, type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: 0.4469608
+      objectReference: {fileID: 0}
+    - target: {fileID: 3023507991297164182, guid: 86707d1608f309946a883409be855462, type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0.3972969
+      objectReference: {fileID: 0}
+    - target: {fileID: 3023507991297164182, guid: 86707d1608f309946a883409be855462, type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3023507991297164182, guid: 86707d1608f309946a883409be855462, type: 3}
+      propertyPath: ShapeModule.m_Rotation.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6491812228526771887, guid: 86707d1608f309946a883409be855462, type: 3}
       propertyPath: m_PresetInfoIsWorld

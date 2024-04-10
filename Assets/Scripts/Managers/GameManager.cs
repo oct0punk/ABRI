@@ -112,6 +112,16 @@ public class GameManager : MonoBehaviour
     {
         this.pause = pause;
         Time.timeScale = pause ? 0.0f : 1.0f;
+        Lumberjack.Instance.OnPause(pause);
+        if (pause)
+        {
+            foreach (var tap in FindObjectsOfType<Tap>())
+                tap.gameObject.SetActive(false);
+        }
+        else {
+            if (gameState == GameState.Indoor) Shelter.instance.OnEnter();
+            else Shelter.instance.OnExit();
+        }
     }
 
     public void End()

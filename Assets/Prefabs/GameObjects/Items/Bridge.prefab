@@ -450,6 +450,10 @@ PrefabInstance:
       propertyPath: ShapeModule.m_Scale.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 567084717370510826, guid: 1c6b3f418bf08d1419aa9a90374a6b7b, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 5757525940613758070, guid: 1c6b3f418bf08d1419aa9a90374a6b7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -533,6 +537,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7602428921980447180}
+    - target: {fileID: 3765346260486799702, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuildWithFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3765346260486799702, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Construction, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6338622978610546188, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -668,6 +680,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7602428921980447180}
+    - target: {fileID: 3765346260486799702, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuildWithFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3765346260486799702, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Construction, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6338622978610546188, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: m_Pivot.x
       value: 0

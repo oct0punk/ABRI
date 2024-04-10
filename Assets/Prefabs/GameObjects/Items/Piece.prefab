@@ -5147,7 +5147,7 @@ PrefabInstance:
       objectReference: {fileID: 7159894314602775091}
     - target: {fileID: 3765346260486799702, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Build
+      value: BuildWithFX
       objectReference: {fileID: 0}
     - target: {fileID: 3765346260486799702, guid: 705da230e8f4ab9448062b856b60bceb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

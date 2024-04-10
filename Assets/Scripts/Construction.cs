@@ -22,6 +22,11 @@ public class Construction : MonoBehaviour
         }
     }
 
+    public virtual void BuildWithFX()
+    {
+        buildFX.Play();
+        Invoke(nameof(Build), buildFX.main.duration);
+    }
     public virtual void Build()
     {
         if (ItemsManager.Instance.Build(this))
@@ -31,7 +36,6 @@ public class Construction : MonoBehaviour
                 item.SetActive(false);
             }
             build = true;
-            if (required != 0) buildFX.Play();
             AudioManager.Instance.Play("Build");
         }
         else

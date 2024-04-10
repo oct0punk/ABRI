@@ -20,13 +20,13 @@ public class Menu : MonoBehaviour
     [TextArea]
     public string[] texts;
     [Tooltip("How long is the interval between each text")] public int waitFor;
-    
 
     private void Awake()
     {
         StartCoroutine(Bubble());
+        tog.isOn = PlayerPrefs.GetInt("Locale") == 1;
         tog.onValueChanged.AddListener(ToggleFunc);
-        
+        Translate();
     }
 
     IEnumerator Bubble()
@@ -52,7 +52,12 @@ public class Menu : MonoBehaviour
     public void ToggleFunc(bool val)
     {
         DialogueManager.Translate(val);
-        foreach (var txt in sMenuTexts) {
+        Translate();
+    }
+    void Translate()
+    {
+        foreach (var txt in sMenuTexts)
+        {
             txt.tmp.text = DialogueManager.GetString(txt.registerName);
         }
     }
