@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Device;
 
 public class Storm : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class Storm : MonoBehaviour
 
     public void Guts()
     {
+        Handheld.Vibrate();
         Bird.SendClueToPlayer(2);
         timeBeforeNextGust = UnityEngine.Random.Range(gutsFrequency.x, gutsFrequency.y);
         enabled = true;

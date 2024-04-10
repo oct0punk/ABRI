@@ -69,11 +69,20 @@ public class Ladder : Construction, IFix
         //transform.rotation = Quaternion.identity;
 
         if (l == null) return;
-        if (l.fsm == l.climbingState) return;
         if (l.fsm == l.workingState) return;
+        if (l.isAutoMoving) return;
 
         if (SwipeManager.ClimbUp())
         {
+            if (l.fsm == l.climbingState)
+            {
+                if (l.climbingState.climbDown)
+                {
+                    l.Climb(this, false);
+                }
+                return;
+            }
+            
             if (isAtBottom(l))
             {
                 l.AutoMoveTo(transform.position, () => l.Climb(this, false), () => transform.position);
@@ -84,6 +93,14 @@ public class Ladder : Construction, IFix
         }
         else if (SwipeManager.ClimbDown())
         {
+            if (l.fsm == l.climbingState)
+            {
+                if (!l.climbingState.climbDown)
+                {
+                    l.Climb(this, true);
+                }
+                return;
+            }
             if (!isAtBottom(l))
             {
                 l.AutoMoveTo(Top(), () => l.Climb(this, true), () => Top());
