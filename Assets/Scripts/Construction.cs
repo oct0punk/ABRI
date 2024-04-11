@@ -24,24 +24,26 @@ public class Construction : MonoBehaviour
 
     public virtual void BuildWithFX()
     {
-        buildFX.Play();
-        Invoke(nameof(Build), buildFX.main.duration);
-    }
-    public virtual void Build()
-    {
         if (ItemsManager.Instance.Build(this))
         {
-            foreach (GameObject item in taps)
-            {
-                item.SetActive(false);
-            }
-            build = true;
-            AudioManager.Instance.Play("Build");
+            buildFX.Play();
+            AudioManager.Instance.Play("BeginBuild");
+            Invoke(nameof(Build), buildFX.main.duration);
+
         }
         else
         {
             Lumberjack.Instance.Message("NeedMoreWood");
         }
+    }
+    public virtual void Build()
+    {
+        foreach (GameObject item in taps)
+        {
+            item.SetActive(false);
+        }
+        build = true;
+        AudioManager.Instance.Play("Build");
     }
 
     public virtual void Break()

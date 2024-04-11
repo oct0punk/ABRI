@@ -25,7 +25,8 @@ public class Bridge : Construction, IFix
     public override void BuildWithFX()
     {
         Vector2 leftToRight = left.position - right.position;
-        buildFX.transform.position = (left.position + right.position) / 2;
+        Vector3 fxPos = (left.position + right.position) / 2;
+        buildFX.transform.position = new Vector3(fxPos.x, fxPos.y, -8.0f);
         buildFX.transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(leftToRight.y, leftToRight.x) * Mathf.Rad2Deg);
         var sh = buildFX.shape;
         sh.scale = new Vector3(Vector3.Distance(left.position, right.position) + 1, 3, 1);
