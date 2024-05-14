@@ -197,4 +197,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efca52f8c9b0a294b9e373fe2700f42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locale: 1
+  _dialoguesTable: {fileID: 11400000, guid: b8f4fd4c7c359f744b535775bebade87, type: 2}
