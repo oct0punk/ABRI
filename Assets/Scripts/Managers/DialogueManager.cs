@@ -53,13 +53,13 @@ public class DialogueManager : MonoBehaviour
     public static void Translate(bool french)
     {        
         PlayerPrefs.SetInt("Locale", french ? 1 : 0);
-        localeIsFrench = !french;
+        localeIsFrench = french;
     }
 
     public static string GetString(string name)
     {
         Table tab = _DialoguesTable.tables.Find(t => t.name == name);
-        if (localeIsFrench) return tab.frTable[UnityEngine.Random.Range(0, tab.frTable.Count)];
-        else                return tab.engTable[UnityEngine.Random.Range(0, tab.frTable.Count)];
+        if (localeIsFrench) return tab.frTable[Random.Range(0, tab.frTable.Count)];
+        else                return tab.engTable[Random.Range(0, tab.engTable.Count)];
     }
 }

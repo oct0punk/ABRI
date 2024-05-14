@@ -78,6 +78,7 @@ public class ThinkBubble : MonoBehaviour
             Tmp.text = text;
             yield return new WaitForSeconds(timeBtw);
         }
+        if (timeEnd == 0) yield return null;
         yield return new WaitForSeconds(timeEnd);
         bubble.gameObject.SetActive(false);
         

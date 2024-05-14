@@ -128,4 +128,9 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F)) { End(); Debug.Log("ex"); }
+    }
 }

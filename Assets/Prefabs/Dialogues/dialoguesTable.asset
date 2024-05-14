@@ -214,3 +214,8 @@ MonoBehaviour:
     - Title Screen
     frTable:
     - Ecran titre
+  - name: OnBackHome
+    engTable:
+    - Home, Sweet home
+    frTable:
+    - "On est bien l\xE0\xE0\xE0"

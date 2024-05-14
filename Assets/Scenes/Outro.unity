@@ -297,7 +297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2343581090168148969, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
       propertyPath: m_text
-      value: "On est bien l\xE0\xE0\xE0 "
+      value: "On est bien l\xE0\xE0\xE0 fefzeffe"
       objectReference: {fileID: 0}
     - target: {fileID: 2343581090168148969, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
       propertyPath: m_fontStyle
@@ -337,6 +337,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5784061021981109411, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906552179977491450, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
+      propertyPath: timeEnd
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6680310397986181555, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
@@ -484,6 +488,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
+--- !u!114 &982706797 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5906552179977491450, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
+  m_PrefabInstance: {fileID: 982706796}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94d914f6c4298f4a97f01e889737b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1207497864
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,6 +664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9fbe6fd5eee6f7478dcc1bdb7b6e12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubble: {fileID: 982706797}
 --- !u!114 &1561553997
 MonoBehaviour:
   m_ObjectHideFlags: 0
