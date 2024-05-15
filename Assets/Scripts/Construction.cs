@@ -30,6 +30,10 @@ public class Construction : MonoBehaviour
             AudioManager.Instance.Play("BeginBuild");
             Invoke(nameof(Build), buildFX.main.duration);
 
+            foreach (GameObject item in taps)
+            {
+                item.SetActive(false);
+            }
         }
         else
         {
@@ -38,12 +42,8 @@ public class Construction : MonoBehaviour
     }
     public virtual void Build()
     {
-        foreach (GameObject item in taps)
-        {
-            item.SetActive(false);
-        }
-        build = true;
         AudioManager.Instance.Play("Build");
+        build = true;
     }
 
     public virtual void Break()

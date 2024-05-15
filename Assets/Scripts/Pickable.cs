@@ -40,7 +40,11 @@ public class Pickable : MonoBehaviour, IFix
     void OnDie()
     {
         alive = false;
-        Tuto = false;
+        if (Tuto)
+        {
+            Tuto = false;
+            GameUI.DisableTutoText();
+        }
         AudioManager.Instance.Play("Collect");
         GetComponentInChildren<SpriteRenderer>().enabled = false;
         StartCoroutine(Revive());
@@ -102,6 +106,7 @@ public class Pickable : MonoBehaviour, IFix
         Lumberjack lum = collision.GetComponentInParent<Lumberjack>();
         if (lum != null)
         {
+            if (Tuto) GameUI.DisableTutoText();
             if (Lumberjack.hasCaught) return;
             lum.OnResExit(this);
         }
@@ -112,5 +117,9 @@ public class Pickable : MonoBehaviour, IFix
         trail.SetActive(canCut);
         swipeTuto.SetActive(canCut);
         swipeTuto.SetActive(Tuto);
+        if (Tuto)
+        {
+            GameUI.TutoText("Swipe");
+        }
     }
 }

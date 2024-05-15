@@ -4,8 +4,8 @@ public class End : MonoBehaviour
 {
     [SerializeField] ThinkBubble bubble;
     private void Awake()
-    {
-        bubble.Message(DialogueManager.GetString("OnBackHome"));
+    {        
+        bubble.Message("OnBackHome");
     }
     public void Skip()
     {

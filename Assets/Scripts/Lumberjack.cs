@@ -180,7 +180,11 @@ public class Lumberjack : MonoBehaviour
     #region Climb
     public void Climb(Ladder ladder, bool climbDown)
     {
-        Ladder.Tuto = false;
+        if (Ladder.Tuto == true)
+        {
+            GameUI.DisableTutoText();
+            Ladder.Tuto = false;
+        }
         climbingState.ladder = ladder;
         climbingState.climbDown = climbDown;
         ChangeFSM(climbingState);

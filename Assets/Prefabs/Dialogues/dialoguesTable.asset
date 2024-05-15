@@ -219,3 +219,28 @@ MonoBehaviour:
     - Home, Sweet home
     frTable:
     - "On est bien l\xE0\xE0\xE0"
+  - name: Swipe
+    engTable:
+    - Cut by swiping your finger
+    frTable:
+    - Coupe en glissant du doigt
+  - name: Climb
+    engTable:
+    - Swipe your finger to climb
+    frTable:
+    - Glisser le doigt pour grimper
+  - name: TutoGutsOutdoor
+    engTable:
+    - "Quand \xE7a souffle, \xE7a peut faire mal \xE0 la cabane"
+    frTable:
+    - "Quand \xE7a souffle, \xE7a peut faire mal \xE0 la cabane"
+  - name: TutoGutsIndoor
+    engTable:
+    - "La temp\xEAte a fait un trou dans l'abri"
+    frTable:
+    - "La temp\xEAte a fait un trou dans l'abri"
+  - name: TutoRepair
+    engTable:
+    - "Tape la bulle pour r\xE9parer"
+    frTable:
+    - "Tape la bulle pour r\xE9parer"

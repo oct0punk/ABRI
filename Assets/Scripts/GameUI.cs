@@ -17,6 +17,8 @@ public class GameUI : MonoBehaviour
     Canvas[] UI_WorldArray;
     [Space]
     [SerializeField] TextMeshProUGUI woodCount;
+    [SerializeField] SetTMPstring tutoText;
+    public string currentTutoText { get; private set; } = "";
     [Space]
     [SerializeField] Toggle tog;
     public SMenuText[] sMenuTexts;
@@ -111,5 +113,19 @@ public class GameUI : MonoBehaviour
         {
             txt.tmp.text = DialogueManager.GetString(txt.registerName);
         }
+    }
+
+    public static void TutoText(string text)
+    {
+        instance.currentTutoText = text;
+        instance.tutoText.transform.parent.gameObject.SetActive(true);
+        instance.tutoText.tmp.SetText(DialogueManager.GetString(text));
+    }
+
+    public static void DisableTutoText()
+    {
+        instance.currentTutoText = "";
+        instance.tutoText.transform.parent.gameObject.SetActive(false);
+        instance.tutoText.tmp.SetText("");
     }
 }

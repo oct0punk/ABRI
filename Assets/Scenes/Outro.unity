@@ -297,7 +297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2343581090168148969, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
       propertyPath: m_text
-      value: "On est bien l\xE0\xE0\xE0 fefzeffe"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2343581090168148969, guid: a18eb328ac0101f46a8150676447b09e, type: 3}
       propertyPath: m_fontStyle

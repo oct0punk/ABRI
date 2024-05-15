@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [SelectionBase]
@@ -131,6 +132,8 @@ public class Ladder : Construction, IFix
             l = null;
             enabled = false;
             arrow.SetActive(false);
+            if (Tuto)
+                GameUI.DisableTutoText();
         }
     }
 
@@ -152,5 +155,9 @@ public class Ladder : Construction, IFix
             arrow.transform.SetLocalPositionAndRotation(new Vector3(-1.5f, height, 0.0f), Quaternion.Euler(0, 0, 90));
         }
         swipeTuto.SetActive(Tuto);
+        if (Tuto)
+        {
+            GameUI.TutoText("Climb");
+        }
     }
 }

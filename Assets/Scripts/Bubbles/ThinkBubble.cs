@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 class MessageStruct
@@ -64,24 +65,32 @@ public class ThinkBubble : MonoBehaviour
     public IEnumerator MessageRoutine(string text, float time = 0, Action action = null)
     {
         isRunning = true;
+        // Action on begin messaging
         action?.Invoke();
         yield return new WaitForSeconds(time);
+
+        // Init
         AudioManager.Instance.Play("Speak");
         bubble.gameObject.SetActive(true);
         playingText = text;
         text = DialogueManager.GetString(text);
         content = text;
         text = "";
+
+        // Print the text, char by char
         for (int c = 0; c < content.Length; c++)
         {
             text += content[c];
             Tmp.text = text;
             yield return new WaitForSeconds(timeBtw);
         }
-        if (timeEnd == 0) yield return null;
-        yield return new WaitForSeconds(timeEnd);
-        bubble.gameObject.SetActive(false);
+        // Disable bubble
+        if (timeEnd != 0) {
+            yield return new WaitForSeconds(timeEnd);
+            bubble.gameObject.SetActive(false);
+        }
         
+        // Print the next message
         if (standby.Count > 0)
         {
             MessageStruct value = standby.First.Value;
@@ -96,14 +105,13 @@ public class ThinkBubble : MonoBehaviour
 
 
 
-
-
     public Coroutine Message(string text, Func<bool> condition)
     {
         return StartCoroutine(MessageRoutine(text, condition));
     }
     public IEnumerator MessageRoutine(string text, Func<bool> condition)
     {
+        // Init
         isRunning = true;
         AudioManager.Instance.Play("Speak");
         bubble.gameObject.SetActive(true);
@@ -111,12 +119,16 @@ public class ThinkBubble : MonoBehaviour
         text = DialogueManager.GetString(text);
         content = text;
         text = "";
+
+        // Print the text, char by char
         for (int c = 0; c < content.Length; c++)
         {
             text += content[c];
             Tmp.text = text;
             yield return new WaitForSeconds(timeBtw);
         }
+
+        // Disable bubble when the condition is true
         yield return new WaitWhile(() => condition.Invoke());
         bubble.gameObject.SetActive(false);
         isRunning = false;

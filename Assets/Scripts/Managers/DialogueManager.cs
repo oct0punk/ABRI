@@ -59,6 +59,7 @@ public class DialogueManager : MonoBehaviour
     public static string GetString(string name)
     {
         Table tab = _DialoguesTable.tables.Find(t => t.name == name);
+        if (tab.name != name) Debug.LogWarning($"String {name} not found");
         if (localeIsFrench) return tab.frTable[Random.Range(0, tab.frTable.Count)];
         else                return tab.engTable[Random.Range(0, tab.engTable.Count)];
     }
