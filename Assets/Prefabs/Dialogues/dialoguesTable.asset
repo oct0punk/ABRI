@@ -35,9 +35,8 @@ MonoBehaviour:
   - name: OnBirdEnter
     engTable:
     - Hear that? The bird's song ain't too distant.
-    - Time to see if these old ears can still track it down.
     frTable:
-    - "L'oiseau est audible. Il n'est pas loin.\r"
+    - "J'entends l'soieau! Il n'est plus tr\xE8s loin."
   - name: OnBirdExit
     engTable:
     - Lost track of that bird's song. Time to turn back and find my bearings
@@ -231,16 +230,16 @@ MonoBehaviour:
     - Glisser le doigt pour grimper
   - name: TutoGutsOutdoor
     engTable:
-    - "Quand \xE7a souffle, \xE7a peut faire mal \xE0 la cabane"
+    - Strong gusts can cause damage to the shelter
     frTable:
-    - "Quand \xE7a souffle, \xE7a peut faire mal \xE0 la cabane"
+    - "Les fortes bourrasques peuvent provoquer des d\xE9g\xE2ts \xE0 la cabane"
   - name: TutoGutsIndoor
     engTable:
-    - "La temp\xEAte a fait un trou dans l'abri"
+    - If there are too many holes in the shelter, it will collapse
     frTable:
-    - "La temp\xEAte a fait un trou dans l'abri"
+    - S'il y a trop de trous dans la cabane, elle s'effondrera
   - name: TutoRepair
     engTable:
-    - "Tape la bulle pour r\xE9parer"
+    - Tap the bubble to repair
     frTable:
     - "Tape la bulle pour r\xE9parer"
