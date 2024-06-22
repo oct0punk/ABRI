@@ -23,7 +23,7 @@ MonoBehaviour:
     - "Il me manque encore du bois. o\xF9 est-ce que je peux bien en couper..?\r"
   - name: intro1
     engTable:
-    - This storm's fierce/ Gotta hustle, my shelter's on the brink of collapse.
+    - This storm's fierce. Gotta hustle, my shelter's on the brink of collapse.
     frTable:
     - "Cette temp\xEAte est f\xE9roce. Mon abri risque \xE0 tout moment de s'\xE9fondrer\r"
   - name: intro2
